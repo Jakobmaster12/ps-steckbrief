@@ -1,0 +1,63 @@
+{
+  "meta": {
+    "quelldatei": "tech_050_trollbase64.ps1",
+    "sha256": "9889fc6a4a640564715ca77fa61dcf02f0350c323bdb765704262e65fea76f3a",
+    "groesse_bytes": 1098,
+    "zeilen": 2,
+    "ground_truth_label": "techniques",
+    "analyse_gekuerzt": false,
+    "hinweis": "Kein Urteil enthalten. Bewertung erfolgt durch das LLM."
+  },
+  "stufe1_extract": {
+    "strings": [],
+    "string_anzahl_gesamt": 0,
+    "base64_bloecke_dekodiert": [
+      {
+        "laenge": 1096,
+        "dekodiert": "畦据楴湯吠潲汬笠਍††摁ⵤ祔数ⴠ獁敳扭祬慎敭匠獹整⹭楗摮睯⹳潆浲൳ഊ †␠祬楲獣㴠䀠നऊ∉潓敭潢祤漠据⁥潴摬洠⁥桴⁥潷汲⁤獩朠湯慮爠汯⁬敭ഢऊ∉⁉楡❮⁴桴⁥桳牡数瑳琠潯⁬湩琠敨猠敨≤਍उ匢敨眠獡氠潯楫杮欠湩⁤景搠浵⁢楷桴栠牥映湩敧⁲湡⁤敨⁲桴浵≢਍उ䤢⁮桴⁥桳灡⁥景愠⁮䰧‧湯栠牥映牯桥慥≤਍††††圢汥ⱬ琠敨礠慥獲猠慴瑲挠浯湩⁧湡⁤桴祥搠湯琧猠潴⁰潣業杮Ⱒ਍††††愢摮琠敨⁹潤❮⁴瑳灯挠浯湩≧਍††ഩഊ †映牯慥档⠠氤湩⁥湩␠祬楲獣 ൻ †††椠⁦␨楬敮ⴠ煥∠湡⁤桴祥搠湯琧猠潴⁰潣業杮⤢笠਍††††††桷汩⁥␨牴敵 ൻ †††††††嬠祓瑳浥圮湩潤獷䘮牯獭䴮獥慳敧潂嵸㨺桓睯␨楬敮‬洢浥≥‬卛獹整⹭楗摮睯⹳潆浲⹳敍獳条䉥硯畂瑴湯嵳㨺䭏ഩ †††††素਍††††ൽ †††攠獬⁥ൻ †††††嬠祓瑳浥圮湩潤獷䘮牯獭䴮獥慳敧潂嵸㨺桓睯␨楬敮‬洢浥≥‬卛獹整⹭楗摮睯⹳潆浲⹳敍獳条䉥硯畂瑴湯嵳㨺䭏ഩ †††素਍††ൽ紊਍"
+      }
+    ],
+    "base64_bloecke_gesamt": 1
+  },
+  "stufe2_features": {
+    "strings": [],
+    "string_anzahl_gesamt": 0,
+    "base64_bloecke_dekodiert": [
+      {
+        "laenge": 1096,
+        "dekodiert": "畦据楴湯吠潲汬笠਍††摁ⵤ祔数ⴠ獁敳扭祬慎敭匠獹整⹭楗摮睯⹳潆浲൳ഊ †␠祬楲獣㴠䀠നऊ∉潓敭潢祤漠据⁥潴摬洠⁥桴⁥潷汲⁤獩朠湯慮爠汯⁬敭ഢऊ∉⁉楡❮⁴桴⁥桳牡数瑳琠潯⁬湩琠敨猠敨≤਍उ匢敨眠獡氠潯楫杮欠湩⁤景搠浵⁢楷桴栠牥映湩敧⁲湡⁤敨⁲桴浵≢਍उ䤢⁮桴⁥桳灡⁥景愠⁮䰧‧湯栠牥映牯桥慥≤਍††††圢汥ⱬ琠敨礠慥獲猠慴瑲挠浯湩⁧湡⁤桴祥搠湯琧猠潴⁰潣業杮Ⱒ਍††††愢摮琠敨⁹潤❮⁴瑳灯挠浯湩≧਍††ഩഊ †映牯慥档⠠氤湩⁥湩␠祬楲獣 ൻ †††椠⁦␨楬敮ⴠ煥∠湡⁤桴祥搠湯琧猠潴⁰潣業杮⤢笠਍††††††桷汩⁥␨牴敵 ൻ †††††††嬠祓瑳浥圮湩潤獷䘮牯獭䴮獥慳敧潂嵸㨺桓睯␨楬敮‬洢浥≥‬卛獹整⹭楗摮睯⹳潆浲⹳敍獳条䉥硯畂瑴湯嵳㨺䭏ഩ †††††素਍††††ൽ †††攠獬⁥ൻ †††††嬠祓瑳浥圮湩潤獷䘮牯獭䴮獥慳敧潂嵸㨺桓睯␨楬敮‬洢浥≥‬卛獹整⹭楗摮睯⹳潆浲⹳敍獳条䉥硯畂瑴湯嵳㨺䭏ഩ †††素਍††ൽ紊਍"
+      }
+    ],
+    "base64_bloecke_gesamt": 1,
+    "beobachtete_cmdlets": [],
+    "auffaellige_tokens": {},
+    "iocs": {
+      "urls": [],
+      "ipv4": [],
+      "pfade": []
+    }
+  },
+  "stufe3_structure": {
+    "strings": [],
+    "string_anzahl_gesamt": 0,
+    "base64_bloecke_dekodiert": [
+      {
+        "laenge": 1096,
+        "dekodiert": "畦据楴湯吠潲汬笠਍††摁ⵤ祔数ⴠ獁敳扭祬慎敭匠獹整⹭楗摮睯⹳潆浲൳ഊ †␠祬楲獣㴠䀠നऊ∉潓敭潢祤漠据⁥潴摬洠⁥桴⁥潷汲⁤獩朠湯慮爠汯⁬敭ഢऊ∉⁉楡❮⁴桴⁥桳牡数瑳琠潯⁬湩琠敨猠敨≤਍उ匢敨眠獡氠潯楫杮欠湩⁤景搠浵⁢楷桴栠牥映湩敧⁲湡⁤敨⁲桴浵≢਍उ䤢⁮桴⁥桳灡⁥景愠⁮䰧‧湯栠牥映牯桥慥≤਍††††圢汥ⱬ琠敨礠慥獲猠慴瑲挠浯湩⁧湡⁤桴祥搠湯琧猠潴⁰潣業杮Ⱒ਍††††愢摮琠敨⁹潤❮⁴瑳灯挠浯湩≧਍††ഩഊ †映牯慥档⠠氤湩⁥湩␠祬楲獣 ൻ †††椠⁦␨楬敮ⴠ煥∠湡⁤桴祥搠湯琧猠潴⁰潣業杮⤢笠਍††††††桷汩⁥␨牴敵 ൻ †††††††嬠祓瑳浥圮湩潤獷䘮牯獭䴮獥慳敧潂嵸㨺桓睯␨楬敮‬洢浥≥‬卛獹整⹭楗摮睯⹳潆浲⹳敍獳条䉥硯畂瑴湯嵳㨺䭏ഩ †††††素਍††††ൽ †††攠獬⁥ൻ †††††嬠祓瑳浥圮湩潤獷䘮牯獭䴮獥慳敧潂嵸㨺桓睯␨楬敮‬洢浥≥‬卛獹整⹭楗摮睯⹳潆浲⹳敍獳条䉥硯畂瑴湯嵳㨺䭏ഩ †††素਍††ൽ紊਍"
+      }
+    ],
+    "base64_bloecke_gesamt": 1,
+    "beobachtete_cmdlets": [],
+    "auffaellige_tokens": {},
+    "iocs": {
+      "urls": [],
+      "ipv4": [],
+      "pfade": []
+    },
+    "deobfuskiert_auszug": "ZnVuY3Rpb24gVHJvbGwgew0KICAgIEFkZC1UeXBlIC1Bc3NlbWJseU5hbWUgU3lzdGVtLldpbmRvd3MuRm9ybXMNCg0KICAgICRseXJpY3MgPSBAKA0KCQkiU29tZWJvZHkgb25jZSB0b2xkIG1lIHRoZSB3b3JsZCBpcyBnb25uYSByb2xsIG1lIg0KCQkiSSBhaW4ndCB0aGUgc2hhcnBlc3QgdG9vbCBpbiB0aGUgc2hlZCINCgkJIlNoZSB3YXMgbG9va2luZyBraW5kIG9mIGR1bWIgd2l0aCBoZXIgZmluZ2VyIGFuZCBoZXIgdGh1bWIiDQoJCSJJbiB0aGUgc2hhcGUgb2YgYW4gJ0wnIG9uIGhlciBmb3JlaGVhZCINCiAgICAgICAgIldlbGwsIHRoZSB5ZWFycyBzdGFydCBjb21pbmcgYW5kIHRoZXkgZG9uJ3Qgc3RvcCBjb21pbmciLA0KICAgICAgICAiYW5kIHRoZXkgZG9uJ3Qgc3RvcCBjb21pbmciDQogICAgKQ0KDQogICAgZm9yZWFjaCAoJGxpbmUgaW4gJGx5cmljcykgew0KICAgICAgICBpZiAoJGxpbmUgLWVxICJhbmQgdGhleSBkb24ndCBzdG9wIGNvbWluZyIpIHsNCiAgICAgICAgICAgIHdoaWxlICgkdHJ1ZSkgew0KICAgICAgICAgICAgICAgIFtTeXN0ZW0uV2luZG93cy5Gb3Jtcy5NZXNzYWdlQm94XTo6U2hvdygkbGluZSwgIm1lbWUiLCBbU3lzdGVtLldpbmRvd3MuRm9ybXMuTWVzc2FnZUJveEJ1dHRvbnNdOjpPSykNCiAgICAgICAgICAgIH0NCiAgICAgICAgfQ0KICAgICAgICBlbHNlIHsNCiAgICAgICAgICAgIFtTeXN0ZW0uV2luZG93cy5Gb3Jtcy5NZXNzYWdlQm94XTo6U2hvdygkbGluZSwgIm1lbWUiLCBbU3lzdGVtLldpbmRvd3MuRm9ybXMuTWVzc2FnZUJveEJ1dHRvbnNdOjpPSykNCiAgICAgICAgfQ0KICAgIH0NCn0NCg==\r\n",
+    "dekodierte_befehle": [
+      "畦据楴湯吠潲汬笠਍††摁ⵤ祔数ⴠ獁敳扭祬慎敭匠獹整⹭楗摮睯⹳潆浲൳ഊ †␠祬楲獣㴠䀠നऊ∉潓敭潢祤漠据⁥潴摬洠⁥桴⁥潷汲⁤獩朠湯慮爠汯⁬敭ഢऊ∉⁉楡❮⁴桴⁥桳牡数瑳琠潯⁬湩琠敨猠敨≤਍उ匢敨眠獡氠潯楫杮欠湩⁤景搠浵⁢楷桴栠牥映湩敧⁲湡⁤敨⁲桴浵≢਍उ䤢⁮桴⁥桳灡⁥景愠⁮䰧‧湯栠牥映牯桥慥≤਍††††圢汥ⱬ琠敨礠慥獲猠慴瑲挠浯湩⁧湡⁤桴祥搠湯琧猠潴⁰潣業杮Ⱒ਍††††愢摮琠敨⁹潤❮⁴瑳灯挠浯湩≧਍††ഩഊ †映牯慥档⠠氤湩⁥湩␠祬楲獣 ൻ †††椠⁦␨楬敮ⴠ煥∠湡⁤桴祥搠湯琧猠潴⁰潣業杮⤢笠਍††††††桷汩⁥␨牴敵 ൻ †††††††嬠祓瑳浥圮湩潤獷䘮牯獭䴮獥慳敧潂嵸㨺桓睯␨楬敮‬洢浥≥‬卛獹整⹭楗摮睯⹳潆浲⹳敍獳条䉥硯畂瑴湯嵳㨺䭏ഩ †††††素਍††††ൽ †††攠獬⁥ൻ †††††嬠祓瑳浥圮湩潤獷䘮牯獭䴮獥慳敧潂嵸㨺桓睯␨楬敮‬洢浥≥‬卛獹整⹭楗摮睯⹳潆浲⹳敍獳条䉥硯畂瑴湯嵳㨺䭏ഩ †††素਍††ൽ紊਍"
+    ],
+    "beobachtete_abfolge": []
+  }
+}

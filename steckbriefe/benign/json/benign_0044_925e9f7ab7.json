@@ -1,0 +1,69 @@
+{
+  "meta": {
+    "quelldatei": "benign_043_check-admin.ps1",
+    "sha256": "925e9f7ab7fff5d9cc5507d7c4575704c51743ae6ef7d15e65d79e9db2571045",
+    "groesse_bytes": 988,
+    "zeilen": 34,
+    "ground_truth_label": "benign",
+    "analyse_gekuerzt": false,
+    "hinweis": "Kein Urteil enthalten. Bewertung erfolgt durch das LLM."
+  },
+  "stufe1_extract": {
+    "strings": [
+      "✅ Yes, $USERNAME has admin rights.",
+      "⚠️ No, $USERNAME, has guest rights only.",
+      "⚠️ No, $USERNAME has normal user rights only.",
+      "⚠️ ERROR: $($Error[0]) (at line $($_.InvocationInfo.ScriptLineNumber))"
+    ],
+    "string_anzahl_gesamt": 4,
+    "base64_bloecke_dekodiert": [],
+    "base64_bloecke_gesamt": 0
+  },
+  "stufe2_features": {
+    "strings": [
+      "✅ Yes, $USERNAME has admin rights.",
+      "⚠️ No, $USERNAME, has guest rights only.",
+      "⚠️ No, $USERNAME has normal user rights only.",
+      "⚠️ ERROR: $($Error[0]) (at line $($_.InvocationInfo.ScriptLineNumber))"
+    ],
+    "string_anzahl_gesamt": 4,
+    "base64_bloecke_dekodiert": [],
+    "base64_bloecke_gesamt": 0,
+    "beobachtete_cmdlets": [
+      "New-Object"
+    ],
+    "auffaellige_tokens": {},
+    "iocs": {
+      "urls": [
+        "https://github.com/fleschutz/PowerShell"
+      ],
+      "ipv4": [],
+      "pfade": []
+    }
+  },
+  "stufe3_structure": {
+    "strings": [
+      "✅ Yes, $USERNAME has admin rights.",
+      "⚠️ No, $USERNAME, has guest rights only.",
+      "⚠️ No, $USERNAME has normal user rights only.",
+      "⚠️ ERROR: $($Error[0]) (at line $($_.InvocationInfo.ScriptLineNumber))"
+    ],
+    "string_anzahl_gesamt": 4,
+    "base64_bloecke_dekodiert": [],
+    "base64_bloecke_gesamt": 0,
+    "beobachtete_cmdlets": [
+      "New-Object"
+    ],
+    "auffaellige_tokens": {},
+    "iocs": {
+      "urls": [
+        "https://github.com/fleschutz/PowerShell"
+      ],
+      "ipv4": [],
+      "pfade": []
+    },
+    "deobfuskiert_auszug": "﻿<#\r\n.SYNOPSIS\r\n        Check for admin rights\r\n.DESCRIPTION\r\n        This PowerShell script checks if the user has administrator rights.\r\n.EXAMPLE\r\n        PS> ./check-admin.ps1\r\n        ✅ Yes, Markus has admin rights.\r\n.LINK\r\n        https://github.com/fleschutz/PowerShell\r\n.NOTES\r\n        Author: Markus Fleschutz | License: CC0\r\n#>\r\n\r\ntry {\r\n\tif ($IsLinux) {\r\n\t\t# todo\r\n\t} else {\r\n\t\t$user = [Security.Principal.WindowsIdentity]::GetCurrent()\r\n\t\t$principal = (New-Object Security.Principal.WindowsPrincipal $user)\r\n\t\tif ($principal.IsInRole([Security.Principal.WindowsBuiltinRole]::Administrator)) {\r\n\t\t\t\"✅ Yes, $USERNAME has admin rights.\"\r\n\t\t} elseif ($principal.IsInRole([Security.Principal.WindowsBuiltinRole]::Guest)) {\r\n\t\t\t\"⚠️ No, $USERNAME, has guest rights only.\"\r\n\t\t} else {\r\n\t\t\t\"⚠️ No, $USERNAME has normal user rights only.\"\r\n\t\t}\r\n\t}  \r\n\texit 0 # success\r\n} catch {\r\n\t\"⚠️ ERROR: $($Error[0]) (at line $($_.InvocationInfo.ScriptLineNumber))\"\r\n\texit 1\r\n}\t\r\n",
+    "dekodierte_befehle": [],
+    "beobachtete_abfolge": []
+  }
+}

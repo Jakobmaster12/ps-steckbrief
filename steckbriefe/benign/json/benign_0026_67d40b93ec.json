@@ -1,0 +1,130 @@
+{
+  "meta": {
+    "quelldatei": "benign_025_cd-repos.ps1",
+    "sha256": "67d40b93eceac126e122d1639a3b077cd6b8945877435a5ea47442a85bf53e1f",
+    "groesse_bytes": 2146,
+    "zeilen": 45,
+    "ground_truth_label": "benign",
+    "analyse_gekuerzt": false,
+    "hinweis": "Kein Urteil enthalten. Bewertung erfolgt durch das LLM."
+  },
+  "stufe1_extract": {
+    "strings": [
+      "~/Repos",
+      "~/repos",
+      "~/Repositories",
+      "~/repositories",
+      "~/Git",
+      "~/git",
+      "/Repos",
+      "/repos",
+      "/Repositories",
+      "/repositories",
+      "/Git",
+      "/git",
+      "~/source/repos",
+      "D:/Repos",
+      "D:/Repositories",
+      "D:/Git",
+      "D:/git",
+      "Found no folder for Git repositories (in home or root directory) - Please create one.",
+      "$path",
+      "📂$path entered, has $($folders.Count) subfolders.",
+      "⚠️ ERROR: $($Error[0])"
+    ],
+    "string_anzahl_gesamt": 38,
+    "base64_bloecke_dekodiert": [],
+    "base64_bloecke_gesamt": 0
+  },
+  "stufe2_features": {
+    "strings": [
+      "~/Repos",
+      "~/repos",
+      "~/Repositories",
+      "~/repositories",
+      "~/Git",
+      "~/git",
+      "/Repos",
+      "/repos",
+      "/Repositories",
+      "/repositories",
+      "/Git",
+      "/git",
+      "~/source/repos",
+      "D:/Repos",
+      "D:/Repositories",
+      "D:/Git",
+      "D:/git",
+      "Found no folder for Git repositories (in home or root directory) - Please create one.",
+      "$path",
+      "📂$path entered, has $($folders.Count) subfolders.",
+      "⚠️ ERROR: $($Error[0])"
+    ],
+    "string_anzahl_gesamt": 38,
+    "base64_bloecke_dekodiert": [],
+    "base64_bloecke_gesamt": 0,
+    "beobachtete_cmdlets": [
+      "Get-ChildItem",
+      "Resolve-Path",
+      "Set-Location",
+      "Test-Path"
+    ],
+    "auffaellige_tokens": {},
+    "iocs": {
+      "urls": [
+        "https://github.com/fleschutz/PowerShell"
+      ],
+      "ipv4": [],
+      "pfade": [
+        "C:\\Repos"
+      ]
+    }
+  },
+  "stufe3_structure": {
+    "strings": [
+      "~/Repos",
+      "~/repos",
+      "~/Repositories",
+      "~/repositories",
+      "~/Git",
+      "~/git",
+      "/Repos",
+      "/repos",
+      "/Repositories",
+      "/repositories",
+      "/Git",
+      "/git",
+      "~/source/repos",
+      "D:/Repos",
+      "D:/Repositories",
+      "D:/Git",
+      "D:/git",
+      "Found no folder for Git repositories (in home or root directory) - Please create one.",
+      "$path",
+      "📂$path entered, has $($folders.Count) subfolders.",
+      "⚠️ ERROR: $($Error[0])"
+    ],
+    "string_anzahl_gesamt": 38,
+    "base64_bloecke_dekodiert": [],
+    "base64_bloecke_gesamt": 0,
+    "beobachtete_cmdlets": [
+      "Get-ChildItem",
+      "Resolve-Path",
+      "Set-Location",
+      "Test-Path"
+    ],
+    "auffaellige_tokens": {},
+    "iocs": {
+      "urls": [
+        "https://github.com/fleschutz/PowerShell"
+      ],
+      "ipv4": [],
+      "pfade": [
+        "C:\\Repos"
+      ]
+    },
+    "deobfuskiert_auszug": "﻿<#\n.SYNOPSIS\n\tSets the working dir to the repos folder\n.DESCRIPTION\n\tThis PowerShell script changes the current working directory to the Git repositories folder.\n.EXAMPLE\n\tPS> ./cd-repos.ps1\n\t📂C:\\Repos entered, has 33 subfolders.\n.LINK\n\thttps://github.com/fleschutz/PowerShell\n.NOTES\n\tAuthor: Markus Fleschutz | License: CC0\n#>\n\n#requires -version 5.1\n\ntry {\n\tif (Test-Path \"~/Repos\"              -pathType container) { $path = \"~/Repos\"\n\t} elseif (Test-Path \"~/repos\"        -pathType container) { $path = \"~/repos\"\n\t} elseif (Test-Path \"~/Repositories\" -pathType container) { $path = \"~/Repositories\"\n\t} elseif (Test-Path \"~/repositories\" -pathType container) { $path = \"~/repositories\"\n\t} elseif (Test-Path \"~/Git\"          -pathType container) { $path = \"~/Git\"\n\t} elseif (Test-Path \"~/git\"          -pathType container) { $path = \"~/git\"\n\t} elseif (Test-Path \"/Repos\"         -pathType container) { $path = \"/Repos\"\n\t} elseif (Test-Path \"/repos\"         -pathType container) { $path = \"/repos\"\n\t} elseif (Test-Path \"/Repositories\"  -pathType container) { $path = \"/Repositories\"\n\t} elseif (Test-Path \"/repositories\"  -pathType container) { $path = \"/repositories\"\n\t} elseif (Test-Path \"/Git\"           -pathType container) { $path = \"/Git\"\n\t} elseif (Test-Path \"/git\"           -pathType container) { $path = \"/git\"\n\t} elseif (Test-Path \"~/source/repos\" -pathType container) { $path = \"~/source/repos\" # Visual Studio default\n\t} elseif (Test-Path \"D:/Repos\"\t     -pathType container) { $path = \"D:/Repos\"       # on HDD\n\t} elseif (Test-Path \"D:/Repositories\" -pathType container) { $path = \"D:/Repositories\" # on HDD\n\t} elseif (Test-Path \"D:/Git\"\t     -pathType container) { $path = \"D:/Git\"         # on HDD\n\t} elseif (Test-Path \"D:/git\"\t     -pathType container) { $path = \"D:/git\"         # on HDD\n\t} else { throw \"Found no folder for Git repositories (in home or root directory) - Please create one.\" }\n\t$path = Resolve-Path $path\n\tSet-Location \"$path\"\n\t$folders = Get-ChildItem $path -attr",
+    "dekodierte_befehle": [],
+    "beobachtete_abfolge": []
+  }
+}

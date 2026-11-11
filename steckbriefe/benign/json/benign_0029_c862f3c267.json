@@ -1,0 +1,82 @@
+{
+  "meta": {
+    "quelldatei": "benign_028_cd-scripts.ps1",
+    "sha256": "c862f3c267c1242e4a0b473e6ded2dfc8e29d0eefcf649adf553065d3b08322a",
+    "groesse_bytes": 824,
+    "zeilen": 29,
+    "ground_truth_label": "benign",
+    "analyse_gekuerzt": false,
+    "hinweis": "Kein Urteil enthalten. Bewertung erfolgt durch das LLM."
+  },
+  "stufe1_extract": {
+    "strings": [
+      "$PSScriptRoot",
+      "$path",
+      "No scripts folder at: $path",
+      "📁$path entered, has $($files.Count) scripts and $($folders.Count) folder.",
+      "⚠️ ERROR: $($Error[0])"
+    ],
+    "string_anzahl_gesamt": 6,
+    "base64_bloecke_dekodiert": [],
+    "base64_bloecke_gesamt": 0
+  },
+  "stufe2_features": {
+    "strings": [
+      "$PSScriptRoot",
+      "$path",
+      "No scripts folder at: $path",
+      "📁$path entered, has $($files.Count) scripts and $($folders.Count) folder.",
+      "⚠️ ERROR: $($Error[0])"
+    ],
+    "string_anzahl_gesamt": 6,
+    "base64_bloecke_dekodiert": [],
+    "base64_bloecke_gesamt": 0,
+    "beobachtete_cmdlets": [
+      "Get-ChildItem",
+      "Resolve-Path",
+      "Set-Location",
+      "Test-Path"
+    ],
+    "auffaellige_tokens": {},
+    "iocs": {
+      "urls": [
+        "https://github.com/fleschutz/PowerShell"
+      ],
+      "ipv4": [],
+      "pfade": [
+        "C:\\Repos\\PowerShell\\scripts"
+      ]
+    }
+  },
+  "stufe3_structure": {
+    "strings": [
+      "$PSScriptRoot",
+      "$path",
+      "No scripts folder at: $path",
+      "📁$path entered, has $($files.Count) scripts and $($folders.Count) folder.",
+      "⚠️ ERROR: $($Error[0])"
+    ],
+    "string_anzahl_gesamt": 6,
+    "base64_bloecke_dekodiert": [],
+    "base64_bloecke_gesamt": 0,
+    "beobachtete_cmdlets": [
+      "Get-ChildItem",
+      "Resolve-Path",
+      "Set-Location",
+      "Test-Path"
+    ],
+    "auffaellige_tokens": {},
+    "iocs": {
+      "urls": [
+        "https://github.com/fleschutz/PowerShell"
+      ],
+      "ipv4": [],
+      "pfade": [
+        "C:\\Repos\\PowerShell\\scripts"
+      ]
+    },
+    "deobfuskiert_auszug": "﻿<#\n.SYNOPSIS\n\tSets the working directory to the PowerShell scripts folder\n.DESCRIPTION\n\tThis PowerShell script changes the currrent working directory to the PowerShell scripts folder.\n.EXAMPLE\n\tPS> ./cd-scripts.ps1\n\t📁C:\\Repos\\PowerShell\\scripts entered, has 655 scripts and 1 folder.\n.LINK\n\thttps://github.com/fleschutz/PowerShell\n.NOTES\n\tAuthor: Markus Fleschutz | License: CC0\n#>\n\n#requires -version 5.1\n\ntry {\n\t$path = Resolve-Path \"$PSScriptRoot\"\n\tif (-not(Test-Path \"$path\" -pathType container)) { throw \"No scripts folder at: $path\" }\n\tSet-Location \"$path\"\n\t$files = Get-ChildItem $path -attributes !Directory\n\t$folders = Get-ChildItem $path -attributes Directory\n\t\"📁$path entered, has $($files.Count) scripts and $($folders.Count) folder.\"\n\texit 0 # success\n} catch {\n\t\"⚠️ ERROR: $($Error[0])\"\n\texit 1\n}\n",
+    "dekodierte_befehle": [],
+    "beobachtete_abfolge": []
+  }
+}

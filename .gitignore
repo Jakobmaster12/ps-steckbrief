@@ -1,0 +1,4 @@
+# Rohskripte werden nicht versioniert (Lizenz offen, Schadcode). Beschaffung per src/fetch.py
+scripts/
+__pycache__/
+*.pyc

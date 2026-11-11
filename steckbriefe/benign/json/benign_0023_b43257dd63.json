@@ -1,0 +1,83 @@
+{
+  "meta": {
+    "quelldatei": "benign_022_cd-recent.ps1",
+    "sha256": "b43257dd63c6a41a9cf533e9603fff4333083e265e598015c6b46018418da0e0",
+    "groesse_bytes": 836,
+    "zeilen": 30,
+    "ground_truth_label": "benign",
+    "analyse_gekuerzt": false,
+    "hinweis": "Kein Urteil enthalten. Bewertung erfolgt durch das LLM."
+  },
+  "stufe1_extract": {
+    "strings": [
+      "recent",
+      "Recent",
+      "$path",
+      "No recent folder at $path",
+      "📂$path entered, has $($files.Count) files and $($folders.Count) folders.",
+      "⚠️ ERROR: $($Error[0])"
+    ],
+    "string_anzahl_gesamt": 8,
+    "base64_bloecke_dekodiert": [],
+    "base64_bloecke_gesamt": 0
+  },
+  "stufe2_features": {
+    "strings": [
+      "recent",
+      "Recent",
+      "$path",
+      "No recent folder at $path",
+      "📂$path entered, has $($files.Count) files and $($folders.Count) folders.",
+      "⚠️ ERROR: $($Error[0])"
+    ],
+    "string_anzahl_gesamt": 8,
+    "base64_bloecke_dekodiert": [],
+    "base64_bloecke_gesamt": 0,
+    "beobachtete_cmdlets": [
+      "Get-ChildItem",
+      "Set-Location",
+      "Test-Path"
+    ],
+    "auffaellige_tokens": {},
+    "iocs": {
+      "urls": [
+        "https://github.com/fleschutz/PowerShell"
+      ],
+      "ipv4": [],
+      "pfade": [
+        "C:\\Users\\Markus\\AppData\\Roaming\\Microsoft\\Windows\\Recent"
+      ]
+    }
+  },
+  "stufe3_structure": {
+    "strings": [
+      "recent",
+      "Recent",
+      "$path",
+      "No recent folder at $path",
+      "📂$path entered, has $($files.Count) files and $($folders.Count) folders.",
+      "⚠️ ERROR: $($Error[0])"
+    ],
+    "string_anzahl_gesamt": 8,
+    "base64_bloecke_dekodiert": [],
+    "base64_bloecke_gesamt": 0,
+    "beobachtete_cmdlets": [
+      "Get-ChildItem",
+      "Set-Location",
+      "Test-Path"
+    ],
+    "auffaellige_tokens": {},
+    "iocs": {
+      "urls": [
+        "https://github.com/fleschutz/PowerShell"
+      ],
+      "ipv4": [],
+      "pfade": [
+        "C:\\Users\\Markus\\AppData\\Roaming\\Microsoft\\Windows\\Recent"
+      ]
+    },
+    "deobfuskiert_auszug": "﻿<#\n.SYNOPSIS\n\tSets the working directory to the 'recent' folder\n.DESCRIPTION\n\tThis PowerShell script changes the current working directory to the 'recent' folder.\n.EXAMPLE\n\tPS> ./cd-recent.ps1\n\t📂C:\\Users\\Markus\\AppData\\Roaming\\Microsoft\\Windows\\Recent entered, has 2 files and 3 folders.\n.LINK\n\thttps://github.com/fleschutz/PowerShell\n.NOTES\n\tAuthor: Markus Fleschutz | License: CC0\n#>\n\n#requires -version 5.1\n\ntry {\n\t$path = [Environment]::GetFolderPath('Recent')\n\tif (-not(Test-Path \"$path\" -pathType container)) { throw \"No recent folder at $path\" }\n\n\tSet-Location \"$path\"\n\t$files = Get-ChildItem $path -attributes !Directory\n\t$folders = Get-ChildItem $path -attributes Directory\n\t\"📂$path entered, has $($files.Count) files and $($folders.Count) folders.\"\n\texit 0 # success\n} catch {\n\t\"⚠️ ERROR: $($Error[0])\"\n\texit 1\n}\n",
+    "dekodierte_befehle": [],
+    "beobachtete_abfolge": []
+  }
+}

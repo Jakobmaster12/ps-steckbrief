@@ -1,0 +1,76 @@
+{
+  "meta": {
+    "quelldatei": "benign_035_cd-up2.ps1",
+    "sha256": "0075cd45aeb6737ca7449f61880d975da9f739b95d4f217a7a362e8b756affbf",
+    "groesse_bytes": 568,
+    "zeilen": 27,
+    "ground_truth_label": "benign",
+    "analyse_gekuerzt": false,
+    "hinweis": "Kein Urteil enthalten. Bewertung erfolgt durch das LLM."
+  },
+  "stufe1_extract": {
+    "strings": [
+      "../..",
+      "$path",
+      "Folder at 📂$path doesn't exist (yet)",
+      "📂$path",
+      "⚠️ ERROR: $($Error[0])"
+    ],
+    "string_anzahl_gesamt": 6,
+    "base64_bloecke_dekodiert": [],
+    "base64_bloecke_gesamt": 0
+  },
+  "stufe2_features": {
+    "strings": [
+      "../..",
+      "$path",
+      "Folder at 📂$path doesn't exist (yet)",
+      "📂$path",
+      "⚠️ ERROR: $($Error[0])"
+    ],
+    "string_anzahl_gesamt": 6,
+    "base64_bloecke_dekodiert": [],
+    "base64_bloecke_gesamt": 0,
+    "beobachtete_cmdlets": [
+      "Resolve-Path",
+      "Set-Location",
+      "Test-Path"
+    ],
+    "auffaellige_tokens": {},
+    "iocs": {
+      "urls": [
+        "https://github.com/fleschutz/PowerShell"
+      ],
+      "ipv4": [],
+      "pfade": []
+    }
+  },
+  "stufe3_structure": {
+    "strings": [
+      "../..",
+      "$path",
+      "Folder at 📂$path doesn't exist (yet)",
+      "📂$path",
+      "⚠️ ERROR: $($Error[0])"
+    ],
+    "string_anzahl_gesamt": 6,
+    "base64_bloecke_dekodiert": [],
+    "base64_bloecke_gesamt": 0,
+    "beobachtete_cmdlets": [
+      "Resolve-Path",
+      "Set-Location",
+      "Test-Path"
+    ],
+    "auffaellige_tokens": {},
+    "iocs": {
+      "urls": [
+        "https://github.com/fleschutz/PowerShell"
+      ],
+      "ipv4": [],
+      "pfade": []
+    },
+    "deobfuskiert_auszug": "﻿<#\n.SYNOPSIS\n\tSets the working directory 2 directory levels up\n.DESCRIPTION\n\tThis PowerShell script changes the current working directory to two directory level up.\n.EXAMPLE\n\tPS> ./cd-up2.ps1\n\t📂C:\\\n.LINK\n\thttps://github.com/fleschutz/PowerShell\n.NOTES\n\tAuthor: Markus Fleschutz | License: CC0\n#>\n\n#requires -version 5.1\n\ntry {\n\t$path = Resolve-Path \"../..\"\n\tif (-not(Test-Path \"$path\" -pathType container)) { throw \"Folder at 📂$path doesn't exist (yet)\" }\n\tSet-Location \"$path\"\n\t\"📂$path\"\n\texit 0 # success\n} catch {\n\t\"⚠️ ERROR: $($Error[0])\"\n\texit 1\n}\n",
+    "dekodierte_befehle": [],
+    "beobachtete_abfolge": []
+  }
+}

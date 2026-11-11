@@ -1,0 +1,422 @@
+[
+  {
+    "id": "malicious_0001_ba4e1d443d",
+    "quelldatei": "Invoke-ObfuscateRandomFiles.ps1",
+    "sha256": "ba4e1d443d7889773f2ae8f45942f66d41199d4c567ef58610850c855bfc6bfa",
+    "label": "malicious",
+    "groesse_bytes": 1437
+  },
+  {
+    "id": "malicious_0002_0089970739",
+    "quelldatei": "0089970739fad5ebc14ec26b78eba1752eb41491992a35ae0763c73b718d5660.ps1",
+    "sha256": "0089970739fad5ebc14ec26b78eba1752eb41491992a35ae0763c73b718d5660",
+    "label": "malicious",
+    "groesse_bytes": 262788
+  },
+  {
+    "id": "malicious_0003_00cef7ba9f",
+    "quelldatei": "00cef7ba9fa500deee68eafd286aa841d3e46443322958d8f8844c9aaa3949b2.ps1",
+    "sha256": "00cef7ba9fa500deee68eafd286aa841d3e46443322958d8f8844c9aaa3949b2",
+    "label": "malicious",
+    "groesse_bytes": 145
+  },
+  {
+    "id": "malicious_0004_026ccb13ef",
+    "quelldatei": "026ccb13ef7903f6cb39a85357181a613588b7118ea61b3580152aca02879638.ps1",
+    "sha256": "026ccb13ef7903f6cb39a85357181a613588b7118ea61b3580152aca02879638",
+    "label": "malicious",
+    "groesse_bytes": 792
+  },
+  {
+    "id": "malicious_0005_0352f8641a",
+    "quelldatei": "0352f8641a0a894364b873dccc2738ef9fa6dd606c95fc9db08392238cffe899.ps1",
+    "sha256": "0352f8641a0a894364b873dccc2738ef9fa6dd606c95fc9db08392238cffe899",
+    "label": "malicious",
+    "groesse_bytes": 558
+  },
+  {
+    "id": "malicious_0006_035ee55b03",
+    "quelldatei": "035ee55b03afb96a70ca0cb79001a6ea3c33f9b6b8f85e816d21ab5faf9f21bf.ps1",
+    "sha256": "035ee55b03afb96a70ca0cb79001a6ea3c33f9b6b8f85e816d21ab5faf9f21bf",
+    "label": "malicious",
+    "groesse_bytes": 118910
+  },
+  {
+    "id": "malicious_0007_03f7cc3cfd",
+    "quelldatei": "03f7cc3cfda880c17d3339c63bc87ee4af3d75fff81ff104741dea04e1f9752a.ps1",
+    "sha256": "03f7cc3cfda880c17d3339c63bc87ee4af3d75fff81ff104741dea04e1f9752a",
+    "label": "malicious",
+    "groesse_bytes": 300159
+  },
+  {
+    "id": "malicious_0008_046d4048e8",
+    "quelldatei": "046d4048e859b77f86cc4f0e583276a80b02f15c85565d56a7ef0ad2a60db917.ps1",
+    "sha256": "046d4048e859b77f86cc4f0e583276a80b02f15c85565d56a7ef0ad2a60db917",
+    "label": "malicious",
+    "groesse_bytes": 3163
+  },
+  {
+    "id": "malicious_0009_04d352615e",
+    "quelldatei": "04d352615ee970fbfd3ec4f8e1692310bcf059339d14ad934d63bc9acb32e767.ps1",
+    "sha256": "04d352615ee970fbfd3ec4f8e1692310bcf059339d14ad934d63bc9acb32e767",
+    "label": "malicious",
+    "groesse_bytes": 3210
+  },
+  {
+    "id": "malicious_0010_04e09a2d4b",
+    "quelldatei": "04e09a2d4b77ece6e0e178d5cf8d1665048b834f481c66a3960d82d0eef51fea.ps1",
+    "sha256": "04e09a2d4b77ece6e0e178d5cf8d1665048b834f481c66a3960d82d0eef51fea",
+    "label": "malicious",
+    "groesse_bytes": 1452625
+  },
+  {
+    "id": "malicious_0011_051269318b",
+    "quelldatei": "051269318be07b5c083b001ee816becb14bf45919ea9371c82de917fae7043f1.ps1",
+    "sha256": "051269318be07b5c083b001ee816becb14bf45919ea9371c82de917fae7043f1",
+    "label": "malicious",
+    "groesse_bytes": 460418
+  },
+  {
+    "id": "malicious_0012_054ca3d10e",
+    "quelldatei": "054ca3d10e6696769835c8db9ba3bd09142237d21b5bddb013598053f6e0230a.ps1",
+    "sha256": "054ca3d10e6696769835c8db9ba3bd09142237d21b5bddb013598053f6e0230a",
+    "label": "malicious",
+    "groesse_bytes": 2097
+  },
+  {
+    "id": "malicious_0013_056deb6e3f",
+    "quelldatei": "056deb6e3f5de68f9ae2b1ed11f7d3d398a3488387294937bebcb0f8f847b5c9.ps1",
+    "sha256": "056deb6e3f5de68f9ae2b1ed11f7d3d398a3488387294937bebcb0f8f847b5c9",
+    "label": "malicious",
+    "groesse_bytes": 369
+  },
+  {
+    "id": "malicious_0014_05c2ce2a59",
+    "quelldatei": "05c2ce2a59b010993bade6495e647ccdc0f557d84df037ba8b81bb8c08a99900.ps1",
+    "sha256": "05c2ce2a59b010993bade6495e647ccdc0f557d84df037ba8b81bb8c08a99900",
+    "label": "malicious",
+    "groesse_bytes": 72469
+  },
+  {
+    "id": "malicious_0015_05daac7bba",
+    "quelldatei": "05daac7bbab4f98d298036f05b6ca784a38ac23f3a2b40fe764fdf5a13b89949.ps1",
+    "sha256": "05daac7bbab4f98d298036f05b6ca784a38ac23f3a2b40fe764fdf5a13b89949",
+    "label": "malicious",
+    "groesse_bytes": 260030
+  },
+  {
+    "id": "malicious_0016_0627d2a429",
+    "quelldatei": "0627d2a429f6e47620a7f0d409fdb0f2f1e0eb1d3cf31604cf8667b32f4408bf.ps1",
+    "sha256": "0627d2a429f6e47620a7f0d409fdb0f2f1e0eb1d3cf31604cf8667b32f4408bf",
+    "label": "malicious",
+    "groesse_bytes": 4869
+  },
+  {
+    "id": "malicious_0017_0650ef83b3",
+    "quelldatei": "0650ef83b3fa0ba158db8f846b2702a03b90ce85d691c2cbcade2b95e8d9271f.ps1",
+    "sha256": "0650ef83b3fa0ba158db8f846b2702a03b90ce85d691c2cbcade2b95e8d9271f",
+    "label": "malicious",
+    "groesse_bytes": 251
+  },
+  {
+    "id": "malicious_0018_0666a55041",
+    "quelldatei": "0666a55041e8c1247fb0b485b453e0235d120c854031e4b8db7f6f22354c6924.ps1",
+    "sha256": "0666a55041e8c1247fb0b485b453e0235d120c854031e4b8db7f6f22354c6924",
+    "label": "malicious",
+    "groesse_bytes": 263
+  },
+  {
+    "id": "malicious_0019_06db102d1c",
+    "quelldatei": "06db102d1c5d9386cd8d13e22237b286e4ecf1869c84cc70f17da0d421ccad3d.ps1",
+    "sha256": "06db102d1c5d9386cd8d13e22237b286e4ecf1869c84cc70f17da0d421ccad3d",
+    "label": "malicious",
+    "groesse_bytes": 456
+  },
+  {
+    "id": "malicious_0020_07106658bc",
+    "quelldatei": "07106658bc0e608667a987849f8ef91fff217a5a05a94c64fdfd7e3d91ac436f.ps1",
+    "sha256": "07106658bc0e608667a987849f8ef91fff217a5a05a94c64fdfd7e3d91ac436f",
+    "label": "malicious",
+    "groesse_bytes": 109787
+  },
+  {
+    "id": "malicious_0021_0748f282a2",
+    "quelldatei": "0748f282a25a47cfc13ff200079f82de1cee78e2a7ab06959343bf21733b222f.ps1",
+    "sha256": "0748f282a25a47cfc13ff200079f82de1cee78e2a7ab06959343bf21733b222f",
+    "label": "malicious",
+    "groesse_bytes": 327504
+  },
+  {
+    "id": "malicious_0022_0749c57fa5",
+    "quelldatei": "0749c57fa5774132e6218a35182fdb0d52a0f06fcd6d740dffa31342e43554eb.ps1",
+    "sha256": "0749c57fa5774132e6218a35182fdb0d52a0f06fcd6d740dffa31342e43554eb",
+    "label": "malicious",
+    "groesse_bytes": 3528
+  },
+  {
+    "id": "malicious_0023_078025707e",
+    "quelldatei": "078025707e0069438637644d4b57c0ab3f20c21fc738117589b15716d4e429d5.ps1",
+    "sha256": "078025707e0069438637644d4b57c0ab3f20c21fc738117589b15716d4e429d5",
+    "label": "malicious",
+    "groesse_bytes": 5191
+  },
+  {
+    "id": "malicious_0024_07ac813802",
+    "quelldatei": "07ac813802ee5aca4be94372bf75957c86845a877e2a80c7e674f87822199ea4.ps1",
+    "sha256": "07ac813802ee5aca4be94372bf75957c86845a877e2a80c7e674f87822199ea4",
+    "label": "malicious",
+    "groesse_bytes": 665
+  },
+  {
+    "id": "malicious_0025_07f375cb53",
+    "quelldatei": "07f375cb53ca2275e741e46a0b58739ac1c4a6862f9afded3315a26cb256e584.ps1",
+    "sha256": "07f375cb53ca2275e741e46a0b58739ac1c4a6862f9afded3315a26cb256e584",
+    "label": "malicious",
+    "groesse_bytes": 2778
+  },
+  {
+    "id": "malicious_0026_08ce501a98",
+    "quelldatei": "08ce501a984a5cb366de6a40c762738fafaed6643a3be1268e13331f0196cf46.ps1",
+    "sha256": "08ce501a984a5cb366de6a40c762738fafaed6643a3be1268e13331f0196cf46",
+    "label": "malicious",
+    "groesse_bytes": 1420
+  },
+  {
+    "id": "malicious_0027_08f491d46a",
+    "quelldatei": "08f491d46a9d05f1aebc83d724ca32c8063a2613250d50ce5b7e8ba469680605.ps1",
+    "sha256": "08f491d46a9d05f1aebc83d724ca32c8063a2613250d50ce5b7e8ba469680605",
+    "label": "malicious",
+    "groesse_bytes": 17244
+  },
+  {
+    "id": "malicious_0028_09094ed7de",
+    "quelldatei": "09094ed7deb2b722d47c888b47bc8d71b33355e5052b6e42621e4e98642e7ea9.ps1",
+    "sha256": "09094ed7deb2b722d47c888b47bc8d71b33355e5052b6e42621e4e98642e7ea9",
+    "label": "malicious",
+    "groesse_bytes": 372087
+  },
+  {
+    "id": "malicious_0029_0921bdc85e",
+    "quelldatei": "0921bdc85effd18e3c467d28105458420febcab5e458f58fcee82914e5ca61c7.ps1",
+    "sha256": "0921bdc85effd18e3c467d28105458420febcab5e458f58fcee82914e5ca61c7",
+    "label": "malicious",
+    "groesse_bytes": 2742
+  },
+  {
+    "id": "malicious_0030_0935319f18",
+    "quelldatei": "0935319f18514842a11d95bc435972a23b618ff294d2a861f2149954871c6784.ps1",
+    "sha256": "0935319f18514842a11d95bc435972a23b618ff294d2a861f2149954871c6784",
+    "label": "malicious",
+    "groesse_bytes": 1824560
+  },
+  {
+    "id": "malicious_0031_094c5bdd35",
+    "quelldatei": "094c5bdd350a0f2a9108ff23e6835e1a892170f23b573cc6dc6d829c4b079374.ps1",
+    "sha256": "094c5bdd350a0f2a9108ff23e6835e1a892170f23b573cc6dc6d829c4b079374",
+    "label": "malicious",
+    "groesse_bytes": 673
+  },
+  {
+    "id": "malicious_0032_0974754a58",
+    "quelldatei": "0974754a58673dcc33334213be5d6b8388d87a268a63e49f60221c1c41f4159d.ps1",
+    "sha256": "0974754a58673dcc33334213be5d6b8388d87a268a63e49f60221c1c41f4159d",
+    "label": "malicious",
+    "groesse_bytes": 338221
+  },
+  {
+    "id": "malicious_0033_09f2b4b6dd",
+    "quelldatei": "09f2b4b6ddb2f0311812bd06802a37f7b15c0b4160becc8287b6a6329ae31074.ps1",
+    "sha256": "09f2b4b6ddb2f0311812bd06802a37f7b15c0b4160becc8287b6a6329ae31074",
+    "label": "malicious",
+    "groesse_bytes": 68183
+  },
+  {
+    "id": "malicious_0034_0a511648b1",
+    "quelldatei": "0a511648b1eb00f3eee4edaaa1fca683bbfc2fbb24923f334ba82485fd890f1b.ps1",
+    "sha256": "0a511648b1eb00f3eee4edaaa1fca683bbfc2fbb24923f334ba82485fd890f1b",
+    "label": "malicious",
+    "groesse_bytes": 27057
+  },
+  {
+    "id": "malicious_0035_0a678fb9fa",
+    "quelldatei": "0a678fb9faabedfeb96cba05015bdbaa02830aada6d8dc3b73f8caf1c90502a2.ps1",
+    "sha256": "0a678fb9faabedfeb96cba05015bdbaa02830aada6d8dc3b73f8caf1c90502a2",
+    "label": "malicious",
+    "groesse_bytes": 1824350
+  },
+  {
+    "id": "malicious_0036_0a724325d6",
+    "quelldatei": "0a724325d6c34ee680d393db2ab074eb37c5c9c1cd5985e51382d275d97daa10.ps1",
+    "sha256": "0a724325d6c34ee680d393db2ab074eb37c5c9c1cd5985e51382d275d97daa10",
+    "label": "malicious",
+    "groesse_bytes": 1378
+  },
+  {
+    "id": "malicious_0037_0ab753de21",
+    "quelldatei": "0ab753de218dbbe2abedb69a406fc07cd30b9e607632cfaba4e398f70c49c457.ps1",
+    "sha256": "0ab753de218dbbe2abedb69a406fc07cd30b9e607632cfaba4e398f70c49c457",
+    "label": "malicious",
+    "groesse_bytes": 921
+  },
+  {
+    "id": "malicious_0038_0afe02415b",
+    "quelldatei": "0afe02415b9523c9f840be11d9561d1c07b41ac1f7b803b7112608ae8db29950.ps1",
+    "sha256": "0afe02415b9523c9f840be11d9561d1c07b41ac1f7b803b7112608ae8db29950",
+    "label": "malicious",
+    "groesse_bytes": 2354266
+  },
+  {
+    "id": "malicious_0039_0b4b035aa1",
+    "quelldatei": "0b4b035aa14a556e3c2bb2fac92f601085e8c30a09fcd94964d6255452ec4288.ps1",
+    "sha256": "0b4b035aa14a556e3c2bb2fac92f601085e8c30a09fcd94964d6255452ec4288",
+    "label": "malicious",
+    "groesse_bytes": 268489
+  },
+  {
+    "id": "malicious_0040_0b6d43368a",
+    "quelldatei": "0b6d43368ade45f7316d8b73ef0ae6e3c9b9849e9e9ff86a6bb62d219b565cf0.ps1",
+    "sha256": "0b6d43368ade45f7316d8b73ef0ae6e3c9b9849e9e9ff86a6bb62d219b565cf0",
+    "label": "malicious",
+    "groesse_bytes": 1135476
+  },
+  {
+    "id": "malicious_0041_0bbce92b54",
+    "quelldatei": "0bbce92b547f0e99a37636b090cb05d9633cc05e1ce876e0076ca32dc4c901c4.ps1",
+    "sha256": "0bbce92b547f0e99a37636b090cb05d9633cc05e1ce876e0076ca32dc4c901c4",
+    "label": "malicious",
+    "groesse_bytes": 29490
+  },
+  {
+    "id": "malicious_0042_0bcf98a0bc",
+    "quelldatei": "0bcf98a0bc82f88141cba86f3a583be951d9b05c9e9af2b1d454c291c15922de.ps1",
+    "sha256": "0bcf98a0bc82f88141cba86f3a583be951d9b05c9e9af2b1d454c291c15922de",
+    "label": "malicious",
+    "groesse_bytes": 568
+  },
+  {
+    "id": "malicious_0043_0bd3097c6d",
+    "quelldatei": "0bd3097c6dbfeac3baa66f96668c4330c1fa22fb8b650e8d3635381c6813ed74.ps1",
+    "sha256": "0bd3097c6dbfeac3baa66f96668c4330c1fa22fb8b650e8d3635381c6813ed74",
+    "label": "malicious",
+    "groesse_bytes": 2050
+  },
+  {
+    "id": "malicious_0044_0bd3c47006",
+    "quelldatei": "0bd3c4700677ac918391442acbdcc67a5dcd09a22b3cb32dda659a42569deb56.ps1",
+    "sha256": "0bd3c4700677ac918391442acbdcc67a5dcd09a22b3cb32dda659a42569deb56",
+    "label": "malicious",
+    "groesse_bytes": 1023
+  },
+  {
+    "id": "malicious_0045_0c2bb3e84c",
+    "quelldatei": "0c2bb3e84cc99eced7a999b2ff8a068f3993a8a80487fbff55b8e0083bb43c9e.ps1",
+    "sha256": "0c2bb3e84cc99eced7a999b2ff8a068f3993a8a80487fbff55b8e0083bb43c9e",
+    "label": "malicious",
+    "groesse_bytes": 338231
+  },
+  {
+    "id": "malicious_0046_0c79ad0f73",
+    "quelldatei": "0c79ad0f738bdbcb2b761295a25a2c9a66aa2ca96eba8e6b8913d3168e9dacbc.ps1",
+    "sha256": "0c79ad0f738bdbcb2b761295a25a2c9a66aa2ca96eba8e6b8913d3168e9dacbc",
+    "label": "malicious",
+    "groesse_bytes": 36276
+  },
+  {
+    "id": "malicious_0047_0c7c90cb43",
+    "quelldatei": "0c7c90cb43fd9c1f00523028b2112e9d27e08233fb9374956df0496ff4415192.ps1",
+    "sha256": "0c7c90cb43fd9c1f00523028b2112e9d27e08233fb9374956df0496ff4415192",
+    "label": "malicious",
+    "groesse_bytes": 1132383
+  },
+  {
+    "id": "malicious_0048_0d40b05905",
+    "quelldatei": "0d40b05905eb041af1e5362dc4aaa69222e33867213528253599d100529d384f.ps1",
+    "sha256": "0d40b05905eb041af1e5362dc4aaa69222e33867213528253599d100529d384f",
+    "label": "malicious",
+    "groesse_bytes": 21613
+  },
+  {
+    "id": "malicious_0049_0dead736f6",
+    "quelldatei": "0dead736f60366e0ef43b755d6d3a775220f73bd2971012c77e4cac81da658e3.ps1",
+    "sha256": "0dead736f60366e0ef43b755d6d3a775220f73bd2971012c77e4cac81da658e3",
+    "label": "malicious",
+    "groesse_bytes": 4839
+  },
+  {
+    "id": "malicious_0050_0e242927ec",
+    "quelldatei": "0e242927eceb9af6c0d5be7a11a4a9eb4eefa9699cd8a156ddb10af03b95e3fe.ps1",
+    "sha256": "0e242927eceb9af6c0d5be7a11a4a9eb4eefa9699cd8a156ddb10af03b95e3fe",
+    "label": "malicious",
+    "groesse_bytes": 21342
+  },
+  {
+    "id": "malicious_0051_0e2f3b3ee0",
+    "quelldatei": "0e2f3b3ee0463eed39361790dd95f323890716f4e7fbf169efeab7133a6d123a.ps1",
+    "sha256": "0e2f3b3ee0463eed39361790dd95f323890716f4e7fbf169efeab7133a6d123a",
+    "label": "malicious",
+    "groesse_bytes": 26638
+  },
+  {
+    "id": "malicious_0052_0e6dc96dea",
+    "quelldatei": "0e6dc96deab61e32f179b79b187defb3997a7779f7fb20026c09930af3c9de1e.ps1",
+    "sha256": "0e6dc96deab61e32f179b79b187defb3997a7779f7fb20026c09930af3c9de1e",
+    "label": "malicious",
+    "groesse_bytes": 878
+  },
+  {
+    "id": "malicious_0053_0edf219fdf",
+    "quelldatei": "0edf219fdf56fb6e0e69dae0538cc82427ac8ae8616bca83a3518c7711fa84fe.ps1",
+    "sha256": "0edf219fdf56fb6e0e69dae0538cc82427ac8ae8616bca83a3518c7711fa84fe",
+    "label": "malicious",
+    "groesse_bytes": 815
+  },
+  {
+    "id": "malicious_0054_0f083aac77",
+    "quelldatei": "0f083aac77fb734a8e81fb9dff218f0414ac6c4c9a23b2832837fbc2c7e2031d.ps1",
+    "sha256": "0f083aac77fb734a8e81fb9dff218f0414ac6c4c9a23b2832837fbc2c7e2031d",
+    "label": "malicious",
+    "groesse_bytes": 146218
+  },
+  {
+    "id": "malicious_0055_0f4aeb8482",
+    "quelldatei": "0f4aeb84826e863ba58695f58e50cfd749373ca46a1832885e3eb3e4b1a6f0c3.ps1",
+    "sha256": "0f4aeb84826e863ba58695f58e50cfd749373ca46a1832885e3eb3e4b1a6f0c3",
+    "label": "malicious",
+    "groesse_bytes": 851766
+  },
+  {
+    "id": "malicious_0056_0f7ee6a865",
+    "quelldatei": "0f7ee6a8657f531f5ae654e0420823de493c33cfe45348f53e6bb40ac2cb1613.ps1",
+    "sha256": "0f7ee6a8657f531f5ae654e0420823de493c33cfe45348f53e6bb40ac2cb1613",
+    "label": "malicious",
+    "groesse_bytes": 2152
+  },
+  {
+    "id": "malicious_0057_0ff8988d76",
+    "quelldatei": "0ff8988d76fc6bd764a70a7a4f07a15b2b2c604138d9aadc784c9aeb6b77e275.ps1",
+    "sha256": "0ff8988d76fc6bd764a70a7a4f07a15b2b2c604138d9aadc784c9aeb6b77e275",
+    "label": "malicious",
+    "groesse_bytes": 1986766
+  },
+  {
+    "id": "malicious_0058_10217f8ba9",
+    "quelldatei": "10217f8ba9a476b857735740263c71339bb4d9b3b0bee4a89ce48110e919f3ed.ps1",
+    "sha256": "10217f8ba9a476b857735740263c71339bb4d9b3b0bee4a89ce48110e919f3ed",
+    "label": "malicious",
+    "groesse_bytes": 852512
+  },
+  {
+    "id": "malicious_0059_102dd336f8",
+    "quelldatei": "102dd336f8be1d68a34a389851cd0454d6bdf4d93911ba330e48029dd5c520e8.ps1",
+    "sha256": "102dd336f8be1d68a34a389851cd0454d6bdf4d93911ba330e48029dd5c520e8",
+    "label": "malicious",
+    "groesse_bytes": 235855
+  },
+  {
+    "id": "malicious_0060_10882cb1fc",
+    "quelldatei": "10882cb1fc5cfdf37b2bb6ea6ea9189f39ae8f0889eac96866cb72e3ea4e4b3c.ps1",
+    "sha256": "10882cb1fc5cfdf37b2bb6ea6ea9189f39ae8f0889eac96866cb72e3ea4e4b3c",
+    "label": "malicious",
+    "groesse_bytes": 231940
+  }
+]

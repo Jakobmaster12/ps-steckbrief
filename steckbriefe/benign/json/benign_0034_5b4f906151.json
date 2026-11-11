@@ -1,0 +1,91 @@
+{
+  "meta": {
+    "quelldatei": "benign_033_cd-trash.ps1",
+    "sha256": "5b4f906151d948dbd9e480ac6c9c9ca9e7ac06daacd639ee1d9e1af8a79ac99d",
+    "groesse_bytes": 1104,
+    "zeilen": 41,
+    "ground_truth_label": "benign",
+    "analyse_gekuerzt": false,
+    "hinweis": "Kein Urteil enthalten. Bewertung erfolgt durch das LLM."
+  },
+  "stufe1_extract": {
+    "strings": [
+      "~/.local/share/Trash/",
+      "C:\\`$Recycle.Bin\\$(GetCurrentUserSID)",
+      "$path",
+      "No trash folder at $path",
+      "📂$path entered, has $($files.Count) files and $($folders.Count) folders.",
+      "⚠️ ERROR: $($Error[0])"
+    ],
+    "string_anzahl_gesamt": 7,
+    "base64_bloecke_dekodiert": [],
+    "base64_bloecke_gesamt": 0
+  },
+  "stufe2_features": {
+    "strings": [
+      "~/.local/share/Trash/",
+      "C:\\`$Recycle.Bin\\$(GetCurrentUserSID)",
+      "$path",
+      "No trash folder at $path",
+      "📂$path entered, has $($files.Count) files and $($folders.Count) folders.",
+      "⚠️ ERROR: $($Error[0])"
+    ],
+    "string_anzahl_gesamt": 7,
+    "base64_bloecke_dekodiert": [],
+    "base64_bloecke_gesamt": 0,
+    "beobachtete_cmdlets": [
+      "Add-Type",
+      "Get-ChildItem",
+      "Set-Location",
+      "Test-Path"
+    ],
+    "auffaellige_tokens": {
+      "add_type": 1
+    },
+    "iocs": {
+      "urls": [
+        "https://github.com/fleschutz/PowerShell"
+      ],
+      "ipv4": [],
+      "pfade": [
+        "C:\\$Recycle.Bin\\S-1-5-21-123404-23309-294260-1001",
+        "C:\\`$Recycle.Bin\\$(GetCurrentUserSID)"
+      ]
+    }
+  },
+  "stufe3_structure": {
+    "strings": [
+      "~/.local/share/Trash/",
+      "C:\\`$Recycle.Bin\\$(GetCurrentUserSID)",
+      "$path",
+      "No trash folder at $path",
+      "📂$path entered, has $($files.Count) files and $($folders.Count) folders.",
+      "⚠️ ERROR: $($Error[0])"
+    ],
+    "string_anzahl_gesamt": 7,
+    "base64_bloecke_dekodiert": [],
+    "base64_bloecke_gesamt": 0,
+    "beobachtete_cmdlets": [
+      "Add-Type",
+      "Get-ChildItem",
+      "Set-Location",
+      "Test-Path"
+    ],
+    "auffaellige_tokens": {
+      "add_type": 1
+    },
+    "iocs": {
+      "urls": [
+        "https://github.com/fleschutz/PowerShell"
+      ],
+      "ipv4": [],
+      "pfade": [
+        "C:\\$Recycle.Bin\\S-1-5-21-123404-23309-294260-1001",
+        "C:\\`$Recycle.Bin\\$(GetCurrentUserSID)"
+      ]
+    },
+    "deobfuskiert_auszug": "﻿<#\n.SYNOPSIS\n\tSets the working dir to the trash folder\n.DESCRIPTION\n\tThis PowerShell script changes the current working directory to the user's trash folder.\n.EXAMPLE\n\tPS> ./cd-trash.ps1\n\t📂C:\\$Recycle.Bin\\S-1-5-21-123404-23309-294260-1001 entered, has 4 files and 0 folders.\n.LINK\n\thttps://github.com/fleschutz/PowerShell\n.NOTES\n\tAuthor: Markus Fleschutz | License: CC0\n#>\n\n#requires -version 5.1\n\nfunction GetCurrentUserSID { [CmdletBinding()] param()\n\tAdd-Type -AssemblyName System.DirectoryServices.AccountManagement\n\treturn ([System.DirectoryServices.AccountManagement.UserPrincipal]::Current).SID.Value\n}\n\n\ntry {\n\tif ($IsLinux) {\n\t\t$path = \"~/.local/share/Trash/\"\n\t} else {\n\t\t$path = \"C:\\$Recycle.Bin\\$(GetCurrentUserSID)\"\n\t}\n\tif (-not(Test-Path \"$path\" -pathType container)) {\n\t\tthrow \"No trash folder at $path\"\n\t}\n\tSet-Location \"$path\"\n\t$files = Get-ChildItem $path -attributes !Directory\n\t$folders = Get-ChildItem $path -attributes Directory\n\t\"📂$path entered, has $($files.Count) files and $($folders.Count) folders.\"\n\texit 0 # success\n} catch {\n\t\"⚠️ ERROR: $($Error[0])\"\n\texit 1\n}\n",
+    "dekodierte_befehle": [],
+    "beobachtete_abfolge": []
+  }
+}

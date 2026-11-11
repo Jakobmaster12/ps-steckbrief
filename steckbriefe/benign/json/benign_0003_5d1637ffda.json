@@ -1,0 +1,93 @@
+{
+  "meta": {
+    "quelldatei": "benign_002_brew-coffee.ps1",
+    "sha256": "5d1637ffda6a2b5a3732642d966ac679c4ccfd570234a54b51698306c8b19bc4",
+    "groesse_bytes": 1552,
+    "zeilen": 69,
+    "ground_truth_label": "benign",
+    "analyse_gekuerzt": false,
+    "hinweis": "Kein Urteil enthalten. Bewertung erfolgt durch das LLM."
+  },
+  "stufe1_extract": {
+    "strings": [
+      "                 ",
+      "       )(   )(   ",
+      "      (  ) (  )  ",
+      "      _________   ",
+      "  ###|         |  ",
+      " |   |         |  ",
+      " |   | B O S S |  ",
+      "  ###|_________|  ",
+      "     \\_________/  ",
+      "⚠️ ERROR: $($Error[0]) (at line $($_.InvocationInfo.ScriptLineNumber))"
+    ],
+    "string_anzahl_gesamt": 18,
+    "base64_bloecke_dekodiert": [],
+    "base64_bloecke_gesamt": 0
+  },
+  "stufe2_features": {
+    "strings": [
+      "                 ",
+      "       )(   )(   ",
+      "      (  ) (  )  ",
+      "      _________   ",
+      "  ###|         |  ",
+      " |   |         |  ",
+      " |   | B O S S |  ",
+      "  ###|_________|  ",
+      "     \\_________/  ",
+      "⚠️ ERROR: $($Error[0]) (at line $($_.InvocationInfo.ScriptLineNumber))"
+    ],
+    "string_anzahl_gesamt": 18,
+    "base64_bloecke_dekodiert": [],
+    "base64_bloecke_gesamt": 0,
+    "beobachtete_cmdlets": [
+      "Clear-Host",
+      "Start-CoffeeCupAnimation",
+      "Start-Sleep",
+      "Write-Host"
+    ],
+    "auffaellige_tokens": {},
+    "iocs": {
+      "urls": [
+        "https://github.com/fleschutz/PowerShell"
+      ],
+      "ipv4": [],
+      "pfade": []
+    }
+  },
+  "stufe3_structure": {
+    "strings": [
+      "                 ",
+      "       )(   )(   ",
+      "      (  ) (  )  ",
+      "      _________   ",
+      "  ###|         |  ",
+      " |   |         |  ",
+      " |   | B O S S |  ",
+      "  ###|_________|  ",
+      "     \\_________/  ",
+      "⚠️ ERROR: $($Error[0]) (at line $($_.InvocationInfo.ScriptLineNumber))"
+    ],
+    "string_anzahl_gesamt": 18,
+    "base64_bloecke_dekodiert": [],
+    "base64_bloecke_gesamt": 0,
+    "beobachtete_cmdlets": [
+      "Clear-Host",
+      "Start-CoffeeCupAnimation",
+      "Start-Sleep",
+      "Write-Host"
+    ],
+    "auffaellige_tokens": {},
+    "iocs": {
+      "urls": [
+        "https://github.com/fleschutz/PowerShell"
+      ],
+      "ipv4": [],
+      "pfade": []
+    },
+    "deobfuskiert_auszug": "﻿<#\n.SYNOPSIS\n\tBrews coffee as animation\n.DESCRIPTION\n\tThis PowerShell script writes a coffee cup with animated steam to the console.\n.EXAMPLE\n\tPS> ./brew-coffee.ps1\n.LINK\n\thttps://github.com/fleschutz/PowerShell\n.NOTES\n\tAuthor: Markus Fleschutz | License: CC0\n#>\n\n#requires -version 5.1\n\nfunction Start-CoffeeCupAnimation { param ([int]$DelayMs = 250)\n\n    $SteamFrames = @(\n        # Frame 1\n        @(  \"                 \"\n            \"                 \"\n            \"       )(   )(   \"\n            \"      (  ) (  )  \"\n            \"       )(   )(   \"\n        ),\n        # Frame 2\n        @(\n            \"                 \"\n            \"                 \"\n            \"      (  ) (  )  \"\n            \"       )(   )(   \"\n            \"      (  ) (  )  \"\n        )\n    )\n    $SteamFrameIndex = 0\n \n    $CoffeeCup = @(\n     \"      _________   \"\n     \"  ###|         |  \"\n     \" |   |         |  \"\n     \" |   | B O S S |  \"\n     \" |   |         |  \"\n     \"  ###|_________|  \"\n     \"     \\_________/  \"\n    )\n\n    while ($true) {\n            $currentSteam = $SteamFrames[$SteamFrameIndex]\n\n            Clear-Host\n            foreach ($line in $currentSteam) { Write-Host $line }\n            foreach ($line in $CoffeeCup) { Write-Host $line }\n           \n            $SteamFrameIndex = ($SteamFrameIndex + 1) % $SteamFrames.Length\n            \n            Start-Sleep -Milliseconds $DelayMs\n        }\n}\n\n\ntry {\n\tStart-CoffeeCupAnimation \n\n\texit 0 # success\n} catch {\n\t\"⚠️ ERROR: $($Error[0]) (at line $($_.InvocationInfo.ScriptLineNumber))\"\n\texit 1\n}\n",
+    "dekodierte_befehle": [],
+    "beobachtete_abfolge": []
+  }
+}

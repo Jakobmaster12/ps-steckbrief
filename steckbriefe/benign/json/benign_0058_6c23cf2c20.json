@@ -1,0 +1,80 @@
+{
+  "meta": {
+    "quelldatei": "benign_057_check-gpu.ps1",
+    "sha256": "6c23cf2c20b3e5bc6b9ce7baffd8016602b6999d3dc4f67915fcd23b5eb493c2",
+    "groesse_bytes": 1456,
+    "zeilen": 49,
+    "ground_truth_label": "benign",
+    "analyse_gekuerzt": false,
+    "hinweis": "Kein Urteil enthalten. Bewertung erfolgt durch das LLM."
+  },
+  "stufe1_extract": {
+    "strings": [
+      "$Bytes bytes",
+      "$($Bytes)KB",
+      "$($Bytes)MB",
+      "$($Bytes)GB",
+      "$($Bytes)TB",
+      "✅ $Model GPU ($(Bytes2String $RAMSize) RAM, $($ResWidth)x$($ResHeight) pixels, $($BitsPerPixel)-bit, $($RefreshRate)Hz, driver $DriverVersion) - status $Status",
+      "⚠️ ERROR: $($Error[0]) (at line $($_.InvocationInfo.ScriptLineNumber))"
+    ],
+    "string_anzahl_gesamt": 7,
+    "base64_bloecke_dekodiert": [],
+    "base64_bloecke_gesamt": 0
+  },
+  "stufe2_features": {
+    "strings": [
+      "$Bytes bytes",
+      "$($Bytes)KB",
+      "$($Bytes)MB",
+      "$($Bytes)GB",
+      "$($Bytes)TB",
+      "✅ $Model GPU ($(Bytes2String $RAMSize) RAM, $($ResWidth)x$($ResHeight) pixels, $($BitsPerPixel)-bit, $($RefreshRate)Hz, driver $DriverVersion) - status $Status",
+      "⚠️ ERROR: $($Error[0]) (at line $($_.InvocationInfo.ScriptLineNumber))"
+    ],
+    "string_anzahl_gesamt": 7,
+    "base64_bloecke_dekodiert": [],
+    "base64_bloecke_gesamt": 0,
+    "beobachtete_cmdlets": [
+      "Get-WmiObject",
+      "Write-Host"
+    ],
+    "auffaellige_tokens": {},
+    "iocs": {
+      "urls": [
+        "https://github.com/fleschutz/PowerShell"
+      ],
+      "ipv4": [],
+      "pfade": []
+    }
+  },
+  "stufe3_structure": {
+    "strings": [
+      "$Bytes bytes",
+      "$($Bytes)KB",
+      "$($Bytes)MB",
+      "$($Bytes)GB",
+      "$($Bytes)TB",
+      "✅ $Model GPU ($(Bytes2String $RAMSize) RAM, $($ResWidth)x$($ResHeight) pixels, $($BitsPerPixel)-bit, $($RefreshRate)Hz, driver $DriverVersion) - status $Status",
+      "⚠️ ERROR: $($Error[0]) (at line $($_.InvocationInfo.ScriptLineNumber))"
+    ],
+    "string_anzahl_gesamt": 7,
+    "base64_bloecke_dekodiert": [],
+    "base64_bloecke_gesamt": 0,
+    "beobachtete_cmdlets": [
+      "Get-WmiObject",
+      "Write-Host"
+    ],
+    "auffaellige_tokens": {},
+    "iocs": {
+      "urls": [
+        "https://github.com/fleschutz/PowerShell"
+      ],
+      "ipv4": [],
+      "pfade": []
+    },
+    "deobfuskiert_auszug": "﻿<#\r\n.SYNOPSIS\r\n\tChecks the GPU status\r\n.DESCRIPTION\r\n\tThis PowerShell script queries the GPU status and prints it.\r\n.EXAMPLE\r\n\tPS> ./check-gpu.ps1\r\n\t✅ NVIDIA Quadro P400 GPU (2GB RAM, 3840x2160 pixels, 32-bit, 59Hz, driver 31.0.15.1740) - status OK\r\n.LINK\r\n\thttps://github.com/fleschutz/PowerShell\r\n.NOTES\r\n\tAuthor: Markus Fleschutz, Tyler MacInnis | License: CC0\r\n#>\r\n\r\nfunction Bytes2String { param([int64]$Bytes)\r\n\tif ($Bytes -lt 1000) { return \"$Bytes bytes\" }\r\n\t$Bytes /= 1000\r\n\tif ($Bytes -lt 1000) { return \"$($Bytes)KB\" }\r\n\t$Bytes /= 1000\r\n\tif ($Bytes -lt 1000) { return \"$($Bytes)MB\" }\r\n\t$Bytes /= 1000\r\n\tif ($Bytes -lt 1000) { return \"$($Bytes)GB\" }\r\n\t$Bytes /= 1000\r\n\treturn \"$($Bytes)TB\"\r\n}\r\n\r\ntry {\r\n\tif ($IsLinux) {\r\n\t\t# TODO\r\n\t} else {\r\n\t\t$Details = Get-WmiObject Win32_VideoController\r\n\t\tforeach ($GPU in $Details) {\r\n\t\t\t$Model = $GPU.Caption\r\n\t\t\t$RAMSize = $GPU.AdapterRAM\r\n\t\t\t$ResWidth = $GPU.CurrentHorizontalResolution\r\n\t\t\t$ResHeight = $GPU.CurrentVerticalResolution\r\n\t\t\t$BitsPerPixel = $GPU.CurrentBitsPerPixel\r\n\t\t\t$RefreshRate = $GPU.CurrentRefreshRate\r\n\t\t\t$DriverVersion = $GPU.DriverVersion\r\n\t\t\t$Status = $GPU.Status\r\n\t\t\tWrite-Host \"✅ $Model GPU ($(Bytes2String $RAMSize) RAM, $($ResWidth)x$($ResHeight) pixels, $($BitsPerPixel)-bit, $($RefreshRate)Hz, driver $DriverVersion) - status $Status\"\r\n\t\t}\r\n\t}\r\n\texit 0 # success\r\n} catch {\r\n\t\"⚠️ ERROR: $($Error[0]) (at line $($_.InvocationInfo.ScriptLineNumber))\"\r\n\texit 1\r\n}\r\n",
+    "dekodierte_befehle": [],
+    "beobachtete_abfolge": []
+  }
+}

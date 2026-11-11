@@ -1,0 +1,84 @@
+{
+  "meta": {
+    "quelldatei": "benign_047_check-credentials.ps1",
+    "sha256": "d33402706952df81bf2f51831d698f60aabf1f91f034558b70ea9d2b42a7d605",
+    "groesse_bytes": 1401,
+    "zeilen": 39,
+    "ground_truth_label": "benign",
+    "analyse_gekuerzt": false,
+    "hinweis": "Kein Urteil enthalten. Bewertung erfolgt durch das LLM."
+  },
+  "stufe1_extract": {
+    "strings": [
+      "$HOME\\my.credentials",
+      "Enter username and password, please.",
+      "$TargetFile",
+      "Sorry, your username is wrong.",
+      "Sorry, your password is wrong.",
+      "✅ Your credentials are correct.",
+      "⚠️ ERROR: $($Error[0]) (at line $($_.InvocationInfo.ScriptLineNumber))"
+    ],
+    "string_anzahl_gesamt": 9,
+    "base64_bloecke_dekodiert": [],
+    "base64_bloecke_gesamt": 0
+  },
+  "stufe2_features": {
+    "strings": [
+      "$HOME\\my.credentials",
+      "Enter username and password, please.",
+      "$TargetFile",
+      "Sorry, your username is wrong.",
+      "Sorry, your password is wrong.",
+      "✅ Your credentials are correct.",
+      "⚠️ ERROR: $($Error[0]) (at line $($_.InvocationInfo.ScriptLineNumber))"
+    ],
+    "string_anzahl_gesamt": 9,
+    "base64_bloecke_dekodiert": [],
+    "base64_bloecke_gesamt": 0,
+    "beobachtete_cmdlets": [
+      "Get-Content",
+      "Get-Credential",
+      "New-Object",
+      "Write-Host"
+    ],
+    "auffaellige_tokens": {},
+    "iocs": {
+      "urls": [
+        "https://github.com/fleschutz/PowerShell"
+      ],
+      "ipv4": [],
+      "pfade": []
+    }
+  },
+  "stufe3_structure": {
+    "strings": [
+      "$HOME\\my.credentials",
+      "Enter username and password, please.",
+      "$TargetFile",
+      "Sorry, your username is wrong.",
+      "Sorry, your password is wrong.",
+      "✅ Your credentials are correct.",
+      "⚠️ ERROR: $($Error[0]) (at line $($_.InvocationInfo.ScriptLineNumber))"
+    ],
+    "string_anzahl_gesamt": 9,
+    "base64_bloecke_dekodiert": [],
+    "base64_bloecke_gesamt": 0,
+    "beobachtete_cmdlets": [
+      "Get-Content",
+      "Get-Credential",
+      "New-Object",
+      "Write-Host"
+    ],
+    "auffaellige_tokens": {},
+    "iocs": {
+      "urls": [
+        "https://github.com/fleschutz/PowerShell"
+      ],
+      "ipv4": [],
+      "pfade": []
+    },
+    "deobfuskiert_auszug": "﻿<#\n.SYNOPSIS\n\tChecks credentials \n.DESCRIPTION\n\tThis PowerShell script asks for credentials and checks them against saved ones (\"$HOME\\my.credentials\" by default).\n.PARAMETER TargetFile\n\tSpecifies the target file (\"$HOME\\my.credentials\" by default)\n.EXAMPLE\n\tPS> ./check-credentials.ps1\n\tEnter username and password, please.\n \t✅ Your credentials are correct.\n.LINK\n\thttps://github.com/fleschutz/PowerShell\n.NOTES\n\tAuthor: Markus Fleschutz | License: CC0\n#>\n\nparam([string]$TargetFile = \"$HOME\\my.credentials\")\n\ntry {\n\tWrite-Host \"Enter username and password, please.\" -foreground red\n\t$credsFromUser = Get-Credential\n\n\t$secureString = Get-Content \"$TargetFile\" | ConvertTo-SecureString\n\t$credsFromFile = New-Object System.Management.Automation.PSCredential($credsFromUser.UserName, $secureString)\n\n\tif ($credsFromUser.UserName -ne $credsFromFile.UserName) { throw \"Sorry, your username is wrong.\" }\n\n\t$pw1 = [Runtime.InteropServices.Marshal]::PtrToStringAuto([Runtime.InteropServices.Marshal]::SecureStringToBSTR($credsFromUser.Password))\n\t$pw2 = [Runtime.InteropServices.Marshal]::PtrToStringAuto([Runtime.InteropServices.Marshal]::SecureStringToBSTR($credsFromFile.Password))\n\tif ($pw1 -cne $pw2) { throw \"Sorry, your password is wrong.\" }\n\n\t\"✅ Your credentials are correct.\"\n\texit 0 # success\n} catch {\n\t\"⚠️ ERROR: $($Error[0]) (at line $($_.InvocationInfo.ScriptLineNumber))\"\n\texit 1\n}\n",
+    "dekodierte_befehle": [],
+    "beobachtete_abfolge": []
+  }
+}

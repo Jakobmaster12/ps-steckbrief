@@ -1,0 +1,84 @@
+{
+  "meta": {
+    "quelldatei": "benign_056_check-firewall.ps1",
+    "sha256": "1a84dae9d21e776938a5508f8017d64e7a88099b45c02e1f42f1afc53fde2721",
+    "groesse_bytes": 780,
+    "zeilen": 32,
+    "ground_truth_label": "benign",
+    "analyse_gekuerzt": false,
+    "hinweis": "Kein Urteil enthalten. Bewertung erfolgt durch das LLM."
+  },
+  "stufe1_extract": {
+    "strings": [
+      "✅ Firewall ",
+      "HKLM:\\SYSTEM\\ControlSet001\\Services\\SharedAccess\\Parameters\\FirewallPolicy\\DomainProfile",
+      "✅ Local firewall enabled",
+      "⚠️ Local firewall disabled!",
+      "⚠️ ERROR: $($Error[0]) (at line $($_.InvocationInfo.ScriptLineNumber))"
+    ],
+    "string_anzahl_gesamt": 5,
+    "base64_bloecke_dekodiert": [],
+    "base64_bloecke_gesamt": 0
+  },
+  "stufe2_features": {
+    "strings": [
+      "✅ Firewall ",
+      "HKLM:\\SYSTEM\\ControlSet001\\Services\\SharedAccess\\Parameters\\FirewallPolicy\\DomainProfile",
+      "✅ Local firewall enabled",
+      "⚠️ Local firewall disabled!",
+      "⚠️ ERROR: $($Error[0]) (at line $($_.InvocationInfo.ScriptLineNumber))"
+    ],
+    "string_anzahl_gesamt": 5,
+    "base64_bloecke_dekodiert": [],
+    "base64_bloecke_gesamt": 0,
+    "beobachtete_cmdlets": [
+      "Get-ItemProperty",
+      "Write-Host"
+    ],
+    "auffaellige_tokens": {
+      "registry_run": 1
+    },
+    "iocs": {
+      "urls": [
+        "https://github.com/fleschutz/PowerShell"
+      ],
+      "ipv4": [],
+      "pfade": [
+        "M:\\SYSTEM\\ControlSet001\\Services\\SharedAccess\\Parameters\\FirewallPolicy\\DomainProfile"
+      ]
+    }
+  },
+  "stufe3_structure": {
+    "strings": [
+      "✅ Firewall ",
+      "HKLM:\\SYSTEM\\ControlSet001\\Services\\SharedAccess\\Parameters\\FirewallPolicy\\DomainProfile",
+      "✅ Local firewall enabled",
+      "⚠️ Local firewall disabled!",
+      "⚠️ ERROR: $($Error[0]) (at line $($_.InvocationInfo.ScriptLineNumber))"
+    ],
+    "string_anzahl_gesamt": 5,
+    "base64_bloecke_dekodiert": [],
+    "base64_bloecke_gesamt": 0,
+    "beobachtete_cmdlets": [
+      "Get-ItemProperty",
+      "Write-Host"
+    ],
+    "auffaellige_tokens": {
+      "registry_run": 1
+    },
+    "iocs": {
+      "urls": [
+        "https://github.com/fleschutz/PowerShell"
+      ],
+      "ipv4": [],
+      "pfade": [
+        "M:\\SYSTEM\\ControlSet001\\Services\\SharedAccess\\Parameters\\FirewallPolicy\\DomainProfile"
+      ]
+    },
+    "deobfuskiert_auszug": "﻿<#\n.SYNOPSIS\n\tChecks the firewall status\n.DESCRIPTION\n\tThis PowerShell script queries the status of the firewall and prints it to the console.\n.EXAMPLE\n\tPS> ./check-firewall.ps1\n\t✅ Local firewall is on\n.LINK\n\thttps://github.com/fleschutz/PowerShell\n.NOTES\n\tAuthor: Markus Fleschutz | License: CC0\n#>\n\ntry {\n\tif ($IsLinux) {\n\t\tWrite-Host \"✅ Firewall \" -noNewline\n\t\t& sudo ufw status\n\t} else {\n\t\t$enabled = (Get-ItemProperty 'HKLM:\\SYSTEM\\ControlSet001\\Services\\SharedAccess\\Parameters\\FirewallPolicy\\DomainProfile').EnableFirewall\n\t\tif ($enabled) {\n\t\t\tWrite-Host \"✅ Local firewall enabled\"\n\t\t} else {\n\t\t\tWrite-Host \"⚠️ Local firewall disabled!\"\n\t\t}\n\t}\n\texit 0 # success\n} catch {\n\t\"⚠️ ERROR: $($Error[0]) (at line $($_.InvocationInfo.ScriptLineNumber))\"\n\texit 1\n}\n",
+    "dekodierte_befehle": [],
+    "beobachtete_abfolge": [
+      "Registry-Autostart beruehren"
+    ]
+  }
+}

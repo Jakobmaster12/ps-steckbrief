@@ -1,0 +1,125 @@
+{
+  "meta": {
+    "quelldatei": "benign_024_cd-repo.ps1",
+    "sha256": "45e30411d2ab33d9249823c3f069f29e1b3f94c996793f4a2a4fddf9f8384a5a",
+    "groesse_bytes": 2371,
+    "zeilen": 60,
+    "ground_truth_label": "benign",
+    "analyse_gekuerzt": false,
+    "hinweis": "Kein Urteil enthalten. Bewertung erfolgt durch das LLM."
+  },
+  "stufe1_extract": {
+    "strings": [
+      ")\n\nfunction GetPathToRepos {\n\tif (Test-Path ",
+      "       -pathType container) { return ",
+      "\n\t} elseif (Test-Path ",
+      " -pathType container) { return ",
+      "        -pathType container) { return ",
+      "          -pathType container) { return ",
+      "  -pathType container) { return ",
+      "         -pathType container) { return ",
+      "           -pathType container) { return ",
+      " # Visual Studio default\n\t} elseif (Test-Path ",
+      "\t     -pathType container) { return ",
+      "       # on second HDD\n\t} else {\n\t\tthrow ",
+      "\n\t}\n}\n\ntry {\n\tif (",
+      " -eq ",
+      ") { $folderName = Read-Host ",
+      "s folder name\" }\n\n\t$path = (GetPathToRepos)\n\t$dirs = (Get-ChildItem -Path \"$path\" -attributes Directory)\n\tforeach ($dir in $dirs) {\n\t\tif (\"$($dir.Name)\" -eq \"$folderName\") {\n\t\t\t$path = Resolve-Path -Path \"$path/$($dir.Name)\"\n\t\t\tSet-Location \"$path\"\n\t\t\tWrite-Host \"📂$path entered, branch at: \" -noNewline\n\t\t\t& git status --branch --short \n\t\t\texit 0 # success\n\t\t}\n\t}\n\tthrow \"No folder ",
+      " in ",
+      "\n} catch {\n\t"
+    ],
+    "string_anzahl_gesamt": 35,
+    "base64_bloecke_dekodiert": [],
+    "base64_bloecke_gesamt": 0
+  },
+  "stufe2_features": {
+    "strings": [
+      ")\n\nfunction GetPathToRepos {\n\tif (Test-Path ",
+      "       -pathType container) { return ",
+      "\n\t} elseif (Test-Path ",
+      " -pathType container) { return ",
+      "        -pathType container) { return ",
+      "          -pathType container) { return ",
+      "  -pathType container) { return ",
+      "         -pathType container) { return ",
+      "           -pathType container) { return ",
+      " # Visual Studio default\n\t} elseif (Test-Path ",
+      "\t     -pathType container) { return ",
+      "       # on second HDD\n\t} else {\n\t\tthrow ",
+      "\n\t}\n}\n\ntry {\n\tif (",
+      " -eq ",
+      ") { $folderName = Read-Host ",
+      "s folder name\" }\n\n\t$path = (GetPathToRepos)\n\t$dirs = (Get-ChildItem -Path \"$path\" -attributes Directory)\n\tforeach ($dir in $dirs) {\n\t\tif (\"$($dir.Name)\" -eq \"$folderName\") {\n\t\t\t$path = Resolve-Path -Path \"$path/$($dir.Name)\"\n\t\t\tSet-Location \"$path\"\n\t\t\tWrite-Host \"📂$path entered, branch at: \" -noNewline\n\t\t\t& git status --branch --short \n\t\t\texit 0 # success\n\t\t}\n\t}\n\tthrow \"No folder ",
+      " in ",
+      "\n} catch {\n\t"
+    ],
+    "string_anzahl_gesamt": 35,
+    "base64_bloecke_dekodiert": [],
+    "base64_bloecke_gesamt": 0,
+    "beobachtete_cmdlets": [
+      "Get-ChildItem",
+      "Read-Host",
+      "Resolve-Path",
+      "Set-Location",
+      "Test-Path",
+      "Write-Host"
+    ],
+    "auffaellige_tokens": {},
+    "iocs": {
+      "urls": [
+        "https://github.com/fleschutz/PowerShell"
+      ],
+      "ipv4": [],
+      "pfade": [
+        "C:\\Repos\\rust"
+      ]
+    }
+  },
+  "stufe3_structure": {
+    "strings": [
+      ")\n\nfunction GetPathToRepos {\n\tif (Test-Path ",
+      "       -pathType container) { return ",
+      "\n\t} elseif (Test-Path ",
+      " -pathType container) { return ",
+      "        -pathType container) { return ",
+      "          -pathType container) { return ",
+      "  -pathType container) { return ",
+      "         -pathType container) { return ",
+      "           -pathType container) { return ",
+      " # Visual Studio default\n\t} elseif (Test-Path ",
+      "\t     -pathType container) { return ",
+      "       # on second HDD\n\t} else {\n\t\tthrow ",
+      "\n\t}\n}\n\ntry {\n\tif (",
+      " -eq ",
+      ") { $folderName = Read-Host ",
+      "s folder name\" }\n\n\t$path = (GetPathToRepos)\n\t$dirs = (Get-ChildItem -Path \"$path\" -attributes Directory)\n\tforeach ($dir in $dirs) {\n\t\tif (\"$($dir.Name)\" -eq \"$folderName\") {\n\t\t\t$path = Resolve-Path -Path \"$path/$($dir.Name)\"\n\t\t\tSet-Location \"$path\"\n\t\t\tWrite-Host \"📂$path entered, branch at: \" -noNewline\n\t\t\t& git status --branch --short \n\t\t\texit 0 # success\n\t\t}\n\t}\n\tthrow \"No folder ",
+      " in ",
+      "\n} catch {\n\t"
+    ],
+    "string_anzahl_gesamt": 35,
+    "base64_bloecke_dekodiert": [],
+    "base64_bloecke_gesamt": 0,
+    "beobachtete_cmdlets": [
+      "Get-ChildItem",
+      "Read-Host",
+      "Resolve-Path",
+      "Set-Location",
+      "Test-Path",
+      "Write-Host"
+    ],
+    "auffaellige_tokens": {},
+    "iocs": {
+      "urls": [
+        "https://github.com/fleschutz/PowerShell"
+      ],
+      "ipv4": [],
+      "pfade": [
+        "C:\\Repos\\rust"
+      ]
+    },
+    "deobfuskiert_auszug": "﻿<#\n.SYNOPSIS\n\tSet working directory to a repo\n.DESCRIPTION\n\tThis PowerShell script changes the current working directory to the given Git repository.\n.PARAMETER folderName\n\tSpecifies the folder name of the Git repository\n.EXAMPLE\n\tPS> ./cd-repo.ps1 rust\n\t📂C:\\Repos\\rust entered, branch at: ## main ... origin/main\n.LINK\n\thttps://github.com/fleschutz/PowerShell\n.NOTES\n\tAuthor: Markus Fleschutz | License: CC0\n#>\n\n#requires -version 5.1\n\nparam([string]$folderName = \"\")\n\nfunction GetPathToRepos {\n\tif (Test-Path \"~/Repositories\"       -pathType container) { return \"~/Repositories\"\n\t} elseif (Test-Path \"~/repositories\" -pathType container) { return \"~/repositories\"\n\t} elseif (Test-Path \"~/Repos\"        -pathType container) { return \"~/Repos\"\n\t} elseif (Test-Path \"~/repos\"        -pathType container) { return \"~/repos\"\n\t} elseif (Test-Path \"~/Git\"          -pathType container) { return \"~/Git\"\n\t} elseif (Test-Path \"~/git\"          -pathType container) { return \"~/git\"\n\t} elseif (Test-Path \"/Repositories\"  -pathType container) { return \"/Repositories\"\n\t} elseif (Test-Path \"/repositories\"  -pathType container) { return \"/repositories\"\n\t} elseif (Test-Path \"/Repos\"         -pathType container) { return \"/Repos\"\n\t} elseif (Test-Path \"/repos\"         -pathType container) { return \"/repos\"\n\t} elseif (Test-Path \"/Git\"           -pathType container) { return \"/Git\"\n\t} elseif (Test-Path \"/git\"           -pathType container) { return \"/git\"\n\t} elseif (Test-Path \"~/source/repos\" -pathType container) { return \"~/source/repos\" # Visual Studio default\n\t} elseif (Test-Path \"D:/Repos\"\t     -pathType container) { return \"D:/Repos\"       # on second HDD\n\t} else {\n\t\tthrow \"No Git repositories folder in your home directory or in the root folder yet\"\n\t}\n}\n\ntry {\n\tif (\"$folderName\" -eq \"\") { $folderName = Read-Host \"Please enter the Git repository's folder name\" }\n\n\t$path = (GetPathToRepos)\n\t$dirs = (Get-ChildItem -Path \"$path\" -attributes Directory)\n\tforeach ($dir in $dirs) {\n\t\tif (\"$($dir.Name",
+    "dekodierte_befehle": [],
+    "beobachtete_abfolge": []
+  }
+}

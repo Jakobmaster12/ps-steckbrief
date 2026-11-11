@@ -1,0 +1,64 @@
+{
+  "meta": {
+    "quelldatei": "tech_046_psmatrix.ps1",
+    "sha256": "088db3de28a0a430903118bc26238b767c01ac97e3b85897ba415fd69191ebf4",
+    "groesse_bytes": 1341,
+    "zeilen": 49,
+    "ground_truth_label": "techniques",
+    "analyse_gekuerzt": false,
+    "hinweis": "Kein Urteil enthalten. Bewertung erfolgt durch das LLM."
+  },
+  "stufe1_extract": {
+    "strings": [
+      "C a l i N u X"
+    ],
+    "string_anzahl_gesamt": 1,
+    "base64_bloecke_dekodiert": [],
+    "base64_bloecke_gesamt": 0
+  },
+  "stufe2_features": {
+    "strings": [
+      "C a l i N u X"
+    ],
+    "string_anzahl_gesamt": 1,
+    "base64_bloecke_dekodiert": [],
+    "base64_bloecke_gesamt": 0,
+    "beobachtete_cmdlets": [
+      "Get-Date",
+      "Get-Random",
+      "Out-Null",
+      "Start-Sleep",
+      "Write-Host"
+    ],
+    "auffaellige_tokens": {},
+    "iocs": {
+      "urls": [],
+      "ipv4": [],
+      "pfade": []
+    }
+  },
+  "stufe3_structure": {
+    "strings": [
+      "C a l i N u X"
+    ],
+    "string_anzahl_gesamt": 1,
+    "base64_bloecke_dekodiert": [],
+    "base64_bloecke_gesamt": 0,
+    "beobachtete_cmdlets": [
+      "Get-Date",
+      "Get-Random",
+      "Out-Null",
+      "Start-Sleep",
+      "Write-Host"
+    ],
+    "auffaellige_tokens": {},
+    "iocs": {
+      "urls": [],
+      "ipv4": [],
+      "pfade": []
+    },
+    "deobfuskiert_auszug": "cls\r\n[Console]::CursorVisible = $false\r\n\r\n$width = [Console]::WindowWidth\r\n$height = [Console]::WindowHeight\r\n$text = \"C a l i N u X\"\r\n\r\n$versionText = $PSVersionTable.PSVersion.ToString()\r\n\r\n$drops = 0..($width - 1) | ForEach-Object { Get-Random -Minimum 0 -Maximum $height }\r\ncls\r\n\r\n$startTime = Get-Date\r\n\r\nwhile ($true) {\r\n    if (((Get-Date) - $startTime).TotalSeconds -ge 6) {\r\n        cls\r\n        break\r\n    }\r\n    \r\n    if ([Console]::KeyAvailable) {\r\n        [Console]::ReadKey($true) | Out-Null\r\n        cls\r\n        break\r\n    }\r\n    \r\n    for ($i = 0; $i -lt $width; $i++) {\r\n        $char = [char](Get-Random -Minimum 33 -Maximum 126)\r\n        [Console]::SetCursorPosition($i, $drops[$i])\r\n        Write-Host $char -ForegroundColor Green -NoNewline\r\n        \r\n        $drops[$i]++\r\n        if ($drops[$i] -ge $height) {\r\n            $drops[$i] = 0\r\n        }\r\n    }\r\n    \r\n    $centerX = [Math]::Floor(($width - $text.Length) / 2)\r\n    $centerY = [Math]::Floor($height / 2)\r\n    [Console]::SetCursorPosition($centerX, $centerY)\r\n    Write-Host $text -ForegroundColor Red -NoNewline\r\n\r\n    $centerXVersion = [Math]::Floor(($width - $versionText.Length) / 2)\r\n    [Console]::SetCursorPosition($centerXVersion, $centerY + 1)\r\n    Write-Host $versionText -ForegroundColor Red -NoNewline\r\n    \r\n    Start-Sleep -Milliseconds 80\r\n}\r\n",
+    "dekodierte_befehle": [],
+    "beobachtete_abfolge": []
+  }
+}

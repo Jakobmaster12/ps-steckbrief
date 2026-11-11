@@ -1,0 +1,94 @@
+{
+  "meta": {
+    "quelldatei": "benign_007_cd-crashdumps.ps1",
+    "sha256": "f18dfc0791e628e1f195b717939de8167a5c19f060ba44d430dac1468ea79b64",
+    "groesse_bytes": 1134,
+    "zeilen": 34,
+    "ground_truth_label": "benign",
+    "analyse_gekuerzt": false,
+    "hinweis": "Kein Urteil enthalten. Bewertung erfolgt durch das LLM."
+  },
+  "stufe1_extract": {
+    "strings": [
+      "This script requires Windows",
+      "\n\tif (!(Test-Path ",
+      " -pathType container)) { throw ",
+      "$path",
+      " }\n\n\t$path += ",
+      "\n\tif (-not(Test-Path ",
+      " }\n\n\tSet-Location ",
+      "\n\t$files = Get-ChildItem $path -attributes !Directory\n\t",
+      "\n\texit 0 # success\n} catch {\n\t"
+    ],
+    "string_anzahl_gesamt": 11,
+    "base64_bloecke_dekodiert": [],
+    "base64_bloecke_gesamt": 0
+  },
+  "stufe2_features": {
+    "strings": [
+      "This script requires Windows",
+      "\n\tif (!(Test-Path ",
+      " -pathType container)) { throw ",
+      "$path",
+      " }\n\n\t$path += ",
+      "\n\tif (-not(Test-Path ",
+      " }\n\n\tSet-Location ",
+      "\n\t$files = Get-ChildItem $path -attributes !Directory\n\t",
+      "\n\texit 0 # success\n} catch {\n\t"
+    ],
+    "string_anzahl_gesamt": 11,
+    "base64_bloecke_dekodiert": [],
+    "base64_bloecke_gesamt": 0,
+    "beobachtete_cmdlets": [
+      "Get-ChildItem",
+      "Resolve-Path",
+      "Set-Location",
+      "Test-Path"
+    ],
+    "auffaellige_tokens": {},
+    "iocs": {
+      "urls": [
+        "https://github.com/fleschutz/PowerShell"
+      ],
+      "ipv4": [],
+      "pfade": [
+        "C:\\Users\\Markus\\AppData\\Local\\CrashDumps"
+      ]
+    }
+  },
+  "stufe3_structure": {
+    "strings": [
+      "This script requires Windows",
+      "\n\tif (!(Test-Path ",
+      " -pathType container)) { throw ",
+      "$path",
+      " }\n\n\t$path += ",
+      "\n\tif (-not(Test-Path ",
+      " }\n\n\tSet-Location ",
+      "\n\t$files = Get-ChildItem $path -attributes !Directory\n\t",
+      "\n\texit 0 # success\n} catch {\n\t"
+    ],
+    "string_anzahl_gesamt": 11,
+    "base64_bloecke_dekodiert": [],
+    "base64_bloecke_gesamt": 0,
+    "beobachtete_cmdlets": [
+      "Get-ChildItem",
+      "Resolve-Path",
+      "Set-Location",
+      "Test-Path"
+    ],
+    "auffaellige_tokens": {},
+    "iocs": {
+      "urls": [
+        "https://github.com/fleschutz/PowerShell"
+      ],
+      "ipv4": [],
+      "pfade": [
+        "C:\\Users\\Markus\\AppData\\Local\\CrashDumps"
+      ]
+    },
+    "deobfuskiert_auszug": "﻿<#\n.SYNOPSIS\n\tChange to the crash dumps folder\n.DESCRIPTION\n\tThis PowerShell script changes the working directory to the crash dumps directory (Windows only). Whenever a software crashes and crash dumps are enabled(!) a crash dump file is written. This file helps to identify the reason for the crash.\n.EXAMPLE\n\tPS> ./cd-crashdumps.ps1\n\t📂C:\\Users\\Markus\\AppData\\Local\\CrashDumps entered, has 3 files.\n.LINK\n\thttps://github.com/fleschutz/PowerShell\n.NOTES\n\tAuthor: Markus Fleschutz | License: CC0\n#>\n\n#requires -version 5.1\n\ntry {\n\tif ($IsLinux -or $IsMacOS) { throw \"This script requires Windows\" }\n\n\t[string]$path = Resolve-Path -Path \"~\"\n\tif (!(Test-Path \"$path\" -pathType container)) { throw \"No home directory at '$path'\" }\n\n\t$path += \"\\AppData\\Local\\CrashDumps\"\n\tif (-not(Test-Path \"$path\" -pathType container)) { throw \"The path to crashdumps folder '$path' doesn't exist (yet)\" }\n\n\tSet-Location \"$path\"\n\t$files = Get-ChildItem $path -attributes !Directory\n\t\"📂$path entered, has $($files.Count) files.\"\n\texit 0 # success\n} catch {\n\t\"⚠️ ERROR: $($Error[0]) (at line $($_.InvocationInfo.ScriptLineNumber))\"\n\texit 1\n}\n",
+    "dekodierte_befehle": [],
+    "beobachtete_abfolge": []
+  }
+}

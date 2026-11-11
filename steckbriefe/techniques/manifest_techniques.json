@@ -1,0 +1,443 @@
+[
+  {
+    "id": "techniques_0001_be4ad4c460",
+    "quelldatei": "tech_000_makeirm.ps1",
+    "sha256": "be4ad4c460e68881384b2bd262fc0104c082838ff4a85394add2dd1ca54e641a",
+    "label": "techniques",
+    "groesse_bytes": 2129
+  },
+  {
+    "id": "techniques_0002_f42b0767e6",
+    "quelldatei": "tech_001_brute7dtd.ps1",
+    "sha256": "f42b0767e6a62a6bcfc2cdf007286e89aa134457080a82dd026fbcb155286e57",
+    "label": "techniques",
+    "groesse_bytes": 2734
+  },
+  {
+    "id": "techniques_0003_3fa8691638",
+    "quelldatei": "tech_002_AskAI.ps1",
+    "sha256": "3fa8691638c44dbf21e766431cf53068ffa2833e808b9f0b1f58a6c641c54e8d",
+    "label": "techniques",
+    "groesse_bytes": 3770
+  },
+  {
+    "id": "techniques_0004_18acbb7218",
+    "quelldatei": "tech_003_Get-Aced.ps1",
+    "sha256": "18acbb721857a826d65f73c3eb3d3e3c45a83f8660484d20a2be4d8a8acb8251",
+    "label": "techniques",
+    "groesse_bytes": 981
+  },
+  {
+    "id": "techniques_0005_6d8f40c295",
+    "quelldatei": "tech_004_AdvEmail.ps1",
+    "sha256": "6d8f40c295af0d34d455fe2205853aca088388f2c3ae6ecef6ca0171095ae647",
+    "label": "techniques",
+    "groesse_bytes": 2094
+  },
+  {
+    "id": "techniques_0006_655652cbfa",
+    "quelldatei": "tech_005_Get-AppInfo.ps1",
+    "sha256": "655652cbfa8b2a16b0cf6f9eac0eca51277382c44af200e4e6d36c66bcfe0948",
+    "label": "techniques",
+    "groesse_bytes": 802
+  },
+  {
+    "id": "techniques_0007_6d7682ee9e",
+    "quelldatei": "tech_006_Ask AI.ps1",
+    "sha256": "6d7682ee9e4417aedcf464e8ea9f4a5ec63e0e84b88fb181eb089650566ba186",
+    "label": "techniques",
+    "groesse_bytes": 3394
+  },
+  {
+    "id": "techniques_0008_ef42b5f67a",
+    "quelldatei": "tech_007_Overlay.ps1",
+    "sha256": "ef42b5f67a29bceb2f4e52d288c578f47df5e925ff73856984242cb905ad7c31",
+    "label": "techniques",
+    "groesse_bytes": 3348
+  },
+  {
+    "id": "techniques_0009_f7600977bd",
+    "quelldatei": "tech_008_YouTube.ps1",
+    "sha256": "f7600977bd566c3b00a2ccc7fbcc3d2f6ec3b89bbaee14739624f14bd7c29299",
+    "label": "techniques",
+    "groesse_bytes": 96
+  },
+  {
+    "id": "techniques_0010_eed3911e0d",
+    "quelldatei": "tech_009_test.ps1",
+    "sha256": "eed3911e0d5b662b6552cb2becd2d11fade50e300a3eeb36288117cd92f91728",
+    "label": "techniques",
+    "groesse_bytes": 72
+  },
+  {
+    "id": "techniques_0011_9b4b78bf03",
+    "quelldatei": "tech_010_Convert-Base64.ps1",
+    "sha256": "9b4b78bf032f42fbd53080d0b1040a5fa9e37d5506c8560cec57b43059f5aef3",
+    "label": "techniques",
+    "groesse_bytes": 1064
+  },
+  {
+    "id": "techniques_0012_b181227d7a",
+    "quelldatei": "tech_011_Base64-irm.ps1",
+    "sha256": "b181227d7a565a69b64ea211c7f9e94805c71c806991598383de48e7add94205",
+    "label": "techniques",
+    "groesse_bytes": 444
+  },
+  {
+    "id": "techniques_0013_28bd783d97",
+    "quelldatei": "tech_012_Convert-Base64.ps1",
+    "sha256": "28bd783d9790a4b512ab2e87bdadd51fc7f40bec3ab679590213065ecb8358ad",
+    "label": "techniques",
+    "groesse_bytes": 1034
+  },
+  {
+    "id": "techniques_0014_558c16e52b",
+    "quelldatei": "tech_013_Get-Recon.ps1",
+    "sha256": "558c16e52b018c826a59e15bd2ae405212412a303557d5d632117951b29a5d9c",
+    "label": "techniques",
+    "groesse_bytes": 5002
+  },
+  {
+    "id": "techniques_0015_9315587cdf",
+    "quelldatei": "tech_014_Check-Pass.ps1",
+    "sha256": "9315587cdfe6ad9418757ab8896020439615feacf042d42a4a1399147726bf2f",
+    "label": "techniques",
+    "groesse_bytes": 1333
+  },
+  {
+    "id": "techniques_0016_43aed013be",
+    "quelldatei": "tech_015_checkpass.ps1",
+    "sha256": "43aed013be70b2b4c956b24b928f706d42e505d387118ab57fc9e44320e543d4",
+    "label": "techniques",
+    "groesse_bytes": 1306
+  },
+  {
+    "id": "techniques_0017_981a8f3eff",
+    "quelldatei": "tech_016_ClipboardYEET.ps1",
+    "sha256": "981a8f3eff361d904ad0e32896862044f3e01374408aabab9b3f37c877e5ae45",
+    "label": "techniques",
+    "groesse_bytes": 597
+  },
+  {
+    "id": "techniques_0018_c5cc9c4884",
+    "quelldatei": "tech_017_DNScrypt.ps1",
+    "sha256": "c5cc9c48849dba22bcb5cdfd39625a45c6524b5e0d6c84600d07f790108bf942",
+    "label": "techniques",
+    "groesse_bytes": 1499
+  },
+  {
+    "id": "techniques_0019_94117572e0",
+    "quelldatei": "tech_018_B64.ps1",
+    "sha256": "94117572e03294ba06ce9ab4b6ebfc4fca863aa0fb989fef591d065285c626b7",
+    "label": "techniques",
+    "groesse_bytes": 745
+  },
+  {
+    "id": "techniques_0020_b3f8e9b57c",
+    "quelldatei": "tech_019_DisableUAC.ps1",
+    "sha256": "b3f8e9b57c86c8fcc9ea7f70dd08562fd0a1e568a02a5534261e9d519bfd0f2b",
+    "label": "techniques",
+    "groesse_bytes": 568
+  },
+  {
+    "id": "techniques_0021_7b70da8310",
+    "quelldatei": "tech_020_DiscordCapper.ps1",
+    "sha256": "7b70da8310eaaa73aeb3dcfda1289de4b90c9f20651b1f8b0c2a5fdba4d06025",
+    "label": "techniques",
+    "groesse_bytes": 4426
+  },
+  {
+    "id": "techniques_0022_46e9b519a1",
+    "quelldatei": "tech_021_PicturesDocumentsGrab.ps1",
+    "sha256": "46e9b519a18843fec86edb10f035515b8746735f8d9c64510229963391019f79",
+    "label": "techniques",
+    "groesse_bytes": 1581
+  },
+  {
+    "id": "techniques_0023_bf533c7f1d",
+    "quelldatei": "tech_022_Get-EmailInfo.ps1",
+    "sha256": "bf533c7f1ddb15700db34140abe4e90ca1b867e32183aa27b9d181e2ef4246ac",
+    "label": "techniques",
+    "groesse_bytes": 1483
+  },
+  {
+    "id": "techniques_0024_47ac6a44c3",
+    "quelldatei": "tech_023_Decrypt-AES-shortened.ps1",
+    "sha256": "47ac6a44c36efeb0a2a69b2fbe0fce25b765e570cba68d2a5f49024ae9a4877d",
+    "label": "techniques",
+    "groesse_bytes": 1384
+  },
+  {
+    "id": "techniques_0025_0bd21feb05",
+    "quelldatei": "tech_024_Decrypt-AES.ps1",
+    "sha256": "0bd21feb0520565ea424b5d294b736fb971c954942b27d48f85436c13db71546",
+    "label": "techniques",
+    "groesse_bytes": 1400
+  },
+  {
+    "id": "techniques_0026_83d7a0e045",
+    "quelldatei": "tech_025_Encrypt-AES.ps1",
+    "sha256": "83d7a0e04553eceb5dfcc051a779c195e15183a796c00bbbf60840d7fa88d4bd",
+    "label": "techniques",
+    "groesse_bytes": 1113
+  },
+  {
+    "id": "techniques_0027_eb6dd32c7b",
+    "quelldatei": "tech_026_E-D.ps1",
+    "sha256": "eb6dd32c7b026b011bdaf6a08c2c58f7b6fb6eb652c063351936c617e4c26150",
+    "label": "techniques",
+    "groesse_bytes": 3945
+  },
+  {
+    "id": "techniques_0028_881dd7433b",
+    "quelldatei": "tech_027_Get-Geo.ps1",
+    "sha256": "881dd7433b5b02503ee6ec7c579cb158c210434bebcaae3fca72614e743f3d67",
+    "label": "techniques",
+    "groesse_bytes": 1412
+  },
+  {
+    "id": "techniques_0029_025f2ed664",
+    "quelldatei": "tech_028_Get-Geo.ps1",
+    "sha256": "025f2ed6643cc0eeb7ebe0c9c6ece8c71ce97bfe6a3bcc63f07b70b7f228256c",
+    "label": "techniques",
+    "groesse_bytes": 1952
+  },
+  {
+    "id": "techniques_0030_0ac2c05590",
+    "quelldatei": "tech_029_Get-MicrosoftOSINT.ps1",
+    "sha256": "0ac2c05590b4948c796251d71a3395e4ecfe7299ae6aa543bbe58f2d194a4e7e",
+    "label": "techniques",
+    "groesse_bytes": 8772
+  },
+  {
+    "id": "techniques_0031_3b53fe68be",
+    "quelldatei": "tech_030_Get-Pic-NoFunt.ps1",
+    "sha256": "3b53fe68be0709a65b6aa0fd009bfe1c131a0dd2e898607cab99c6865858655f",
+    "label": "techniques",
+    "groesse_bytes": 2926
+  },
+  {
+    "id": "techniques_0032_f953a69fac",
+    "quelldatei": "tech_031_Get-Pic.ps1",
+    "sha256": "f953a69facadf83d2f23bb0720e99a721caec96348c195d3759f7530fa3e8222",
+    "label": "techniques",
+    "groesse_bytes": 2381
+  },
+  {
+    "id": "techniques_0033_fb747e75a7",
+    "quelldatei": "tech_032_Get-PKey.ps1",
+    "sha256": "fb747e75a7d4baba101ac605f60b7ae8589f5c008a987cacd2ac0d2ca71c7799",
+    "label": "techniques",
+    "groesse_bytes": 639
+  },
+  {
+    "id": "techniques_0034_4c38a266ee",
+    "quelldatei": "tech_033_Get-PublicIP(not_encoded).ps1",
+    "sha256": "4c38a266ee9e53599a4ff6ca8bf59c35b74de55b2771edda93420c42d51f9610",
+    "label": "techniques",
+    "groesse_bytes": 186
+  },
+  {
+    "id": "techniques_0035_31b4d6decd",
+    "quelldatei": "tech_034_get-publicip.ps1",
+    "sha256": "31b4d6decdf3bd590968afc0bb18b8fce9d3395c77b24fd5acea2e3ee4503d47",
+    "label": "techniques",
+    "groesse_bytes": 140
+  },
+  {
+    "id": "techniques_0036_8d10bfe12d",
+    "quelldatei": "tech_035_github_crawler.ps1",
+    "sha256": "8d10bfe12d9e392f6a402046d1d227ba5eb737165fe477f1343f795c012c3433",
+    "label": "techniques",
+    "groesse_bytes": 3345
+  },
+  {
+    "id": "techniques_0037_42e4daea80",
+    "quelldatei": "tech_036_drivepwn.ps1",
+    "sha256": "42e4daea8068c3e4f45041af4125899384c3de659290d2d19027018fd3b59e83",
+    "label": "techniques",
+    "groesse_bytes": 1546
+  },
+  {
+    "id": "techniques_0038_d12703c2db",
+    "quelldatei": "tech_037_MOAR.ps1",
+    "sha256": "d12703c2db4632c51beab288db2df82f962d18d8bb11e2728fc40ca012dc55fa",
+    "label": "techniques",
+    "groesse_bytes": 9554
+  },
+  {
+    "id": "techniques_0039_1fec9d5392",
+    "quelldatei": "tech_038_Moar64.ps1",
+    "sha256": "1fec9d5392fbf24a9f5f894b3013c448386df2b0d53274221d9a830b789a48b7",
+    "label": "techniques",
+    "groesse_bytes": 12429
+  },
+  {
+    "id": "techniques_0040_d17e37134a",
+    "quelldatei": "tech_039_Meme.ps1",
+    "sha256": "d17e37134a3abc00721bd09638bd29df73632f18fd39324fb6f3bb659ed5870c",
+    "label": "techniques",
+    "groesse_bytes": 2183
+  },
+  {
+    "id": "techniques_0041_a8fa3549f3",
+    "quelldatei": "tech_040_Start-Mission.ps1",
+    "sha256": "a8fa3549f37bef8653c262041086fd1aadadadc12fab19661017b61cda048811",
+    "label": "techniques",
+    "groesse_bytes": 1675
+  },
+  {
+    "id": "techniques_0042_3fbe331f8a",
+    "quelldatei": "tech_041_Obfuscate.ps1",
+    "sha256": "3fbe331f8aa2139338a3990b3030110cbc0842aede5237665f156f88c3599c47",
+    "label": "techniques",
+    "groesse_bytes": 16040
+  },
+  {
+    "id": "techniques_0043_6aca7cfe43",
+    "quelldatei": "tech_042_Medium.ps1",
+    "sha256": "6aca7cfe430e2afd6833acade2b39a8c0763a4d7fee35783bab5b43ccf536ac5",
+    "label": "techniques",
+    "groesse_bytes": 711
+  },
+  {
+    "id": "techniques_0044_a6b57d6dfc",
+    "quelldatei": "tech_043_Medium(Harder).ps1",
+    "sha256": "a6b57d6dfc5415e0e679ac64b382b2947489e9e736fd7061efc4698d82fe58ce",
+    "label": "techniques",
+    "groesse_bytes": 1687
+  },
+  {
+    "id": "techniques_0045_158c241616",
+    "quelldatei": "tech_044_Get-Ports.ps1",
+    "sha256": "158c241616fc72506170d1f91c482845c05ab7428bcd34dec157bdca3d3527c9",
+    "label": "techniques",
+    "groesse_bytes": 697
+  },
+  {
+    "id": "techniques_0046_a59febab72",
+    "quelldatei": "tech_045_OverlayAttack.ps1",
+    "sha256": "a59febab729f89331e18b1744c6c869e5288af3f344e2a04591b50661ac9ce5c",
+    "label": "techniques",
+    "groesse_bytes": 2498
+  },
+  {
+    "id": "techniques_0047_088db3de28",
+    "quelldatei": "tech_046_psmatrix.ps1",
+    "sha256": "088db3de28a0a430903118bc26238b767c01ac97e3b85897ba415fd69191ebf4",
+    "label": "techniques",
+    "groesse_bytes": 1341
+  },
+  {
+    "id": "techniques_0048_6b535aa720",
+    "quelldatei": "tech_047_phish.ps1",
+    "sha256": "6b535aa720d7b2798ddd6520754a2b8c2e8c7b8a534d3da179e364b7d6835a65",
+    "label": "techniques",
+    "groesse_bytes": 2125
+  },
+  {
+    "id": "techniques_0049_271407981b",
+    "quelldatei": "tech_048_update.ps1",
+    "sha256": "271407981b6b4a663df01e9f3f7097007132918845b59f8bbdb51896de1fe6ff",
+    "label": "techniques",
+    "groesse_bytes": 1903
+  },
+  {
+    "id": "techniques_0050_ecb6d27b28",
+    "quelldatei": "tech_049_troll.ps1",
+    "sha256": "ecb6d27b282bab061cba134b9152cc6a8616d5ac8a5b8b676ff306f5d63e4f3f",
+    "label": "techniques",
+    "groesse_bytes": 816
+  },
+  {
+    "id": "techniques_0051_9889fc6a4a",
+    "quelldatei": "tech_050_trollbase64.ps1",
+    "sha256": "9889fc6a4a640564715ca77fa61dcf02f0350c323bdb765704262e65fea76f3a",
+    "label": "techniques",
+    "groesse_bytes": 1098
+  },
+  {
+    "id": "techniques_0052_92105fde5d",
+    "quelldatei": "tech_051_SubnetGrab(PYTHON).ps1",
+    "sha256": "92105fde5d96a397b465852ac9dcfbabc59981c1b33d02f71f71104e5035fe2e",
+    "label": "techniques",
+    "groesse_bytes": 1663
+  },
+  {
+    "id": "techniques_0053_34118d3f0e",
+    "quelldatei": "tech_052_CreatePassword.ps1",
+    "sha256": "34118d3f0e88fa36fe9b744de6303bd9b0396c23f3485486c98b9dca0ebbebba",
+    "label": "techniques",
+    "groesse_bytes": 191
+  },
+  {
+    "id": "techniques_0054_89dfb7cf28",
+    "quelldatei": "tech_053_Protect-Terminal.ps1",
+    "sha256": "89dfb7cf2878f04664ea4e28835e6f5413c78092cb18b823dc0cf6b66aeb4b3e",
+    "label": "techniques",
+    "groesse_bytes": 1623
+  },
+  {
+    "id": "techniques_0055_4b29091018",
+    "quelldatei": "tech_054_Get-TikTokProfile.ps1",
+    "sha256": "4b29091018dc201a2a08696ef6f191abf5581c118493fc5d75ecf78d78f020c3",
+    "label": "techniques",
+    "groesse_bytes": 3946
+  },
+  {
+    "id": "techniques_0056_64f6eaec61",
+    "quelldatei": "tech_055_To-Discord.ps1",
+    "sha256": "64f6eaec61855ac32d414ddb96a9950f1565f2090dcf2c9b790900d95c94b964",
+    "label": "techniques",
+    "groesse_bytes": 588
+  },
+  {
+    "id": "techniques_0057_e75546cf66",
+    "quelldatei": "tech_056_WITHER.ps1",
+    "sha256": "e75546cf662ed25145d4a2628ae1aab29d7fc517f928ce7706fc62559b1d9a62",
+    "label": "techniques",
+    "groesse_bytes": 206
+  },
+  {
+    "id": "techniques_0058_c8385d58ef",
+    "quelldatei": "tech_057_Run_on_BOOT.ps1",
+    "sha256": "c8385d58ef735dd36c72f70f50c2576bb1d3841733a626320ea62522e120f4fd",
+    "label": "techniques",
+    "groesse_bytes": 1047
+  },
+  {
+    "id": "techniques_0059_f4d9249462",
+    "quelldatei": "tech_058_wallpaper_AUTO-cali.ps1",
+    "sha256": "f4d9249462686c7791b70a808cfec62673f04fda19b9224f86bad7027d690c0c",
+    "label": "techniques",
+    "groesse_bytes": 606
+  },
+  {
+    "id": "techniques_0060_362fd045c0",
+    "quelldatei": "tech_059_Get-Weather.ps1",
+    "sha256": "362fd045c07088b90e0e7b23a91658b880a3a0c3176911b1f730607ecfbc680c",
+    "label": "techniques",
+    "groesse_bytes": 319
+  },
+  {
+    "id": "techniques_0061_48fbaa6e37",
+    "quelldatei": "tech_060_runit.ps1",
+    "sha256": "48fbaa6e37674ea8ee78fedd39e90b7b7d778639f6e5d2f51cf01273ae14cc39",
+    "label": "techniques",
+    "groesse_bytes": 9732
+  },
+  {
+    "id": "techniques_0062_4d9b5bae39",
+    "quelldatei": "tech_061_WifiBrute.ps1",
+    "sha256": "4d9b5bae39bd7a5a253602276a07b2bd963747090bbc2bd03bb1913b1bb7ab69",
+    "label": "techniques",
+    "groesse_bytes": 1441
+  },
+  {
+    "id": "techniques_0063_75cd8be604",
+    "quelldatei": "tech_062_WiFiGrab.ps1",
+    "sha256": "75cd8be604202593bff06ca6cccb8085f1923735d1a3057055bda200f5f291ed",
+    "label": "techniques",
+    "groesse_bytes": 1308
+  }
+]

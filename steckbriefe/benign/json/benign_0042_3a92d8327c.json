@@ -1,0 +1,127 @@
+{
+  "meta": {
+    "quelldatei": "benign_041_ceo-mode.ps1",
+    "sha256": "3a92d8327c08a17fba66aa037b70f48c166d72f3be0e9835169358c040d49e11",
+    "groesse_bytes": 1305,
+    "zeilen": 45,
+    "ground_truth_label": "benign",
+    "analyse_gekuerzt": false,
+    "hinweis": "Kein Urteil enthalten. Bewertung erfolgt durch das LLM."
+  },
+  "stufe1_extract": {
+    "strings": [
+      "$PSScriptRoot/write-big.ps1",
+      "CEO MODE",
+      "$PSScriptRoot/list-times.ps1",
+      "⏳ Minimizing all windows...",
+      "$PSScriptRoot/minimize-all-windows.ps1",
+      "$PSScriptRoot/open-URL.ps1",
+      "https://tasks.google.com/tasks/",
+      "https://calendar.google.com/calendar/u/0/r/agenda",
+      "https://time.is/",
+      "https://notepad.js.org/",
+      "https://www.youtube.com/watch?v=TZgFg0Ok7W0&list=RDTZgFg0Ok7W0&start_radio=1&t=2229s",
+      "⏳ Launching VPN settings...",
+      "$PSScriptRoot/open-vpn-settings.ps1",
+      "⏳ Playing Big Ben and telling the current time...",
+      "$PSScriptRoot/play-big-ben.ps1",
+      "$PSScriptRoot/speak-time.ps1",
+      "$PSScriptRoot/show-notification.ps1",
+      "CEO mode activated.",
+      "✅ CEO mode activated.",
+      "⚠️ ERROR: $($Error[0]) (in line $($_.InvocationInfo.ScriptLineNumber))"
+    ],
+    "string_anzahl_gesamt": 24,
+    "base64_bloecke_dekodiert": [],
+    "base64_bloecke_gesamt": 0
+  },
+  "stufe2_features": {
+    "strings": [
+      "$PSScriptRoot/write-big.ps1",
+      "CEO MODE",
+      "$PSScriptRoot/list-times.ps1",
+      "⏳ Minimizing all windows...",
+      "$PSScriptRoot/minimize-all-windows.ps1",
+      "$PSScriptRoot/open-URL.ps1",
+      "https://tasks.google.com/tasks/",
+      "https://calendar.google.com/calendar/u/0/r/agenda",
+      "https://time.is/",
+      "https://notepad.js.org/",
+      "https://www.youtube.com/watch?v=TZgFg0Ok7W0&list=RDTZgFg0Ok7W0&start_radio=1&t=2229s",
+      "⏳ Launching VPN settings...",
+      "$PSScriptRoot/open-vpn-settings.ps1",
+      "⏳ Playing Big Ben and telling the current time...",
+      "$PSScriptRoot/play-big-ben.ps1",
+      "$PSScriptRoot/speak-time.ps1",
+      "$PSScriptRoot/show-notification.ps1",
+      "CEO mode activated.",
+      "✅ CEO mode activated.",
+      "⚠️ ERROR: $($Error[0]) (in line $($_.InvocationInfo.ScriptLineNumber))"
+    ],
+    "string_anzahl_gesamt": 24,
+    "base64_bloecke_dekodiert": [],
+    "base64_bloecke_gesamt": 0,
+    "beobachtete_cmdlets": [
+      "Clear-Host"
+    ],
+    "auffaellige_tokens": {},
+    "iocs": {
+      "urls": [
+        "https://calendar.google.com/calendar/u/0/r/agenda",
+        "https://github.com/fleschutz/PowerShell",
+        "https://notepad.js.org/",
+        "https://tasks.google.com/tasks/",
+        "https://time.is/",
+        "https://www.youtube.com/watch?v=TZgFg0Ok7W0&list=RDTZgFg0Ok7W0&start_radio=1&t=2229s"
+      ],
+      "ipv4": [],
+      "pfade": []
+    }
+  },
+  "stufe3_structure": {
+    "strings": [
+      "$PSScriptRoot/write-big.ps1",
+      "CEO MODE",
+      "$PSScriptRoot/list-times.ps1",
+      "⏳ Minimizing all windows...",
+      "$PSScriptRoot/minimize-all-windows.ps1",
+      "$PSScriptRoot/open-URL.ps1",
+      "https://tasks.google.com/tasks/",
+      "https://calendar.google.com/calendar/u/0/r/agenda",
+      "https://time.is/",
+      "https://notepad.js.org/",
+      "https://www.youtube.com/watch?v=TZgFg0Ok7W0&list=RDTZgFg0Ok7W0&start_radio=1&t=2229s",
+      "⏳ Launching VPN settings...",
+      "$PSScriptRoot/open-vpn-settings.ps1",
+      "⏳ Playing Big Ben and telling the current time...",
+      "$PSScriptRoot/play-big-ben.ps1",
+      "$PSScriptRoot/speak-time.ps1",
+      "$PSScriptRoot/show-notification.ps1",
+      "CEO mode activated.",
+      "✅ CEO mode activated.",
+      "⚠️ ERROR: $($Error[0]) (in line $($_.InvocationInfo.ScriptLineNumber))"
+    ],
+    "string_anzahl_gesamt": 24,
+    "base64_bloecke_dekodiert": [],
+    "base64_bloecke_gesamt": 0,
+    "beobachtete_cmdlets": [
+      "Clear-Host"
+    ],
+    "auffaellige_tokens": {},
+    "iocs": {
+      "urls": [
+        "https://calendar.google.com/calendar/u/0/r/agenda",
+        "https://github.com/fleschutz/PowerShell",
+        "https://notepad.js.org/",
+        "https://tasks.google.com/tasks/",
+        "https://time.is/",
+        "https://www.youtube.com/watch?v=TZgFg0Ok7W0&list=RDTZgFg0Ok7W0&start_radio=1&t=2229s"
+      ],
+      "ipv4": [],
+      "pfade": []
+    },
+    "deobfuskiert_auszug": "﻿<#\n.SYNOPSIS\n\tEnables the CEO mode\n.DESCRIPTION\n\tThis PowerShell script activates the CEO mode.\n.EXAMPLE\n\t./ceo-mode.ps1\n.LINK\n\thttps://github.com/fleschutz/PowerShell\n.NOTES\n\tAuthor: Markus Fleschutz | License: CC0\n#>\n\n#requires -version 5.1\n\ntry {\n\tClear-Host\n\t& \"$PSScriptRoot/write-big.ps1\" \"CEO MODE\"\n\n\t& \"$PSScriptRoot/list-times.ps1\"\n\n\t\"⏳ Minimizing all windows...\"\n\t& \"$PSScriptRoot/minimize-all-windows.ps1\"\n\n\t# Launch browser with useful tabs: tasks, calendar, world clock, notepad, nice background music\n\t& \"$PSScriptRoot/open-URL.ps1\" \"https://tasks.google.com/tasks/\"\n\t& \"$PSScriptRoot/open-URL.ps1\" \"https://calendar.google.com/calendar/u/0/r/agenda\"\n\t& \"$PSScriptRoot/open-URL.ps1\" \"https://time.is/\"\n\t& \"$PSScriptRoot/open-URL.ps1\" \"https://notepad.js.org/\"\n\t& \"$PSScriptRoot/open-URL.ps1\" \"https://www.youtube.com/watch?v=TZgFg0Ok7W0&list=RDTZgFg0Ok7W0&start_radio=1&t=2229s\"\n\t\"⏳ Launching VPN settings...\"\n\t& \"$PSScriptRoot/open-vpn-settings.ps1\"\n\n\t\"⏳ Playing Big Ben and telling the current time...\"\n\t& \"$PSScriptRoot/play-big-ben.ps1\"\n\t& \"$PSScriptRoot/speak-time.ps1\"\n\n\t& \"$PSScriptRoot/show-notification.ps1\" \"CEO mode activated.\"\n\t\"✅ CEO mode activated.\"\n\texit 0 # success\n} catch {\n\t\"⚠️ ERROR: $($Error[0]) (in line $($_.InvocationInfo.ScriptLineNumber))\"\n\texit 1\n}\n",
+    "dekodierte_befehle": [],
+    "beobachtete_abfolge": []
+  }
+}

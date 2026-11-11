@@ -1,0 +1,63 @@
+{
+  "meta": {
+    "quelldatei": "benign_048_check-day.ps1",
+    "sha256": "b0bba4a15114e3a70a8f27eb205303e6e1328003c011ea482972f6111695bef5",
+    "groesse_bytes": 601,
+    "zeilen": 24,
+    "ground_truth_label": "benign",
+    "analyse_gekuerzt": false,
+    "hinweis": "Kein Urteil enthalten. Bewertung erfolgt durch das LLM."
+  },
+  "stufe1_extract": {
+    "strings": [
+      "s Sunday.\n.LINK\n\thttps://github.com/fleschutz/PowerShell\n.NOTES\n\tAuthor: Markus Fleschutz | License: CC0\n#>\n\ntry {\n\t[system.threading.thread]::currentthread.currentculture=[system.globalization.cultureinfo]\"en-US\"\n\t$Weekday = (Get-Date -format \"dddd\")\n\t& \"$PSScriptRoot/speak-english.ps1\" \"It",
+      "\n\texit 0 # success\n} catch {\n\t"
+    ],
+    "string_anzahl_gesamt": 2,
+    "base64_bloecke_dekodiert": [],
+    "base64_bloecke_gesamt": 0
+  },
+  "stufe2_features": {
+    "strings": [
+      "s Sunday.\n.LINK\n\thttps://github.com/fleschutz/PowerShell\n.NOTES\n\tAuthor: Markus Fleschutz | License: CC0\n#>\n\ntry {\n\t[system.threading.thread]::currentthread.currentculture=[system.globalization.cultureinfo]\"en-US\"\n\t$Weekday = (Get-Date -format \"dddd\")\n\t& \"$PSScriptRoot/speak-english.ps1\" \"It",
+      "\n\texit 0 # success\n} catch {\n\t"
+    ],
+    "string_anzahl_gesamt": 2,
+    "base64_bloecke_dekodiert": [],
+    "base64_bloecke_gesamt": 0,
+    "beobachtete_cmdlets": [
+      "Get-Date"
+    ],
+    "auffaellige_tokens": {},
+    "iocs": {
+      "urls": [
+        "https://github.com/fleschutz/PowerShell"
+      ],
+      "ipv4": [],
+      "pfade": []
+    }
+  },
+  "stufe3_structure": {
+    "strings": [
+      "s Sunday.\n.LINK\n\thttps://github.com/fleschutz/PowerShell\n.NOTES\n\tAuthor: Markus Fleschutz | License: CC0\n#>\n\ntry {\n\t[system.threading.thread]::currentthread.currentculture=[system.globalization.cultureinfo]\"en-US\"\n\t$Weekday = (Get-Date -format \"dddd\")\n\t& \"$PSScriptRoot/speak-english.ps1\" \"It",
+      "\n\texit 0 # success\n} catch {\n\t"
+    ],
+    "string_anzahl_gesamt": 2,
+    "base64_bloecke_dekodiert": [],
+    "base64_bloecke_gesamt": 0,
+    "beobachtete_cmdlets": [
+      "Get-Date"
+    ],
+    "auffaellige_tokens": {},
+    "iocs": {
+      "urls": [
+        "https://github.com/fleschutz/PowerShell"
+      ],
+      "ipv4": [],
+      "pfade": []
+    },
+    "deobfuskiert_auszug": "﻿<#\n.SYNOPSIS\n\tDetermines the current day \n.DESCRIPTION\n\tThis PowerShell script determines and speaks the current day by text-to-speech (TTS).\n.EXAMPLE\n\tPS> ./check-day\n\t✅ It's Sunday.\n.LINK\n\thttps://github.com/fleschutz/PowerShell\n.NOTES\n\tAuthor: Markus Fleschutz | License: CC0\n#>\n\ntry {\n\t[system.threading.thread]::currentthread.currentculture=[system.globalization.cultureinfo]\"en-US\"\n\t$Weekday = (Get-Date -format \"dddd\")\n\t& \"$PSScriptRoot/speak-english.ps1\" \"It's $Weekday.\"\n\texit 0 # success\n} catch {\n\t\"⚠️ ERROR: $($Error[0]) (at line $($_.InvocationInfo.ScriptLineNumber))\"\n\texit 1\n}\n",
+    "dekodierte_befehle": [],
+    "beobachtete_abfolge": []
+  }
+}

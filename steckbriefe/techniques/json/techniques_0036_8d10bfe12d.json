@@ -1,0 +1,120 @@
+{
+  "meta": {
+    "quelldatei": "tech_035_github_crawler.ps1",
+    "sha256": "8d10bfe12d9e392f6a402046d1d227ba5eb737165fe477f1343f795c012c3433",
+    "groesse_bytes": 3345,
+    "zeilen": 90,
+    "ground_truth_label": "techniques",
+    "analyse_gekuerzt": false,
+    "hinweis": "Kein Urteil enthalten. Bewertung erfolgt durch das LLM."
+  },
+  "stufe1_extract": {
+    "strings": [
+      "Enter the GitHub username",
+      "https://api.github.com/users/$username/repos",
+      "GitHubRepos.txt",
+      "Invoke-RestMethod",
+      "GitHub has rate limited your IP address. Try switching IP addresses or waiting for a period.",
+      "Press Enter to continue",
+      "An error occurred: $responseMessage",
+      "If GitHub has rate limited your IP address. Try switching IP addresses or waiting for a period.",
+      "An error occurred: $($_.Exception.Message)",
+      "\\{\\+path\\}",
+      "\r\n        $repoContents = Invoke-RestMethod -Uri $contentsUrl\r\n\r\n        # Append subdirectories, sub-repos, or files URLs\r\n        foreach ($content in $repoContents) {\r\n            if ($content.type -eq \"dir\") {\r\n                \"    ____ $($content.html_url)\" | Out-File -Append -FilePath $outputFile\r\n                # Additional check for nested contents within the directory\r\n                Fetch-Content -url $content.url -prefix \"______\"\r\n            }\r\n            elseif ($content.type -eq \"file\") {\r\n                \"______ $($content.html_url)\" | Out-File -Append -FilePath $outputFile\r\n            }\r\n        }\r\n    }\r\n\r\n    # Check for pagination (next page of results)\r\n    if ($response.Headers.",
+      " -match ",
+      "next",
+      "$prefix $($nestedContent.html_url)",
+      "dir",
+      "$prefix____",
+      "Repository links, their subdirectories, and files have been written to $outputFile"
+    ],
+    "string_anzahl_gesamt": 20,
+    "base64_bloecke_dekodiert": [],
+    "base64_bloecke_gesamt": 0
+  },
+  "stufe2_features": {
+    "strings": [
+      "Enter the GitHub username",
+      "https://api.github.com/users/$username/repos",
+      "GitHubRepos.txt",
+      "Invoke-RestMethod",
+      "GitHub has rate limited your IP address. Try switching IP addresses or waiting for a period.",
+      "Press Enter to continue",
+      "An error occurred: $responseMessage",
+      "If GitHub has rate limited your IP address. Try switching IP addresses or waiting for a period.",
+      "An error occurred: $($_.Exception.Message)",
+      "\\{\\+path\\}",
+      "\r\n        $repoContents = Invoke-RestMethod -Uri $contentsUrl\r\n\r\n        # Append subdirectories, sub-repos, or files URLs\r\n        foreach ($content in $repoContents) {\r\n            if ($content.type -eq \"dir\") {\r\n                \"    ____ $($content.html_url)\" | Out-File -Append -FilePath $outputFile\r\n                # Additional check for nested contents within the directory\r\n                Fetch-Content -url $content.url -prefix \"______\"\r\n            }\r\n            elseif ($content.type -eq \"file\") {\r\n                \"______ $($content.html_url)\" | Out-File -Append -FilePath $outputFile\r\n            }\r\n        }\r\n    }\r\n\r\n    # Check for pagination (next page of results)\r\n    if ($response.Headers.",
+      " -match ",
+      "next",
+      "$prefix $($nestedContent.html_url)",
+      "dir",
+      "$prefix____",
+      "Repository links, their subdirectories, and files have been written to $outputFile"
+    ],
+    "string_anzahl_gesamt": 20,
+    "base64_bloecke_dekodiert": [],
+    "base64_bloecke_gesamt": 0,
+    "beobachtete_cmdlets": [
+      "Fetch-Content",
+      "Fetch-Repos",
+      "Invoke-RestMethod",
+      "Out-File",
+      "Read-Host",
+      "Write-Host"
+    ],
+    "auffaellige_tokens": {},
+    "iocs": {
+      "urls": [
+        "https://api",
+        "https://api.github.com/users/$username/repos"
+      ],
+      "ipv4": [],
+      "pfade": []
+    }
+  },
+  "stufe3_structure": {
+    "strings": [
+      "Enter the GitHub username",
+      "https://api.github.com/users/$username/repos",
+      "GitHubRepos.txt",
+      "Invoke-RestMethod",
+      "GitHub has rate limited your IP address. Try switching IP addresses or waiting for a period.",
+      "Press Enter to continue",
+      "An error occurred: $responseMessage",
+      "If GitHub has rate limited your IP address. Try switching IP addresses or waiting for a period.",
+      "An error occurred: $($_.Exception.Message)",
+      "\\{\\+path\\}",
+      "\r\n        $repoContents = Invoke-RestMethod -Uri $contentsUrl\r\n\r\n        # Append subdirectories, sub-repos, or files URLs\r\n        foreach ($content in $repoContents) {\r\n            if ($content.type -eq \"dir\") {\r\n                \"    ____ $($content.html_url)\" | Out-File -Append -FilePath $outputFile\r\n                # Additional check for nested contents within the directory\r\n                Fetch-Content -url $content.url -prefix \"______\"\r\n            }\r\n            elseif ($content.type -eq \"file\") {\r\n                \"______ $($content.html_url)\" | Out-File -Append -FilePath $outputFile\r\n            }\r\n        }\r\n    }\r\n\r\n    # Check for pagination (next page of results)\r\n    if ($response.Headers.",
+      " -match ",
+      "next",
+      "$prefix $($nestedContent.html_url)",
+      "dir",
+      "$prefix____",
+      "Repository links, their subdirectories, and files have been written to $outputFile"
+    ],
+    "string_anzahl_gesamt": 20,
+    "base64_bloecke_dekodiert": [],
+    "base64_bloecke_gesamt": 0,
+    "beobachtete_cmdlets": [
+      "Fetch-Content",
+      "Fetch-Repos",
+      "Invoke-RestMethod",
+      "Out-File",
+      "Read-Host",
+      "Write-Host"
+    ],
+    "auffaellige_tokens": {},
+    "iocs": {
+      "urls": [
+        "https://api",
+        "https://api.github.com/users/$username/repos"
+      ],
+      "ipv4": [],
+      "pfade": []
+    },
+    "deobfuskiert_auszug": "# Ask for GitHub username\r\n$username = Read-Host -Prompt \"Enter the GitHub username\"\r\n\r\n# Base GitHub API URL for user repositories\r\n$apiUrl = \"https://api.github.com/users/$username/repos\"\r\n\r\n# Output file\r\n$outputFile = \"GitHubRepos.txt\"\r\n\r\n# Function to fetch repositories and write to file\r\nfunction Fetch-Repos {\r\n    param (\r\n        [string]$url\r\n    )\r\n\r\n    # Call GitHub API for repositories\r\n    try {\r\n        $response = Invoke-RestMethod -Uri $url -ErrorAction Stop\r\n    } catch {\r\n        if ($_.Exception.Response.StatusCode -eq 403) {\r\n            $responseMessage = $_.Exception.Response.StatusDescription\r\n            if ($responseMessage -match \"Invoke-RestMethod\") {\r\n                Write-Host \"GitHub has rate limited your IP address. Try switching IP addresses or waiting for a period.\"\r\n                Read-Host -Prompt \"Press Enter to continue\"\r\n                exit\r\n            }\r\n            else {\r\n                Write-Host \"An error occurred: $responseMessage\"\r\n                Write-Host \"If GitHub has rate limited your IP address. Try switching IP addresses or waiting for a period.\"\r\n                Read-Host -Prompt \"Press Enter to continue\"\r\n                exit\r\n            }\r\n        }\r\n        else {\r\n            Write-Host \"An error occurred: $($_.Exception.Message)\"\r\n            Write-Host \"If GitHub has rate limited your IP address. Try switching IP addresses or waiting for a period.\"\r\n            Read-Host -Prompt \"Press Enter to continue\"\r\n            exit\r\n        }\r\n    }\r\n\r\n    # Write each repo URL to the file and fetch its contents\r\n    foreach ($repo in $response) {\r\n        $repo.html_url | Out-File -Append -FilePath $outputFile\r\n\r\n        # Fetch contents of the repository\r\n        $contentsUrl = $repo.contents_url -replace '\\{\\+path\\}', ''\r\n        $repoContents = Invoke-RestMethod -Uri $contentsUrl\r\n\r\n        # Append subdirectories, sub-repos, or files URLs\r\n        foreach ($content in $repoContents) {\r\n            if ($con",
+    "dekodierte_befehle": [],
+    "beobachtete_abfolge": []
+  }
+}

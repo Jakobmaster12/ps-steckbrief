@@ -1,0 +1,76 @@
+{
+  "meta": {
+    "quelldatei": "benign_049_check-dns.ps1",
+    "sha256": "774601373cabd1b11aa91d6659542779849e660233a742596cc1181feba585d2",
+    "groesse_bytes": 1179,
+    "zeilen": 40,
+    "ground_truth_label": "benign",
+    "analyse_gekuerzt": false,
+    "hinweis": "Kein Urteil enthalten. Bewertung erfolgt durch das LLM."
+  },
+  "stufe1_extract": {
+    "strings": [
+      "$PSScriptRoot/data/popular-domains.csv",
+      "✅ Internet DNS lookup is $($speed)ms on average (excellent)",
+      "✅ Internet DNS lookup is $($speed)ms on average (good)",
+      "⚠️ Internet DNS lookup is $($speed)ms on average (slow)",
+      "⚠️ ERROR: $($Error[0]) (at line $($_.InvocationInfo.ScriptLineNumber))"
+    ],
+    "string_anzahl_gesamt": 5,
+    "base64_bloecke_dekodiert": [],
+    "base64_bloecke_gesamt": 0
+  },
+  "stufe2_features": {
+    "strings": [
+      "$PSScriptRoot/data/popular-domains.csv",
+      "✅ Internet DNS lookup is $($speed)ms on average (excellent)",
+      "✅ Internet DNS lookup is $($speed)ms on average (good)",
+      "⚠️ Internet DNS lookup is $($speed)ms on average (slow)",
+      "⚠️ ERROR: $($Error[0]) (at line $($_.InvocationInfo.ScriptLineNumber))"
+    ],
+    "string_anzahl_gesamt": 5,
+    "base64_bloecke_dekodiert": [],
+    "base64_bloecke_gesamt": 0,
+    "beobachtete_cmdlets": [
+      "Clear-DnsClientCache",
+      "Import-CSV",
+      "Resolve-DNSName"
+    ],
+    "auffaellige_tokens": {},
+    "iocs": {
+      "urls": [
+        "https://github.com/fleschutz/PowerShell"
+      ],
+      "ipv4": [],
+      "pfade": []
+    }
+  },
+  "stufe3_structure": {
+    "strings": [
+      "$PSScriptRoot/data/popular-domains.csv",
+      "✅ Internet DNS lookup is $($speed)ms on average (excellent)",
+      "✅ Internet DNS lookup is $($speed)ms on average (good)",
+      "⚠️ Internet DNS lookup is $($speed)ms on average (slow)",
+      "⚠️ ERROR: $($Error[0]) (at line $($_.InvocationInfo.ScriptLineNumber))"
+    ],
+    "string_anzahl_gesamt": 5,
+    "base64_bloecke_dekodiert": [],
+    "base64_bloecke_gesamt": 0,
+    "beobachtete_cmdlets": [
+      "Clear-DnsClientCache",
+      "Import-CSV",
+      "Resolve-DNSName"
+    ],
+    "auffaellige_tokens": {},
+    "iocs": {
+      "urls": [
+        "https://github.com/fleschutz/PowerShell"
+      ],
+      "ipv4": [],
+      "pfade": []
+    },
+    "deobfuskiert_auszug": "﻿<#\n.SYNOPSIS\n\tChecks the DNS speed \n.DESCRIPTION\n\tThis PowerShell script measures the DNS lookup speed using 100 internet domains and prints it.\n.EXAMPLE\n\tPS> ./check-dns.ps1\n\t✅ Internet DNS lookup is 33.6ms on average (excellent)\n.LINK\n\thttps://github.com/fleschutz/PowerShell\n.NOTES\n\tAuthor: Markus Fleschutz | License: CC0\n#>\n \ntry {\n\t$table = Import-CSV \"$PSScriptRoot/data/popular-domains.csv\"\n\n\tif ($IsLinux) {\n\t\t$stopWatch = [system.diagnostics.stopwatch]::startNew()\n\t\tforeach($row in $table){$nop=dig $row.Domain +short}\n\t} else {\n\t\tClear-DnsClientCache\n\t\t$stopWatch = [system.diagnostics.stopwatch]::startNew()\n\t\tforeach($row in $table){$nop=Resolve-DNSName $row.Domain}\n\t}\n\t[float]$elapsed = $stopWatch.Elapsed.TotalSeconds * 1000.0\n\t$speed = [math]::round($elapsed / $table.Length, 1)\n\tif ($speed -lt 50.0) {\n\t\t\"✅ Internet DNS lookup is $($speed)ms on average (excellent)\"\n\t} elseif ($speed -lt 100.0) {\n\t\t\"✅ Internet DNS lookup is $($speed)ms on average (good)\"\n\t} else {  \n\t\t\"⚠️ Internet DNS lookup is $($speed)ms on average (slow)\"\n\t}\n\texit 0 # success\n} catch {\n\t\"⚠️ ERROR: $($Error[0]) (at line $($_.InvocationInfo.ScriptLineNumber))\"\n\texit 1\n}\n",
+    "dekodierte_befehle": [],
+    "beobachtete_abfolge": []
+  }
+}

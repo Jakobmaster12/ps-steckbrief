@@ -1,0 +1,80 @@
+{
+  "meta": {
+    "quelldatei": "benign_034_cd-up.ps1",
+    "sha256": "92d710102bc4ffaf15960bbed12ebec071f3c4581dcc08b973be2b4c687f5be8",
+    "groesse_bytes": 563,
+    "zeilen": 27,
+    "ground_truth_label": "benign",
+    "analyse_gekuerzt": false,
+    "hinweis": "Kein Urteil enthalten. Bewertung erfolgt durch das LLM."
+  },
+  "stufe1_extract": {
+    "strings": [
+      "\n\tif (-not(Test-Path ",
+      " -pathType container)) { throw ",
+      " }\n\tSet-Location ",
+      "📂$path",
+      "⚠️ ERROR: $($Error[0])"
+    ],
+    "string_anzahl_gesamt": 5,
+    "base64_bloecke_dekodiert": [],
+    "base64_bloecke_gesamt": 0
+  },
+  "stufe2_features": {
+    "strings": [
+      "\n\tif (-not(Test-Path ",
+      " -pathType container)) { throw ",
+      " }\n\tSet-Location ",
+      "📂$path",
+      "⚠️ ERROR: $($Error[0])"
+    ],
+    "string_anzahl_gesamt": 5,
+    "base64_bloecke_dekodiert": [],
+    "base64_bloecke_gesamt": 0,
+    "beobachtete_cmdlets": [
+      "Resolve-Path",
+      "Set-Location",
+      "Test-Path"
+    ],
+    "auffaellige_tokens": {},
+    "iocs": {
+      "urls": [
+        "https://github.com/fleschutz/PowerShell"
+      ],
+      "ipv4": [],
+      "pfade": [
+        "C:\\Users"
+      ]
+    }
+  },
+  "stufe3_structure": {
+    "strings": [
+      "\n\tif (-not(Test-Path ",
+      " -pathType container)) { throw ",
+      " }\n\tSet-Location ",
+      "📂$path",
+      "⚠️ ERROR: $($Error[0])"
+    ],
+    "string_anzahl_gesamt": 5,
+    "base64_bloecke_dekodiert": [],
+    "base64_bloecke_gesamt": 0,
+    "beobachtete_cmdlets": [
+      "Resolve-Path",
+      "Set-Location",
+      "Test-Path"
+    ],
+    "auffaellige_tokens": {},
+    "iocs": {
+      "urls": [
+        "https://github.com/fleschutz/PowerShell"
+      ],
+      "ipv4": [],
+      "pfade": [
+        "C:\\Users"
+      ]
+    },
+    "deobfuskiert_auszug": "﻿<#\n.SYNOPSIS\n\tSets the working directory to one level up\n.DESCRIPTION\n\tThis PowerShell script changes the current working directory to one directory level up.\n.EXAMPLE\n\tPS> .\\cd-up.ps1\n\t📂C:\\Users\n.LINK\n\thttps://github.com/fleschutz/PowerShell\n.NOTES\n\tAuthor: Markus Fleschutz | License: CC0\n#>\n\n#requires -version 5.1\n\ntry {\n\t$path = Resolve-Path \"..\"\n\tif (-not(Test-Path \"$path\" -pathType container)) { throw \"Folder at 📂$path doesn't exist (yet)\" }\n\tSet-Location \"$path\"\n\t\"📂$path\"\n\texit 0 # success\n} catch {\n\t\"⚠️ ERROR: $($Error[0])\"\n\texit 1\n}\n",
+    "dekodierte_befehle": [],
+    "beobachtete_abfolge": []
+  }
+}

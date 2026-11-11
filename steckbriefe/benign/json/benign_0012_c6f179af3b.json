@@ -1,0 +1,85 @@
+{
+  "meta": {
+    "quelldatei": "benign_011_cd-dropbox.ps1",
+    "sha256": "c6f179af3b566530fb77cb1703d03c6cb1a6fcb8b8aa553ae3036a86d77d8734",
+    "groesse_bytes": 839,
+    "zeilen": 31,
+    "ground_truth_label": "benign",
+    "analyse_gekuerzt": false,
+    "hinweis": "Kein Urteil enthalten. Bewertung erfolgt durch das LLM."
+  },
+  "stufe1_extract": {
+    "strings": [
+      "s Dropbox folder\n.DESCRIPTION\n\tThis PowerShell script changes the working directory to the user",
+      "~/Dropbox",
+      "No 'Dropbox' folder in your home directory - Please install Dropbox.",
+      "$path",
+      "📂$path entered, has $($files.Count) files and $($folders.Count) folders.",
+      "⚠️ ERROR: $($Error[0])"
+    ],
+    "string_anzahl_gesamt": 7,
+    "base64_bloecke_dekodiert": [],
+    "base64_bloecke_gesamt": 0
+  },
+  "stufe2_features": {
+    "strings": [
+      "s Dropbox folder\n.DESCRIPTION\n\tThis PowerShell script changes the working directory to the user",
+      "~/Dropbox",
+      "No 'Dropbox' folder in your home directory - Please install Dropbox.",
+      "$path",
+      "📂$path entered, has $($files.Count) files and $($folders.Count) folders.",
+      "⚠️ ERROR: $($Error[0])"
+    ],
+    "string_anzahl_gesamt": 7,
+    "base64_bloecke_dekodiert": [],
+    "base64_bloecke_gesamt": 0,
+    "beobachtete_cmdlets": [
+      "Get-ChildItem",
+      "Resolve-Path",
+      "Set-Location",
+      "Test-Path"
+    ],
+    "auffaellige_tokens": {},
+    "iocs": {
+      "urls": [
+        "https://github.com/fleschutz/PowerShell"
+      ],
+      "ipv4": [],
+      "pfade": [
+        "C:\\Users\\Markus\\Dropbox"
+      ]
+    }
+  },
+  "stufe3_structure": {
+    "strings": [
+      "s Dropbox folder\n.DESCRIPTION\n\tThis PowerShell script changes the working directory to the user",
+      "~/Dropbox",
+      "No 'Dropbox' folder in your home directory - Please install Dropbox.",
+      "$path",
+      "📂$path entered, has $($files.Count) files and $($folders.Count) folders.",
+      "⚠️ ERROR: $($Error[0])"
+    ],
+    "string_anzahl_gesamt": 7,
+    "base64_bloecke_dekodiert": [],
+    "base64_bloecke_gesamt": 0,
+    "beobachtete_cmdlets": [
+      "Get-ChildItem",
+      "Resolve-Path",
+      "Set-Location",
+      "Test-Path"
+    ],
+    "auffaellige_tokens": {},
+    "iocs": {
+      "urls": [
+        "https://github.com/fleschutz/PowerShell"
+      ],
+      "ipv4": [],
+      "pfade": [
+        "C:\\Users\\Markus\\Dropbox"
+      ]
+    },
+    "deobfuskiert_auszug": "﻿<#\n.SYNOPSIS\n\tSets the working directory to the user's Dropbox folder\n.DESCRIPTION\n\tThis PowerShell script changes the working directory to the user's Dropbox folder.\n.EXAMPLE\n\tPS> ./cd-dropbox\n\t📂C:\\Users\\Markus\\Dropbox entered, has 2 files and 0 folders.\n.LINK\n\thttps://github.com/fleschutz/PowerShell\n.NOTES\n\tAuthor: Markus Fleschutz | License: CC0\n#>\n\n#requires -version 5.1\n\ntry {\n\tif (-not(Test-Path \"~/Dropbox\" -pathType container)) {\n\t\tthrow \"No 'Dropbox' folder in your home directory - Please install Dropbox.\"\n\t}\n\t$path = Resolve-Path \"~/Dropbox\"\n\tSet-Location \"$path\"\n\t$files = Get-ChildItem $path -attributes !Directory\n\t$folders = Get-ChildItem $path -attributes Directory\n\t\"📂$path entered, has $($files.Count) files and $($folders.Count) folders.\"\n\texit 0 # success\n} catch {\n\t\"⚠️ ERROR: $($Error[0])\"\n\texit 1\n}\n",
+    "dekodierte_befehle": [],
+    "beobachtete_abfolge": []
+  }
+}

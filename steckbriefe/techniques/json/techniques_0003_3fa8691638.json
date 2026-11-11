@@ -1,0 +1,125 @@
+{
+  "meta": {
+    "quelldatei": "tech_002_AskAI.ps1",
+    "sha256": "3fa8691638c44dbf21e766431cf53068ffa2833e808b9f0b1f58a6c641c54e8d",
+    "groesse_bytes": 3770,
+    "zeilen": 122,
+    "ground_truth_label": "techniques",
+    "analyse_gekuerzt": false,
+    "hinweis": "Kein Urteil enthalten. Bewertung erfolgt durch das LLM."
+  },
+  "stufe1_extract": {
+    "strings": [
+      "YOUR OPENAI API HERE",
+      "https://api.openai.com/v1/chat/completions",
+      "Authorization",
+      "Bearer $apiKey",
+      "Content-Type",
+      "application/json",
+      "\r\n\r\n`nAsk-AI is a PowerShell function crafted to simplify troubleshooting within PowerShell.\r\nJust type Ask-AI following a PowerShell error to troubleshoot, rectify syntax issues, or locate the right command.\r\n`n\r\nOptions:\r\n  /?: Display this help message.\r\n  /s: Display full message sent to OpenAI's API.\r\n  /d: Request detailed assistance.\r\n  /a: Display full message & request detailed assistance.\r\n  /i: Send a custom message to OpenAI's API.\r\n`n\r\nExample:\r\n  > Ask-AI\r\n  > Ask-AI /?\r\n  > Ask-AI /s\r\n  > Ask-AI /d\r\n  > Ask-AI /a\r\n  > Ask-AI /i\r\n`n\r\n",
+      ") {\r\n        $showErrorInfo = $true\r\n    } elseif ($arg -eq ",
+      ") {\r\n        $detailed = $true\r\n    } elseif ($arg -eq ",
+      ") {\r\n        $showErrorInfo = $true\r\n        $detailed = $true\r\n    } elseif ($arg -eq ",
+      ") {\r\n        $userInputMode = $true\r\n    } elseif ($arg -eq ",
+      " -or $arg -eq ",
+      ") {\r\n        $help\r\n        return\r\n    }\r\n\r\n\r\n    if ($userInputMode) {\r\n        Write-Host ",
+      " -ForegroundColor Yellow\r\n        $prompt = Read-Host\r\n\r\n        $maxTokens = 80\r\n    } else {\r\n        if ($Error.Count -gt 0) {\r\n            if ($Error.Count -gt 0 -and $Error[0] -ne $null) {\r\n                $ErrorMessage = $Error[0].ToString()\r\n            } else {\r\n                $ErrorMessage = ",
+      "\r\n            }\r\n\r\n            $LastUserInput = $Error[0].InvocationInfo.Line\r\n\r\n            if ($showErrorInfo) {\r\n                Write-Host -ForegroundColor Yellow ",
+      "\r\n                Write-Host -ForegroundColor Cyan ",
+      "\r\n            }\r\n        } else {\r\n            $LastUserInput = Read-Host\r\n        }\r\n\r\n        $prompt = ",
+      "\r\n        $maxTokens = 80\r\n\r\n        if ($detailed) {\r\n            $prompt = ",
+      "\r\n            $maxTokens = 250\r\n        }\r\n    }\r\n\r\n    $body = @{\r\n        'model'               = 'gpt-3.5-turbo-0125'\r\n        'messages'            = @(\r\n                                @{\r\n                                    'role'    = 'user'\r\n                                    'content' = $prompt\r\n                                }\r\n                                )\r\n        'temperature'         = 1\r\n        'max_tokens'          = $maxTokens\r\n        'top_p'               = 1\r\n        'frequency_penalty'   = 0\r\n        'presence_penalty'    = 0\r\n    } | ConvertTo-Json\r\n\r\n\r\n    $response = Invoke-RestMethod -Uri $apiEndpoint -Method 'POST' -Headers $headers -Body $body\r\n\r\n    if ($response -ne $null -and $response.choices -ne $null) {\r\n        Write-Host $response.choices[0].message.content -ForegroundColor Green ",
+      "\r\n    } else {\r\n        Write-Host "
+    ],
+    "string_anzahl_gesamt": 24,
+    "base64_bloecke_dekodiert": [],
+    "base64_bloecke_gesamt": 0
+  },
+  "stufe2_features": {
+    "strings": [
+      "YOUR OPENAI API HERE",
+      "https://api.openai.com/v1/chat/completions",
+      "Authorization",
+      "Bearer $apiKey",
+      "Content-Type",
+      "application/json",
+      "\r\n\r\n`nAsk-AI is a PowerShell function crafted to simplify troubleshooting within PowerShell.\r\nJust type Ask-AI following a PowerShell error to troubleshoot, rectify syntax issues, or locate the right command.\r\n`n\r\nOptions:\r\n  /?: Display this help message.\r\n  /s: Display full message sent to OpenAI's API.\r\n  /d: Request detailed assistance.\r\n  /a: Display full message & request detailed assistance.\r\n  /i: Send a custom message to OpenAI's API.\r\n`n\r\nExample:\r\n  > Ask-AI\r\n  > Ask-AI /?\r\n  > Ask-AI /s\r\n  > Ask-AI /d\r\n  > Ask-AI /a\r\n  > Ask-AI /i\r\n`n\r\n",
+      ") {\r\n        $showErrorInfo = $true\r\n    } elseif ($arg -eq ",
+      ") {\r\n        $detailed = $true\r\n    } elseif ($arg -eq ",
+      ") {\r\n        $showErrorInfo = $true\r\n        $detailed = $true\r\n    } elseif ($arg -eq ",
+      ") {\r\n        $userInputMode = $true\r\n    } elseif ($arg -eq ",
+      " -or $arg -eq ",
+      ") {\r\n        $help\r\n        return\r\n    }\r\n\r\n\r\n    if ($userInputMode) {\r\n        Write-Host ",
+      " -ForegroundColor Yellow\r\n        $prompt = Read-Host\r\n\r\n        $maxTokens = 80\r\n    } else {\r\n        if ($Error.Count -gt 0) {\r\n            if ($Error.Count -gt 0 -and $Error[0] -ne $null) {\r\n                $ErrorMessage = $Error[0].ToString()\r\n            } else {\r\n                $ErrorMessage = ",
+      "\r\n            }\r\n\r\n            $LastUserInput = $Error[0].InvocationInfo.Line\r\n\r\n            if ($showErrorInfo) {\r\n                Write-Host -ForegroundColor Yellow ",
+      "\r\n                Write-Host -ForegroundColor Cyan ",
+      "\r\n            }\r\n        } else {\r\n            $LastUserInput = Read-Host\r\n        }\r\n\r\n        $prompt = ",
+      "\r\n        $maxTokens = 80\r\n\r\n        if ($detailed) {\r\n            $prompt = ",
+      "\r\n            $maxTokens = 250\r\n        }\r\n    }\r\n\r\n    $body = @{\r\n        'model'               = 'gpt-3.5-turbo-0125'\r\n        'messages'            = @(\r\n                                @{\r\n                                    'role'    = 'user'\r\n                                    'content' = $prompt\r\n                                }\r\n                                )\r\n        'temperature'         = 1\r\n        'max_tokens'          = $maxTokens\r\n        'top_p'               = 1\r\n        'frequency_penalty'   = 0\r\n        'presence_penalty'    = 0\r\n    } | ConvertTo-Json\r\n\r\n\r\n    $response = Invoke-RestMethod -Uri $apiEndpoint -Method 'POST' -Headers $headers -Body $body\r\n\r\n    if ($response -ne $null -and $response.choices -ne $null) {\r\n        Write-Host $response.choices[0].message.content -ForegroundColor Green ",
+      "\r\n    } else {\r\n        Write-Host "
+    ],
+    "string_anzahl_gesamt": 24,
+    "base64_bloecke_dekodiert": [],
+    "base64_bloecke_gesamt": 0,
+    "beobachtete_cmdlets": [
+      "Ask-AI",
+      "Content-Type",
+      "Invoke-RestMethod",
+      "Read-Host",
+      "Write-Host"
+    ],
+    "auffaellige_tokens": {},
+    "iocs": {
+      "urls": [
+        "https://api.openai.com/v1/chat/completions"
+      ],
+      "ipv4": [],
+      "pfade": []
+    }
+  },
+  "stufe3_structure": {
+    "strings": [
+      "YOUR OPENAI API HERE",
+      "https://api.openai.com/v1/chat/completions",
+      "Authorization",
+      "Bearer $apiKey",
+      "Content-Type",
+      "application/json",
+      "\r\n\r\n`nAsk-AI is a PowerShell function crafted to simplify troubleshooting within PowerShell.\r\nJust type Ask-AI following a PowerShell error to troubleshoot, rectify syntax issues, or locate the right command.\r\n`n\r\nOptions:\r\n  /?: Display this help message.\r\n  /s: Display full message sent to OpenAI's API.\r\n  /d: Request detailed assistance.\r\n  /a: Display full message & request detailed assistance.\r\n  /i: Send a custom message to OpenAI's API.\r\n`n\r\nExample:\r\n  > Ask-AI\r\n  > Ask-AI /?\r\n  > Ask-AI /s\r\n  > Ask-AI /d\r\n  > Ask-AI /a\r\n  > Ask-AI /i\r\n`n\r\n",
+      ") {\r\n        $showErrorInfo = $true\r\n    } elseif ($arg -eq ",
+      ") {\r\n        $detailed = $true\r\n    } elseif ($arg -eq ",
+      ") {\r\n        $showErrorInfo = $true\r\n        $detailed = $true\r\n    } elseif ($arg -eq ",
+      ") {\r\n        $userInputMode = $true\r\n    } elseif ($arg -eq ",
+      " -or $arg -eq ",
+      ") {\r\n        $help\r\n        return\r\n    }\r\n\r\n\r\n    if ($userInputMode) {\r\n        Write-Host ",
+      " -ForegroundColor Yellow\r\n        $prompt = Read-Host\r\n\r\n        $maxTokens = 80\r\n    } else {\r\n        if ($Error.Count -gt 0) {\r\n            if ($Error.Count -gt 0 -and $Error[0] -ne $null) {\r\n                $ErrorMessage = $Error[0].ToString()\r\n            } else {\r\n                $ErrorMessage = ",
+      "\r\n            }\r\n\r\n            $LastUserInput = $Error[0].InvocationInfo.Line\r\n\r\n            if ($showErrorInfo) {\r\n                Write-Host -ForegroundColor Yellow ",
+      "\r\n                Write-Host -ForegroundColor Cyan ",
+      "\r\n            }\r\n        } else {\r\n            $LastUserInput = Read-Host\r\n        }\r\n\r\n        $prompt = ",
+      "\r\n        $maxTokens = 80\r\n\r\n        if ($detailed) {\r\n            $prompt = ",
+      "\r\n            $maxTokens = 250\r\n        }\r\n    }\r\n\r\n    $body = @{\r\n        'model'               = 'gpt-3.5-turbo-0125'\r\n        'messages'            = @(\r\n                                @{\r\n                                    'role'    = 'user'\r\n                                    'content' = $prompt\r\n                                }\r\n                                )\r\n        'temperature'         = 1\r\n        'max_tokens'          = $maxTokens\r\n        'top_p'               = 1\r\n        'frequency_penalty'   = 0\r\n        'presence_penalty'    = 0\r\n    } | ConvertTo-Json\r\n\r\n\r\n    $response = Invoke-RestMethod -Uri $apiEndpoint -Method 'POST' -Headers $headers -Body $body\r\n\r\n    if ($response -ne $null -and $response.choices -ne $null) {\r\n        Write-Host $response.choices[0].message.content -ForegroundColor Green ",
+      "\r\n    } else {\r\n        Write-Host "
+    ],
+    "string_anzahl_gesamt": 24,
+    "base64_bloecke_dekodiert": [],
+    "base64_bloecke_gesamt": 0,
+    "beobachtete_cmdlets": [
+      "Ask-AI",
+      "Content-Type",
+      "Invoke-RestMethod",
+      "Read-Host",
+      "Write-Host"
+    ],
+    "auffaellige_tokens": {},
+    "iocs": {
+      "urls": [
+        "https://api.openai.com/v1/chat/completions"
+      ],
+      "ipv4": [],
+      "pfade": []
+    },
+    "deobfuskiert_auszug": "function Ask-AI {\r\n    param(\r\n        [string]$arg\r\n    )\r\n\r\n    $apiKey = 'YOUR OPENAI API HERE'\r\n    $apiEndpoint = 'https://api.openai.com/v1/chat/completions'\r\n\r\n\r\n    $headers = @{\r\n        'Authorization' = \"Bearer $apiKey\"\r\n        'Content-Type'  = 'application/json'\r\n    }\r\n\r\n    $ErrorMessage = $null\r\n    $LastUserInput = $null\r\n    $showErrorInfo = $false\r\n    $detailed = $false\r\n    $userInputMode = $false\r\n    $help = @\"\r\n\r\nnAsk-AI is a PowerShell function crafted to simplify troubleshooting within PowerShell.\r\nJust type Ask-AI following a PowerShell error to troubleshoot, rectify syntax issues, or locate the right command.\r\nn\r\nOptions:\r\n  /?: Display this help message.\r\n  /s: Display full message sent to OpenAI's API.\r\n  /d: Request detailed assistance.\r\n  /a: Display full message & request detailed assistance.\r\n  /i: Send a custom message to OpenAI's API.\r\nn\r\nExample:\r\n  > Ask-AI\r\n  > Ask-AI /?\r\n  > Ask-AI /s\r\n  > Ask-AI /d\r\n  > Ask-AI /a\r\n  > Ask-AI /i\r\nn\r\n\"@\r\n\r\n    if ($arg -eq \"/s\") {\r\n        $showErrorInfo = $true\r\n    } elseif ($arg -eq \"/d\") {\r\n        $detailed = $true\r\n    } elseif ($arg -eq \"/a\") {\r\n        $showErrorInfo = $true\r\n        $detailed = $true\r\n    } elseif ($arg -eq \"/i\") {\r\n        $userInputMode = $true\r\n    } elseif ($arg -eq \"/help\" -or $arg -eq \"/?\" -or $arg -eq \"?\" -or $arg -eq \"help\" -or $arg -eq \"h\" -or $arg -eq \"/h\") {\r\n        $help\r\n        return\r\n    }\r\n\r\n\r\n    if ($userInputMode) {\r\n        Write-Host \"User Input:\" -ForegroundColor Yellow\r\n        $prompt = Read-Host\r\n\r\n        $maxTokens = 80\r\n    } else {\r\n        if ($Error.Count -gt 0) {\r\n            if ($Error.Count -gt 0 -and $Error[0] -ne $null) {\r\n                $ErrorMessage = $Error[0].ToString()\r\n            } else {\r\n                $ErrorMessage = \"No recent errors detected.\"\r\n            }\r\n\r\n            $LastUserInput = $Error[0].InvocationInfo.Line\r\n\r\n            if ($showErrorInfo) {\r\n                Write-Host -ForegroundColor Yellow \"nError me",
+    "dekodierte_befehle": [],
+    "beobachtete_abfolge": []
+  }
+}

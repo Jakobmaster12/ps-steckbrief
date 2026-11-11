@@ -1,0 +1,89 @@
+{
+  "meta": {
+    "quelldatei": "tech_057_Run_on_BOOT.ps1",
+    "sha256": "c8385d58ef735dd36c72f70f50c2576bb1d3841733a626320ea62522e120f4fd",
+    "groesse_bytes": 1047,
+    "zeilen": 30,
+    "ground_truth_label": "techniques",
+    "analyse_gekuerzt": false,
+    "hinweis": "Kein Urteil enthalten. Bewertung erfolgt durch das LLM."
+  },
+  "stufe1_extract": {
+    "strings": [
+      "wallpaper_AUTO-cali.ps1",
+      "HKCU:\\Software\\Microsoft\\Windows\\CurrentVersion\\Run",
+      "Wallpaper Engine",
+      "Registry entry added for auto-run at boot: $filePath",
+      "Press Enter to continue",
+      "File not found: $fileName"
+    ],
+    "string_anzahl_gesamt": 7,
+    "base64_bloecke_dekodiert": [],
+    "base64_bloecke_gesamt": 0
+  },
+  "stufe2_features": {
+    "strings": [
+      "wallpaper_AUTO-cali.ps1",
+      "HKCU:\\Software\\Microsoft\\Windows\\CurrentVersion\\Run",
+      "Wallpaper Engine",
+      "Registry entry added for auto-run at boot: $filePath",
+      "Press Enter to continue",
+      "File not found: $fileName"
+    ],
+    "string_anzahl_gesamt": 7,
+    "base64_bloecke_dekodiert": [],
+    "base64_bloecke_gesamt": 0,
+    "beobachtete_cmdlets": [
+      "Get-ChildItem",
+      "Read-Host",
+      "Select-Object",
+      "Set-ItemProperty",
+      "Write-Host"
+    ],
+    "auffaellige_tokens": {
+      "registry_run": 2
+    },
+    "iocs": {
+      "urls": [],
+      "ipv4": [],
+      "pfade": [
+        "U:\\Software\\Microsoft\\Windows\\CurrentVersion\\Run"
+      ]
+    }
+  },
+  "stufe3_structure": {
+    "strings": [
+      "wallpaper_AUTO-cali.ps1",
+      "HKCU:\\Software\\Microsoft\\Windows\\CurrentVersion\\Run",
+      "Wallpaper Engine",
+      "Registry entry added for auto-run at boot: $filePath",
+      "Press Enter to continue",
+      "File not found: $fileName"
+    ],
+    "string_anzahl_gesamt": 7,
+    "base64_bloecke_dekodiert": [],
+    "base64_bloecke_gesamt": 0,
+    "beobachtete_cmdlets": [
+      "Get-ChildItem",
+      "Read-Host",
+      "Select-Object",
+      "Set-ItemProperty",
+      "Write-Host"
+    ],
+    "auffaellige_tokens": {
+      "registry_run": 2
+    },
+    "iocs": {
+      "urls": [],
+      "ipv4": [],
+      "pfade": [
+        "U:\\Software\\Microsoft\\Windows\\CurrentVersion\\Run"
+      ]
+    },
+    "deobfuskiert_auszug": "# PowerShell script to find wallpaper_AUTO-cali.ps1 and add its path to the registry for auto-run at boot\r\n\r\n# Define the file to search for\r\n$fileName = \"wallpaper_AUTO-cali.ps1\"\r\n\r\n# Search for the file in the specified directory\r\n$file = Get-ChildItem -Path C:\\ -Recurse -Filter $fileName -ErrorAction SilentlyContinue | Select-Object -First 1\r\n\r\n# Check if the file was found\r\nif ($file -ne $null) {\r\n    # Extract the full path of the file\r\n    $filePath = $file.FullName\r\n\r\n    # Define the registry path where the string value will be added\r\n    $regPath = \"HKCU:\\Software\\Microsoft\\Windows\\CurrentVersion\\Run\"\r\n\r\n    # Define the name of the new registry entry\r\n    $regName = \"Wallpaper Engine\"\r\n\r\n    # Add the file path to the registry\r\n    Set-ItemProperty -Path $regPath -Name $regName -Value $filePath\r\n\r\n    Write-Host \"Registry entry added for auto-run at boot: $filePath\"\r\n    Read-Host -Prompt \"Press Enter to continue\"\r\n\r\n} else {\r\n    Write-Host \"File not found: $fileName\"\r\n    Read-Host -Prompt \"Press Enter to continue\"\r\n}\r\n",
+    "dekodierte_befehle": [],
+    "beobachtete_abfolge": [
+      "Registry-Autostart beruehren"
+    ]
+  }
+}

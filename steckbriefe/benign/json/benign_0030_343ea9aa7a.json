@@ -1,0 +1,82 @@
+{
+  "meta": {
+    "quelldatei": "benign_029_cd-ssh.ps1",
+    "sha256": "343ea9aa7a09176b3785c4864bd99d20a15fd04f6d769ee490c32f25cc2fd5ac",
+    "groesse_bytes": 747,
+    "zeilen": 31,
+    "ground_truth_label": "benign",
+    "analyse_gekuerzt": false,
+    "hinweis": "Kein Urteil enthalten. Bewertung erfolgt durch das LLM."
+  },
+  "stufe1_extract": {
+    "strings": [
+      "s secure shell (SSH) folder.\n.EXAMPLE\n\tPS> ./cd-ssh.ps1\n\t📂C:\\Users\\Markus\\.ssh entered, has 4 files.\n.LINK\n\thttps://github.com/fleschutz/PowerShell\n.NOTES\n\tAuthor: Markus Fleschutz | License: CC0\n#>\n\n#requires -version 5.1\n\ntry {\n\t$path = \"~/.ssh\"\n\tif (-not(Test-Path \"$path\" -pathType container)) {\n\t\tthrow \"No ",
+      "\n\t}\n\t$path = Resolve-Path ",
+      "\n\tSet-Location ",
+      "\n\t$files = Get-ChildItem $path -attributes !Directory\n\t",
+      "\n\texit 0 # success\n} catch {\n\t"
+    ],
+    "string_anzahl_gesamt": 5,
+    "base64_bloecke_dekodiert": [],
+    "base64_bloecke_gesamt": 0
+  },
+  "stufe2_features": {
+    "strings": [
+      "s secure shell (SSH) folder.\n.EXAMPLE\n\tPS> ./cd-ssh.ps1\n\t📂C:\\Users\\Markus\\.ssh entered, has 4 files.\n.LINK\n\thttps://github.com/fleschutz/PowerShell\n.NOTES\n\tAuthor: Markus Fleschutz | License: CC0\n#>\n\n#requires -version 5.1\n\ntry {\n\t$path = \"~/.ssh\"\n\tif (-not(Test-Path \"$path\" -pathType container)) {\n\t\tthrow \"No ",
+      "\n\t}\n\t$path = Resolve-Path ",
+      "\n\tSet-Location ",
+      "\n\t$files = Get-ChildItem $path -attributes !Directory\n\t",
+      "\n\texit 0 # success\n} catch {\n\t"
+    ],
+    "string_anzahl_gesamt": 5,
+    "base64_bloecke_dekodiert": [],
+    "base64_bloecke_gesamt": 0,
+    "beobachtete_cmdlets": [
+      "Get-ChildItem",
+      "Resolve-Path",
+      "Set-Location",
+      "Test-Path"
+    ],
+    "auffaellige_tokens": {},
+    "iocs": {
+      "urls": [
+        "https://github.com/fleschutz/PowerShell"
+      ],
+      "ipv4": [],
+      "pfade": [
+        "C:\\Users\\Markus\\.ssh"
+      ]
+    }
+  },
+  "stufe3_structure": {
+    "strings": [
+      "s secure shell (SSH) folder.\n.EXAMPLE\n\tPS> ./cd-ssh.ps1\n\t📂C:\\Users\\Markus\\.ssh entered, has 4 files.\n.LINK\n\thttps://github.com/fleschutz/PowerShell\n.NOTES\n\tAuthor: Markus Fleschutz | License: CC0\n#>\n\n#requires -version 5.1\n\ntry {\n\t$path = \"~/.ssh\"\n\tif (-not(Test-Path \"$path\" -pathType container)) {\n\t\tthrow \"No ",
+      "\n\t}\n\t$path = Resolve-Path ",
+      "\n\tSet-Location ",
+      "\n\t$files = Get-ChildItem $path -attributes !Directory\n\t",
+      "\n\texit 0 # success\n} catch {\n\t"
+    ],
+    "string_anzahl_gesamt": 5,
+    "base64_bloecke_dekodiert": [],
+    "base64_bloecke_gesamt": 0,
+    "beobachtete_cmdlets": [
+      "Get-ChildItem",
+      "Resolve-Path",
+      "Set-Location",
+      "Test-Path"
+    ],
+    "auffaellige_tokens": {},
+    "iocs": {
+      "urls": [
+        "https://github.com/fleschutz/PowerShell"
+      ],
+      "ipv4": [],
+      "pfade": [
+        "C:\\Users\\Markus\\.ssh"
+      ]
+    },
+    "deobfuskiert_auszug": "﻿<#\n.SYNOPSIS\n\tSets the working dir to the SSH folder\n.DESCRIPTION\n\tThis PowerShell script changes the current working directory to the user's secure shell (SSH) folder.\n.EXAMPLE\n\tPS> ./cd-ssh.ps1\n\t📂C:\\Users\\Markus\\.ssh entered, has 4 files.\n.LINK\n\thttps://github.com/fleschutz/PowerShell\n.NOTES\n\tAuthor: Markus Fleschutz | License: CC0\n#>\n\n#requires -version 5.1\n\ntry {\n\t$path = \"~/.ssh\"\n\tif (-not(Test-Path \"$path\" -pathType container)) {\n\t\tthrow \"No '.ssh' folder in your home directory yet - Please install SSH.\"\n\t}\n\t$path = Resolve-Path \"$path\"\n\tSet-Location \"$path\"\n\t$files = Get-ChildItem $path -attributes !Directory\n\t\"📂$path entered, has $($files.Count) files.\"\n\texit 0 # success\n} catch {\n\t\"⚠️ ERROR: $($Error[0])\"\n\texit 1\n}\n",
+    "dekodierte_befehle": [],
+    "beobachtete_abfolge": []
+  }
+}

@@ -1,0 +1,24 @@
+{
+  "erstellt_am": "2026-11-03",
+  "hinweis": "Commit-Staende zum Beschaffungszeitpunkt, fuer Reproduzierbarkeit.",
+  "quellen": {
+    "benign": {
+      "repo": "https://github.com/fleschutz/PowerShell",
+      "commit": "311a575973f345ce29fc71485bf04404b0a9c09d",
+      "lizenz": "CC0-1.0",
+      "zweck": "gutartige Kontrollgruppe"
+    },
+    "malicious": {
+      "repo": "https://github.com/Fa2y/Malicious-PowerShell-Dataset",
+      "commit": "69387cd626db0dadbe7c4ef1c700564bc54fabe0",
+      "lizenz": "keine LICENSE-Datei (vor Nutzung klaeren)",
+      "zweck": "boesartige Skripte"
+    },
+    "techniques": {
+      "repo": "https://github.com/calinux-py/PowerShell",
+      "commit": "2429c2d49e2ab522a2dfa6081702ebe7e17dd80e",
+      "lizenz": "keine LICENSE-Datei (vor Nutzung klaeren)",
+      "zweck": "Technik-Demonstrationen"
+    }
+  }
+}

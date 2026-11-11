@@ -1,0 +1,77 @@
+{
+  "meta": {
+    "quelldatei": "tech_019_DisableUAC.ps1",
+    "sha256": "b3f8e9b57c86c8fcc9ea7f70dd08562fd0a1e568a02a5534261e9d519bfd0f2b",
+    "groesse_bytes": 568,
+    "zeilen": 12,
+    "ground_truth_label": "techniques",
+    "analyse_gekuerzt": false,
+    "hinweis": "Kein Urteil enthalten. Bewertung erfolgt durch das LLM."
+  },
+  "stufe1_extract": {
+    "strings": [
+      "Administrator",
+      "Please run this script as an Administrator!",
+      "HKLM:\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Policies\\System",
+      "EnableLUA"
+    ],
+    "string_anzahl_gesamt": 4,
+    "base64_bloecke_dekodiert": [],
+    "base64_bloecke_gesamt": 0
+  },
+  "stufe2_features": {
+    "strings": [
+      "Administrator",
+      "Please run this script as an Administrator!",
+      "HKLM:\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Policies\\System",
+      "EnableLUA"
+    ],
+    "string_anzahl_gesamt": 4,
+    "base64_bloecke_dekodiert": [],
+    "base64_bloecke_gesamt": 0,
+    "beobachtete_cmdlets": [
+      "Set-ItemProperty",
+      "Write-Warning"
+    ],
+    "auffaellige_tokens": {
+      "registry_run": 1
+    },
+    "iocs": {
+      "urls": [],
+      "ipv4": [],
+      "pfade": [
+        "M:\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Policies\\System"
+      ]
+    }
+  },
+  "stufe3_structure": {
+    "strings": [
+      "Administrator",
+      "Please run this script as an Administrator!",
+      "HKLM:\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Policies\\System",
+      "EnableLUA"
+    ],
+    "string_anzahl_gesamt": 4,
+    "base64_bloecke_dekodiert": [],
+    "base64_bloecke_gesamt": 0,
+    "beobachtete_cmdlets": [
+      "Set-ItemProperty",
+      "Write-Warning"
+    ],
+    "auffaellige_tokens": {
+      "registry_run": 1
+    },
+    "iocs": {
+      "urls": [],
+      "ipv4": [],
+      "pfade": [
+        "M:\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Policies\\System"
+      ]
+    },
+    "deobfuskiert_auszug": "# PowerShell Script to Disable UAC\r\n\r\n# Ensure the script is run with Administrator privileges\r\nif (-NOT ([Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole] \"Administrator\"))\r\n{\r\n    Write-Warning \"Please run this script as an Administrator!\"\r\n    break\r\n}\r\n# Set the path to the registry key\r\n$registryPath = \"HKLM:\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Policies\\System\"\r\n# Disable UAC by setting EnableLUA to 0\r\nSet-ItemProperty -Path $registryPath -Name \"EnableLUA\" -Value 0",
+    "dekodierte_befehle": [],
+    "beobachtete_abfolge": [
+      "Registry-Autostart beruehren"
+    ]
+  }
+}

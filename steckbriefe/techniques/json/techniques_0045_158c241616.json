@@ -1,0 +1,72 @@
+{
+  "meta": {
+    "quelldatei": "tech_044_Get-Ports.ps1",
+    "sha256": "158c241616fc72506170d1f91c482845c05ab7428bcd34dec157bdca3d3527c9",
+    "groesse_bytes": 697,
+    "zeilen": 16,
+    "ground_truth_label": "techniques",
+    "analyse_gekuerzt": false,
+    "hinweis": "Kein Urteil enthalten. Bewertung erfolgt durch das LLM."
+  },
+  "stufe1_extract": {
+    "strings": [
+      "Established",
+      "`nOPEN PORTS: $currentNumber",
+      "`n$portCount. [Local Port]: $port <--> [Remote Port]: $remotePort"
+    ],
+    "string_anzahl_gesamt": 3,
+    "base64_bloecke_dekodiert": [],
+    "base64_bloecke_gesamt": 0
+  },
+  "stufe2_features": {
+    "strings": [
+      "Established",
+      "`nOPEN PORTS: $currentNumber",
+      "`n$portCount. [Local Port]: $port <--> [Remote Port]: $remotePort"
+    ],
+    "string_anzahl_gesamt": 3,
+    "base64_bloecke_dekodiert": [],
+    "base64_bloecke_gesamt": 0,
+    "beobachtete_cmdlets": [
+      "Get-NetTCPConnection",
+      "Get-Ports",
+      "Select-Object",
+      "Sort-Object",
+      "Where-Object",
+      "Write-Host"
+    ],
+    "auffaellige_tokens": {},
+    "iocs": {
+      "urls": [],
+      "ipv4": [],
+      "pfade": []
+    }
+  },
+  "stufe3_structure": {
+    "strings": [
+      "Established",
+      "`nOPEN PORTS: $currentNumber",
+      "`n$portCount. [Local Port]: $port <--> [Remote Port]: $remotePort"
+    ],
+    "string_anzahl_gesamt": 3,
+    "base64_bloecke_dekodiert": [],
+    "base64_bloecke_gesamt": 0,
+    "beobachtete_cmdlets": [
+      "Get-NetTCPConnection",
+      "Get-Ports",
+      "Select-Object",
+      "Sort-Object",
+      "Where-Object",
+      "Write-Host"
+    ],
+    "auffaellige_tokens": {},
+    "iocs": {
+      "urls": [],
+      "ipv4": [],
+      "pfade": []
+    },
+    "deobfuskiert_auszug": "function Get-Ports {\n    $connections = Get-NetTCPConnection | Where-Object { $_.State -eq 'Established' }\n    $openPorts = $connections | Select-Object -ExpandProperty LocalPort | Sort-Object -Unique\n    $currentNumber = $openPorts.Count\n    Write-Host \"nOPEN PORTS: $currentNumber\"-ForegroundColor Cyan\n    \n    $portCount = 1\n    foreach ($port in $openPorts) {\n        $remotePorts = ($connections | Where-Object { $_.LocalPort -eq $port }).RemotePort | Select-Object -Unique\n        foreach ($remotePort in $remotePorts) {\n            Write-Host \"n$portCount. [Local Port]: $port <--> [Remote Port]: $remotePort\"-ForegroundColor Red\n            $portCount++\nwrite-host(\"\")\n        }\n    }\n}",
+    "dekodierte_befehle": [],
+    "beobachtete_abfolge": []
+  }
+}

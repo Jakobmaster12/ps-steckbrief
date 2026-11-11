@@ -1,0 +1,71 @@
+{
+  "meta": {
+    "quelldatei": "051269318be07b5c083b001ee816becb14bf45919ea9371c82de917fae7043f1.ps1",
+    "sha256": "051269318be07b5c083b001ee816becb14bf45919ea9371c82de917fae7043f1",
+    "groesse_bytes": 460418,
+    "zeilen": 53,
+    "ground_truth_label": "malicious",
+    "analyse_gekuerzt": true,
+    "hinweis": "Kein Urteil enthalten. Bewertung erfolgt durch das LLM."
+  },
+  "stufe1_extract": {
+    "strings": [
+      "\r\n  $D4FD5C5B9266824C4EEFC83E0C69FD3FAAG = [Text.Encoding]::Utf8.GetString([Convert]::$D4FD5C5B9266824C4EEFC83E0C69FD3FAAx($D4FD5C5B9266824C4EEFC83E0C69FD3FAAE))\r\n  return $D4FD5C5B9266824C4EEFC83E0C69FD3FAAG\r\n}\r\nsal daowduaoiwmdoaiuwoduiamwodiumaowduimdaowduaoiwmdoaiuwoduiamwodiumaowduimdaowduaoiwmdoaiuwoduiamwodiumaowduimdaowduaoiwmdoaiuwoduiamwodiumaowduimdaowduaoiwmdoaiuwoduiamwodiumaowduim New-Object\r\nfunction Get-DecompressedByteArray {\r\n\r\n\t[CmdletBinding()]\r\n    Param (\r\n\t\t[Parameter(Mandatory,ValueFromPipeline,ValueFromPipelineByPropertyName)]\r\n        [byte[]] $byteArray = $(Throw(",
+      "))\r\n    )\r\n\tProcess {\r\n\t    Write-Verbose ",
+      "\r\n        \r\n        $input = daowduaoiwmdoaiuwoduiamwodiumaowduimdaowduaoiwmdoaiuwoduiamwodiumaowduimdaowduaoiwmdoaiuwoduiamwodiumaowduimdaowduaoiwmdoaiuwoduiamwodiumaowduimdaowduaoiwmdoaiuwoduiamwodiumaowduim System.IO.MemoryStream( , $byteArray )\r\n\t    $output = daowduaoiwmdoaiuwoduiamwodiumaowduimdaowduaoiwmdoaiuwoduiamwodiumaowduimdaowduaoiwmdoaiuwoduiamwodiumaowduimdaowduaoiwmdoaiuwoduiamwodiumaowduimdaowduaoiwmdoaiuwoduiamwodiumaowduim System.IO.MemoryStream\r\n        $gzipStream = daowduaoiwmdoaiuwoduiamwodiumaowduimdaowduaoiwmdoaiuwoduiamwodiumaowduimdaowduaoiwmdoaiuwoduiamwodiumaowduimdaowduaoiwmdoaiuwoduiamwodiumaowduimdaowduaoiwmdoaiuwoduiamwodiumaowduim System.IO.Compression.GzipStream $input, ([IO.Compression.CompressionMode]::Decompress)\r\n\t    $gzipStream.CopyTo( $output )\r\n        $gzipStream.Close()\r\n\t\t$input.Close()\r\n\t\t[byte[]] $byteOutArray = $output.ToArray()\r\n        Write-Output $byteOutArray\r\n        \r\n    }\r\n}\r\n\r\nFUNCTION COMBINEMEANINGSCOBOLTPOTASSIUM($IAKWBQIPASKBAMAGSWQIAKDHKASNDAS)\r\n{\r\n    $IAKWBQIPASKBAMAGSWQIAKDHKASNDAS = $($IAKWBQIPASKBAMAGSWQIAKDHKASNDAS -join [Environment]::NewLine)\r\n    $IAKWBQIPASKBAMAGSWQIAKDHKASNDASQ = [string]::join(",
+      ",($IAKWBQIPASKBAMAGSWQIAKDHKASNDAS.Split("
+    ],
+    "string_anzahl_gesamt": 4,
+    "base64_bloecke_dekodiert": [],
+    "base64_bloecke_gesamt": 4
+  },
+  "stufe2_features": {
+    "strings": [
+      "\r\n  $D4FD5C5B9266824C4EEFC83E0C69FD3FAAG = [Text.Encoding]::Utf8.GetString([Convert]::$D4FD5C5B9266824C4EEFC83E0C69FD3FAAx($D4FD5C5B9266824C4EEFC83E0C69FD3FAAE))\r\n  return $D4FD5C5B9266824C4EEFC83E0C69FD3FAAG\r\n}\r\nsal daowduaoiwmdoaiuwoduiamwodiumaowduimdaowduaoiwmdoaiuwoduiamwodiumaowduimdaowduaoiwmdoaiuwoduiamwodiumaowduimdaowduaoiwmdoaiuwoduiamwodiumaowduimdaowduaoiwmdoaiuwoduiamwodiumaowduim New-Object\r\nfunction Get-DecompressedByteArray {\r\n\r\n\t[CmdletBinding()]\r\n    Param (\r\n\t\t[Parameter(Mandatory,ValueFromPipeline,ValueFromPipelineByPropertyName)]\r\n        [byte[]] $byteArray = $(Throw(",
+      "))\r\n    )\r\n\tProcess {\r\n\t    Write-Verbose ",
+      "\r\n        \r\n        $input = daowduaoiwmdoaiuwoduiamwodiumaowduimdaowduaoiwmdoaiuwoduiamwodiumaowduimdaowduaoiwmdoaiuwoduiamwodiumaowduimdaowduaoiwmdoaiuwoduiamwodiumaowduimdaowduaoiwmdoaiuwoduiamwodiumaowduim System.IO.MemoryStream( , $byteArray )\r\n\t    $output = daowduaoiwmdoaiuwoduiamwodiumaowduimdaowduaoiwmdoaiuwoduiamwodiumaowduimdaowduaoiwmdoaiuwoduiamwodiumaowduimdaowduaoiwmdoaiuwoduiamwodiumaowduimdaowduaoiwmdoaiuwoduiamwodiumaowduim System.IO.MemoryStream\r\n        $gzipStream = daowduaoiwmdoaiuwoduiamwodiumaowduimdaowduaoiwmdoaiuwoduiamwodiumaowduimdaowduaoiwmdoaiuwoduiamwodiumaowduimdaowduaoiwmdoaiuwoduiamwodiumaowduimdaowduaoiwmdoaiuwoduiamwodiumaowduim System.IO.Compression.GzipStream $input, ([IO.Compression.CompressionMode]::Decompress)\r\n\t    $gzipStream.CopyTo( $output )\r\n        $gzipStream.Close()\r\n\t\t$input.Close()\r\n\t\t[byte[]] $byteOutArray = $output.ToArray()\r\n        Write-Output $byteOutArray\r\n        \r\n    }\r\n}\r\n\r\nFUNCTION COMBINEMEANINGSCOBOLTPOTASSIUM($IAKWBQIPASKBAMAGSWQIAKDHKASNDAS)\r\n{\r\n    $IAKWBQIPASKBAMAGSWQIAKDHKASNDAS = $($IAKWBQIPASKBAMAGSWQIAKDHKASNDAS -join [Environment]::NewLine)\r\n    $IAKWBQIPASKBAMAGSWQIAKDHKASNDASQ = [string]::join(",
+      ",($IAKWBQIPASKBAMAGSWQIAKDHKASNDAS.Split("
+    ],
+    "string_anzahl_gesamt": 4,
+    "base64_bloecke_dekodiert": [],
+    "base64_bloecke_gesamt": 4,
+    "beobachtete_cmdlets": [
+      "Get-DecompressedByteArray",
+      "New-Object",
+      "Write-Output",
+      "Write-Verbose"
+    ],
+    "auffaellige_tokens": {},
+    "iocs": {
+      "urls": [],
+      "ipv4": [],
+      "pfade": []
+    }
+  },
+  "stufe3_structure": {
+    "strings": [
+      "\r\n  $D4FD5C5B9266824C4EEFC83E0C69FD3FAAG = [Text.Encoding]::Utf8.GetString([Convert]::$D4FD5C5B9266824C4EEFC83E0C69FD3FAAx($D4FD5C5B9266824C4EEFC83E0C69FD3FAAE))\r\n  return $D4FD5C5B9266824C4EEFC83E0C69FD3FAAG\r\n}\r\nsal daowduaoiwmdoaiuwoduiamwodiumaowduimdaowduaoiwmdoaiuwoduiamwodiumaowduimdaowduaoiwmdoaiuwoduiamwodiumaowduimdaowduaoiwmdoaiuwoduiamwodiumaowduimdaowduaoiwmdoaiuwoduiamwodiumaowduim New-Object\r\nfunction Get-DecompressedByteArray {\r\n\r\n\t[CmdletBinding()]\r\n    Param (\r\n\t\t[Parameter(Mandatory,ValueFromPipeline,ValueFromPipelineByPropertyName)]\r\n        [byte[]] $byteArray = $(Throw(",
+      "))\r\n    )\r\n\tProcess {\r\n\t    Write-Verbose ",
+      "\r\n        \r\n        $input = daowduaoiwmdoaiuwoduiamwodiumaowduimdaowduaoiwmdoaiuwoduiamwodiumaowduimdaowduaoiwmdoaiuwoduiamwodiumaowduimdaowduaoiwmdoaiuwoduiamwodiumaowduimdaowduaoiwmdoaiuwoduiamwodiumaowduim System.IO.MemoryStream( , $byteArray )\r\n\t    $output = daowduaoiwmdoaiuwoduiamwodiumaowduimdaowduaoiwmdoaiuwoduiamwodiumaowduimdaowduaoiwmdoaiuwoduiamwodiumaowduimdaowduaoiwmdoaiuwoduiamwodiumaowduimdaowduaoiwmdoaiuwoduiamwodiumaowduim System.IO.MemoryStream\r\n        $gzipStream = daowduaoiwmdoaiuwoduiamwodiumaowduimdaowduaoiwmdoaiuwoduiamwodiumaowduimdaowduaoiwmdoaiuwoduiamwodiumaowduimdaowduaoiwmdoaiuwoduiamwodiumaowduimdaowduaoiwmdoaiuwoduiamwodiumaowduim System.IO.Compression.GzipStream $input, ([IO.Compression.CompressionMode]::Decompress)\r\n\t    $gzipStream.CopyTo( $output )\r\n        $gzipStream.Close()\r\n\t\t$input.Close()\r\n\t\t[byte[]] $byteOutArray = $output.ToArray()\r\n        Write-Output $byteOutArray\r\n        \r\n    }\r\n}\r\n\r\nFUNCTION COMBINEMEANINGSCOBOLTPOTASSIUM($IAKWBQIPASKBAMAGSWQIAKDHKASNDAS)\r\n{\r\n    $IAKWBQIPASKBAMAGSWQIAKDHKASNDAS = $($IAKWBQIPASKBAMAGSWQIAKDHKASNDAS -join [Environment]::NewLine)\r\n    $IAKWBQIPASKBAMAGSWQIAKDHKASNDASQ = [string]::join(",
+      ",($IAKWBQIPASKBAMAGSWQIAKDHKASNDAS.Split("
+    ],
+    "string_anzahl_gesamt": 4,
+    "base64_bloecke_dekodiert": [],
+    "base64_bloecke_gesamt": 4,
+    "beobachtete_cmdlets": [
+      "Get-DecompressedByteArray",
+      "New-Object",
+      "Write-Output",
+      "Write-Verbose"
+    ],
+    "auffaellige_tokens": {},
+    "iocs": {
+      "urls": [],
+      "ipv4": [],
+      "pfade": []
+    },
+    "deobfuskiert_auszug": "\r\nFUNCTION D4FD5C5B9266824C4EEFC83E0C69FD3FAA($D4FD5C5B9266824C4EEFC83E0C69FD3FAAE)\r\n{\r\n    \r\n  $D4FD5C5B9266824C4EEFC83E0C69FD3FAAx = \"F\"+\"r\"+\"o\"+\"m\"+\"B\"+\"A\"+\"s\"+\"E\"+\"6\"+\"4\"+\"S\"+\"t\"+\"r\"+\"i\"+\"n\"+\"g\"\r\n  $D4FD5C5B9266824C4EEFC83E0C69FD3FAAG = [Text.Encoding]::Utf8.GetString([Convert]::$D4FD5C5B9266824C4EEFC83E0C69FD3FAAx($D4FD5C5B9266824C4EEFC83E0C69FD3FAAE))\r\n  return $D4FD5C5B9266824C4EEFC83E0C69FD3FAAG\r\n}\r\nsal daowduaoiwmdoaiuwoduiamwodiumaowduimdaowduaoiwmdoaiuwoduiamwodiumaowduimdaowduaoiwmdoaiuwoduiamwodiumaowduimdaowduaoiwmdoaiuwoduiamwodiumaowduimdaowduaoiwmdoaiuwoduiamwodiumaowduim New-Object\r\nfunction Get-DecompressedByteArray {\r\n\r\n\t[CmdletBinding()]\r\n    Param (\r\n\t\t[Parameter(Mandatory,ValueFromPipeline,ValueFromPipelineByPropertyName)]\r\n        [byte[]] $byteArray = $(Throw(\"-byteArray is required\"))\r\n    )\r\n\tProcess {\r\n\t    Write-Verbose \"Get-DecompressedByteArray\"\r\n        \r\n        $input = daowduaoiwmdoaiuwoduiamwodiumaowduimdaowduaoiwmdoaiuwoduiamwodiumaowduimdaowduaoiwmdoaiuwoduiamwodiumaowduimdaowduaoiwmdoaiuwoduiamwodiumaowduimdaowduaoiwmdoaiuwoduiamwodiumaowduim System.IO.MemoryStream( , $byteArray )\r\n\t    $output = daowduaoiwmdoaiuwoduiamwodiumaowduimdaowduaoiwmdoaiuwoduiamwodiumaowduimdaowduaoiwmdoaiuwoduiamwodiumaowduimdaowduaoiwmdoaiuwoduiamwodiumaowduimdaowduaoiwmdoaiuwoduiamwodiumaowduim System.IO.MemoryStream\r\n        $gzipStream = daowduaoiwmdoaiuwoduiamwodiumaowduimdaowduaoiwmdoaiuwoduiamwodiumaowduimdaowduaoiwmdoaiuwoduiamwodiumaowduimdaowduaoiwmdoaiuwoduiamwodiumaowduimdaowduaoiwmdoaiuwoduiamwodiumaowduim System.IO.Compression.GzipStream $input, ([IO.Compression.CompressionMode]::Decompress)\r\n\t    $gzipStream.CopyTo( $output )\r\n        $gzipStream.Close()\r\n\t\t$input.Close()\r\n\t\t[byte[]] $byteOutArray = $output.ToArray()\r\n        Write-Output $byteOutArray\r\n        \r\n    }\r\n}\r\n\r\nFUNCTION COMBINEMEANINGSCOBOLTPOTASSIUM($IAKWBQIPASKBAMAGSWQIAKDHKASNDAS)\r\n{\r\n    $IAKWBQIPASKBAMAGSWQIAKDHKASNDAS = $($IAKWBQIPASKBAMAGSWQIAKDHKASNDAS -join [Envi",
+    "dekodierte_befehle": [],
+    "beobachtete_abfolge": []
+  }
+}

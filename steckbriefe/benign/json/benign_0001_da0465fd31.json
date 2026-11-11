@@ -1,0 +1,115 @@
+{
+  "meta": {
+    "quelldatei": "benign_000_add-firewall-rules.ps1",
+    "sha256": "da0465fd31716aab52def24b28c59ac0e26b6a4e7deb887d4868375bc7ca4978",
+    "groesse_bytes": 1677,
+    "zeilen": 56,
+    "ground_truth_label": "benign",
+    "analyse_gekuerzt": false,
+    "hinweis": "Kein Urteil enthalten. Bewertung erfolgt durch das LLM."
+  },
+  "stufe1_extract": {
+    "strings": [
+      "Inbound",
+      "Outbound",
+      "Domain",
+      "Private",
+      "Public",
+      ",\n\t[string]$Direction = ",
+      ",\n\t[array]$FirewallProfile  = @(",
+      "Enter path to executables",
+      "*.exe",
+      "No executables found. No Firewall rules have been created.",
+      "Press Enter to continue...",
+      "Adding firewall rule for $exeName",
+      "Done",
+      "⚠️ ERROR: $($Error[0]) (at line $($_.InvocationInfo.ScriptLineNumber))"
+    ],
+    "string_anzahl_gesamt": 16,
+    "base64_bloecke_dekodiert": [],
+    "base64_bloecke_gesamt": 0
+  },
+  "stufe2_features": {
+    "strings": [
+      "Inbound",
+      "Outbound",
+      "Domain",
+      "Private",
+      "Public",
+      ",\n\t[string]$Direction = ",
+      ",\n\t[array]$FirewallProfile  = @(",
+      "Enter path to executables",
+      "*.exe",
+      "No executables found. No Firewall rules have been created.",
+      "Press Enter to continue...",
+      "Adding firewall rule for $exeName",
+      "Done",
+      "⚠️ ERROR: $($Error[0]) (at line $($_.InvocationInfo.ScriptLineNumber))"
+    ],
+    "string_anzahl_gesamt": 16,
+    "base64_bloecke_dekodiert": [],
+    "base64_bloecke_gesamt": 0,
+    "beobachtete_cmdlets": [
+      "Convert-Path",
+      "Get-ChildItem",
+      "New-NetFirewallRule",
+      "Read-Host",
+      "Write-Host",
+      "Write-Output",
+      "Write-Warning"
+    ],
+    "auffaellige_tokens": {},
+    "iocs": {
+      "urls": [
+        "https://github.com/fleschutz/PowerShell"
+      ],
+      "ipv4": [],
+      "pfade": [
+        "C:\\MyApp\\bin"
+      ]
+    }
+  },
+  "stufe3_structure": {
+    "strings": [
+      "Inbound",
+      "Outbound",
+      "Domain",
+      "Private",
+      "Public",
+      ",\n\t[string]$Direction = ",
+      ",\n\t[array]$FirewallProfile  = @(",
+      "Enter path to executables",
+      "*.exe",
+      "No executables found. No Firewall rules have been created.",
+      "Press Enter to continue...",
+      "Adding firewall rule for $exeName",
+      "Done",
+      "⚠️ ERROR: $($Error[0]) (at line $($_.InvocationInfo.ScriptLineNumber))"
+    ],
+    "string_anzahl_gesamt": 16,
+    "base64_bloecke_dekodiert": [],
+    "base64_bloecke_gesamt": 0,
+    "beobachtete_cmdlets": [
+      "Convert-Path",
+      "Get-ChildItem",
+      "New-NetFirewallRule",
+      "Read-Host",
+      "Write-Host",
+      "Write-Output",
+      "Write-Warning"
+    ],
+    "auffaellige_tokens": {},
+    "iocs": {
+      "urls": [
+        "https://github.com/fleschutz/PowerShell"
+      ],
+      "ipv4": [],
+      "pfade": [
+        "C:\\MyApp\\bin"
+      ]
+    },
+    "deobfuskiert_auszug": "﻿<#\n.SYNOPSIS\n\tAdds firewall rules for executables (needs admin rights).\n.DESCRIPTION\n\tThis PowerShell script adds firewall rules for the given executable. Administrator rights are required.\n.PARAMETER PathToExecutables\n\tSpecifies the path to the executables.\n.PARAMETER Direction\n\tSpecifies the direction for the firewall rule. Can be 'Inbound' or 'Outbound'. Default is 'Inbound'.\n.PARAMETER Profile \n\tSpecifies the firewall profile. Can be 'Domain', 'Private', or 'Public'. Multiple values can be specified as an array.\n.EXAMPLE\n\tPS> ./add-firewall-rules.ps1 -PathToExecutables C:\\MyApp\\bin -Direction Outbound -Profile Private\n.LINK\n\thttps://github.com/fleschutz/PowerShell\n.NOTES\n\tAuthor: Markus Fleschutz | License: CC0\n#>\n\n#Requires -RunAsAdministrator\n\nparam(\n\t[string]$PathToExecutables = \"\",\n\t[string]$Direction = \"Inbound\",\n\t[array]$FirewallProfile  = @(\"Domain\", \"Private\")\n)\n\ntry {\n\tif (-not $PathToExecutables) {\n\t\t$PathToExecutables = Read-Host \"Enter path to executables\"\n\t}\n\n\t$AbsPath = Convert-Path -Path $PathToExecutables\n\t$Executables = Get-ChildItem -Path $AbsPath -Filter \"*.exe\"\n\n\tif (-not $Executables) {\n\t\tWrite-Warning \"No executables found. No Firewall rules have been created.\"\n\t\tRead-Host \"Press Enter to continue...\"\n\t\treturn\n\t}\n\n\tforeach ($exe in $Executables) {\n\t\t$exeName = $exe.Name\n\t\t$exeFullPath = $exe.FullName\n\n\t\tWrite-Output \"Adding firewall rule for $exeName\"\n\t\tNew-NetFirewallRule -DisplayName $exeName -Direction $Direction -Program $exeFullPath -Profile $FirewallProfile  -Action Allow\n\t}\n\n\tWrite-Host -ForegroundColor Green \"Done\"\n} catch {\n\t\"⚠️ ERROR: $($Error[0]) (at line $($_.InvocationInfo.ScriptLineNumber))\"\n\texit 1\n}\n\n",
+    "dekodierte_befehle": [],
+    "beobachtete_abfolge": []
+  }
+}

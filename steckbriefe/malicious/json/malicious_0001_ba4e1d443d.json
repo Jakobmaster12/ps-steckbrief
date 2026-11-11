@@ -1,0 +1,143 @@
+{
+  "meta": {
+    "quelldatei": "Invoke-ObfuscateRandomFiles.ps1",
+    "sha256": "ba4e1d443d7889773f2ae8f45942f66d41199d4c567ef58610850c855bfc6bfa",
+    "groesse_bytes": 1437,
+    "zeilen": 28,
+    "ground_truth_label": "malicious",
+    "analyse_gekuerzt": false,
+    "hinweis": "Kein Urteil enthalten. Bewertung erfolgt durch das LLM."
+  },
+  "stufe1_extract": {
+    "strings": [
+      "-obf-$randomCommand",
+      "Executing '$randomCommand' for file: $file",
+      "$randomCommand -Path $sourcefilename > $newfilename",
+      "-------------------------------",
+      "Out-CompressedCommand",
+      "Out-EncodedAsciiCommand",
+      "Out-EncodedBinaryCommand",
+      "Out-EncodedBXORCommand",
+      "Out-EncodedHexCommand",
+      "Out-EncodedOctalCommand",
+      "Out-EncodedSpecialCharOnlyCommand",
+      "Out-EncodedWhitespaceCommand",
+      "Out-ObfuscatedAst",
+      "Out-ObfuscatedStringCommand",
+      "Out-ObfuscatedTokenCommand",
+      "Out-SecureStringCommand"
+    ],
+    "string_anzahl_gesamt": 16,
+    "base64_bloecke_dekodiert": [],
+    "base64_bloecke_gesamt": 0
+  },
+  "stufe2_features": {
+    "strings": [
+      "-obf-$randomCommand",
+      "Executing '$randomCommand' for file: $file",
+      "$randomCommand -Path $sourcefilename > $newfilename",
+      "-------------------------------",
+      "Out-CompressedCommand",
+      "Out-EncodedAsciiCommand",
+      "Out-EncodedBinaryCommand",
+      "Out-EncodedBXORCommand",
+      "Out-EncodedHexCommand",
+      "Out-EncodedOctalCommand",
+      "Out-EncodedSpecialCharOnlyCommand",
+      "Out-EncodedWhitespaceCommand",
+      "Out-ObfuscatedAst",
+      "Out-ObfuscatedStringCommand",
+      "Out-ObfuscatedTokenCommand",
+      "Out-SecureStringCommand"
+    ],
+    "string_anzahl_gesamt": 16,
+    "base64_bloecke_dekodiert": [],
+    "base64_bloecke_gesamt": 0,
+    "beobachtete_cmdlets": [
+      "Get-ChildItem",
+      "Get-Random",
+      "Invoke-Expression",
+      "Invoke-ObfuscateRandomFiles",
+      "Out-CompressedCommand",
+      "Out-EncodedAsciiCommand",
+      "Out-EncodedBXORCommand",
+      "Out-EncodedBinaryCommand",
+      "Out-EncodedHexCommand",
+      "Out-EncodedOctalCommand",
+      "Out-EncodedSpecialCharOnlyCommand",
+      "Out-EncodedWhitespaceCommand",
+      "Out-ObfuscatedAst",
+      "Out-ObfuscatedStringCommand",
+      "Out-ObfuscatedTokenCommand",
+      "Out-SecureStringCommand",
+      "Select-Object",
+      "Where-Object",
+      "Write-Host"
+    ],
+    "auffaellige_tokens": {
+      "invoke_expression": 1
+    },
+    "iocs": {
+      "urls": [],
+      "ipv4": [],
+      "pfade": []
+    }
+  },
+  "stufe3_structure": {
+    "strings": [
+      "-obf-$randomCommand",
+      "Executing '$randomCommand' for file: $file",
+      "$randomCommand -Path $sourcefilename > $newfilename",
+      "-------------------------------",
+      "Out-CompressedCommand",
+      "Out-EncodedAsciiCommand",
+      "Out-EncodedBinaryCommand",
+      "Out-EncodedBXORCommand",
+      "Out-EncodedHexCommand",
+      "Out-EncodedOctalCommand",
+      "Out-EncodedSpecialCharOnlyCommand",
+      "Out-EncodedWhitespaceCommand",
+      "Out-ObfuscatedAst",
+      "Out-ObfuscatedStringCommand",
+      "Out-ObfuscatedTokenCommand",
+      "Out-SecureStringCommand"
+    ],
+    "string_anzahl_gesamt": 16,
+    "base64_bloecke_dekodiert": [],
+    "base64_bloecke_gesamt": 0,
+    "beobachtete_cmdlets": [
+      "Get-ChildItem",
+      "Get-Random",
+      "Invoke-Expression",
+      "Invoke-ObfuscateRandomFiles",
+      "Out-CompressedCommand",
+      "Out-EncodedAsciiCommand",
+      "Out-EncodedBXORCommand",
+      "Out-EncodedBinaryCommand",
+      "Out-EncodedHexCommand",
+      "Out-EncodedOctalCommand",
+      "Out-EncodedSpecialCharOnlyCommand",
+      "Out-EncodedWhitespaceCommand",
+      "Out-ObfuscatedAst",
+      "Out-ObfuscatedStringCommand",
+      "Out-ObfuscatedTokenCommand",
+      "Out-SecureStringCommand",
+      "Select-Object",
+      "Where-Object",
+      "Write-Host"
+    ],
+    "auffaellige_tokens": {
+      "invoke_expression": 1
+    },
+    "iocs": {
+      "urls": [],
+      "ipv4": [],
+      "pfade": []
+    },
+    "deobfuskiert_auszug": "function Invoke-ObfuscateRandomFiles {\n    param(\n        [string]$Directory,\n        [string[]]$CommandList\n    )\n    \n    $maximumSize = 20KB\n    $fileList = Get-ChildItem -Path $Directory -File | Where-Object { $_.Length -lt $maximumSize }\n    $numFiles = $fileList.Count\n    $numFilesToSelect = [math]::Ceiling($numFiles * 0.05)\n\n    $randomFiles = $fileList | Get-Random -Count $numFilesToSelect | Select-Object -ExpandProperty Name\n    foreach ($file in $randomFiles) {\n        echo $file\n        $randomCommand = $CommandList | Get-Random\n        $newfilename = $file.substring(0, $file.length - 4) + \"-obf-$randomCommand\" + [IO.Path]::GetExtension($file)\n        $newfilename = [IO.Path]::Combine($Directory, $newfilename.toLower())\n        $sourcefilename = [IO.Path]::Combine($Directory, $file)\n        Write-Host \"Executing '$randomCommand' for file: $file\"\n        Invoke-Expression \"$randomCommand -Path $sourcefilename > $newfilename\"\n        Write-Host \"-------------------------------\"\n    }\n}\n\n\n# Example: \n# Invoke-ObfuscateRandomFiles -Directory ./malicious_samples/ -CommandList @(\"Out-CompressedCommand\", \"Out-EncodedAsciiCommand\", \"Out-EncodedBinaryCommand\", \"Out-EncodedBXORCommand\", \"Out-EncodedHexCommand\", \"Out-EncodedOctalCommand\", \"Out-EncodedSpecialCharOnlyCommand\", \"Out-EncodedWhitespaceCommand\", \"Out-ObfuscatedAst\", \"Out-ObfuscatedStringCommand\", \"Out-ObfuscatedTokenCommand\", \"Out-SecureStringCommand\")\n",
+    "dekodierte_befehle": [],
+    "beobachtete_abfolge": [
+      "Zeichenkette als Code ausfuehren"
+    ]
+  }
+}

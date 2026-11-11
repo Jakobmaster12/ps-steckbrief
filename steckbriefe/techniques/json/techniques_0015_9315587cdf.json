@@ -1,0 +1,92 @@
+{
+  "meta": {
+    "quelldatei": "tech_014_Check-Pass.ps1",
+    "sha256": "9315587cdfe6ad9418757ab8896020439615feacf042d42a4a1399147726bf2f",
+    "groesse_bytes": 1333,
+    "zeilen": 28,
+    "ground_truth_label": "techniques",
+    "analyse_gekuerzt": false,
+    "hinweis": "Kein Urteil enthalten. Bewertung erfolgt durch das LLM."
+  },
+  "stufe1_extract": {
+    "strings": [
+      "`nEnter the password to check its security status at haveibeenpwned.com",
+      ").ToLower()\r\n    $hashPrefix = $sha1Hash.Substring(0, 5)\r\n    $hashSuffix = $sha1Hash.Substring(5)\r\n\r\n    $response = Invoke-WebRequest -Uri ",
+      " -UseBasicParsing -Headers @{",
+      "true",
+      "`r`n",
+      "\r\n        if ($hashParts[0].Equals($hashSuffix, [System.StringComparison]::OrdinalIgnoreCase)) {\r\n            $found = $true\r\n            $count = [int]$hashParts[1]\r\n            Write-Host ",
+      " -ForegroundColor Red\r\n            break\r\n        }\r\n    }\r\n\r\n    if (-not $found) {\r\n        Write-Host "
+    ],
+    "string_anzahl_gesamt": 7,
+    "base64_bloecke_dekodiert": [],
+    "base64_bloecke_gesamt": 0
+  },
+  "stufe2_features": {
+    "strings": [
+      "`nEnter the password to check its security status at haveibeenpwned.com",
+      ").ToLower()\r\n    $hashPrefix = $sha1Hash.Substring(0, 5)\r\n    $hashSuffix = $sha1Hash.Substring(5)\r\n\r\n    $response = Invoke-WebRequest -Uri ",
+      " -UseBasicParsing -Headers @{",
+      "true",
+      "`r`n",
+      "\r\n        if ($hashParts[0].Equals($hashSuffix, [System.StringComparison]::OrdinalIgnoreCase)) {\r\n            $found = $true\r\n            $count = [int]$hashParts[1]\r\n            Write-Host ",
+      " -ForegroundColor Red\r\n            break\r\n        }\r\n    }\r\n\r\n    if (-not $found) {\r\n        Write-Host "
+    ],
+    "string_anzahl_gesamt": 7,
+    "base64_bloecke_dekodiert": [],
+    "base64_bloecke_gesamt": 0,
+    "beobachtete_cmdlets": [
+      "Add-Padding",
+      "Check-Pass",
+      "Invoke-WebRequest",
+      "Read-Host",
+      "Write-Host"
+    ],
+    "auffaellige_tokens": {
+      "invoke_webrequest": 1
+    },
+    "iocs": {
+      "urls": [
+        "https://api.pwnedpasswords.com/range/$hashPrefix"
+      ],
+      "ipv4": [],
+      "pfade": []
+    }
+  },
+  "stufe3_structure": {
+    "strings": [
+      "`nEnter the password to check its security status at haveibeenpwned.com",
+      ").ToLower()\r\n    $hashPrefix = $sha1Hash.Substring(0, 5)\r\n    $hashSuffix = $sha1Hash.Substring(5)\r\n\r\n    $response = Invoke-WebRequest -Uri ",
+      " -UseBasicParsing -Headers @{",
+      "true",
+      "`r`n",
+      "\r\n        if ($hashParts[0].Equals($hashSuffix, [System.StringComparison]::OrdinalIgnoreCase)) {\r\n            $found = $true\r\n            $count = [int]$hashParts[1]\r\n            Write-Host ",
+      " -ForegroundColor Red\r\n            break\r\n        }\r\n    }\r\n\r\n    if (-not $found) {\r\n        Write-Host "
+    ],
+    "string_anzahl_gesamt": 7,
+    "base64_bloecke_dekodiert": [],
+    "base64_bloecke_gesamt": 0,
+    "beobachtete_cmdlets": [
+      "Add-Padding",
+      "Check-Pass",
+      "Invoke-WebRequest",
+      "Read-Host",
+      "Write-Host"
+    ],
+    "auffaellige_tokens": {
+      "invoke_webrequest": 1
+    },
+    "iocs": {
+      "urls": [
+        "https://api.pwnedpasswords.com/range/$hashPrefix"
+      ],
+      "ipv4": [],
+      "pfade": []
+    },
+    "deobfuskiert_auszug": "function Check-Pass {\r\n    $password = Read-Host \"nEnter the password to check its security status at haveibeenpwned.com\" -AsSecureString\r\n    $passwordPlainText = [System.Runtime.InteropServices.Marshal]::PtrToStringAuto([System.Runtime.InteropServices.Marshal]::SecureStringToBSTR($password))\r\n\r\n    $sha1Password = [System.Security.Cryptography.SHA1]::Create().ComputeHash([System.Text.Encoding]::UTF8.GetBytes($passwordPlainText))\r\n    $sha1Hash = [System.BitConverter]::ToString($sha1Password).Replace(\"-\", \"\").ToLower()\r\n    $hashPrefix = $sha1Hash.Substring(0, 5)\r\n    $hashSuffix = $sha1Hash.Substring(5)\r\n\r\n    $response = Invoke-WebRequest -Uri \"https://api.pwnedpasswords.com/range/$hashPrefix\" -UseBasicParsing -Headers @{\"Add-Padding\"=\"true\"}\r\n    $hashes = $response.Content -split \"rn\"\r\n\r\n    $found = $false\r\n    foreach ($hash in $hashes) {\r\n        $hashParts = $hash -split \":\"\r\n        if ($hashParts[0].Equals($hashSuffix, [System.StringComparison]::OrdinalIgnoreCase)) {\r\n            $found = $true\r\n            $count = [int]$hashParts[1]\r\n            Write-Host \"nThe password has been pwned $count times.n\" -ForegroundColor Red\r\n            break\r\n        }\r\n    }\r\n\r\n    if (-not $found) {\r\n        Write-Host \"nThe password has not been pwned. You're good to go!n\" -ForegroundColor Green\r\n    }\r\n}\r\n",
+    "dekodierte_befehle": [],
+    "beobachtete_abfolge": [
+      "Web-Anfrage senden"
+    ]
+  }
+}

@@ -1,0 +1,112 @@
+{
+  "meta": {
+    "quelldatei": "benign_044_check-apps.ps1",
+    "sha256": "428e31ae55458a2554edd937c7932d0fb05f3d7b735cbfdfb9849c4b963edf6d",
+    "groesse_bytes": 1653,
+    "zeilen": 54,
+    "ground_truth_label": "benign",
+    "analyse_gekuerzt": false,
+    "hinweis": "Kein Urteil enthalten. Bewertung erfolgt durch das LLM."
+  },
+  "stufe1_extract": {
+    "strings": [
+      "~\\AppData\\Local\\CrashDumps",
+      "$path\\*.dmp",
+      "\n\tif ($IsLinux) {\n\t\tWrite-Progress ",
+      "\n\t\t$numPkgs = (apt list --installed 2>/dev/null).Count\n\t\t$numSnaps = (snap list).Count - 1\n\t\tWrite-Progress -completed ",
+      "\n\t\t$reply = ",
+      "\n\t} else {\n\t\tWrite-Progress ",
+      "\n\t\t$apps = Get-AppxPackage\n\t\tWrite-Progress -completed ",
+      "\n\n\t\t[int]$numNonOk = 0\n\t\tforeach($app in $apps) { if ($app.Status -ne ",
+      ") { $numNonOk++ } }\n\t\tif ($numNonOk -gt 0) { $status = ",
+      "; $reply += ",
+      " }\n\n\t\t[int]$numErrors = (Get-AppxLastError)\n\t\tif ($numErrors -gt 0) { $status = ",
+      " }\n\n\t\t$numUpdates = (winget upgrade --include-unknown).Count - 5\n\t\t$reply += ",
+      "\n\n\t\t$numCrashDumps = CountCrashDumps\n\t\tif ($numCrashDumps -ne 0) { $status = ",
+      " }\n\t}\n\tWrite-Host ",
+      "\n\texit 0 # success\n} catch {\n\t"
+    ],
+    "string_anzahl_gesamt": 18,
+    "base64_bloecke_dekodiert": [],
+    "base64_bloecke_gesamt": 0
+  },
+  "stufe2_features": {
+    "strings": [
+      "~\\AppData\\Local\\CrashDumps",
+      "$path\\*.dmp",
+      "\n\tif ($IsLinux) {\n\t\tWrite-Progress ",
+      "\n\t\t$numPkgs = (apt list --installed 2>/dev/null).Count\n\t\t$numSnaps = (snap list).Count - 1\n\t\tWrite-Progress -completed ",
+      "\n\t\t$reply = ",
+      "\n\t} else {\n\t\tWrite-Progress ",
+      "\n\t\t$apps = Get-AppxPackage\n\t\tWrite-Progress -completed ",
+      "\n\n\t\t[int]$numNonOk = 0\n\t\tforeach($app in $apps) { if ($app.Status -ne ",
+      ") { $numNonOk++ } }\n\t\tif ($numNonOk -gt 0) { $status = ",
+      "; $reply += ",
+      " }\n\n\t\t[int]$numErrors = (Get-AppxLastError)\n\t\tif ($numErrors -gt 0) { $status = ",
+      " }\n\n\t\t$numUpdates = (winget upgrade --include-unknown).Count - 5\n\t\t$reply += ",
+      "\n\n\t\t$numCrashDumps = CountCrashDumps\n\t\tif ($numCrashDumps -ne 0) { $status = ",
+      " }\n\t}\n\tWrite-Host ",
+      "\n\texit 0 # success\n} catch {\n\t"
+    ],
+    "string_anzahl_gesamt": 18,
+    "base64_bloecke_dekodiert": [],
+    "base64_bloecke_gesamt": 0,
+    "beobachtete_cmdlets": [
+      "Get-AppxLastError",
+      "Get-AppxPackage",
+      "Get-ChildItem",
+      "Resolve-Path",
+      "Write-Host",
+      "Write-Progress"
+    ],
+    "auffaellige_tokens": {},
+    "iocs": {
+      "urls": [
+        "https://github.com/fleschutz/PowerShell"
+      ],
+      "ipv4": [],
+      "pfade": []
+    }
+  },
+  "stufe3_structure": {
+    "strings": [
+      "~\\AppData\\Local\\CrashDumps",
+      "$path\\*.dmp",
+      "\n\tif ($IsLinux) {\n\t\tWrite-Progress ",
+      "\n\t\t$numPkgs = (apt list --installed 2>/dev/null).Count\n\t\t$numSnaps = (snap list).Count - 1\n\t\tWrite-Progress -completed ",
+      "\n\t\t$reply = ",
+      "\n\t} else {\n\t\tWrite-Progress ",
+      "\n\t\t$apps = Get-AppxPackage\n\t\tWrite-Progress -completed ",
+      "\n\n\t\t[int]$numNonOk = 0\n\t\tforeach($app in $apps) { if ($app.Status -ne ",
+      ") { $numNonOk++ } }\n\t\tif ($numNonOk -gt 0) { $status = ",
+      "; $reply += ",
+      " }\n\n\t\t[int]$numErrors = (Get-AppxLastError)\n\t\tif ($numErrors -gt 0) { $status = ",
+      " }\n\n\t\t$numUpdates = (winget upgrade --include-unknown).Count - 5\n\t\t$reply += ",
+      "\n\n\t\t$numCrashDumps = CountCrashDumps\n\t\tif ($numCrashDumps -ne 0) { $status = ",
+      " }\n\t}\n\tWrite-Host ",
+      "\n\texit 0 # success\n} catch {\n\t"
+    ],
+    "string_anzahl_gesamt": 18,
+    "base64_bloecke_dekodiert": [],
+    "base64_bloecke_gesamt": 0,
+    "beobachtete_cmdlets": [
+      "Get-AppxLastError",
+      "Get-AppxPackage",
+      "Get-ChildItem",
+      "Resolve-Path",
+      "Write-Host",
+      "Write-Progress"
+    ],
+    "auffaellige_tokens": {},
+    "iocs": {
+      "urls": [
+        "https://github.com/fleschutz/PowerShell"
+      ],
+      "ipv4": [],
+      "pfade": []
+    },
+    "deobfuskiert_auszug": "﻿<#\n.SYNOPSIS\n\tQuery the app status\n.DESCRIPTION\n\tThis PowerShell script queries the installed applications and prints it.\n.EXAMPLE\n\tPS> ./check-apps.ps1\n\t⚠️ 150 Win apps installed, 72 upgrades available, 5 crash dump(s) found\n.LINK\n\thttps://github.com/fleschutz/PowerShell\n.NOTES\n\tAuthor: Markus Fleschutz | License: CC0\n#>\n\nfunction CountCrashDumps {\n\t[string]$path = Resolve-Path -Path \"~\\AppData\\Local\\CrashDumps\"\n\t$files = (Get-ChildItem -path \"$path\\*.dmp\" -attributes !Directory)\n\treturn $files.Count\n}\n\ntry {\n\t$status = \"✅\"\n\tif ($IsLinux) {\n\t\tWrite-Progress \"Querying installed applications...\"\n\t\t$numPkgs = (apt list --installed 2>/dev/null).Count\n\t\t$numSnaps = (snap list).Count - 1\n\t\tWrite-Progress -completed \"Done.\"\n\t\t$reply = \"$numPkgs Debian packages, $numSnaps snaps installed\"\n\t} else {\n\t\tWrite-Progress \"Querying installed apps...\"\n\t\t$apps = Get-AppxPackage\n\t\tWrite-Progress -completed \"Done.\"\n\t\t$reply = \"$($apps.Count) Win apps installed\"\n\n\t\t[int]$numNonOk = 0\n\t\tforeach($app in $apps) { if ($app.Status -ne \"Ok\") { $numNonOk++ } }\n\t\tif ($numNonOk -gt 0) { $status = \"⚠️\"; $reply += \", $numNonOk non-ok\" }\n\n\t\t[int]$numErrors = (Get-AppxLastError)\n\t\tif ($numErrors -gt 0) { $status = \"⚠️\"; $reply += \", $numErrors errors\" }\n\n\t\t$numUpdates = (winget upgrade --include-unknown).Count - 5\n\t\t$reply += \", $numUpdates upgrades available\"\n\n\t\t$numCrashDumps = CountCrashDumps\n\t\tif ($numCrashDumps -ne 0) { $status = \"⚠️\"; $reply += \", $numCrashDumps crash dump(s) found\" }\n\t}\n\tWrite-Host \"$status $reply\"\n\texit 0 # success\n} catch {\n\t\"⚠️ ERROR: $($Error[0]) (at line $($_.InvocationInfo.ScriptLineNumber))\"\n\texit 1\n}\n",
+    "dekodierte_befehle": [],
+    "beobachtete_abfolge": []
+  }
+}

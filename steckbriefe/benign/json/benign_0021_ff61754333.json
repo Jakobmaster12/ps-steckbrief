@@ -1,0 +1,91 @@
+{
+  "meta": {
+    "quelldatei": "benign_020_cd-pics.ps1",
+    "sha256": "ff61754333c619e69352c90dd5851e8afc466419c2ee68649dc61dae80d8a983",
+    "groesse_bytes": 1042,
+    "zeilen": 34,
+    "ground_truth_label": "benign",
+    "analyse_gekuerzt": false,
+    "hinweis": "Kein Urteil enthalten. Bewertung erfolgt durch das LLM."
+  },
+  "stufe1_extract": {
+    "strings": [
+      "s pictures folder\n.DESCRIPTION\n\tThis PowerShell script changes the current working directory to the user",
+      "~/Pictures",
+      "No 'Pictures' folder in your home directory (yet)",
+      "MyPictures",
+      "$path",
+      "The path to pictures folder '$path' doesn't exist (yet)",
+      "📂$path entered, has $($files.Count) files and $($folders.Count) folders.",
+      "⚠️ ERROR: $($Error[0])"
+    ],
+    "string_anzahl_gesamt": 10,
+    "base64_bloecke_dekodiert": [],
+    "base64_bloecke_gesamt": 0
+  },
+  "stufe2_features": {
+    "strings": [
+      "s pictures folder\n.DESCRIPTION\n\tThis PowerShell script changes the current working directory to the user",
+      "~/Pictures",
+      "No 'Pictures' folder in your home directory (yet)",
+      "MyPictures",
+      "$path",
+      "The path to pictures folder '$path' doesn't exist (yet)",
+      "📂$path entered, has $($files.Count) files and $($folders.Count) folders.",
+      "⚠️ ERROR: $($Error[0])"
+    ],
+    "string_anzahl_gesamt": 10,
+    "base64_bloecke_dekodiert": [],
+    "base64_bloecke_gesamt": 0,
+    "beobachtete_cmdlets": [
+      "Get-ChildItem",
+      "Resolve-Path",
+      "Set-Location",
+      "Test-Path"
+    ],
+    "auffaellige_tokens": {},
+    "iocs": {
+      "urls": [
+        "https://github.com/fleschutz/PowerShell"
+      ],
+      "ipv4": [],
+      "pfade": [
+        "C:\\Users\\Markus\\Pictures"
+      ]
+    }
+  },
+  "stufe3_structure": {
+    "strings": [
+      "s pictures folder\n.DESCRIPTION\n\tThis PowerShell script changes the current working directory to the user",
+      "~/Pictures",
+      "No 'Pictures' folder in your home directory (yet)",
+      "MyPictures",
+      "$path",
+      "The path to pictures folder '$path' doesn't exist (yet)",
+      "📂$path entered, has $($files.Count) files and $($folders.Count) folders.",
+      "⚠️ ERROR: $($Error[0])"
+    ],
+    "string_anzahl_gesamt": 10,
+    "base64_bloecke_dekodiert": [],
+    "base64_bloecke_gesamt": 0,
+    "beobachtete_cmdlets": [
+      "Get-ChildItem",
+      "Resolve-Path",
+      "Set-Location",
+      "Test-Path"
+    ],
+    "auffaellige_tokens": {},
+    "iocs": {
+      "urls": [
+        "https://github.com/fleschutz/PowerShell"
+      ],
+      "ipv4": [],
+      "pfade": [
+        "C:\\Users\\Markus\\Pictures"
+      ]
+    },
+    "deobfuskiert_auszug": "﻿<#\n.SYNOPSIS\n\tSets the working dir to the user's pictures folder\n.DESCRIPTION\n\tThis PowerShell script changes the current working directory to the user's pictures folder.\n.EXAMPLE\n\tPS> ./cd-pics.ps1\n\t📂C:\\Users\\Markus\\Pictures entered, has 7 files and 0 folders.\n.LINK\n\thttps://github.com/fleschutz/PowerShell\n.NOTES\n\tAuthor: Markus Fleschutz | License: CC0\n#>\n\n#requires -version 5.1\n\ntry {\n\tif ($IsLinux -or $IsMacOS) {\n\t\tif (-not(Test-Path \"~/Pictures\" -pathType container)) { throw \"No 'Pictures' folder in your home directory (yet)\" }\n\t\t$path = Resolve-Path \"~/Pictures\"\n\t} else {\n\t\t$path = [Environment]::GetFolderPath('MyPictures')\n\t\tif (-not(Test-Path \"$path\" -pathType container)) { throw \"The path to pictures folder '$path' doesn't exist (yet)\" }\n\t}\n\tSet-Location \"$path\"\n\t$files = Get-ChildItem $path -attributes !Directory\n\t$folders = Get-ChildItem $path -attributes Directory\n\t\"📂$path entered, has $($files.Count) files and $($folders.Count) folders.\"\n\texit 0 # success\n} catch {\n\t\"⚠️ ERROR: $($Error[0])\"\n\texit 1\n}\n",
+    "dekodierte_befehle": [],
+    "beobachtete_abfolge": []
+  }
+}

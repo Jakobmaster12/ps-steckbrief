@@ -1,0 +1,63 @@
+{
+  "meta": {
+    "quelldatei": "tech_008_YouTube.ps1",
+    "sha256": "f7600977bd566c3b00a2ccc7fbcc3d2f6ec3b89bbaee14739624f14bd7c29299",
+    "groesse_bytes": 96,
+    "zeilen": 1,
+    "ground_truth_label": "techniques",
+    "analyse_gekuerzt": false,
+    "hinweis": "Kein Urteil enthalten. Bewertung erfolgt durch das LLM."
+  },
+  "stufe1_extract": {
+    "strings": [],
+    "string_anzahl_gesamt": 0,
+    "base64_bloecke_dekodiert": [
+      {
+        "laenge": 96,
+        "dekodiert": "甤汲㴠∠瑨灴㩳⼯睷⹷潹瑵扵⹥潣⽭慷捴㽨㵶摔娹剩漰灮≫匊慴瑲倭潲散獳␠牵੬"
+      }
+    ],
+    "base64_bloecke_gesamt": 1
+  },
+  "stufe2_features": {
+    "strings": [],
+    "string_anzahl_gesamt": 0,
+    "base64_bloecke_dekodiert": [
+      {
+        "laenge": 96,
+        "dekodiert": "甤汲㴠∠瑨灴㩳⼯睷⹷潹瑵扵⹥潣⽭慷捴㽨㵶摔娹剩漰灮≫匊慴瑲倭潲散獳␠牵੬"
+      }
+    ],
+    "base64_bloecke_gesamt": 1,
+    "beobachtete_cmdlets": [],
+    "auffaellige_tokens": {},
+    "iocs": {
+      "urls": [],
+      "ipv4": [],
+      "pfade": []
+    }
+  },
+  "stufe3_structure": {
+    "strings": [],
+    "string_anzahl_gesamt": 0,
+    "base64_bloecke_dekodiert": [
+      {
+        "laenge": 96,
+        "dekodiert": "甤汲㴠∠瑨灴㩳⼯睷⹷潹瑵扵⹥潣⽭慷捴㽨㵶摔娹剩漰灮≫匊慴瑲倭潲散獳␠牵੬"
+      }
+    ],
+    "base64_bloecke_gesamt": 1,
+    "beobachtete_cmdlets": [],
+    "auffaellige_tokens": {},
+    "iocs": {
+      "urls": [],
+      "ipv4": [],
+      "pfade": []
+    },
+    "deobfuskiert_auszug": "JHVybCA9ICJodHRwczovL3d3dy55b3V0dWJlLmNvbS93YXRjaD92PVRkOVppUjBvbnBrIgpTdGFydC1Qcm9jZXNzICR1cmwK",
+    "dekodierte_befehle": [
+      "甤汲㴠∠瑨灴㩳⼯睷⹷潹瑵扵⹥潣⽭慷捴㽨㵶摔娹剩漰灮≫匊慴瑲倭潲散獳␠牵੬"
+    ],
+    "beobachtete_abfolge": []
+  }
+}

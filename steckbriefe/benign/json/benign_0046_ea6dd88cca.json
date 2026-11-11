@@ -1,0 +1,106 @@
+{
+  "meta": {
+    "quelldatei": "benign_045_check-bios.ps1",
+    "sha256": "ea6dd88cca36adbad432bb0da19fc15563adbcf0a23f1c2dcd2c5fb9447dd04c",
+    "groesse_bytes": 1416,
+    "zeilen": 42,
+    "ground_truth_label": "benign",
+    "analyse_gekuerzt": false,
+    "hinweis": "Kein Urteil enthalten. Bewertung erfolgt durch das LLM."
+  },
+  "stufe1_extract": {
+    "strings": [
+      "$model",
+      ") { exit 0 } # no information\n\t\tWrite-Progress ",
+      "\n\t\t$version = (sudo dmidecode -s bios-version)\n\t\t$releaseDate = (sudo dmidecode -s bios-release-date)\n\t\t$manufacturer = (sudo dmidecode -s system-manufacturer)\n\t\tWrite-Progress -completed ",
+      "\n\t} else {\n\t\t$details = Get-CimInstance -ClassName Win32_BIOS\n\t\t$model = $details.Name.Trim()\n\t\t$version = $details.Version.Trim()\n\t\t$serial = $details.SerialNumber.Trim()\n\t\t$manufacturer = $details.Manufacturer.Trim()\n\t}\n\tif ($model -eq ",
+      ") { $model = ",
+      " }\n\tif ($version -eq ",
+      ") { $version = ",
+      " }\n\tif (",
+      " -ne ",
+      ") { $releaseDate = ",
+      " -eq ",
+      ") { $serial = ",
+      " }\n\tif ($serial -eq ",
+      " }\n\tWrite-Host ",
+      "\n\texit 0 # success\n} catch {\n\t"
+    ],
+    "string_anzahl_gesamt": 17,
+    "base64_bloecke_dekodiert": [],
+    "base64_bloecke_gesamt": 0
+  },
+  "stufe2_features": {
+    "strings": [
+      "$model",
+      ") { exit 0 } # no information\n\t\tWrite-Progress ",
+      "\n\t\t$version = (sudo dmidecode -s bios-version)\n\t\t$releaseDate = (sudo dmidecode -s bios-release-date)\n\t\t$manufacturer = (sudo dmidecode -s system-manufacturer)\n\t\tWrite-Progress -completed ",
+      "\n\t} else {\n\t\t$details = Get-CimInstance -ClassName Win32_BIOS\n\t\t$model = $details.Name.Trim()\n\t\t$version = $details.Version.Trim()\n\t\t$serial = $details.SerialNumber.Trim()\n\t\t$manufacturer = $details.Manufacturer.Trim()\n\t}\n\tif ($model -eq ",
+      ") { $model = ",
+      " }\n\tif ($version -eq ",
+      ") { $version = ",
+      " }\n\tif (",
+      " -ne ",
+      ") { $releaseDate = ",
+      " -eq ",
+      ") { $serial = ",
+      " }\n\tif ($serial -eq ",
+      " }\n\tWrite-Host ",
+      "\n\texit 0 # success\n} catch {\n\t"
+    ],
+    "string_anzahl_gesamt": 17,
+    "base64_bloecke_dekodiert": [],
+    "base64_bloecke_gesamt": 0,
+    "beobachtete_cmdlets": [
+      "Get-CimInstance",
+      "Write-Host",
+      "Write-Progress"
+    ],
+    "auffaellige_tokens": {},
+    "iocs": {
+      "urls": [
+        "https://github.com/fleschutz/PowerShell"
+      ],
+      "ipv4": [],
+      "pfade": []
+    }
+  },
+  "stufe3_structure": {
+    "strings": [
+      "$model",
+      ") { exit 0 } # no information\n\t\tWrite-Progress ",
+      "\n\t\t$version = (sudo dmidecode -s bios-version)\n\t\t$releaseDate = (sudo dmidecode -s bios-release-date)\n\t\t$manufacturer = (sudo dmidecode -s system-manufacturer)\n\t\tWrite-Progress -completed ",
+      "\n\t} else {\n\t\t$details = Get-CimInstance -ClassName Win32_BIOS\n\t\t$model = $details.Name.Trim()\n\t\t$version = $details.Version.Trim()\n\t\t$serial = $details.SerialNumber.Trim()\n\t\t$manufacturer = $details.Manufacturer.Trim()\n\t}\n\tif ($model -eq ",
+      ") { $model = ",
+      " }\n\tif ($version -eq ",
+      ") { $version = ",
+      " }\n\tif (",
+      " -ne ",
+      ") { $releaseDate = ",
+      " -eq ",
+      ") { $serial = ",
+      " }\n\tif ($serial -eq ",
+      " }\n\tWrite-Host ",
+      "\n\texit 0 # success\n} catch {\n\t"
+    ],
+    "string_anzahl_gesamt": 17,
+    "base64_bloecke_dekodiert": [],
+    "base64_bloecke_gesamt": 0,
+    "beobachtete_cmdlets": [
+      "Get-CimInstance",
+      "Write-Host",
+      "Write-Progress"
+    ],
+    "auffaellige_tokens": {},
+    "iocs": {
+      "urls": [
+        "https://github.com/fleschutz/PowerShell"
+      ],
+      "ipv4": [],
+      "pfade": []
+    },
+    "deobfuskiert_auszug": "﻿<#\n.SYNOPSIS\n\tChecks the BIOS status\n.DESCRIPTION\n\tThis PowerShell script queries the BIOS status and prints it.\n.EXAMPLE\n\tPS> ./check-bios.ps1\n\t✅ BIOS model P62 v02.67, version HPQOEM - 5, S/N CZC1080B01 by HP\n.LINK\n\thttps://github.com/fleschutz/PowerShell\n.NOTES\n\tAuthor: Markus Fleschutz | License: CC0\n#>\n\ntry {\n\tif ($IsLinux) {\n\t\t$model = (sudo dmidecode -s system-product-name)\n\t\tif (\"$model\" -eq \"\") { exit 0 } # no information\n\t\tWrite-Progress \"Querying BIOS details...\"\n\t\t$version = (sudo dmidecode -s bios-version)\n\t\t$releaseDate = (sudo dmidecode -s bios-release-date)\n\t\t$manufacturer = (sudo dmidecode -s system-manufacturer)\n\t\tWrite-Progress -completed \"Done.\"\n\t} else {\n\t\t$details = Get-CimInstance -ClassName Win32_BIOS\n\t\t$model = $details.Name.Trim()\n\t\t$version = $details.Version.Trim()\n\t\t$serial = $details.SerialNumber.Trim()\n\t\t$manufacturer = $details.Manufacturer.Trim()\n\t}\n\tif ($model -eq \"To be filled by O.E.M.\") { $model = \"N/A\" }\n\tif ($version -eq \"To be filled by O.E.M.\") { $version = \"N/A\" }\n\tif (\"$releaseDate\" -ne \"\") { $releaseDate = \" of $releaseDate\" }\n\tif (\"$serial\" -eq \"\") { $serial = \"N/A\" }\n\tif ($serial -eq \"To be filled by O.E.M.\") { $serial = \"N/A\" }\n\tWrite-Host \"✅ BIOS model $model, version $($version)$($releaseDate), S/N $serial by $manufacturer\"\n\texit 0 # success\n} catch {\n\t\"⚠️ ERROR: $($Error[0]) (at line $($_.InvocationInfo.ScriptLineNumber))\"\n\texit 1\n}\n",
+    "dekodierte_befehle": [],
+    "beobachtete_abfolge": []
+  }
+}

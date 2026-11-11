@@ -1,0 +1,110 @@
+{
+  "meta": {
+    "quelldatei": "benign_031_cd-temp.ps1",
+    "sha256": "2c6901a18e4df3ac36e3bb94e8f1d8e7e1af191b53150001615292244a8ac1a8",
+    "groesse_bytes": 1016,
+    "zeilen": 36,
+    "ground_truth_label": "benign",
+    "analyse_gekuerzt": false,
+    "hinweis": "Kein Urteil enthalten. Bewertung erfolgt durch das LLM."
+  },
+  "stufe1_extract": {
+    "strings": [
+      "$env:TEMP",
+      ") { return ",
+      " }\n        if (",
+      " -ne ",
+      ")  { return ",
+      " }\n\tif ($IsLinux -or $IsMacOS) { return ",
+      " }\n        return ",
+      "\n}\n\ntry {\n\t$path = GetTempDir\n\tif (-not(Test-Path ",
+      " -pathType container)) { throw ",
+      "$path",
+      " }\n\tSet-Location ",
+      "\n\t$files = Get-ChildItem $path -attributes !Directory\n\t$folders = Get-ChildItem $path -attributes Directory\n\t",
+      "\n\texit 0 # success\n} catch {\n\t"
+    ],
+    "string_anzahl_gesamt": 13,
+    "base64_bloecke_dekodiert": [],
+    "base64_bloecke_gesamt": 0
+  },
+  "stufe2_features": {
+    "strings": [
+      "$env:TEMP",
+      ") { return ",
+      " }\n        if (",
+      " -ne ",
+      ")  { return ",
+      " }\n\tif ($IsLinux -or $IsMacOS) { return ",
+      " }\n        return ",
+      "\n}\n\ntry {\n\t$path = GetTempDir\n\tif (-not(Test-Path ",
+      " -pathType container)) { throw ",
+      "$path",
+      " }\n\tSet-Location ",
+      "\n\t$files = Get-ChildItem $path -attributes !Directory\n\t$folders = Get-ChildItem $path -attributes Directory\n\t",
+      "\n\texit 0 # success\n} catch {\n\t"
+    ],
+    "string_anzahl_gesamt": 13,
+    "base64_bloecke_dekodiert": [],
+    "base64_bloecke_gesamt": 0,
+    "beobachtete_cmdlets": [
+      "Get-ChildItem",
+      "Set-Location",
+      "Test-Path"
+    ],
+    "auffaellige_tokens": {},
+    "iocs": {
+      "urls": [
+        "https://github.com/fleschutz/PowerShell"
+      ],
+      "ipv4": [],
+      "pfade": [
+        "$env:TEMP",
+        "$env:TMP",
+        "C:\\Temp",
+        "C:\\Users\\Markus\\AppData\\Local\\Temp"
+      ]
+    }
+  },
+  "stufe3_structure": {
+    "strings": [
+      "$env:TEMP",
+      ") { return ",
+      " }\n        if (",
+      " -ne ",
+      ")  { return ",
+      " }\n\tif ($IsLinux -or $IsMacOS) { return ",
+      " }\n        return ",
+      "\n}\n\ntry {\n\t$path = GetTempDir\n\tif (-not(Test-Path ",
+      " -pathType container)) { throw ",
+      "$path",
+      " }\n\tSet-Location ",
+      "\n\t$files = Get-ChildItem $path -attributes !Directory\n\t$folders = Get-ChildItem $path -attributes Directory\n\t",
+      "\n\texit 0 # success\n} catch {\n\t"
+    ],
+    "string_anzahl_gesamt": 13,
+    "base64_bloecke_dekodiert": [],
+    "base64_bloecke_gesamt": 0,
+    "beobachtete_cmdlets": [
+      "Get-ChildItem",
+      "Set-Location",
+      "Test-Path"
+    ],
+    "auffaellige_tokens": {},
+    "iocs": {
+      "urls": [
+        "https://github.com/fleschutz/PowerShell"
+      ],
+      "ipv4": [],
+      "pfade": [
+        "$env:TEMP",
+        "$env:TMP",
+        "C:\\Temp",
+        "C:\\Users\\Markus\\AppData\\Local\\Temp"
+      ]
+    },
+    "deobfuskiert_auszug": "﻿<#\n.SYNOPSIS\n\tSets the working directory to the temporary folder\n.DESCRIPTION\n\tThis PowerShell script changes the current working directory to the temporary folder.\n.EXAMPLE\n\tPS> ./cd-temp.ps1\n\t📂C:\\Users\\Markus\\AppData\\Local\\Temp entered, has 2 files and 3 folders.\n.LINK\n\thttps://github.com/fleschutz/PowerShell\n.NOTES\n\tAuthor: Markus Fleschutz | License: CC0\n#>\n\n#requires -version 5.1\n\nfunction GetTempDir {\n        if (\"$env:TEMP\" -ne \"\") { return \"$env:TEMP\" }\n        if (\"$env:TMP\" -ne \"\")  { return \"$env:TMP\" }\n\tif ($IsLinux -or $IsMacOS) { return \"/tmp\" }\n        return \"C:\\Temp\"\n}\n\ntry {\n\t$path = GetTempDir\n\tif (-not(Test-Path \"$path\" -pathType container)) { throw \"The temporary folder at '$path' doesn't exist (yet)\" }\n\tSet-Location \"$path\"\n\t$files = Get-ChildItem $path -attributes !Directory\n\t$folders = Get-ChildItem $path -attributes Directory\n\t\"📂$path entered, has $($files.Count) files and $($folders.Count) folders.\"\n\texit 0 # success\n} catch {\n\t\"⚠️ ERROR: $($Error[0])\"\n\texit 1\n}\n",
+    "dekodierte_befehle": [],
+    "beobachtete_abfolge": []
+  }
+}

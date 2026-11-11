@@ -1,0 +1,111 @@
+{
+  "meta": {
+    "quelldatei": "tech_043_Medium(Harder).ps1",
+    "sha256": "a6b57d6dfc5415e0e679ac64b382b2947489e9e736fd7061efc4698d82fe58ce",
+    "groesse_bytes": 1687,
+    "zeilen": 53,
+    "ground_truth_label": "techniques",
+    "analyse_gekuerzt": false,
+    "hinweis": "Kein Urteil enthalten. Bewertung erfolgt durch das LLM."
+  },
+  "stufe1_extract": {
+    "strings": [
+      "In this world, those who seek to create find purpose, while those who seek to destroy find only emptiness.",
+      "123456789 @$%^*><\":\\.",
+      "abcdefghijklmnopqrstuvwxyz",
+      "$ba$bb$ac",
+      " + $ab.Substring(46,1)\r\n$cb = $ii\r\n\r\n$bc = ",
+      "\r\n$ic = ",
+      "\r\n$i1 = ",
+      "\r\n\r\n$a = $i1\r\n$ia = $ab.Substring(3,1);$ai = $ab.Substring(4,1);$bi = $ab.Substring(19,1)\r\n$ci = $i + ",
+      "\r\n$c1 = ",
+      "\r\n$a1 = ",
+      "\r\n$b1 = ",
+      "\r\n\r\n$c = ",
+      "\r\n\r\n$c2 = $ab.Substring(2,1);$a2 = $ad.Substring(15,1);$b3 = $ab.Substring(19,1);$b2 = $ad.Substring(17,1);$a3 = $ad.Substring(11,1)\r\n$c3 = $ab.Substring(1,1); $1b = $da.Substring(21,1); $1d = $ad.Substring(18,1);$1c = $da.Substring(20,1);$2c = $da.Substring(0,1)\r\n$1d = $da.Substring(12,1); $3d = $ad.Substring(18,1); $d3 = $da.Substring(15,1); $a4 = $ab.Substring(10,1); $c4 = $da.Substring(14,1);\r\n$d1 = $da.Substring(5,1); $d2 = $da.Substring(8,1); $2c = $da.Substring(11,1); $4c = $ad.Substring(19,1); $gg = $da.Substring(3,1);\r\n$g1 = $da.Substring(10,1); $g2 = $ab.Substring(3,1);$g3 = $ad.Substring(20,1)\r\n\r\n$66 = ",
+      "\r\n$67 = ($66 -split ' ').ForEach({ [char][Convert]::ToInt32($_, 2) }) -join ''\r\n\r\n\r\n\r\n$r = ",
+      "\r\n$3 = ",
+      ";$y = ",
+      "\r\n\r\n$x = ",
+      ";$x = "
+    ],
+    "string_anzahl_gesamt": 18,
+    "base64_bloecke_dekodiert": [],
+    "base64_bloecke_gesamt": 0
+  },
+  "stufe2_features": {
+    "strings": [
+      "In this world, those who seek to create find purpose, while those who seek to destroy find only emptiness.",
+      "123456789 @$%^*><\":\\.",
+      "abcdefghijklmnopqrstuvwxyz",
+      "$ba$bb$ac",
+      " + $ab.Substring(46,1)\r\n$cb = $ii\r\n\r\n$bc = ",
+      "\r\n$ic = ",
+      "\r\n$i1 = ",
+      "\r\n\r\n$a = $i1\r\n$ia = $ab.Substring(3,1);$ai = $ab.Substring(4,1);$bi = $ab.Substring(19,1)\r\n$ci = $i + ",
+      "\r\n$c1 = ",
+      "\r\n$a1 = ",
+      "\r\n$b1 = ",
+      "\r\n\r\n$c = ",
+      "\r\n\r\n$c2 = $ab.Substring(2,1);$a2 = $ad.Substring(15,1);$b3 = $ab.Substring(19,1);$b2 = $ad.Substring(17,1);$a3 = $ad.Substring(11,1)\r\n$c3 = $ab.Substring(1,1); $1b = $da.Substring(21,1); $1d = $ad.Substring(18,1);$1c = $da.Substring(20,1);$2c = $da.Substring(0,1)\r\n$1d = $da.Substring(12,1); $3d = $ad.Substring(18,1); $d3 = $da.Substring(15,1); $a4 = $ab.Substring(10,1); $c4 = $da.Substring(14,1);\r\n$d1 = $da.Substring(5,1); $d2 = $da.Substring(8,1); $2c = $da.Substring(11,1); $4c = $ad.Substring(19,1); $gg = $da.Substring(3,1);\r\n$g1 = $da.Substring(10,1); $g2 = $ab.Substring(3,1);$g3 = $ad.Substring(20,1)\r\n\r\n$66 = ",
+      "\r\n$67 = ($66 -split ' ').ForEach({ [char][Convert]::ToInt32($_, 2) }) -join ''\r\n\r\n\r\n\r\n$r = ",
+      "\r\n$3 = ",
+      ";$y = ",
+      "\r\n\r\n$x = ",
+      ";$x = "
+    ],
+    "string_anzahl_gesamt": 18,
+    "base64_bloecke_dekodiert": [],
+    "base64_bloecke_gesamt": 0,
+    "beobachtete_cmdlets": [
+      "Write-Host"
+    ],
+    "auffaellige_tokens": {
+      "char_array": 1
+    },
+    "iocs": {
+      "urls": [],
+      "ipv4": [],
+      "pfade": []
+    }
+  },
+  "stufe3_structure": {
+    "strings": [
+      "In this world, those who seek to create find purpose, while those who seek to destroy find only emptiness.",
+      "123456789 @$%^*><\":\\.",
+      "abcdefghijklmnopqrstuvwxyz",
+      "$ba$bb$ac",
+      " + $ab.Substring(46,1)\r\n$cb = $ii\r\n\r\n$bc = ",
+      "\r\n$ic = ",
+      "\r\n$i1 = ",
+      "\r\n\r\n$a = $i1\r\n$ia = $ab.Substring(3,1);$ai = $ab.Substring(4,1);$bi = $ab.Substring(19,1)\r\n$ci = $i + ",
+      "\r\n$c1 = ",
+      "\r\n$a1 = ",
+      "\r\n$b1 = ",
+      "\r\n\r\n$c = ",
+      "\r\n\r\n$c2 = $ab.Substring(2,1);$a2 = $ad.Substring(15,1);$b3 = $ab.Substring(19,1);$b2 = $ad.Substring(17,1);$a3 = $ad.Substring(11,1)\r\n$c3 = $ab.Substring(1,1); $1b = $da.Substring(21,1); $1d = $ad.Substring(18,1);$1c = $da.Substring(20,1);$2c = $da.Substring(0,1)\r\n$1d = $da.Substring(12,1); $3d = $ad.Substring(18,1); $d3 = $da.Substring(15,1); $a4 = $ab.Substring(10,1); $c4 = $da.Substring(14,1);\r\n$d1 = $da.Substring(5,1); $d2 = $da.Substring(8,1); $2c = $da.Substring(11,1); $4c = $ad.Substring(19,1); $gg = $da.Substring(3,1);\r\n$g1 = $da.Substring(10,1); $g2 = $ab.Substring(3,1);$g3 = $ad.Substring(20,1)\r\n\r\n$66 = ",
+      "\r\n$67 = ($66 -split ' ').ForEach({ [char][Convert]::ToInt32($_, 2) }) -join ''\r\n\r\n\r\n\r\n$r = ",
+      "\r\n$3 = ",
+      ";$y = ",
+      "\r\n\r\n$x = ",
+      ";$x = "
+    ],
+    "string_anzahl_gesamt": 18,
+    "base64_bloecke_dekodiert": [],
+    "base64_bloecke_gesamt": 0,
+    "beobachtete_cmdlets": [
+      "Write-Host"
+    ],
+    "auffaellige_tokens": {
+      "char_array": 1
+    },
+    "iocs": {
+      "urls": [],
+      "ipv4": [],
+      "pfade": []
+    },
+    "deobfuskiert_auszug": "$phrase = \"In this world, those who seek to create find purpose, while those who seek to destroy find only emptiness.\"\r\n$numbers = '123456789 @$%^*><\":\\.'\r\n$alph = \"abcdefghijklmnopqrstuvwxyz\"\r\n\r\n$ab = $phrase\r\n$ad = $numbers\r\n$da = $alph\r\n\r\n$aa = $ab. Substring(11,1)\r\n$ac = $aa*2+$ab. Substring(9,1)\r\n$ba = $ab.Substring(4,1)\r\n$bb = $ab.Substring(19,1)\r\n\r\n$i = \"$ba$bb$ac\"\r\n\r\n$ii = $i. Substring(1,1)\r\n$1 = ([char]115)\r\n$ca = $ab.Substring(10,1)\r\n$cc = [char]([char[]]$ab)[1];$1i = $ab.Substring(3,1)\r\n$11 = \" \" + $ab.Substring(46,1)\r\n$cb = $ii\r\n\r\n$bc = \"$cc$ii\"\r\n$ic = \"$1i$11$1$cb\"\r\n$i1 = \"$bc$ic$ca\"\r\n\r\n$a = $i1\r\n$ia = $ab.Substring(3,1);$ai = $ab.Substring(4,1);$bi = $ab.Substring(19,1)\r\n$ci = $i + \" \"\r\n$c1 = \"$ci$ia\"\r\n$a1 = \"$ai$bi\"\r\n$b1 = \"$ca$ii\"\r\n\r\n$c = \"$c1$a1$b1\"\r\n\r\n$c2 = $ab.Substring(2,1);$a2 = $ad.Substring(15,1);$b3 = $ab.Substring(19,1);$b2 = $ad.Substring(17,1);$a3 = $ad.Substring(11,1)\r\n$c3 = $ab.Substring(1,1); $1b = $da.Substring(21,1); $1d = $ad.Substring(18,1);$1c = $da.Substring(20,1);$2c = $da.Substring(0,1)\r\n$1d = $da.Substring(12,1); $3d = $ad.Substring(18,1); $d3 = $da.Substring(15,1); $a4 = $ab.Substring(10,1); $c4 = $da.Substring(14,1);\r\n$d1 = $da.Substring(5,1); $d2 = $da.Substring(8,1); $2c = $da.Substring(11,1); $4c = $ad.Substring(19,1); $gg = $da.Substring(3,1);\r\n$g1 = $da.Substring(10,1); $g2 = $ab.Substring(3,1);$g3 = $ad.Substring(20,1)\r\n\r\n$66 = \"01110100 01111000 01110100\"\r\n$67 = ($66 -split ' ').ForEach({ [char][Convert]::ToInt32($_, 2) }) -join ''\r\n\r\n\r\n\r\n$r = \"$gg$b3$1$g1$g2$c4$d3$4c$i$g3$67$b2\"\r\n$3 = \"$b3$c3$1b$3d$1c$1$b3$ca$d3$a4$c4$d1$d2$2c$b3$4c\";$y = \"$a$c2$a2$c2$b2$a3\"\r\n\r\n$x = \"$c\";$x = \"$y$3$r\";iex $x\r\n\r\nWrite-Host $c\r\n",
+    "dekodierte_befehle": [],
+    "beobachtete_abfolge": []
+  }
+}

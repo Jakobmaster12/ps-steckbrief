@@ -1,0 +1,79 @@
+{
+  "meta": {
+    "quelldatei": "tech_012_Convert-Base64.ps1",
+    "sha256": "28bd783d9790a4b512ab2e87bdadd51fc7f40bec3ab679590213065ecb8358ad",
+    "groesse_bytes": 1034,
+    "zeilen": 33,
+    "ground_truth_label": "techniques",
+    "analyse_gekuerzt": false,
+    "hinweis": "Kein Urteil enthalten. Bewertung erfolgt durch das LLM."
+  },
+  "stufe1_extract": {
+    "strings": [
+      "Enter the path of the file you want to convert",
+      "')\n\n    if (-Not (Test-Path $filePath)) {\n        Write-Host ",
+      "\n        return\n    }\n\n    $fileContent = Get-Content -Path $filePath -Raw\n    \n    try {\n        [System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String($fileContent))\n        $isBase64 = $true\n    } catch {\n        $isBase64 = $false\n    }\n\n    if ($isBase64) {\n        $decodedContent = [System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String($fileContent))\n        Set-Content -Path $filePath -Value $decodedContent\n        Write-Host ",
+      "\n    } else {\n        $encodedContent = [System.Convert]::ToBase64String([System.Text.Encoding]::UTF8.GetBytes($fileContent))\n        Set-Content -Path $filePath -Value $encodedContent\n        Write-Host "
+    ],
+    "string_anzahl_gesamt": 4,
+    "base64_bloecke_dekodiert": [],
+    "base64_bloecke_gesamt": 0
+  },
+  "stufe2_features": {
+    "strings": [
+      "Enter the path of the file you want to convert",
+      "')\n\n    if (-Not (Test-Path $filePath)) {\n        Write-Host ",
+      "\n        return\n    }\n\n    $fileContent = Get-Content -Path $filePath -Raw\n    \n    try {\n        [System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String($fileContent))\n        $isBase64 = $true\n    } catch {\n        $isBase64 = $false\n    }\n\n    if ($isBase64) {\n        $decodedContent = [System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String($fileContent))\n        Set-Content -Path $filePath -Value $decodedContent\n        Write-Host ",
+      "\n    } else {\n        $encodedContent = [System.Convert]::ToBase64String([System.Text.Encoding]::UTF8.GetBytes($fileContent))\n        Set-Content -Path $filePath -Value $encodedContent\n        Write-Host "
+    ],
+    "string_anzahl_gesamt": 4,
+    "base64_bloecke_dekodiert": [],
+    "base64_bloecke_gesamt": 0,
+    "beobachtete_cmdlets": [
+      "Get-Content",
+      "Read-Host",
+      "Set-Content",
+      "Test-Path",
+      "Write-Host"
+    ],
+    "auffaellige_tokens": {
+      "frombase64": 2
+    },
+    "iocs": {
+      "urls": [],
+      "ipv4": [],
+      "pfade": []
+    }
+  },
+  "stufe3_structure": {
+    "strings": [
+      "Enter the path of the file you want to convert",
+      "')\n\n    if (-Not (Test-Path $filePath)) {\n        Write-Host ",
+      "\n        return\n    }\n\n    $fileContent = Get-Content -Path $filePath -Raw\n    \n    try {\n        [System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String($fileContent))\n        $isBase64 = $true\n    } catch {\n        $isBase64 = $false\n    }\n\n    if ($isBase64) {\n        $decodedContent = [System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String($fileContent))\n        Set-Content -Path $filePath -Value $decodedContent\n        Write-Host ",
+      "\n    } else {\n        $encodedContent = [System.Convert]::ToBase64String([System.Text.Encoding]::UTF8.GetBytes($fileContent))\n        Set-Content -Path $filePath -Value $encodedContent\n        Write-Host "
+    ],
+    "string_anzahl_gesamt": 4,
+    "base64_bloecke_dekodiert": [],
+    "base64_bloecke_gesamt": 0,
+    "beobachtete_cmdlets": [
+      "Get-Content",
+      "Read-Host",
+      "Set-Content",
+      "Test-Path",
+      "Write-Host"
+    ],
+    "auffaellige_tokens": {
+      "frombase64": 2
+    },
+    "iocs": {
+      "urls": [],
+      "ipv4": [],
+      "pfade": []
+    },
+    "deobfuskiert_auszug": "function Convert-Base64 {\n    [CmdletBinding()]\n    Param()\n\n    $filePath = Read-Host \"Enter the path of the file you want to convert\"\n    \n    $filePath = $filePath.Trim('\"')\n\n    if (-Not (Test-Path $filePath)) {\n        Write-Host \"File does not exist. Exiting...\"\n        return\n    }\n\n    $fileContent = Get-Content -Path $filePath -Raw\n    \n    try {\n        [System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String($fileContent))\n        $isBase64 = $true\n    } catch {\n        $isBase64 = $false\n    }\n\n    if ($isBase64) {\n        $decodedContent = [System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String($fileContent))\n        Set-Content -Path $filePath -Value $decodedContent\n        Write-Host \"File was Base64. Decoded and saved.\"\n    } else {\n        $encodedContent = [System.Convert]::ToBase64String([System.Text.Encoding]::UTF8.GetBytes($fileContent))\n        Set-Content -Path $filePath -Value $encodedContent\n        Write-Host \"File was not Base64. Encoded and saved.\"\n    }\n}\n",
+    "dekodierte_befehle": [],
+    "beobachtete_abfolge": [
+      "Base64-Inhalt dekodieren"
+    ]
+  }
+}

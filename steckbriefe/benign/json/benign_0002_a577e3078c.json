@@ -1,0 +1,106 @@
+{
+  "meta": {
+    "quelldatei": "benign_001_alert.ps1",
+    "sha256": "a577e3078c4d66e10c3d7b2742b121c41ca477517156d33b7e00b555e196aca2",
+    "groesse_bytes": 801,
+    "zeilen": 30,
+    "ground_truth_label": "benign",
+    "analyse_gekuerzt": false,
+    "hinweis": "Kein Urteil enthalten. Bewertung erfolgt durch das LLM."
+  },
+  "stufe1_extract": {
+    "strings": [
+      "Harddisk failure",
+      ")\n\ntry {\n\tif ($Message -eq ",
+      " ) { $URL = read-host ",
+      " }\n\n\techo ",
+      "\n\n\tcurl --header ",
+      " --header ",
+      " --data-binary '{",
+      "note",
+      "title",
+      "ALERT",
+      "body",
+      "$Message",
+      "⚠️ ERROR: $($Error[0]) (at line $($_.InvocationInfo.ScriptLineNumber))"
+    ],
+    "string_anzahl_gesamt": 13,
+    "base64_bloecke_dekodiert": [],
+    "base64_bloecke_gesamt": 0
+  },
+  "stufe2_features": {
+    "strings": [
+      "Harddisk failure",
+      ")\n\ntry {\n\tif ($Message -eq ",
+      " ) { $URL = read-host ",
+      " }\n\n\techo ",
+      "\n\n\tcurl --header ",
+      " --header ",
+      " --data-binary '{",
+      "note",
+      "title",
+      "ALERT",
+      "body",
+      "$Message",
+      "⚠️ ERROR: $($Error[0]) (at line $($_.InvocationInfo.ScriptLineNumber))"
+    ],
+    "string_anzahl_gesamt": 13,
+    "base64_bloecke_dekodiert": [],
+    "base64_bloecke_gesamt": 0,
+    "beobachtete_cmdlets": [
+      "Access-Token",
+      "Content-Type"
+    ],
+    "auffaellige_tokens": {
+      "invoke_webrequest": 1
+    },
+    "iocs": {
+      "urls": [
+        "https://api.pushbullet.com/v2/pushes",
+        "https://github.com/fleschutz/PowerShell"
+      ],
+      "ipv4": [],
+      "pfade": []
+    }
+  },
+  "stufe3_structure": {
+    "strings": [
+      "Harddisk failure",
+      ")\n\ntry {\n\tif ($Message -eq ",
+      " ) { $URL = read-host ",
+      " }\n\n\techo ",
+      "\n\n\tcurl --header ",
+      " --header ",
+      " --data-binary '{",
+      "note",
+      "title",
+      "ALERT",
+      "body",
+      "$Message",
+      "⚠️ ERROR: $($Error[0]) (at line $($_.InvocationInfo.ScriptLineNumber))"
+    ],
+    "string_anzahl_gesamt": 13,
+    "base64_bloecke_dekodiert": [],
+    "base64_bloecke_gesamt": 0,
+    "beobachtete_cmdlets": [
+      "Access-Token",
+      "Content-Type"
+    ],
+    "auffaellige_tokens": {
+      "invoke_webrequest": 1
+    },
+    "iocs": {
+      "urls": [
+        "https://api.pushbullet.com/v2/pushes",
+        "https://github.com/fleschutz/PowerShell"
+      ],
+      "ipv4": [],
+      "pfade": []
+    },
+    "deobfuskiert_auszug": "﻿<#\n.SYNOPSIS\n\tHandles and escalates an alert \n.DESCRIPTION\n\tThis PowerShell script handles and escalates the given alert message.\n.PARAMETER message\n\tSpecifies the alert message\n.EXAMPLE\n\tPS> ./alert.ps1 \"Harddisk failure\"\n.LINK\n\thttps://github.com/fleschutz/PowerShell\n.NOTES\n\tAuthor: Markus Fleschutz | License: CC0\n#>\n\nparam([string]$Message = \"\")\n\ntry {\n\tif ($Message -eq \"\" ) { $URL = read-host \"Enter alert message\" }\n\n\techo \"ALERT: $Message\"\n\n\tcurl --header \"Access-Token: o.PZl5XCp6SBl4F5PpaNXGDfFpUJZKAlEb\" --header \"Content-Type: application/json\" --data-binary '{\"type\": \"note\", \"title\": \"ALERT\", \"body\": \"$Message\"}' --request POST https://api.pushbullet.com/v2/pushes\n\n\texit 0 # success\n} catch {\n\t\"⚠️ ERROR: $($Error[0]) (at line $($_.InvocationInfo.ScriptLineNumber))\"\n\texit 1\n}\n",
+    "dekodierte_befehle": [],
+    "beobachtete_abfolge": [
+      "Web-Anfrage senden"
+    ]
+  }
+}

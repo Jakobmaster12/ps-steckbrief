@@ -1,0 +1,78 @@
+{
+  "meta": {
+    "quelldatei": "tech_049_troll.ps1",
+    "sha256": "ecb6d27b282bab061cba134b9152cc6a8616d5ac8a5b8b676ff306f5d63e4f3f",
+    "groesse_bytes": 816,
+    "zeilen": 24,
+    "ground_truth_label": "techniques",
+    "analyse_gekuerzt": false,
+    "hinweis": "Kein Urteil enthalten. Bewertung erfolgt durch das LLM."
+  },
+  "stufe1_extract": {
+    "strings": [
+      "Somebody once told me the world is gonna roll me",
+      "I ain't the sharpest tool in the shed",
+      "She was looking kind of dumb with her finger and her thumb",
+      "In the shape of an 'L' on her forehead",
+      "Well, the years start coming and they don't stop coming",
+      "and they don't stop coming",
+      "meme"
+    ],
+    "string_anzahl_gesamt": 9,
+    "base64_bloecke_dekodiert": [],
+    "base64_bloecke_gesamt": 0
+  },
+  "stufe2_features": {
+    "strings": [
+      "Somebody once told me the world is gonna roll me",
+      "I ain't the sharpest tool in the shed",
+      "She was looking kind of dumb with her finger and her thumb",
+      "In the shape of an 'L' on her forehead",
+      "Well, the years start coming and they don't stop coming",
+      "and they don't stop coming",
+      "meme"
+    ],
+    "string_anzahl_gesamt": 9,
+    "base64_bloecke_dekodiert": [],
+    "base64_bloecke_gesamt": 0,
+    "beobachtete_cmdlets": [
+      "Add-Type"
+    ],
+    "auffaellige_tokens": {
+      "add_type": 1
+    },
+    "iocs": {
+      "urls": [],
+      "ipv4": [],
+      "pfade": []
+    }
+  },
+  "stufe3_structure": {
+    "strings": [
+      "Somebody once told me the world is gonna roll me",
+      "I ain't the sharpest tool in the shed",
+      "She was looking kind of dumb with her finger and her thumb",
+      "In the shape of an 'L' on her forehead",
+      "Well, the years start coming and they don't stop coming",
+      "and they don't stop coming",
+      "meme"
+    ],
+    "string_anzahl_gesamt": 9,
+    "base64_bloecke_dekodiert": [],
+    "base64_bloecke_gesamt": 0,
+    "beobachtete_cmdlets": [
+      "Add-Type"
+    ],
+    "auffaellige_tokens": {
+      "add_type": 1
+    },
+    "iocs": {
+      "urls": [],
+      "ipv4": [],
+      "pfade": []
+    },
+    "deobfuskiert_auszug": "function T {\r\n    Add-Type -AssemblyName System.Windows.Forms\r\n\r\n    $lyrics = @(\r\n\t\t\"Somebody once told me the world is gonna roll me\"\r\n\t\t\"I ain't the sharpest tool in the shed\"\r\n\t\t\"She was looking kind of dumb with her finger and her thumb\"\r\n\t\t\"In the shape of an 'L' on her forehead\"\r\n        \"Well, the years start coming and they don't stop coming\",\r\n        \"and they don't stop coming\"\r\n    )\r\n\r\n    foreach ($line in $lyrics) {\r\n        if ($line -eq \"and they don't stop coming\") {\r\n            while ($true) {\r\n                [System.Windows.Forms.MessageBox]::Show($line, \"meme\", [System.Windows.Forms.MessageBoxButtons]::OK)\r\n            }\r\n        }\r\n        else {\r\n            [System.Windows.Forms.MessageBox]::Show($line, \"meme\", [System.Windows.Forms.MessageBoxButtons]::OK)\r\n        }\r\n    }\r\n}\r\n",
+    "dekodierte_befehle": [],
+    "beobachtete_abfolge": []
+  }
+}

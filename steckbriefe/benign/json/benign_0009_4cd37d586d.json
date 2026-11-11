@@ -1,0 +1,87 @@
+{
+  "meta": {
+    "quelldatei": "benign_008_cd-desktop.ps1",
+    "sha256": "4cd37d586d77ef5d5399cb2028571cad3d59d6c69243293f64806071d15ed74f",
+    "groesse_bytes": 1035,
+    "zeilen": 38,
+    "ground_truth_label": "benign",
+    "analyse_gekuerzt": false,
+    "hinweis": "Kein Urteil enthalten. Bewertung erfolgt durch das LLM."
+  },
+  "stufe1_extract": {
+    "strings": [
+      "s desktop folder\n.DESCRIPTION\n\tThis PowerShell script changes the working directory to the user",
+      "~/Desktop",
+      "No 'Desktop' folder in your home directory yet",
+      "DesktopDirectory",
+      "$path",
+      "Desktop folder at $path does not exist yet",
+      "📂$path entered, has $($files.Count) files and $($folders.Count) folders.",
+      "⚠️ ERROR: $($Error[0])"
+    ],
+    "string_anzahl_gesamt": 10,
+    "base64_bloecke_dekodiert": [],
+    "base64_bloecke_gesamt": 0
+  },
+  "stufe2_features": {
+    "strings": [
+      "s desktop folder\n.DESCRIPTION\n\tThis PowerShell script changes the working directory to the user",
+      "~/Desktop",
+      "No 'Desktop' folder in your home directory yet",
+      "DesktopDirectory",
+      "$path",
+      "Desktop folder at $path does not exist yet",
+      "📂$path entered, has $($files.Count) files and $($folders.Count) folders.",
+      "⚠️ ERROR: $($Error[0])"
+    ],
+    "string_anzahl_gesamt": 10,
+    "base64_bloecke_dekodiert": [],
+    "base64_bloecke_gesamt": 0,
+    "beobachtete_cmdlets": [
+      "Get-ChildItem",
+      "Resolve-Path",
+      "Set-Location",
+      "Test-Path"
+    ],
+    "auffaellige_tokens": {},
+    "iocs": {
+      "urls": [
+        "https://github.com/fleschutz/PowerShell"
+      ],
+      "ipv4": [],
+      "pfade": []
+    }
+  },
+  "stufe3_structure": {
+    "strings": [
+      "s desktop folder\n.DESCRIPTION\n\tThis PowerShell script changes the working directory to the user",
+      "~/Desktop",
+      "No 'Desktop' folder in your home directory yet",
+      "DesktopDirectory",
+      "$path",
+      "Desktop folder at $path does not exist yet",
+      "📂$path entered, has $($files.Count) files and $($folders.Count) folders.",
+      "⚠️ ERROR: $($Error[0])"
+    ],
+    "string_anzahl_gesamt": 10,
+    "base64_bloecke_dekodiert": [],
+    "base64_bloecke_gesamt": 0,
+    "beobachtete_cmdlets": [
+      "Get-ChildItem",
+      "Resolve-Path",
+      "Set-Location",
+      "Test-Path"
+    ],
+    "auffaellige_tokens": {},
+    "iocs": {
+      "urls": [
+        "https://github.com/fleschutz/PowerShell"
+      ],
+      "ipv4": [],
+      "pfade": []
+    },
+    "deobfuskiert_auszug": "﻿<#\n.SYNOPSIS\n\tSets the working directory to the user's desktop folder\n.DESCRIPTION\n\tThis PowerShell script changes the working directory to the user's desktop folder.\n.EXAMPLE\n\tPS> ./cd-desktop.ps1\n\t📂/home/Markus/Desktop entered, has 3 files and 0 folders.\n.LINK\n\thttps://github.com/fleschutz/PowerShell\n.NOTES\n\tAuthor: Markus Fleschutz | License: CC0\n#>\n\n#requires -version 5.1\n\ntry {\n\tif ($IsLinux -or $IsMacOS) {\n\t\tif (-not(Test-Path \"~/Desktop\" -pathType container)) {\n\t\t\tthrow \"No 'Desktop' folder in your home directory yet\"\n\t\t}\n\t\t$path = Resolve-Path \"~/Desktop\"\n\t} else {\n\t\t$path = [Environment]::GetFolderPath('DesktopDirectory')\n\t\tif (-not(Test-Path \"$path\" -pathType container)) {\n\t\t\tthrow \"Desktop folder at $path does not exist yet\"\n\t\t}\n\t}\n\tSet-Location \"$path\"\n\t$files = Get-ChildItem $path -attributes !Directory\n\t$folders = Get-ChildItem $path -attributes Directory\n\t\"📂$path entered, has $($files.Count) files and $($folders.Count) folders.\"\n\texit 0 # success\n} catch {\n\t\"⚠️ ERROR: $($Error[0])\"\n\texit 1\n}\n",
+    "dekodierte_befehle": [],
+    "beobachtete_abfolge": []
+  }
+}

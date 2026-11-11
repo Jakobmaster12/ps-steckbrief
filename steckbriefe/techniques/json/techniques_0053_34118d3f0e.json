@@ -1,0 +1,62 @@
+{
+  "meta": {
+    "quelldatei": "tech_052_CreatePassword.ps1",
+    "sha256": "34118d3f0e88fa36fe9b744de6303bd9b0396c23f3485486c98b9dca0ebbebba",
+    "groesse_bytes": 191,
+    "zeilen": 3,
+    "ground_truth_label": "techniques",
+    "analyse_gekuerzt": false,
+    "hinweis": "Kein Urteil enthalten. Bewertung erfolgt durch das LLM."
+  },
+  "stufe1_extract": {
+    "strings": [
+      "Enter your password"
+    ],
+    "string_anzahl_gesamt": 1,
+    "base64_bloecke_dekodiert": [],
+    "base64_bloecke_gesamt": 0
+  },
+  "stufe2_features": {
+    "strings": [
+      "Enter your password"
+    ],
+    "string_anzahl_gesamt": 1,
+    "base64_bloecke_dekodiert": [],
+    "base64_bloecke_gesamt": 0,
+    "beobachtete_cmdlets": [
+      "Read-Host",
+      "Set-Content"
+    ],
+    "auffaellige_tokens": {},
+    "iocs": {
+      "urls": [],
+      "ipv4": [],
+      "pfade": [
+        "C:\\Users\\$env:USERNAME\\Documents\\WindowsPowerShell\\yeet.txt"
+      ]
+    }
+  },
+  "stufe3_structure": {
+    "strings": [
+      "Enter your password"
+    ],
+    "string_anzahl_gesamt": 1,
+    "base64_bloecke_dekodiert": [],
+    "base64_bloecke_gesamt": 0,
+    "beobachtete_cmdlets": [
+      "Read-Host",
+      "Set-Content"
+    ],
+    "auffaellige_tokens": {},
+    "iocs": {
+      "urls": [],
+      "ipv4": [],
+      "pfade": [
+        "C:\\Users\\$env:USERNAME\\Documents\\WindowsPowerShell\\yeet.txt"
+      ]
+    },
+    "deobfuskiert_auszug": "$securePassword = Read-Host -Prompt \"Enter your password\" -AsSecureString\n$securePassword | ConvertFrom-SecureString | Set-Content C:\\Users\\$env:USERNAME\\Documents\\WindowsPowerShell\\yeet.txt\n",
+    "dekodierte_befehle": [],
+    "beobachtete_abfolge": []
+  }
+}

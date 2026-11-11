@@ -1,0 +1,85 @@
+{
+  "meta": {
+    "quelldatei": "benign_030_cd-sync.ps1",
+    "sha256": "2f2f39a7e251e519f1dc0a43910f459451b1347e416363c660ec561d768a118a",
+    "groesse_bytes": 841,
+    "zeilen": 31,
+    "ground_truth_label": "benign",
+    "analyse_gekuerzt": false,
+    "hinweis": "Kein Urteil enthalten. Bewertung erfolgt durch das LLM."
+  },
+  "stufe1_extract": {
+    "strings": [
+      "s Sync folder\n.DESCRIPTION\n\tThis PowerShell script changes the current working directory to the user",
+      "~/Sync",
+      "No 'Sync' folder in your home directory yet - Please install Syncthing.",
+      "$path",
+      "📂$path entered, has $($files.Count) files and $($folders.Count) folders.",
+      "⚠️ ERROR: $($Error[0])"
+    ],
+    "string_anzahl_gesamt": 7,
+    "base64_bloecke_dekodiert": [],
+    "base64_bloecke_gesamt": 0
+  },
+  "stufe2_features": {
+    "strings": [
+      "s Sync folder\n.DESCRIPTION\n\tThis PowerShell script changes the current working directory to the user",
+      "~/Sync",
+      "No 'Sync' folder in your home directory yet - Please install Syncthing.",
+      "$path",
+      "📂$path entered, has $($files.Count) files and $($folders.Count) folders.",
+      "⚠️ ERROR: $($Error[0])"
+    ],
+    "string_anzahl_gesamt": 7,
+    "base64_bloecke_dekodiert": [],
+    "base64_bloecke_gesamt": 0,
+    "beobachtete_cmdlets": [
+      "Get-ChildItem",
+      "Resolve-Path",
+      "Set-Location",
+      "Test-Path"
+    ],
+    "auffaellige_tokens": {},
+    "iocs": {
+      "urls": [
+        "https://github.com/fleschutz/PowerShell"
+      ],
+      "ipv4": [],
+      "pfade": [
+        "C:\\Users\\Markus\\Sync"
+      ]
+    }
+  },
+  "stufe3_structure": {
+    "strings": [
+      "s Sync folder\n.DESCRIPTION\n\tThis PowerShell script changes the current working directory to the user",
+      "~/Sync",
+      "No 'Sync' folder in your home directory yet - Please install Syncthing.",
+      "$path",
+      "📂$path entered, has $($files.Count) files and $($folders.Count) folders.",
+      "⚠️ ERROR: $($Error[0])"
+    ],
+    "string_anzahl_gesamt": 7,
+    "base64_bloecke_dekodiert": [],
+    "base64_bloecke_gesamt": 0,
+    "beobachtete_cmdlets": [
+      "Get-ChildItem",
+      "Resolve-Path",
+      "Set-Location",
+      "Test-Path"
+    ],
+    "auffaellige_tokens": {},
+    "iocs": {
+      "urls": [
+        "https://github.com/fleschutz/PowerShell"
+      ],
+      "ipv4": [],
+      "pfade": [
+        "C:\\Users\\Markus\\Sync"
+      ]
+    },
+    "deobfuskiert_auszug": "﻿<#\n.SYNOPSIS\n\tSets the working directory to the user's Sync folder\n.DESCRIPTION\n\tThis PowerShell script changes the current working directory to the user's Syncthing folder.\n.EXAMPLE\n\tPS> ./cd-sync.ps1\n\t📂C:\\Users\\Markus\\Sync entered, has 2 files and 0 folders.\n.LINK\n\thttps://github.com/fleschutz/PowerShell\n.NOTES\n\tAuthor: Markus Fleschutz | License: CC0\n#>\n\n#requires -version 5.1\n\ntry {\n\tif (-not(Test-Path \"~/Sync\" -pathType container)) {\n\t\tthrow \"No 'Sync' folder in your home directory yet - Please install Syncthing.\"\n\t}\n\t$path = Resolve-Path \"~/Sync\"\n\tSet-Location \"$path\"\n\t$files = Get-ChildItem $path -attributes !Directory\n\t$folders = Get-ChildItem $path -attributes Directory\n\t\"📂$path entered, has $($files.Count) files and $($folders.Count) folders.\"\n\texit 0 # success\n} catch {\n\t\"⚠️ ERROR: $($Error[0])\"\n\texit 1\n}\n",
+    "dekodierte_befehle": [],
+    "beobachtete_abfolge": []
+  }
+}

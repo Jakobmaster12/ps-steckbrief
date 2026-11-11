@@ -1,0 +1,92 @@
+{
+  "meta": {
+    "quelldatei": "benign_004_build-repos.ps1",
+    "sha256": "a5047e99a520336eaa9a14f73994dd2e06e9e9882562936bc16054d67dd8750c",
+    "groesse_bytes": 1076,
+    "zeilen": 38,
+    "ground_truth_label": "benign",
+    "analyse_gekuerzt": false,
+    "hinweis": "Kein Urteil enthalten. Bewertung erfolgt durch das LLM."
+  },
+  "stufe1_extract": {
+    "strings": [
+      "$PWD",
+      "$parentDir",
+      "⏳ Step 1 - Checking parent folder 📂$parentDirName...",
+      "Can't access folder: $parentDir",
+      "Found $numFolders subfolders.",
+      "$PSScriptRoot/build-repo.ps1",
+      "$folder",
+      "✅ $numFolders Git repositories built at 📂$parentDir in $($elapsed)s.",
+      "⚠️ ERROR: $($Error[0]) (at line $($_.InvocationInfo.ScriptLineNumber))"
+    ],
+    "string_anzahl_gesamt": 11,
+    "base64_bloecke_dekodiert": [],
+    "base64_bloecke_gesamt": 0
+  },
+  "stufe2_features": {
+    "strings": [
+      "$PWD",
+      "$parentDir",
+      "⏳ Step 1 - Checking parent folder 📂$parentDirName...",
+      "Can't access folder: $parentDir",
+      "Found $numFolders subfolders.",
+      "$PSScriptRoot/build-repo.ps1",
+      "$folder",
+      "✅ $numFolders Git repositories built at 📂$parentDir in $($elapsed)s.",
+      "⚠️ ERROR: $($Error[0]) (at line $($_.InvocationInfo.ScriptLineNumber))"
+    ],
+    "string_anzahl_gesamt": 11,
+    "base64_bloecke_dekodiert": [],
+    "base64_bloecke_gesamt": 0,
+    "beobachtete_cmdlets": [
+      "Get-ChildItem",
+      "Get-Item",
+      "Test-Path"
+    ],
+    "auffaellige_tokens": {},
+    "iocs": {
+      "urls": [
+        "https://github.com/fleschutz/PowerShell"
+      ],
+      "ipv4": [],
+      "pfade": [
+        "C:\\MyRepos"
+      ]
+    }
+  },
+  "stufe3_structure": {
+    "strings": [
+      "$PWD",
+      "$parentDir",
+      "⏳ Step 1 - Checking parent folder 📂$parentDirName...",
+      "Can't access folder: $parentDir",
+      "Found $numFolders subfolders.",
+      "$PSScriptRoot/build-repo.ps1",
+      "$folder",
+      "✅ $numFolders Git repositories built at 📂$parentDir in $($elapsed)s.",
+      "⚠️ ERROR: $($Error[0]) (at line $($_.InvocationInfo.ScriptLineNumber))"
+    ],
+    "string_anzahl_gesamt": 11,
+    "base64_bloecke_dekodiert": [],
+    "base64_bloecke_gesamt": 0,
+    "beobachtete_cmdlets": [
+      "Get-ChildItem",
+      "Get-Item",
+      "Test-Path"
+    ],
+    "auffaellige_tokens": {},
+    "iocs": {
+      "urls": [
+        "https://github.com/fleschutz/PowerShell"
+      ],
+      "ipv4": [],
+      "pfade": [
+        "C:\\MyRepos"
+      ]
+    },
+    "deobfuskiert_auszug": "﻿<#\n.SYNOPSIS\n\tBuild Git repos\n.DESCRIPTION\n\tThis PowerShell script builds all Git repositories within a folder.\n.PARAMETER parentDir\n\tSpecifies the path to the parent folder\n.EXAMPLE\n\tPS> ./build-repos.ps1 C:\\MyRepos\n.LINK\n\thttps://github.com/fleschutz/PowerShell\n.NOTES\n\tAuthor: Markus Fleschutz | License: CC0\n#>\n\nparam([string]$parentDir = \"$PWD\")\n\ntry {\n\t$stopWatch = [system.diagnostics.stopwatch]::startNew()\n\n\t$parentDirName = (Get-Item \"$parentDir\").Name\n\t\"⏳ Step 1 - Checking parent folder 📂$parentDirName...\"\n\tif (-not(Test-Path \"$parentDir\" -pathType container)) { throw \"Can't access folder: $parentDir\" }\n\t$folders = (Get-ChildItem \"$parentDir\" -attributes Directory)\n\t$numFolders = $folders.Count\n\t\"Found $numFolders subfolders.\"\n\n\tforeach ($folder in $folders) {\n\t\t& \"$PSScriptRoot/build-repo.ps1\" \"$folder\"\n\t}\n\t[int]$elapsed = $stopWatch.Elapsed.TotalSeconds\n\t\"✅ $numFolders Git repositories built at 📂$parentDir in $($elapsed)s.\"\n\texit 0 # success\n} catch {\n\t\"⚠️ ERROR: $($Error[0]) (at line $($_.InvocationInfo.ScriptLineNumber))\"\n\texit 1\n}\n",
+    "dekodierte_befehle": [],
+    "beobachtete_abfolge": []
+  }
+}

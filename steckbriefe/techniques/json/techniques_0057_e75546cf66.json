@@ -1,0 +1,58 @@
+{
+  "meta": {
+    "quelldatei": "tech_056_WITHER.ps1",
+    "sha256": "e75546cf662ed25145d4a2628ae1aab29d7fc517f928ce7706fc62559b1d9a62",
+    "groesse_bytes": 206,
+    "zeilen": 9,
+    "ground_truth_label": "techniques",
+    "analyse_gekuerzt": false,
+    "hinweis": "Kein Urteil enthalten. Bewertung erfolgt durch das LLM."
+  },
+  "stufe1_extract": {
+    "strings": [],
+    "string_anzahl_gesamt": 0,
+    "base64_bloecke_dekodiert": [],
+    "base64_bloecke_gesamt": 0
+  },
+  "stufe2_features": {
+    "strings": [],
+    "string_anzahl_gesamt": 0,
+    "base64_bloecke_dekodiert": [],
+    "base64_bloecke_gesamt": 0,
+    "beobachtete_cmdlets": [
+      "Set-MpPreference",
+      "Set-NetFirewallProfile"
+    ],
+    "auffaellige_tokens": {
+      "set_mppreference": 3
+    },
+    "iocs": {
+      "urls": [],
+      "ipv4": [],
+      "pfade": []
+    }
+  },
+  "stufe3_structure": {
+    "strings": [],
+    "string_anzahl_gesamt": 0,
+    "base64_bloecke_dekodiert": [],
+    "base64_bloecke_gesamt": 0,
+    "beobachtete_cmdlets": [
+      "Set-MpPreference",
+      "Set-NetFirewallProfile"
+    ],
+    "auffaellige_tokens": {
+      "set_mppreference": 3
+    },
+    "iocs": {
+      "urls": [],
+      "ipv4": [],
+      "pfade": []
+    },
+    "deobfuskiert_auszug": "Set-NetFirewallProfile -Profile Domain,Public,Private -Enabled False\r\n\r\nSet-MpPreference -DisableRealtimeMonitoring $true\r\n\r\nSet-MpPreference -MAPSReporting 0\r\n\r\n\r\nSet-MpPreference -SubmitSamplesConsent 0\r\n",
+    "dekodierte_befehle": [],
+    "beobachtete_abfolge": [
+      "Defender-Einstellung aendern"
+    ]
+  }
+}

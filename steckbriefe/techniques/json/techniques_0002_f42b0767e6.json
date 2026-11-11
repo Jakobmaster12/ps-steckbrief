@@ -1,0 +1,99 @@
+{
+  "meta": {
+    "quelldatei": "tech_001_brute7dtd.ps1",
+    "sha256": "f42b0767e6a62a6bcfc2cdf007286e89aa134457080a82dd026fbcb155286e57",
+    "groesse_bytes": 2734,
+    "zeilen": 75,
+    "ground_truth_label": "techniques",
+    "analyse_gekuerzt": false,
+    "hinweis": "Kein Urteil enthalten. Bewertung erfolgt durch das LLM."
+  },
+  "stufe1_extract": {
+    "strings": [
+      "Go to 7DtD door you want to unlock and go to the 'Enter Code' screen and click OK.",
+      "Unlock Door",
+      "Hold CTRL for 3 seconds to stop.",
+      "Instruction",
+      "C:\\Programming\\#PythonScripts\\Malware\\Windows\\WiFi Password Bruteforce\\pass.txt",
+      "\r\nusing System;\r\nusing System.Runtime.InteropServices;\r\n\r\npublic class MouseActions {\r\n    [DllImport(",
+      ", CharSet = CharSet.Auto, CallingConvention = CallingConvention.StdCall)]\r\n    public static extern void mouse_event(uint dwFlags, uint dx, uint dy, uint cButtons, uint dwExtraInfo);\r\n\r\n    public static void MouseClick() {\r\n        mouse_event(0x0002, 0, 0, 0, 0); // Mouse down\r\n        mouse_event(0x0004, 0, 0, 0, 0); // Mouse up\r\n    }\r\n}\r\n",
+      "{ENTER}"
+    ],
+    "string_anzahl_gesamt": 8,
+    "base64_bloecke_dekodiert": [],
+    "base64_bloecke_gesamt": 0
+  },
+  "stufe2_features": {
+    "strings": [
+      "Go to 7DtD door you want to unlock and go to the 'Enter Code' screen and click OK.",
+      "Unlock Door",
+      "Hold CTRL for 3 seconds to stop.",
+      "Instruction",
+      "C:\\Programming\\#PythonScripts\\Malware\\Windows\\WiFi Password Bruteforce\\pass.txt",
+      "\r\nusing System;\r\nusing System.Runtime.InteropServices;\r\n\r\npublic class MouseActions {\r\n    [DllImport(",
+      ", CharSet = CharSet.Auto, CallingConvention = CallingConvention.StdCall)]\r\n    public static extern void mouse_event(uint dwFlags, uint dx, uint dy, uint cButtons, uint dwExtraInfo);\r\n\r\n    public static void MouseClick() {\r\n        mouse_event(0x0002, 0, 0, 0, 0); // Mouse down\r\n        mouse_event(0x0004, 0, 0, 0, 0); // Mouse up\r\n    }\r\n}\r\n",
+      "{ENTER}"
+    ],
+    "string_anzahl_gesamt": 8,
+    "base64_bloecke_dekodiert": [],
+    "base64_bloecke_gesamt": 0,
+    "beobachtete_cmdlets": [
+      "Add-Type",
+      "Check-CtrlPressed",
+      "Get-Content",
+      "Get-Random",
+      "Mouse-ClickCenter",
+      "New-Object",
+      "Send-Keystroke",
+      "Start-Sleep"
+    ],
+    "auffaellige_tokens": {
+      "add_type": 5
+    },
+    "iocs": {
+      "urls": [],
+      "ipv4": [],
+      "pfade": [
+        "C:\\Programming\\#PythonScripts\\Malware\\Windows\\WiFi"
+      ]
+    }
+  },
+  "stufe3_structure": {
+    "strings": [
+      "Go to 7DtD door you want to unlock and go to the 'Enter Code' screen and click OK.",
+      "Unlock Door",
+      "Hold CTRL for 3 seconds to stop.",
+      "Instruction",
+      "C:\\Programming\\#PythonScripts\\Malware\\Windows\\WiFi Password Bruteforce\\pass.txt",
+      "\r\nusing System;\r\nusing System.Runtime.InteropServices;\r\n\r\npublic class MouseActions {\r\n    [DllImport(",
+      ", CharSet = CharSet.Auto, CallingConvention = CallingConvention.StdCall)]\r\n    public static extern void mouse_event(uint dwFlags, uint dx, uint dy, uint cButtons, uint dwExtraInfo);\r\n\r\n    public static void MouseClick() {\r\n        mouse_event(0x0002, 0, 0, 0, 0); // Mouse down\r\n        mouse_event(0x0004, 0, 0, 0, 0); // Mouse up\r\n    }\r\n}\r\n",
+      "{ENTER}"
+    ],
+    "string_anzahl_gesamt": 8,
+    "base64_bloecke_dekodiert": [],
+    "base64_bloecke_gesamt": 0,
+    "beobachtete_cmdlets": [
+      "Add-Type",
+      "Check-CtrlPressed",
+      "Get-Content",
+      "Get-Random",
+      "Mouse-ClickCenter",
+      "New-Object",
+      "Send-Keystroke",
+      "Start-Sleep"
+    ],
+    "auffaellige_tokens": {
+      "add_type": 5
+    },
+    "iocs": {
+      "urls": [],
+      "ipv4": [],
+      "pfade": [
+        "C:\\Programming\\#PythonScripts\\Malware\\Windows\\WiFi"
+      ]
+    },
+    "deobfuskiert_auszug": "Add-Type -AssemblyName System.Windows.Forms\r\n\r\n$response = [System.Windows.Forms.MessageBox]::Show(\"Go to 7DtD door you want to unlock and go to the 'Enter Code' screen and click OK.\", \"Unlock Door\", [System.Windows.Forms.MessageBoxButtons]::OKCancel, [System.Windows.Forms.MessageBoxIcon]::Information, [System.Windows.Forms.MessageBoxDefaultButton]::Button1, [System.Windows.Forms.MessageBoxOptions]::DefaultDesktopOnly)\r\n\r\nif ($response -eq [System.Windows.Forms.DialogResult]::OK) {\r\n    [System.Windows.Forms.MessageBox]::Show(\"Hold CTRL for 3 seconds to stop.\", \"Instruction\", [System.Windows.Forms.MessageBoxButtons]::OK, [System.Windows.Forms.MessageBoxIcon]::Information, [System.Windows.Forms.MessageBoxDefaultButton]::Button1, [System.Windows.Forms.MessageBoxOptions]::DefaultDesktopOnly)\r\n    Start-Sleep -Seconds 5\r\n} else {\r\n    exit\r\n}\r\n\r\nAdd-Type -AssemblyName PresentationCore\r\n\r\n$lines = Get-Content \"C:\\Programming\\#PythonScripts\\Malware\\Windows\\WiFi Password Bruteforce\\pass.txt\"\r\n\r\nfunction Send-Keystroke {\r\n    param (\r\n        [string]$Keys\r\n    )\r\n    Add-Type -AssemblyName System.Windows.Forms\r\n    [System.Windows.Forms.SendKeys]::SendWait($Keys)\r\n}\r\n\r\nfunction Mouse-ClickCenter {\r\n    Add-Type -AssemblyName System.Windows.Forms\r\n    $screenWidth = [System.Windows.Forms.Screen]::PrimaryScreen.Bounds.Width\r\n    $screenHeight = [System.Windows.Forms.Screen]::PrimaryScreen.Bounds.Height\r\n\r\n    [System.Windows.Forms.Cursor]::Position = New-Object System.Drawing.Point(($screenWidth/2), ($screenHeight/2))\r\n\r\n    Add-Type -TypeDefinition @\"\r\nusing System;\r\nusing System.Runtime.InteropServices;\r\n\r\npublic class MouseActions {\r\n    [DllImport(\"user32.dll\", CharSet = CharSet.Auto, CallingConvention = CallingConvention.StdCall)]\r\n    public static extern void mouse_event(uint dwFlags, uint dx, uint dy, uint cButtons, uint dwExtraInfo);\r\n\r\n    public static void MouseClick() {\r\n        mouse_event(0x0002, 0, 0, 0, 0); // Mouse down\r\n        mouse_event(0x0004, 0, 0, 0,",
+    "dekodierte_befehle": [],
+    "beobachtete_abfolge": []
+  }
+}

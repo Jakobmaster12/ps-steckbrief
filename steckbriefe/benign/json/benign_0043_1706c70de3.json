@@ -1,0 +1,114 @@
+{
+  "meta": {
+    "quelldatei": "benign_042_change-wallpaper.ps1",
+    "sha256": "1706c70de34cd63529566e552986abc153396ad310b66aac9e65ca147fa883ba",
+    "groesse_bytes": 983,
+    "zeilen": 38,
+    "ground_truth_label": "benign",
+    "analyse_gekuerzt": false,
+    "hinweis": "Kein Urteil enthalten. Bewertung erfolgt durch das LLM."
+  },
+  "stufe1_extract": {
+    "strings": [
+      ")\n\nfunction GetTempDir {\n        if (",
+      " -ne ",
+      ") { return ",
+      " }\n        if (",
+      ")  { return ",
+      " }\n        if ($IsLinux) { return ",
+      " }\n        return ",
+      "\n}\n\ntry {\n\t& ",
+      "Just a second...",
+      "$(GetTempDir)/next_wallpaper.jpg",
+      "https://source.unsplash.com/3840x2160?$Category",
+      "Download failed",
+      "$PSScriptRoot/set-wallpaper.ps1",
+      "$Path",
+      "⚠️ ERROR: $($Error[0]) (at line $($_.InvocationInfo.ScriptLineNumber))"
+    ],
+    "string_anzahl_gesamt": 16,
+    "base64_bloecke_dekodiert": [],
+    "base64_bloecke_gesamt": 0
+  },
+  "stufe2_features": {
+    "strings": [
+      ")\n\nfunction GetTempDir {\n        if (",
+      " -ne ",
+      ") { return ",
+      " }\n        if (",
+      ")  { return ",
+      " }\n        if ($IsLinux) { return ",
+      " }\n        return ",
+      "\n}\n\ntry {\n\t& ",
+      "Just a second...",
+      "$(GetTempDir)/next_wallpaper.jpg",
+      "https://source.unsplash.com/3840x2160?$Category",
+      "Download failed",
+      "$PSScriptRoot/set-wallpaper.ps1",
+      "$Path",
+      "⚠️ ERROR: $($Error[0]) (at line $($_.InvocationInfo.ScriptLineNumber))"
+    ],
+    "string_anzahl_gesamt": 16,
+    "base64_bloecke_dekodiert": [],
+    "base64_bloecke_gesamt": 0,
+    "beobachtete_cmdlets": [],
+    "auffaellige_tokens": {
+      "invoke_webrequest": 1
+    },
+    "iocs": {
+      "urls": [
+        "https://github.com/fleschutz/PowerShell",
+        "https://source.unsplash.com/3840x2160?$Category"
+      ],
+      "ipv4": [],
+      "pfade": [
+        "$env:TEMP",
+        "$env:TMP",
+        "C:\\Temp"
+      ]
+    }
+  },
+  "stufe3_structure": {
+    "strings": [
+      ")\n\nfunction GetTempDir {\n        if (",
+      " -ne ",
+      ") { return ",
+      " }\n        if (",
+      ")  { return ",
+      " }\n        if ($IsLinux) { return ",
+      " }\n        return ",
+      "\n}\n\ntry {\n\t& ",
+      "Just a second...",
+      "$(GetTempDir)/next_wallpaper.jpg",
+      "https://source.unsplash.com/3840x2160?$Category",
+      "Download failed",
+      "$PSScriptRoot/set-wallpaper.ps1",
+      "$Path",
+      "⚠️ ERROR: $($Error[0]) (at line $($_.InvocationInfo.ScriptLineNumber))"
+    ],
+    "string_anzahl_gesamt": 16,
+    "base64_bloecke_dekodiert": [],
+    "base64_bloecke_gesamt": 0,
+    "beobachtete_cmdlets": [],
+    "auffaellige_tokens": {
+      "invoke_webrequest": 1
+    },
+    "iocs": {
+      "urls": [
+        "https://github.com/fleschutz/PowerShell",
+        "https://source.unsplash.com/3840x2160?$Category"
+      ],
+      "ipv4": [],
+      "pfade": [
+        "$env:TEMP",
+        "$env:TMP",
+        "C:\\Temp"
+      ]
+    },
+    "deobfuskiert_auszug": "﻿<#\n.SYNOPSIS\n\tChanges the wallpaper\n.DESCRIPTION\n\tThis PowerShell script downloads a random photo from Unsplash and sets it as desktop background.\n.PARAMETER Category\n\tSpecifies the photo category (beach, city, ...)\n.EXAMPLE\n\tPS> ./change-wallpaper \n.LINK\n\thttps://github.com/fleschutz/PowerShell\n.NOTES\n\tAuthor: Markus Fleschutz | License: CC0\n#>\n\nparam([string]$Category = \"\")\n\nfunction GetTempDir {\n        if (\"$env:TEMP\" -ne \"\") { return \"$env:TEMP\" }\n        if (\"$env:TMP\" -ne \"\")  { return \"$env:TMP\" }\n        if ($IsLinux) { return \"/tmp\" }\n        return \"C:\\Temp\"\n}\n\ntry {\n\t& \"$PSScriptRoot/speak-english.ps1\" \"Just a second...\"\n\n\t$Path = \"$(GetTempDir)/next_wallpaper.jpg\"\n\t& wget -O $Path \"https://source.unsplash.com/3840x2160?$Category\"\n\tif ($lastExitCode -ne 0) { throw \"Download failed\" }\n\n\t& \"$PSScriptRoot/set-wallpaper.ps1\" -ImageFile \"$Path\"\n\texit 0 # success\n} catch {\n\t\"⚠️ ERROR: $($Error[0]) (at line $($_.InvocationInfo.ScriptLineNumber))\"\n\texit 1\n}\n",
+    "dekodierte_befehle": [],
+    "beobachtete_abfolge": [
+      "Web-Anfrage senden"
+    ]
+  }
+}

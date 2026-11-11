@@ -1,0 +1,93 @@
+{
+  "meta": {
+    "quelldatei": "tech_042_Medium.ps1",
+    "sha256": "6aca7cfe430e2afd6833acade2b39a8c0763a4d7fee35783bab5b43ccf536ac5",
+    "groesse_bytes": 711,
+    "zeilen": 32,
+    "ground_truth_label": "techniques",
+    "analyse_gekuerzt": false,
+    "hinweis": "Kein Urteil enthalten. Bewertung erfolgt durch das LLM."
+  },
+  "stufe1_extract": {
+    "strings": [
+      "In this world, those who seek to create find purpose, while those who seek to destroy find only emptiness.",
+      "$ba$bb$ac",
+      " + $ab.Substring(46,1)\r\n$1 = ([char]115)\r\n$cb = $ii\r\n$ca = $ab.Substring(10,1)\r\n$bc = ",
+      "\r\n$ic = ",
+      "\r\n$i1 = ",
+      "\r\n\r\n$a = $i1\r\n$ia = $ab.Substring(3,1);$ai = $ab.Substring(4,1);$bi = $ab.Substring(19,1)\r\n$ci = $i + ",
+      "\r\n$c1 = ",
+      "\r\n$a1 = ",
+      "\r\n$b1 = ",
+      "\r\n\r\n$c = "
+    ],
+    "string_anzahl_gesamt": 10,
+    "base64_bloecke_dekodiert": [],
+    "base64_bloecke_gesamt": 0
+  },
+  "stufe2_features": {
+    "strings": [
+      "In this world, those who seek to create find purpose, while those who seek to destroy find only emptiness.",
+      "$ba$bb$ac",
+      " + $ab.Substring(46,1)\r\n$1 = ([char]115)\r\n$cb = $ii\r\n$ca = $ab.Substring(10,1)\r\n$bc = ",
+      "\r\n$ic = ",
+      "\r\n$i1 = ",
+      "\r\n\r\n$a = $i1\r\n$ia = $ab.Substring(3,1);$ai = $ab.Substring(4,1);$bi = $ab.Substring(19,1)\r\n$ci = $i + ",
+      "\r\n$c1 = ",
+      "\r\n$a1 = ",
+      "\r\n$b1 = ",
+      "\r\n\r\n$c = "
+    ],
+    "string_anzahl_gesamt": 10,
+    "base64_bloecke_dekodiert": [],
+    "base64_bloecke_gesamt": 0,
+    "beobachtete_cmdlets": [
+      "Invoke-Expression",
+      "Write-Host"
+    ],
+    "auffaellige_tokens": {
+      "invoke_expression": 1,
+      "char_array": 1
+    },
+    "iocs": {
+      "urls": [],
+      "ipv4": [],
+      "pfade": []
+    }
+  },
+  "stufe3_structure": {
+    "strings": [
+      "In this world, those who seek to create find purpose, while those who seek to destroy find only emptiness.",
+      "$ba$bb$ac",
+      " + $ab.Substring(46,1)\r\n$1 = ([char]115)\r\n$cb = $ii\r\n$ca = $ab.Substring(10,1)\r\n$bc = ",
+      "\r\n$ic = ",
+      "\r\n$i1 = ",
+      "\r\n\r\n$a = $i1\r\n$ia = $ab.Substring(3,1);$ai = $ab.Substring(4,1);$bi = $ab.Substring(19,1)\r\n$ci = $i + ",
+      "\r\n$c1 = ",
+      "\r\n$a1 = ",
+      "\r\n$b1 = ",
+      "\r\n\r\n$c = "
+    ],
+    "string_anzahl_gesamt": 10,
+    "base64_bloecke_dekodiert": [],
+    "base64_bloecke_gesamt": 0,
+    "beobachtete_cmdlets": [
+      "Invoke-Expression",
+      "Write-Host"
+    ],
+    "auffaellige_tokens": {
+      "invoke_expression": 1,
+      "char_array": 1
+    },
+    "iocs": {
+      "urls": [],
+      "ipv4": [],
+      "pfade": []
+    },
+    "deobfuskiert_auszug": "$phrase = \"In this world, those who seek to create find purpose, while those who seek to destroy find only emptiness.\"\r\n\r\n$ab = $phrase\r\n\r\n$ba = $ab.Substring(4,1)\r\n$bb = $ab.Substring(19,1)\r\n$aa = $ab. Substring(11,1)\r\n$ac = $aa*2+$ab. Substring(9,1)\r\n\r\n$i = \"$ba$bb$ac\"\r\n\r\n$cc = [char]([char[]]$ab)[1];$1i = $ab.Substring(3,1)\r\n$ii = $i. Substring(1,1)\r\n$11 = \" \" + $ab.Substring(46,1)\r\n$1 = ([char]115)\r\n$cb = $ii\r\n$ca = $ab.Substring(10,1)\r\n$bc = \"$cc$ii\"\r\n$ic = \"$1i$11$1$cb\"\r\n$i1 = \"$bc$ic$ca\"\r\n\r\n$a = $i1\r\n$ia = $ab.Substring(3,1);$ai = $ab.Substring(4,1);$bi = $ab.Substring(19,1)\r\n$ci = $i + \" \"\r\n$c1 = \"$ci$ia\"\r\n$a1 = \"$ai$bi\"\r\n$b1 = \"$ca$ii\"\r\n\r\n$c = \"$c1$a1$b1\"\r\n\r\nWrite-Host $c\r\nInvoke-Expression $a",
+    "dekodierte_befehle": [],
+    "beobachtete_abfolge": [
+      "Zeichenkette als Code ausfuehren"
+    ]
+  }
+}

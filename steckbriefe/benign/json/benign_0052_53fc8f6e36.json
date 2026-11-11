@@ -1,0 +1,115 @@
+{
+  "meta": {
+    "quelldatei": "benign_051_check-drives.ps1",
+    "sha256": "53fc8f6e366985debb71d9b9ededb338d431b22dfe5fd5b5fd63b61d68b0a0ee",
+    "groesse_bytes": 1923,
+    "zeilen": 60,
+    "ground_truth_label": "benign",
+    "analyse_gekuerzt": false,
+    "hinweis": "Kein Urteil enthalten. Bewertung erfolgt durch das LLM."
+  },
+  "stufe1_extract": {
+    "strings": [
+      "$bytes bytes",
+      "{0:N0}KB",
+      "{0:N0}MB",
+      "{0:N0}GB",
+      "{0:N0}TB",
+      "Querying drives...",
+      "Done.",
+      "\n\t$reply = ",
+      "\n\tforeach($drive in $drives) {\n\t\t$details = (Get-PSDrive $drive.Name)\n\t\tif ($IsLinux) { $name = $drive.Name } else { $name = $drive.Name + ",
+      " }\n\t\t[int64]$free = $details.Free\n \t\t[int64]$used = $details.Used\n\t\t[int64]$total = ($used + $free)\n\t\tif ($reply -ne ",
+      ") { $reply += ",
+      " }\n\t\tif ($total -eq 0) {\n\t\t\t$reply += ",
+      "\n\t\t} elseif ($free -eq 0) {\n\t\t\t$status = ",
+      "\n\t\t\t$reply += ",
+      "\n\t\t} elseif ($free -lt $minLevel) {\n\t\t\t$status = ",
+      "\n\t\t} else {\n\t\t\t[int64]$percent = ($used * 100) / $total\n\t\t\t$reply += ",
+      "\n\t\t}\n\t}\n\tWrite-Host ",
+      "\n\texit 0 # success\n} catch {\n\t"
+    ],
+    "string_anzahl_gesamt": 20,
+    "base64_bloecke_dekodiert": [],
+    "base64_bloecke_gesamt": 0
+  },
+  "stufe2_features": {
+    "strings": [
+      "$bytes bytes",
+      "{0:N0}KB",
+      "{0:N0}MB",
+      "{0:N0}GB",
+      "{0:N0}TB",
+      "Querying drives...",
+      "Done.",
+      "\n\t$reply = ",
+      "\n\tforeach($drive in $drives) {\n\t\t$details = (Get-PSDrive $drive.Name)\n\t\tif ($IsLinux) { $name = $drive.Name } else { $name = $drive.Name + ",
+      " }\n\t\t[int64]$free = $details.Free\n \t\t[int64]$used = $details.Used\n\t\t[int64]$total = ($used + $free)\n\t\tif ($reply -ne ",
+      ") { $reply += ",
+      " }\n\t\tif ($total -eq 0) {\n\t\t\t$reply += ",
+      "\n\t\t} elseif ($free -eq 0) {\n\t\t\t$status = ",
+      "\n\t\t\t$reply += ",
+      "\n\t\t} elseif ($free -lt $minLevel) {\n\t\t\t$status = ",
+      "\n\t\t} else {\n\t\t\t[int64]$percent = ($used * 100) / $total\n\t\t\t$reply += ",
+      "\n\t\t}\n\t}\n\tWrite-Host ",
+      "\n\texit 0 # success\n} catch {\n\t"
+    ],
+    "string_anzahl_gesamt": 20,
+    "base64_bloecke_dekodiert": [],
+    "base64_bloecke_gesamt": 0,
+    "beobachtete_cmdlets": [
+      "Get-PSDrive",
+      "Write-Host",
+      "Write-Progress"
+    ],
+    "auffaellige_tokens": {},
+    "iocs": {
+      "urls": [
+        "https://github.com/fleschutz/PowerShell"
+      ],
+      "ipv4": [],
+      "pfade": []
+    }
+  },
+  "stufe3_structure": {
+    "strings": [
+      "$bytes bytes",
+      "{0:N0}KB",
+      "{0:N0}MB",
+      "{0:N0}GB",
+      "{0:N0}TB",
+      "Querying drives...",
+      "Done.",
+      "\n\t$reply = ",
+      "\n\tforeach($drive in $drives) {\n\t\t$details = (Get-PSDrive $drive.Name)\n\t\tif ($IsLinux) { $name = $drive.Name } else { $name = $drive.Name + ",
+      " }\n\t\t[int64]$free = $details.Free\n \t\t[int64]$used = $details.Used\n\t\t[int64]$total = ($used + $free)\n\t\tif ($reply -ne ",
+      ") { $reply += ",
+      " }\n\t\tif ($total -eq 0) {\n\t\t\t$reply += ",
+      "\n\t\t} elseif ($free -eq 0) {\n\t\t\t$status = ",
+      "\n\t\t\t$reply += ",
+      "\n\t\t} elseif ($free -lt $minLevel) {\n\t\t\t$status = ",
+      "\n\t\t} else {\n\t\t\t[int64]$percent = ($used * 100) / $total\n\t\t\t$reply += ",
+      "\n\t\t}\n\t}\n\tWrite-Host ",
+      "\n\texit 0 # success\n} catch {\n\t"
+    ],
+    "string_anzahl_gesamt": 20,
+    "base64_bloecke_dekodiert": [],
+    "base64_bloecke_gesamt": 0,
+    "beobachtete_cmdlets": [
+      "Get-PSDrive",
+      "Write-Host",
+      "Write-Progress"
+    ],
+    "auffaellige_tokens": {},
+    "iocs": {
+      "urls": [
+        "https://github.com/fleschutz/PowerShell"
+      ],
+      "ipv4": [],
+      "pfade": []
+    },
+    "deobfuskiert_auszug": "﻿<#\n.SYNOPSIS\n\tChecks the drive space\n.DESCRIPTION\n\tThis PowerShell script queries the free space of all drives and prints it.\n.PARAMETER minLevel\n\tSpecifies the minimum warning level (5GB by default)\n.EXAMPLE\n\tPS> ./check-drives.ps1\n\t✅ Drive C: uses 53% of 930GB (521GB free), D: uses 87% of 4TB (1TB free), E: is empty\n.LINK\n\thttps://github.com/fleschutz/PowerShell\n.NOTES\n\tAuthor: Markus Fleschutz | License: CC0\n#>\n\nparam([int64]$minLevel = 5GB)\n\nfunction Bytes2String { param([int64]$bytes)\n        if ($bytes -lt 1KB) { return \"$bytes bytes\" }\n        if ($bytes -lt 1MB) { return '{0:N0}KB' -f ($bytes / 1KB) }\n        if ($bytes -lt 1GB) { return '{0:N0}MB' -f ($bytes / 1MB) }\n        if ($bytes -lt 1TB) { return '{0:N0}GB' -f ($bytes / 1GB) }\n        if ($bytes -lt 1PB) { return '{0:N0}TB' -f ($bytes / 1TB) }\n        return '{0:N0}GB' -f ($bytes / 1PB)\n}\n\ntry {\n\tWrite-Progress \"Querying drives...\"\n\t$drives = Get-PSDrive -PSProvider FileSystem\n\tWrite-Progress -completed \"Done.\"\n\t$status = \"✅\"\n\t$reply = \"Drive \"\n\tforeach($drive in $drives) {\n\t\t$details = (Get-PSDrive $drive.Name)\n\t\tif ($IsLinux) { $name = $drive.Name } else { $name = $drive.Name + \":\" }\n\t\t[int64]$free = $details.Free\n \t\t[int64]$used = $details.Used\n\t\t[int64]$total = ($used + $free)\n\t\tif ($reply -ne \"Drive \") { $reply += \", \" }\n\t\tif ($total -eq 0) {\n\t\t\t$reply += \"$name is empty\"\n\t\t} elseif ($free -eq 0) {\n\t\t\t$status = \"⚠️\"\n\t\t\t$reply += \"$name with ($(Bytes2String $total)) is FULL\"\n\t\t} elseif ($free -lt $minLevel) {\n\t\t\t$status = \"⚠️\"\n\t\t\t$reply += \"$name nearly full ($(Bytes2String $free) of $(Bytes2String $total) left)\"\n\t\t} else {\n\t\t\t[int64]$percent = ($used * 100) / $total\n\t\t\t$reply += \"$name uses $percent% of $(Bytes2String $total) ($(Bytes2String $free) free)\"\n\t\t}\n\t}\n\tWrite-Host \"$status $reply\"\n\texit 0 # success\n} catch {\n\t\"⚠️ ERROR: $($Error[0]) (at line $($_.InvocationInfo.ScriptLineNumber))\"\n\texit 1\n}\n",
+    "dekodierte_befehle": [],
+    "beobachtete_abfolge": []
+  }
+}

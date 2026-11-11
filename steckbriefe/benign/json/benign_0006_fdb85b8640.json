@@ -1,0 +1,90 @@
+{
+  "meta": {
+    "quelldatei": "benign_005_calculate-BMI.ps1",
+    "sha256": "fdb85b8640c65aa9fd15cf7d087f1afdda9e293cc5744086764a3fbac2b5c66c",
+    "groesse_bytes": 761,
+    "zeilen": 29,
+    "ground_truth_label": "benign",
+    "analyse_gekuerzt": false,
+    "hinweis": "Kein Urteil enthalten. Bewertung erfolgt durch das LLM."
+  },
+  "stufe1_extract": {
+    "strings": [
+      "Enter your height in m ",
+      "Enter your weight in kg",
+      "Your BMI is $result, for adults the WHO regards:",
+      " <16     as Underweight (severe thinness)",
+      " 16-17   as Underweight (moderate thinness)",
+      " 17-18.5 as Underweight (mild thinness)",
+      " 18.5-25 as Normal range",
+      " 25-30   as Overweight (pre-obese)",
+      " 30-35   as Obese (class I)",
+      " 35-40   as Obese (class II)",
+      " >=40    as Obese (class III)"
+    ],
+    "string_anzahl_gesamt": 11,
+    "base64_bloecke_dekodiert": [],
+    "base64_bloecke_gesamt": 0
+  },
+  "stufe2_features": {
+    "strings": [
+      "Enter your height in m ",
+      "Enter your weight in kg",
+      "Your BMI is $result, for adults the WHO regards:",
+      " <16     as Underweight (severe thinness)",
+      " 16-17   as Underweight (moderate thinness)",
+      " 17-18.5 as Underweight (mild thinness)",
+      " 18.5-25 as Normal range",
+      " 25-30   as Overweight (pre-obese)",
+      " 30-35   as Obese (class I)",
+      " 35-40   as Obese (class II)",
+      " >=40    as Obese (class III)"
+    ],
+    "string_anzahl_gesamt": 11,
+    "base64_bloecke_dekodiert": [],
+    "base64_bloecke_gesamt": 0,
+    "beobachtete_cmdlets": [
+      "Read-Host"
+    ],
+    "auffaellige_tokens": {},
+    "iocs": {
+      "urls": [
+        "https://github.com/fleschutz/PowerShell"
+      ],
+      "ipv4": [],
+      "pfade": []
+    }
+  },
+  "stufe3_structure": {
+    "strings": [
+      "Enter your height in m ",
+      "Enter your weight in kg",
+      "Your BMI is $result, for adults the WHO regards:",
+      " <16     as Underweight (severe thinness)",
+      " 16-17   as Underweight (moderate thinness)",
+      " 17-18.5 as Underweight (mild thinness)",
+      " 18.5-25 as Normal range",
+      " 25-30   as Overweight (pre-obese)",
+      " 30-35   as Obese (class I)",
+      " 35-40   as Obese (class II)",
+      " >=40    as Obese (class III)"
+    ],
+    "string_anzahl_gesamt": 11,
+    "base64_bloecke_dekodiert": [],
+    "base64_bloecke_gesamt": 0,
+    "beobachtete_cmdlets": [
+      "Read-Host"
+    ],
+    "auffaellige_tokens": {},
+    "iocs": {
+      "urls": [
+        "https://github.com/fleschutz/PowerShell"
+      ],
+      "ipv4": [],
+      "pfade": []
+    },
+    "deobfuskiert_auszug": "﻿<#\n.SYNOPSIS\n\tCalculate the BMI\n.DESCRIPTION\n\tThis PowerShell script calculates your BMI value.\n.EXAMPLE\n\tPS> ./calculate-BMI.ps1\n.LINK\n\thttps://github.com/fleschutz/PowerShell\n.NOTES\n\tAuthor: Markus Fleschutz | License: CC0\n#>\n\n#requires -version 5.1\n\n[float]$height = Read-Host(\"Enter your height in m \")\n[float]$weight = Read-Host(\"Enter your weight in kg\")\n$result = $weight / ($height * $height)\n\"Your BMI is $result, for adults the WHO regards:\"\n\" <16     as Underweight (severe thinness)\"\n\" 16-17   as Underweight (moderate thinness)\"\n\" 17-18.5 as Underweight (mild thinness)\"\n\" 18.5-25 as Normal range\"\n\" 25-30   as Overweight (pre-obese)\"\n\" 30-35   as Obese (class I)\"\n\" 35-40   as Obese (class II)\"\n\" >=40    as Obese (class III)\"\nexit 0 # success\n",
+    "dekodierte_befehle": [],
+    "beobachtete_abfolge": []
+  }
+}

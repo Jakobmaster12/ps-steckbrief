@@ -1,0 +1,66 @@
+{
+  "meta": {
+    "quelldatei": "tech_009_test.ps1",
+    "sha256": "eed3911e0d5b662b6552cb2becd2d11fade50e300a3eeb36288117cd92f91728",
+    "groesse_bytes": 72,
+    "zeilen": 3,
+    "ground_truth_label": "techniques",
+    "analyse_gekuerzt": false,
+    "hinweis": "Kein Urteil enthalten. Bewertung erfolgt durch das LLM."
+  },
+  "stufe1_extract": {
+    "strings": [
+      "https://www.youtube.com/watch?v=Td9ZiR0onpk"
+    ],
+    "string_anzahl_gesamt": 1,
+    "base64_bloecke_dekodiert": [],
+    "base64_bloecke_gesamt": 0
+  },
+  "stufe2_features": {
+    "strings": [
+      "https://www.youtube.com/watch?v=Td9ZiR0onpk"
+    ],
+    "string_anzahl_gesamt": 1,
+    "base64_bloecke_dekodiert": [],
+    "base64_bloecke_gesamt": 0,
+    "beobachtete_cmdlets": [
+      "Start-Process"
+    ],
+    "auffaellige_tokens": {
+      "start_process": 1
+    },
+    "iocs": {
+      "urls": [
+        "https://www.youtube.com/watch?v=Td9ZiR0onpk"
+      ],
+      "ipv4": [],
+      "pfade": []
+    }
+  },
+  "stufe3_structure": {
+    "strings": [
+      "https://www.youtube.com/watch?v=Td9ZiR0onpk"
+    ],
+    "string_anzahl_gesamt": 1,
+    "base64_bloecke_dekodiert": [],
+    "base64_bloecke_gesamt": 0,
+    "beobachtete_cmdlets": [
+      "Start-Process"
+    ],
+    "auffaellige_tokens": {
+      "start_process": 1
+    },
+    "iocs": {
+      "urls": [
+        "https://www.youtube.com/watch?v=Td9ZiR0onpk"
+      ],
+      "ipv4": [],
+      "pfade": []
+    },
+    "deobfuskiert_auszug": "$url = \"https://www.youtube.com/watch?v=Td9ZiR0onpk\"\nStart-Process $url\n",
+    "dekodierte_befehle": [],
+    "beobachtete_abfolge": [
+      "Prozess starten"
+    ]
+  }
+}

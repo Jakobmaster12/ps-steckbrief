@@ -1,0 +1,88 @@
+{
+  "meta": {
+    "quelldatei": "tech_017_DNScrypt.ps1",
+    "sha256": "c5cc9c48849dba22bcb5cdfd39625a45c6524b5e0d6c84600d07f790108bf942",
+    "groesse_bytes": 1499,
+    "zeilen": 39,
+    "ground_truth_label": "techniques",
+    "analyse_gekuerzt": false,
+    "hinweis": "Kein Urteil enthalten. Bewertung erfolgt durch das LLM."
+  },
+  "stufe1_extract": {
+    "strings": [
+      "This script needs to be run as an administrator. Please restart the script with administrative privileges.",
+      "Press any key to exit...",
+      "dnscrypt-proxy",
+      "C:\\dnscrypt-proxy-win64-2.1.5\\win64",
+      " }\r\n    Set-DnsClientServerAddress -InterfaceIndex $interface.ifIndex -ServerAddresses \"127.0.0.1\"\r\n\r\n} else {\r\n    # If dnscrypt-proxy.exe is already running, follow these instructions:\r\n\r\n    # Change directory\r\n    Set-Location \"C:\\dnscrypt-proxy-win64-2.1.5\\win64\"\r\n\r\n    # Stop dnscrypt-proxy service\r\n    .\\dnscrypt-proxy -service stop\r\n\r\n    # Change DNS and IP address back to auto\r\n    $interface = Get-NetAdapter | Where-Object { $_.Status -eq "
+    ],
+    "string_anzahl_gesamt": 5,
+    "base64_bloecke_dekodiert": [],
+    "base64_bloecke_gesamt": 0
+  },
+  "stufe2_features": {
+    "strings": [
+      "This script needs to be run as an administrator. Please restart the script with administrative privileges.",
+      "Press any key to exit...",
+      "dnscrypt-proxy",
+      "C:\\dnscrypt-proxy-win64-2.1.5\\win64",
+      " }\r\n    Set-DnsClientServerAddress -InterfaceIndex $interface.ifIndex -ServerAddresses \"127.0.0.1\"\r\n\r\n} else {\r\n    # If dnscrypt-proxy.exe is already running, follow these instructions:\r\n\r\n    # Change directory\r\n    Set-Location \"C:\\dnscrypt-proxy-win64-2.1.5\\win64\"\r\n\r\n    # Stop dnscrypt-proxy service\r\n    .\\dnscrypt-proxy -service stop\r\n\r\n    # Change DNS and IP address back to auto\r\n    $interface = Get-NetAdapter | Where-Object { $_.Status -eq "
+    ],
+    "string_anzahl_gesamt": 5,
+    "base64_bloecke_dekodiert": [],
+    "base64_bloecke_gesamt": 0,
+    "beobachtete_cmdlets": [
+      "Get-NetAdapter",
+      "Get-Process",
+      "Read-Host",
+      "Set-DnsClientServerAddress",
+      "Set-Location",
+      "Where-Object",
+      "Write-Host"
+    ],
+    "auffaellige_tokens": {},
+    "iocs": {
+      "urls": [],
+      "ipv4": [
+        "127.0.0.1"
+      ],
+      "pfade": [
+        "C:\\dnscrypt-proxy-win64-2.1.5\\win64"
+      ]
+    }
+  },
+  "stufe3_structure": {
+    "strings": [
+      "This script needs to be run as an administrator. Please restart the script with administrative privileges.",
+      "Press any key to exit...",
+      "dnscrypt-proxy",
+      "C:\\dnscrypt-proxy-win64-2.1.5\\win64",
+      " }\r\n    Set-DnsClientServerAddress -InterfaceIndex $interface.ifIndex -ServerAddresses \"127.0.0.1\"\r\n\r\n} else {\r\n    # If dnscrypt-proxy.exe is already running, follow these instructions:\r\n\r\n    # Change directory\r\n    Set-Location \"C:\\dnscrypt-proxy-win64-2.1.5\\win64\"\r\n\r\n    # Stop dnscrypt-proxy service\r\n    .\\dnscrypt-proxy -service stop\r\n\r\n    # Change DNS and IP address back to auto\r\n    $interface = Get-NetAdapter | Where-Object { $_.Status -eq "
+    ],
+    "string_anzahl_gesamt": 5,
+    "base64_bloecke_dekodiert": [],
+    "base64_bloecke_gesamt": 0,
+    "beobachtete_cmdlets": [
+      "Get-NetAdapter",
+      "Get-Process",
+      "Read-Host",
+      "Set-DnsClientServerAddress",
+      "Set-Location",
+      "Where-Object",
+      "Write-Host"
+    ],
+    "auffaellige_tokens": {},
+    "iocs": {
+      "urls": [],
+      "ipv4": [
+        "127.0.0.1"
+      ],
+      "pfade": [
+        "C:\\dnscrypt-proxy-win64-2.1.5\\win64"
+      ]
+    },
+    "deobfuskiert_auszug": "# Check if script is being run as an administrator\r\n$isAdmin = ([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)\r\n\r\nif (-not $isAdmin) {\r\n    Write-Host \"This script needs to be run as an administrator. Please restart the script with administrative privileges.\" -ForegroundColor Red\r\n    Read-Host \"Press any key to exit...\"\r\n    exit\r\n}\r\n\r\n# Check if dnscrypt-proxy.exe is running\r\n$process = Get-Process -Name \"dnscrypt-proxy\" -ErrorAction SilentlyContinue\r\n\r\nif (-not $process) {\r\n    # If dnscrypt-proxy.exe is not running, follow these instructions:\r\n\r\n    # Change directory\r\n    Set-Location \"C:\\dnscrypt-proxy-win64-2.1.5\\win64\"\r\n\r\n    # Start dnscrypt-proxy service\r\n    .\\dnscrypt-proxy -service start\r\n\r\n    # Change DNS IP address to 127.0.0.1 and port to 53\r\n    $interface = Get-NetAdapter | Where-Object { $_.Status -eq 'Up' }\r\n    Set-DnsClientServerAddress -InterfaceIndex $interface.ifIndex -ServerAddresses \"127.0.0.1\"\r\n\r\n} else {\r\n    # If dnscrypt-proxy.exe is already running, follow these instructions:\r\n\r\n    # Change directory\r\n    Set-Location \"C:\\dnscrypt-proxy-win64-2.1.5\\win64\"\r\n\r\n    # Stop dnscrypt-proxy service\r\n    .\\dnscrypt-proxy -service stop\r\n\r\n    # Change DNS and IP address back to auto\r\n    $interface = Get-NetAdapter | Where-Object { $_.Status -eq 'Up' }\r\n    Set-DnsClientServerAddress -InterfaceIndex $interface.ifIndex -ResetServerAddresses\r\n}\r\n",
+    "dekodierte_befehle": [],
+    "beobachtete_abfolge": []
+  }
+}

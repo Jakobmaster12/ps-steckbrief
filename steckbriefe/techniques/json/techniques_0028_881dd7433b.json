@@ -1,0 +1,122 @@
+{
+  "meta": {
+    "quelldatei": "tech_027_Get-Geo.ps1",
+    "sha256": "881dd7433b5b02503ee6ec7c579cb158c210434bebcaae3fca72614e743f3d67",
+    "groesse_bytes": 1412,
+    "zeilen": 35,
+    "ground_truth_label": "techniques",
+    "analyse_gekuerzt": false,
+    "hinweis": "Kein Urteil enthalten. Bewertung erfolgt durch das LLM."
+  },
+  "stufe1_extract": {
+    "strings": [
+      "http://ip-api.com/json",
+      "success",
+      "          = $response.query\n                ",
+      "     = $response.country\n                ",
+      "      = $response.regionName\n                ",
+      "        = $response.city\n                ",
+      "    = $response.lat\n                ",
+      "   = $response.lon\n                ",
+      "    = $response.timezone\n                ",
+      "IP Address    : $($geoLocation.IP)",
+      "Country       : $($geoLocation.Country)",
+      "Region        : $($geoLocation.Region)",
+      "City          : $($geoLocation.City)",
+      "Latitude      : $($geoLocation.Latitude)",
+      "Longitude     : $($geoLocation.Longitude)",
+      "Time Zone     : $($geoLocation.TimeZone)",
+      "ISP           : $($geoLocation.ISP)",
+      "Failed to retrieve geolocation information.",
+      "An error occurred while trying to fetch geolocation data: $_"
+    ],
+    "string_anzahl_gesamt": 19,
+    "base64_bloecke_dekodiert": [],
+    "base64_bloecke_gesamt": 0
+  },
+  "stufe2_features": {
+    "strings": [
+      "http://ip-api.com/json",
+      "success",
+      "          = $response.query\n                ",
+      "     = $response.country\n                ",
+      "      = $response.regionName\n                ",
+      "        = $response.city\n                ",
+      "    = $response.lat\n                ",
+      "   = $response.lon\n                ",
+      "    = $response.timezone\n                ",
+      "IP Address    : $($geoLocation.IP)",
+      "Country       : $($geoLocation.Country)",
+      "Region        : $($geoLocation.Region)",
+      "City          : $($geoLocation.City)",
+      "Latitude      : $($geoLocation.Latitude)",
+      "Longitude     : $($geoLocation.Longitude)",
+      "Time Zone     : $($geoLocation.TimeZone)",
+      "ISP           : $($geoLocation.ISP)",
+      "Failed to retrieve geolocation information.",
+      "An error occurred while trying to fetch geolocation data: $_"
+    ],
+    "string_anzahl_gesamt": 19,
+    "base64_bloecke_dekodiert": [],
+    "base64_bloecke_gesamt": 0,
+    "beobachtete_cmdlets": [
+      "Get-Geo",
+      "Invoke-RestMethod",
+      "New-Object",
+      "Write-Error",
+      "Write-Host"
+    ],
+    "auffaellige_tokens": {},
+    "iocs": {
+      "urls": [
+        "http://ip-api.com/json"
+      ],
+      "ipv4": [],
+      "pfade": []
+    }
+  },
+  "stufe3_structure": {
+    "strings": [
+      "http://ip-api.com/json",
+      "success",
+      "          = $response.query\n                ",
+      "     = $response.country\n                ",
+      "      = $response.regionName\n                ",
+      "        = $response.city\n                ",
+      "    = $response.lat\n                ",
+      "   = $response.lon\n                ",
+      "    = $response.timezone\n                ",
+      "IP Address    : $($geoLocation.IP)",
+      "Country       : $($geoLocation.Country)",
+      "Region        : $($geoLocation.Region)",
+      "City          : $($geoLocation.City)",
+      "Latitude      : $($geoLocation.Latitude)",
+      "Longitude     : $($geoLocation.Longitude)",
+      "Time Zone     : $($geoLocation.TimeZone)",
+      "ISP           : $($geoLocation.ISP)",
+      "Failed to retrieve geolocation information.",
+      "An error occurred while trying to fetch geolocation data: $_"
+    ],
+    "string_anzahl_gesamt": 19,
+    "base64_bloecke_dekodiert": [],
+    "base64_bloecke_gesamt": 0,
+    "beobachtete_cmdlets": [
+      "Get-Geo",
+      "Invoke-RestMethod",
+      "New-Object",
+      "Write-Error",
+      "Write-Host"
+    ],
+    "auffaellige_tokens": {},
+    "iocs": {
+      "urls": [
+        "http://ip-api.com/json"
+      ],
+      "ipv4": [],
+      "pfade": []
+    },
+    "deobfuskiert_auszug": "function Get-Geo {\n    $ipInfoApiUrl = \"http://ip-api.com/json\"\n    \n    try {\n        $response = Invoke-RestMethod -Uri $ipInfoApiUrl -Method Get\n        if ($response.status -eq 'success') {\n            $geoData = @{\n                'IP'          = $response.query\n                'Country'     = $response.country\n                'Region'      = $response.regionName\n                'City'        = $response.city\n                'Latitude'    = $response.lat\n                'Longitude'   = $response.lon\n                'TimeZone'    = $response.timezone\n                'ISP'         = $response.isp\n            }\n            $geoLocation = New-Object PSObject -Property $geoData\n\n            Write-Host \"IP Address    : $($geoLocation.IP)\"\n            Write-Host \"Country       : $($geoLocation.Country)\"\n            Write-Host \"Region        : $($geoLocation.Region)\"\n            Write-Host \"City          : $($geoLocation.City)\"\n            Write-Host \"Latitude      : $($geoLocation.Latitude)\"\n            Write-Host \"Longitude     : $($geoLocation.Longitude)\"\n            Write-Host \"Time Zone     : $($geoLocation.TimeZone)\"\n            Write-Host \"ISP           : $($geoLocation.ISP)\"\n        }\n        else {\n            Write-Error \"Failed to retrieve geolocation information.\"\n        }\n    }\n    catch {\n        Write-Error \"An error occurred while trying to fetch geolocation data: $_\"\n    }\n}",
+    "dekodierte_befehle": [],
+    "beobachtete_abfolge": []
+  }
+}

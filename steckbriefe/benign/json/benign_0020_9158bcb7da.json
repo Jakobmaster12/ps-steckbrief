@@ -1,0 +1,82 @@
+{
+  "meta": {
+    "quelldatei": "benign_019_cd-onedrive.ps1",
+    "sha256": "9158bcb7dac58e6e2f6f7ca3a53d93fa06815e65dddbfcd80a0da15c672ae68f",
+    "groesse_bytes": 843,
+    "zeilen": 31,
+    "ground_truth_label": "benign",
+    "analyse_gekuerzt": false,
+    "hinweis": "Kein Urteil enthalten. Bewertung erfolgt durch das LLM."
+  },
+  "stufe1_extract": {
+    "strings": [
+      "s OneDrive folder.\n.EXAMPLE\n\tPS> ./cd-onedrive.ps1\n\t📂C:\\Users\\Markus\\OneDrive entered, has 2 files and 0 folders.\n.LINK\n\thttps://github.com/fleschutz/PowerShell\n.NOTES\n\tAuthor: Markus Fleschutz | License: CC0\n#>\n\n#requires -version 5.1\n\ntry {\n\tif (-not(Test-Path \"~/OneDrive\" -pathType container)) {\n\t\tthrow \"No ",
+      "\n\t}\n\t$path = Resolve-Path ",
+      "\n\tSet-Location ",
+      "\n\t$files = Get-ChildItem $path -attributes !Directory\n\t$folders = Get-ChildItem $path -attributes Directory\n\t",
+      "\n\texit 0 # success\n} catch {\n\t"
+    ],
+    "string_anzahl_gesamt": 5,
+    "base64_bloecke_dekodiert": [],
+    "base64_bloecke_gesamt": 0
+  },
+  "stufe2_features": {
+    "strings": [
+      "s OneDrive folder.\n.EXAMPLE\n\tPS> ./cd-onedrive.ps1\n\t📂C:\\Users\\Markus\\OneDrive entered, has 2 files and 0 folders.\n.LINK\n\thttps://github.com/fleschutz/PowerShell\n.NOTES\n\tAuthor: Markus Fleschutz | License: CC0\n#>\n\n#requires -version 5.1\n\ntry {\n\tif (-not(Test-Path \"~/OneDrive\" -pathType container)) {\n\t\tthrow \"No ",
+      "\n\t}\n\t$path = Resolve-Path ",
+      "\n\tSet-Location ",
+      "\n\t$files = Get-ChildItem $path -attributes !Directory\n\t$folders = Get-ChildItem $path -attributes Directory\n\t",
+      "\n\texit 0 # success\n} catch {\n\t"
+    ],
+    "string_anzahl_gesamt": 5,
+    "base64_bloecke_dekodiert": [],
+    "base64_bloecke_gesamt": 0,
+    "beobachtete_cmdlets": [
+      "Get-ChildItem",
+      "Resolve-Path",
+      "Set-Location",
+      "Test-Path"
+    ],
+    "auffaellige_tokens": {},
+    "iocs": {
+      "urls": [
+        "https://github.com/fleschutz/PowerShell"
+      ],
+      "ipv4": [],
+      "pfade": [
+        "C:\\Users\\Markus\\OneDrive"
+      ]
+    }
+  },
+  "stufe3_structure": {
+    "strings": [
+      "s OneDrive folder.\n.EXAMPLE\n\tPS> ./cd-onedrive.ps1\n\t📂C:\\Users\\Markus\\OneDrive entered, has 2 files and 0 folders.\n.LINK\n\thttps://github.com/fleschutz/PowerShell\n.NOTES\n\tAuthor: Markus Fleschutz | License: CC0\n#>\n\n#requires -version 5.1\n\ntry {\n\tif (-not(Test-Path \"~/OneDrive\" -pathType container)) {\n\t\tthrow \"No ",
+      "\n\t}\n\t$path = Resolve-Path ",
+      "\n\tSet-Location ",
+      "\n\t$files = Get-ChildItem $path -attributes !Directory\n\t$folders = Get-ChildItem $path -attributes Directory\n\t",
+      "\n\texit 0 # success\n} catch {\n\t"
+    ],
+    "string_anzahl_gesamt": 5,
+    "base64_bloecke_dekodiert": [],
+    "base64_bloecke_gesamt": 0,
+    "beobachtete_cmdlets": [
+      "Get-ChildItem",
+      "Resolve-Path",
+      "Set-Location",
+      "Test-Path"
+    ],
+    "auffaellige_tokens": {},
+    "iocs": {
+      "urls": [
+        "https://github.com/fleschutz/PowerShell"
+      ],
+      "ipv4": [],
+      "pfade": [
+        "C:\\Users\\Markus\\OneDrive"
+      ]
+    },
+    "deobfuskiert_auszug": "﻿<#\n.SYNOPSIS\n\tSets the working dir to the OneDrive folder\n.DESCRIPTION\n\tThis PowerShell script sets the current working directory to the user's OneDrive folder.\n.EXAMPLE\n\tPS> ./cd-onedrive.ps1\n\t📂C:\\Users\\Markus\\OneDrive entered, has 2 files and 0 folders.\n.LINK\n\thttps://github.com/fleschutz/PowerShell\n.NOTES\n\tAuthor: Markus Fleschutz | License: CC0\n#>\n\n#requires -version 5.1\n\ntry {\n\tif (-not(Test-Path \"~/OneDrive\" -pathType container)) {\n\t\tthrow \"No 'OneDrive' folder in your home directory - Please install OneDrive.\"\n\t}\n\t$path = Resolve-Path \"~/OneDrive\"\n\tSet-Location \"$path\"\n\t$files = Get-ChildItem $path -attributes !Directory\n\t$folders = Get-ChildItem $path -attributes Directory\n\t\"📂$path entered, has $($files.Count) files and $($folders.Count) folders.\"\n\texit 0 # success\n} catch {\n\t\"⚠️ ERROR: $($Error[0])\"\n\texit 1\n}\n",
+    "dekodierte_befehle": [],
+    "beobachtete_abfolge": []
+  }
+}

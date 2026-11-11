@@ -1,0 +1,80 @@
+{
+  "meta": {
+    "quelldatei": "benign_013_cd-fonts.ps1",
+    "sha256": "a6ce8ac9b87c778809568604cb4937da05f3de8bc499b4acd239eabcad964462",
+    "groesse_bytes": 694,
+    "zeilen": 30,
+    "ground_truth_label": "benign",
+    "analyse_gekuerzt": false,
+    "hinweis": "Kein Urteil enthalten. Bewertung erfolgt durch das LLM."
+  },
+  "stufe1_extract": {
+    "strings": [
+      "Fonts",
+      "$path",
+      "No fonts folder at: $path",
+      "📂$path entered, has $($files.Count) font files.",
+      "⚠️ Error: $($Error[0])"
+    ],
+    "string_anzahl_gesamt": 6,
+    "base64_bloecke_dekodiert": [],
+    "base64_bloecke_gesamt": 0
+  },
+  "stufe2_features": {
+    "strings": [
+      "Fonts",
+      "$path",
+      "No fonts folder at: $path",
+      "📂$path entered, has $($files.Count) font files.",
+      "⚠️ Error: $($Error[0])"
+    ],
+    "string_anzahl_gesamt": 6,
+    "base64_bloecke_dekodiert": [],
+    "base64_bloecke_gesamt": 0,
+    "beobachtete_cmdlets": [
+      "Get-ChildItem",
+      "Set-Location",
+      "Test-Path"
+    ],
+    "auffaellige_tokens": {},
+    "iocs": {
+      "urls": [
+        "https://github.com/fleschutz/PowerShell"
+      ],
+      "ipv4": [],
+      "pfade": [
+        "C:\\Windows\\Fonts"
+      ]
+    }
+  },
+  "stufe3_structure": {
+    "strings": [
+      "Fonts",
+      "$path",
+      "No fonts folder at: $path",
+      "📂$path entered, has $($files.Count) font files.",
+      "⚠️ Error: $($Error[0])"
+    ],
+    "string_anzahl_gesamt": 6,
+    "base64_bloecke_dekodiert": [],
+    "base64_bloecke_gesamt": 0,
+    "beobachtete_cmdlets": [
+      "Get-ChildItem",
+      "Set-Location",
+      "Test-Path"
+    ],
+    "auffaellige_tokens": {},
+    "iocs": {
+      "urls": [
+        "https://github.com/fleschutz/PowerShell"
+      ],
+      "ipv4": [],
+      "pfade": [
+        "C:\\Windows\\Fonts"
+      ]
+    },
+    "deobfuskiert_auszug": "﻿<#\n.SYNOPSIS\n\tSets the working dir to the fonts folder\n.DESCRIPTION\n\tThis PowerShell script sets the current working directory to the fonts folder.\n.EXAMPLE\n\tPS> ./cd-fonts.ps1\n\t📂C:\\Windows\\Fonts entered, has 12 font files.\n.LINK\n\thttps://github.com/fleschutz/PowerShell\n.NOTES\n\tAuthor: Markus Fleschutz | License: CC0\n#>\n\n#requires -version 5.1\n\ntry {\n\t$path = [Environment]::GetFolderPath('Fonts')\n\tif (-not(Test-Path \"$path\" -pathType container)) {\n\t\tthrow \"No fonts folder at: $path\"\n\t}\n\tSet-Location \"$path\"\n\t$files = Get-ChildItem $path -attributes !Directory\n\t\"📂$path entered, has $($files.Count) font files.\"\n\texit 0 # success\n} catch {\n\t\"⚠️ Error: $($Error[0])\"\n\texit 1\n}\n",
+    "dekodierte_befehle": [],
+    "beobachtete_abfolge": []
+  }
+}

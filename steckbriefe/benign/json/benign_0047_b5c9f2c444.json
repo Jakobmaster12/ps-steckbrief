@@ -1,0 +1,153 @@
+{
+  "meta": {
+    "quelldatei": "benign_046_check-cpu.ps1",
+    "sha256": "b5c9f2c4442ac2b9f0d38352c2fdb1657a67e2ae72e408c86b94102cc6aad945",
+    "groesse_bytes": 2593,
+    "zeilen": 86,
+    "ground_truth_label": "benign",
+    "analyse_gekuerzt": false,
+    "hinweis": "Kein Urteil enthalten. Bewertung erfolgt durch das LLM."
+  },
+  "stufe1_extract": {
+    "strings": [
+      "$env:PROCESSOR_ARCHITECTURE",
+      ") { return ",
+      " }\n\tif ($IsLinux) {\n\t\t$Name = $PSVersionTable.OS\n\t\tif ($Name -like ",
+      ") {\n\t\t\tif ([System.Environment]::Is64BitOperatingSystem) { return ",
+      " } else { return ",
+      " }\n\t\t} elseif ($Name -like ",
+      " }\n\t\t} elseif ([System.Environment]::Is64BitOperatingSystem) { return ",
+      " }\n\t}\n}\n\nfunction GetCPUTemperature {\n\t$temp = 99999.9 # unsupported\n\tif ($IsLinux) {\n\t\tif (Test-Path ",
+      " -pathType leaf) {\n\t\t\t[int]$IntTemp = Get-Content ",
+      "\n\t\t\t$temp = [math]::round($IntTemp / 1000.0, 1)\n\t\t}\n\t} else {\n\t\t$objects = Get-WmiObject -Query ",
+      " -Namespace ",
+      "\n\t\tforeach ($object in $objects) {\n\t\t\t$highPrec = $object.HighPrecisionTemperature\n\t\t\t$temp = [math]::round($highPrec / 100.0, 1)\n\t\t}\n\t}\n\treturn $temp\n}\n\ntry {\n\tWrite-Progress ",
+      "\n\t$status = ",
+      "\n\t$arch = GetCPUArchitecture\n\tif ($IsLinux) {\n\t\t$cpuName = ",
+      "\n\t\t$arch = ",
+      "\n\t\t$deviceID = ",
+      "\n\t\t$speed = ",
+      "\n\t\t$socket = ",
+      "\n\t} else {\n\t\t$details = Get-WmiObject -Class Win32_Processor\n\t\t$cpuName = $details.Name.trim()\n\t\t$arch = ",
+      "\n\t}\n\t$cores = [System.Environment]::ProcessorCount\n\t$celsius = GetCPUTemperature\n\tif ($celsius -eq 99999.9) {\n\t\t$temp = ",
+      "\n\t} elseif ($celsius -gt 80) {\n\t\t$temp = ",
+      "\n\t\t$status = ",
+      "\n\t} elseif ($celsius -gt 50) {\n\t\t$temp = ",
+      "\n\t} elseif ($celsius -lt 0) {\n\t\t$temp = ",
+      "\n\t} else {\n\t\t$temp = ",
+      "\n\t} \n\n\tWrite-Progress -completed ",
+      "\n\tWrite-Host ",
+      "\n\texit 0 # success\n} catch {\n\t"
+    ],
+    "string_anzahl_gesamt": 36,
+    "base64_bloecke_dekodiert": [],
+    "base64_bloecke_gesamt": 0
+  },
+  "stufe2_features": {
+    "strings": [
+      "$env:PROCESSOR_ARCHITECTURE",
+      ") { return ",
+      " }\n\tif ($IsLinux) {\n\t\t$Name = $PSVersionTable.OS\n\t\tif ($Name -like ",
+      ") {\n\t\t\tif ([System.Environment]::Is64BitOperatingSystem) { return ",
+      " } else { return ",
+      " }\n\t\t} elseif ($Name -like ",
+      " }\n\t\t} elseif ([System.Environment]::Is64BitOperatingSystem) { return ",
+      " }\n\t}\n}\n\nfunction GetCPUTemperature {\n\t$temp = 99999.9 # unsupported\n\tif ($IsLinux) {\n\t\tif (Test-Path ",
+      " -pathType leaf) {\n\t\t\t[int]$IntTemp = Get-Content ",
+      "\n\t\t\t$temp = [math]::round($IntTemp / 1000.0, 1)\n\t\t}\n\t} else {\n\t\t$objects = Get-WmiObject -Query ",
+      " -Namespace ",
+      "\n\t\tforeach ($object in $objects) {\n\t\t\t$highPrec = $object.HighPrecisionTemperature\n\t\t\t$temp = [math]::round($highPrec / 100.0, 1)\n\t\t}\n\t}\n\treturn $temp\n}\n\ntry {\n\tWrite-Progress ",
+      "\n\t$status = ",
+      "\n\t$arch = GetCPUArchitecture\n\tif ($IsLinux) {\n\t\t$cpuName = ",
+      "\n\t\t$arch = ",
+      "\n\t\t$deviceID = ",
+      "\n\t\t$speed = ",
+      "\n\t\t$socket = ",
+      "\n\t} else {\n\t\t$details = Get-WmiObject -Class Win32_Processor\n\t\t$cpuName = $details.Name.trim()\n\t\t$arch = ",
+      "\n\t}\n\t$cores = [System.Environment]::ProcessorCount\n\t$celsius = GetCPUTemperature\n\tif ($celsius -eq 99999.9) {\n\t\t$temp = ",
+      "\n\t} elseif ($celsius -gt 80) {\n\t\t$temp = ",
+      "\n\t\t$status = ",
+      "\n\t} elseif ($celsius -gt 50) {\n\t\t$temp = ",
+      "\n\t} elseif ($celsius -lt 0) {\n\t\t$temp = ",
+      "\n\t} else {\n\t\t$temp = ",
+      "\n\t} \n\n\tWrite-Progress -completed ",
+      "\n\tWrite-Host ",
+      "\n\texit 0 # success\n} catch {\n\t"
+    ],
+    "string_anzahl_gesamt": 36,
+    "base64_bloecke_dekodiert": [],
+    "base64_bloecke_gesamt": 0,
+    "beobachtete_cmdlets": [
+      "Get-Content",
+      "Get-WmiObject",
+      "Test-Path",
+      "Write-Host",
+      "Write-Progress"
+    ],
+    "auffaellige_tokens": {},
+    "iocs": {
+      "urls": [
+        "https://github.com/fleschutz/PowerShell"
+      ],
+      "ipv4": [],
+      "pfade": [
+        "$env:PROCESSOR"
+      ]
+    }
+  },
+  "stufe3_structure": {
+    "strings": [
+      "$env:PROCESSOR_ARCHITECTURE",
+      ") { return ",
+      " }\n\tif ($IsLinux) {\n\t\t$Name = $PSVersionTable.OS\n\t\tif ($Name -like ",
+      ") {\n\t\t\tif ([System.Environment]::Is64BitOperatingSystem) { return ",
+      " } else { return ",
+      " }\n\t\t} elseif ($Name -like ",
+      " }\n\t\t} elseif ([System.Environment]::Is64BitOperatingSystem) { return ",
+      " }\n\t}\n}\n\nfunction GetCPUTemperature {\n\t$temp = 99999.9 # unsupported\n\tif ($IsLinux) {\n\t\tif (Test-Path ",
+      " -pathType leaf) {\n\t\t\t[int]$IntTemp = Get-Content ",
+      "\n\t\t\t$temp = [math]::round($IntTemp / 1000.0, 1)\n\t\t}\n\t} else {\n\t\t$objects = Get-WmiObject -Query ",
+      " -Namespace ",
+      "\n\t\tforeach ($object in $objects) {\n\t\t\t$highPrec = $object.HighPrecisionTemperature\n\t\t\t$temp = [math]::round($highPrec / 100.0, 1)\n\t\t}\n\t}\n\treturn $temp\n}\n\ntry {\n\tWrite-Progress ",
+      "\n\t$status = ",
+      "\n\t$arch = GetCPUArchitecture\n\tif ($IsLinux) {\n\t\t$cpuName = ",
+      "\n\t\t$arch = ",
+      "\n\t\t$deviceID = ",
+      "\n\t\t$speed = ",
+      "\n\t\t$socket = ",
+      "\n\t} else {\n\t\t$details = Get-WmiObject -Class Win32_Processor\n\t\t$cpuName = $details.Name.trim()\n\t\t$arch = ",
+      "\n\t}\n\t$cores = [System.Environment]::ProcessorCount\n\t$celsius = GetCPUTemperature\n\tif ($celsius -eq 99999.9) {\n\t\t$temp = ",
+      "\n\t} elseif ($celsius -gt 80) {\n\t\t$temp = ",
+      "\n\t\t$status = ",
+      "\n\t} elseif ($celsius -gt 50) {\n\t\t$temp = ",
+      "\n\t} elseif ($celsius -lt 0) {\n\t\t$temp = ",
+      "\n\t} else {\n\t\t$temp = ",
+      "\n\t} \n\n\tWrite-Progress -completed ",
+      "\n\tWrite-Host ",
+      "\n\texit 0 # success\n} catch {\n\t"
+    ],
+    "string_anzahl_gesamt": 36,
+    "base64_bloecke_dekodiert": [],
+    "base64_bloecke_gesamt": 0,
+    "beobachtete_cmdlets": [
+      "Get-Content",
+      "Get-WmiObject",
+      "Test-Path",
+      "Write-Host",
+      "Write-Progress"
+    ],
+    "auffaellige_tokens": {},
+    "iocs": {
+      "urls": [
+        "https://github.com/fleschutz/PowerShell"
+      ],
+      "ipv4": [],
+      "pfade": [
+        "$env:PROCESSOR"
+      ]
+    },
+    "deobfuskiert_auszug": "﻿<#\n.SYNOPSIS\n\tChecks the CPU status\n.DESCRIPTION\n\tThis PowerShell script queries the CPU status (name, type, speed, temperature, etc) and prints it.\n.EXAMPLE\n\tPS> ./check-cpu.ps1\n\t✅ Intel(R) Core(TM) i9-10900X CPU @ 3.70GHz (AMD64, 20 cores, CPU0, 3696MHz, CPU0 socket, 31.3°C)\n.LINK\n\thttps://github.com/fleschutz/PowerShell\n.NOTES\n\tAuthor: Markus Fleschutz | License: CC0\n#>\n\nfunction GetCPUArchitecture {\n\tif (\"$env:PROCESSOR_ARCHITECTURE\" -ne \"\") { return \"$env:PROCESSOR_ARCHITECTURE\" }\n\tif ($IsLinux) {\n\t\t$Name = $PSVersionTable.OS\n\t\tif ($Name -like \"*-generic *\") {\n\t\t\tif ([System.Environment]::Is64BitOperatingSystem) { return \"x64\" } else { return \"x86\" }\n\t\t} elseif ($Name -like \"*-raspi *\") {\n\t\t\tif ([System.Environment]::Is64BitOperatingSystem) { return \"ARM64\" } else { return \"ARM32\" }\n\t\t} elseif ([System.Environment]::Is64BitOperatingSystem) { return \"64-bit\" } else { return \"32-bit\" }\n\t}\n}\n\nfunction GetCPUTemperature {\n\t$temp = 99999.9 # unsupported\n\tif ($IsLinux) {\n\t\tif (Test-Path \"/sys/class/thermal/thermal_zone0/temp\" -pathType leaf) {\n\t\t\t[int]$IntTemp = Get-Content \"/sys/class/thermal/thermal_zone0/temp\"\n\t\t\t$temp = [math]::round($IntTemp / 1000.0, 1)\n\t\t}\n\t} else {\n\t\t$objects = Get-WmiObject -Query \"SELECT * FROM Win32_PerfFormattedData_Counters_ThermalZoneInformation\" -Namespace \"root/CIMV2\"\n\t\tforeach ($object in $objects) {\n\t\t\t$highPrec = $object.HighPrecisionTemperature\n\t\t\t$temp = [math]::round($highPrec / 100.0, 1)\n\t\t}\n\t}\n\treturn $temp\n}\n\ntry {\n\tWrite-Progress \"Querying CPU status...\"\n\t$status = \"✅\"\n\t$arch = GetCPUArchitecture\n\tif ($IsLinux) {\n\t\t$cpuName = \"$arch CPU\"\n\t\t$arch = \"\"\n\t\t$deviceID = \"\"\n\t\t$speed = \"\"\n\t\t$socket = \"\"\n\t} else {\n\t\t$details = Get-WmiObject -Class Win32_Processor\n\t\t$cpuName = $details.Name.trim()\n\t\t$arch = \"$arch, \"\n\t\t$deviceID = \", $($details.DeviceID)\"\n\t\t$speed = \", $($details.MaxClockSpeed)MHz\"\n\t\t$socket = \", $($details.SocketDesignation) socket\"\n\t}\n\t$cores = [System.Environment]::ProcessorCount\n\t$celsius = GetCPUTemperature\n\tif ",
+    "dekodierte_befehle": [],
+    "beobachtete_abfolge": []
+  }
+}

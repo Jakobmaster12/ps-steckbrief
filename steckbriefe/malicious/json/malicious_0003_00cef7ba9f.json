@@ -1,0 +1,62 @@
+{
+  "meta": {
+    "quelldatei": "00cef7ba9fa500deee68eafd286aa841d3e46443322958d8f8844c9aaa3949b2.ps1",
+    "sha256": "00cef7ba9fa500deee68eafd286aa841d3e46443322958d8f8844c9aaa3949b2",
+    "groesse_bytes": 145,
+    "zeilen": 1,
+    "ground_truth_label": "malicious",
+    "analyse_gekuerzt": false,
+    "hinweis": "Kein Urteil enthalten. Bewertung erfolgt durch das LLM."
+  },
+  "stufe1_extract": {
+    "strings": [
+      "HKCU:\\Software\\AppDataLow\\Software\\Microsoft\\BBE2C839-DEF8-A50A-C01F-F2A9F4C346ED"
+    ],
+    "string_anzahl_gesamt": 1,
+    "base64_bloecke_dekodiert": [],
+    "base64_bloecke_gesamt": 0
+  },
+  "stufe2_features": {
+    "strings": [
+      "HKCU:\\Software\\AppDataLow\\Software\\Microsoft\\BBE2C839-DEF8-A50A-C01F-F2A9F4C346ED"
+    ],
+    "string_anzahl_gesamt": 1,
+    "base64_bloecke_dekodiert": [],
+    "base64_bloecke_gesamt": 0,
+    "beobachtete_cmdlets": [],
+    "auffaellige_tokens": {
+      "registry_run": 1
+    },
+    "iocs": {
+      "urls": [],
+      "ipv4": [],
+      "pfade": [
+        "U:\\Software\\AppDataLow\\Software\\Microsoft\\BBE2C839-DEF8-A50A-C01F-F2A9F4C346ED"
+      ]
+    }
+  },
+  "stufe3_structure": {
+    "strings": [
+      "HKCU:\\Software\\AppDataLow\\Software\\Microsoft\\BBE2C839-DEF8-A50A-C01F-F2A9F4C346ED"
+    ],
+    "string_anzahl_gesamt": 1,
+    "base64_bloecke_dekodiert": [],
+    "base64_bloecke_gesamt": 0,
+    "beobachtete_cmdlets": [],
+    "auffaellige_tokens": {
+      "registry_run": 1
+    },
+    "iocs": {
+      "urls": [],
+      "ipv4": [],
+      "pfade": [
+        "U:\\Software\\AppDataLow\\Software\\Microsoft\\BBE2C839-DEF8-A50A-C01F-F2A9F4C346ED"
+      ]
+    },
+    "deobfuskiert_auszug": "iex ([System.Text.Encoding]::ASCII.GetString(( gp \"HKCU:\\Software\\AppDataLow\\Software\\Microsoft\\BBE2C839-DEF8-A50A-C01F-F2A9F4C346ED\").dot3pcfg))",
+    "dekodierte_befehle": [],
+    "beobachtete_abfolge": [
+      "Registry-Autostart beruehren"
+    ]
+  }
+}

@@ -1,0 +1,93 @@
+{
+  "meta": {
+    "quelldatei": "benign_010_cd-downloads.ps1",
+    "sha256": "0befdb1bb7348d44f513bf8e8a821ec66758abc1e5217cee8e1636847060d79f",
+    "groesse_bytes": 1090,
+    "zeilen": 35,
+    "ground_truth_label": "benign",
+    "analyse_gekuerzt": false,
+    "hinweis": "Kein Urteil enthalten. Bewertung erfolgt durch das LLM."
+  },
+  "stufe1_extract": {
+    "strings": [
+      "s downloads folder\n.DESCRIPTION\n\tThis PowerShell script changes the working directory to the user",
+      "~/Downloads",
+      "No 'Downloads' folder in your home directory (yet)",
+      "shell:Downloads",
+      "$path",
+      "The path to downloads folder '$path' doesn't exist (yet)",
+      "📂$path entered, has $($files.Count) files and $($folders.Count) folders.",
+      "⚠️ Error: $($Error[0])"
+    ],
+    "string_anzahl_gesamt": 9,
+    "base64_bloecke_dekodiert": [],
+    "base64_bloecke_gesamt": 0
+  },
+  "stufe2_features": {
+    "strings": [
+      "s downloads folder\n.DESCRIPTION\n\tThis PowerShell script changes the working directory to the user",
+      "~/Downloads",
+      "No 'Downloads' folder in your home directory (yet)",
+      "shell:Downloads",
+      "$path",
+      "The path to downloads folder '$path' doesn't exist (yet)",
+      "📂$path entered, has $($files.Count) files and $($folders.Count) folders.",
+      "⚠️ Error: $($Error[0])"
+    ],
+    "string_anzahl_gesamt": 9,
+    "base64_bloecke_dekodiert": [],
+    "base64_bloecke_gesamt": 0,
+    "beobachtete_cmdlets": [
+      "Get-ChildItem",
+      "New-Object",
+      "Resolve-Path",
+      "Set-Location",
+      "Test-Path"
+    ],
+    "auffaellige_tokens": {},
+    "iocs": {
+      "urls": [
+        "https://github.com/fleschutz/PowerShell"
+      ],
+      "ipv4": [],
+      "pfade": [
+        "C:\\Users\\Markus\\Downloads"
+      ]
+    }
+  },
+  "stufe3_structure": {
+    "strings": [
+      "s downloads folder\n.DESCRIPTION\n\tThis PowerShell script changes the working directory to the user",
+      "~/Downloads",
+      "No 'Downloads' folder in your home directory (yet)",
+      "shell:Downloads",
+      "$path",
+      "The path to downloads folder '$path' doesn't exist (yet)",
+      "📂$path entered, has $($files.Count) files and $($folders.Count) folders.",
+      "⚠️ Error: $($Error[0])"
+    ],
+    "string_anzahl_gesamt": 9,
+    "base64_bloecke_dekodiert": [],
+    "base64_bloecke_gesamt": 0,
+    "beobachtete_cmdlets": [
+      "Get-ChildItem",
+      "New-Object",
+      "Resolve-Path",
+      "Set-Location",
+      "Test-Path"
+    ],
+    "auffaellige_tokens": {},
+    "iocs": {
+      "urls": [
+        "https://github.com/fleschutz/PowerShell"
+      ],
+      "ipv4": [],
+      "pfade": [
+        "C:\\Users\\Markus\\Downloads"
+      ]
+    },
+    "deobfuskiert_auszug": "﻿<#\n.SYNOPSIS\n\tSets the working directory to the user's downloads folder\n.DESCRIPTION\n\tThis PowerShell script changes the working directory to the user's downloads folder.\n.EXAMPLE\n\tPS> ./cd-downloads.ps1\n\t📂C:\\Users\\Markus\\Downloads entered, has 0 files and 0 folders.\n.LINK\n\thttps://github.com/fleschutz/PowerShell\n.NOTES\n\tAuthor: Markus Fleschutz | License: CC0\n#>\n\n#requires -version 5.1\n\ntry {\n\tif ($IsLinux -or $IsMacOS) {\n\t\tif (-not(Test-Path \"~/Downloads\" -pathType container)) { throw \"No 'Downloads' folder in your home directory (yet)\"\n\t\t}\n\t\t$path = Resolve-Path \"~/Downloads\"\n\t} else {\n\t\t$path = (New-Object -ComObject Shell.Application).NameSpace('shell:Downloads').Self.Path\n\t\tif (-not(Test-Path \"$path\" -pathType container)) { throw \"The path to downloads folder '$path' doesn't exist (yet)\" }\n\t}\n\tSet-Location $path\n\t$files = Get-ChildItem $path -attributes !Directory\n\t$folders = Get-ChildItem $path -attributes Directory\n\t\"📂$path entered, has $($files.Count) files and $($folders.Count) folders.\"\n\texit 0 # success\n} catch {\n\t\"⚠️ Error: $($Error[0])\"\n\texit 1\n}\n",
+    "dekodierte_befehle": [],
+    "beobachtete_abfolge": []
+  }
+}

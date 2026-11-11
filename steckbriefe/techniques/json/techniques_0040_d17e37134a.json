@@ -1,0 +1,81 @@
+{
+  "meta": {
+    "quelldatei": "tech_039_Meme.ps1",
+    "sha256": "d17e37134a3abc00721bd09638bd29df73632f18fd39324fb6f3bb659ed5870c",
+    "groesse_bytes": 2183,
+    "zeilen": 62,
+    "ground_truth_label": "techniques",
+    "analyse_gekuerzt": false,
+    "hinweis": "Kein Urteil enthalten. Bewertung erfolgt durch das LLM."
+  },
+  "stufe1_extract": {
+    "strings": [
+      "YouHaveBeenDabbedOnGoodSir",
+      "$FP.meme",
+      "File encrypted successfully: $encryptedFilePath",
+      ".meme",
+      ")\r\n    [System.IO.File]::WriteAllText($decryptedFilePath, $decryptedContent)\r\n}\r\n\r\n#$FP = ",
+      "\r\n#EF $FP\r\n#DF "
+    ],
+    "string_anzahl_gesamt": 7,
+    "base64_bloecke_dekodiert": [],
+    "base64_bloecke_gesamt": 0
+  },
+  "stufe2_features": {
+    "strings": [
+      "YouHaveBeenDabbedOnGoodSir",
+      "$FP.meme",
+      "File encrypted successfully: $encryptedFilePath",
+      ".meme",
+      ")\r\n    [System.IO.File]::WriteAllText($decryptedFilePath, $decryptedContent)\r\n}\r\n\r\n#$FP = ",
+      "\r\n#EF $FP\r\n#DF "
+    ],
+    "string_anzahl_gesamt": 7,
+    "base64_bloecke_dekodiert": [],
+    "base64_bloecke_gesamt": 0,
+    "beobachtete_cmdlets": [
+      "Get-Content",
+      "New-Object",
+      "Write-Host"
+    ],
+    "auffaellige_tokens": {
+      "frombase64": 1
+    },
+    "iocs": {
+      "urls": [],
+      "ipv4": [],
+      "pfade": []
+    }
+  },
+  "stufe3_structure": {
+    "strings": [
+      "YouHaveBeenDabbedOnGoodSir",
+      "$FP.meme",
+      "File encrypted successfully: $encryptedFilePath",
+      ".meme",
+      ")\r\n    [System.IO.File]::WriteAllText($decryptedFilePath, $decryptedContent)\r\n}\r\n\r\n#$FP = ",
+      "\r\n#EF $FP\r\n#DF "
+    ],
+    "string_anzahl_gesamt": 7,
+    "base64_bloecke_dekodiert": [],
+    "base64_bloecke_gesamt": 0,
+    "beobachtete_cmdlets": [
+      "Get-Content",
+      "New-Object",
+      "Write-Host"
+    ],
+    "auffaellige_tokens": {
+      "frombase64": 1
+    },
+    "iocs": {
+      "urls": [],
+      "ipv4": [],
+      "pfade": []
+    },
+    "deobfuskiert_auszug": "function MemeEncrypt($inputString) {\r\n    $key = \"YouHaveBeenDabbedOnGoodSir\"\r\n\r\n    # Convert the input string and key to byte arrays\r\n    $inputBytes = [System.Text.Encoding]::UTF8.GetBytes($inputString)\r\n    $keyBytes = [System.Text.Encoding]::UTF8.GetBytes($key)\r\n\r\n    # Initialize an empty byte array for the encrypted result\r\n    $encryptedBytes = New-Object byte[] $inputBytes.Length\r\n\r\n    # Perform the encryption\r\n    for ($i = 0; $i -lt $inputBytes.Length; $i++) {\r\n        $encryptedBytes[$i] = $inputBytes[$i] -bxor $keyBytes[$i % $keyBytes.Length] -bxor ($i % 255)\r\n    }\r\n\r\n    # Convert the encrypted bytes back to a string and return\r\n    return [Convert]::ToBase64String($encryptedBytes)\r\n}\r\n\r\n# Define the decryption algorithm\r\nfunction CustomDecrypt($encryptedString) {\r\n    $key = \"YouHaveBeenDabbedOnGoodSir\"\r\n\r\n    # Convert the encrypted string and key from Base64 and to byte arrays\r\n    $encryptedBytes = [Convert]::FromBase64String($encryptedString)\r\n    $keyBytes = [System.Text.Encoding]::UTF8.GetBytes($key)\r\n\r\n    # Initialize an empty byte array for the decrypted result\r\n    $decryptedBytes = New-Object byte[] $encryptedBytes.Length\r\n\r\n    # Perform the custom decryption logic\r\n    for ($i = 0; $i -lt $encryptedBytes.Length; $i++) {\r\n        $decryptedBytes[$i] = $encryptedBytes[$i] -bxor $keyBytes[$i % $keyBytes.Length] -bxor ($i % 255)\r\n    }\r\n\r\n    # Convert the decrypted bytes back to a string and return\r\n    return [System.Text.Encoding]::UTF8.GetString($decryptedBytes)\r\n}\r\n\r\nfunction EF($FP) {\r\n    $fileContent = Get-Content $FP -Raw\r\n\r\n    $encryptedContent = MemeEncrypt $fileContent\r\n\r\n    $encryptedFilePath = \"$FP.meme\"\r\n    [System.IO.File]::WriteAllText($encryptedFilePath, $encryptedContent)\r\n    Write-Host \"File encrypted successfully: $encryptedFilePath\"\r\n}\r\n\r\nfunction DF($encryptedFilePath) {\r\n    $encryptedContent = Get-Content $encryptedFilePath -Raw\r\n\r\n    $decryptedContent = CustomDecrypt $encryptedContent\r\n\r\n    $decryptedFilePath",
+    "dekodierte_befehle": [],
+    "beobachtete_abfolge": [
+      "Base64-Inhalt dekodieren"
+    ]
+  }
+}

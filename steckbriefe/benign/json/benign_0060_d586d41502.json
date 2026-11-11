@@ -1,0 +1,62 @@
+{
+  "meta": {
+    "quelldatei": "benign_059_check-health.ps1",
+    "sha256": "d586d41502993650d2a5521f864cc870ec5dd2ff59095e748ca5140a7a4e3710",
+    "groesse_bytes": 543,
+    "zeilen": 21,
+    "ground_truth_label": "benign",
+    "analyse_gekuerzt": false,
+    "hinweis": "Kein Urteil enthalten. Bewertung erfolgt durch das LLM."
+  },
+  "stufe1_extract": {
+    "strings": [
+      "$PSScriptRoot/check-hardware.ps1",
+      "$PSScriptRoot/check-software.ps1",
+      "$PSScriptRoot/check-network.ps1"
+    ],
+    "string_anzahl_gesamt": 3,
+    "base64_bloecke_dekodiert": [],
+    "base64_bloecke_gesamt": 0
+  },
+  "stufe2_features": {
+    "strings": [
+      "$PSScriptRoot/check-hardware.ps1",
+      "$PSScriptRoot/check-software.ps1",
+      "$PSScriptRoot/check-network.ps1"
+    ],
+    "string_anzahl_gesamt": 3,
+    "base64_bloecke_dekodiert": [],
+    "base64_bloecke_gesamt": 0,
+    "beobachtete_cmdlets": [],
+    "auffaellige_tokens": {},
+    "iocs": {
+      "urls": [
+        "https://github.com/fleschutz/PowerShell"
+      ],
+      "ipv4": [],
+      "pfade": []
+    }
+  },
+  "stufe3_structure": {
+    "strings": [
+      "$PSScriptRoot/check-hardware.ps1",
+      "$PSScriptRoot/check-software.ps1",
+      "$PSScriptRoot/check-network.ps1"
+    ],
+    "string_anzahl_gesamt": 3,
+    "base64_bloecke_dekodiert": [],
+    "base64_bloecke_gesamt": 0,
+    "beobachtete_cmdlets": [],
+    "auffaellige_tokens": {},
+    "iocs": {
+      "urls": [
+        "https://github.com/fleschutz/PowerShell"
+      ],
+      "ipv4": [],
+      "pfade": []
+    },
+    "deobfuskiert_auszug": "﻿<#\n.SYNOPSIS\n\tChecks the system health \n.DESCRIPTION\n\tThis PowerShell script queries the system health of the local computer (hardware, software, and network) and prints it.\n.EXAMPLE\n\tPS> ./check-health.ps1\n  \n\tH A R D W A R E\n\t✅ Intel(R) Core(TM) i5-6400 CPU @ 2.70GHz (CPU0, 2701MHz, socket U3E1, 30.1°C)\n\t...\n.LINK\n\thttps://github.com/fleschutz/PowerShell\n.NOTES\n\tAuthor: Markus Fleschutz | License: CC0\n#>\n\n& \"$PSScriptRoot/check-hardware.ps1\"\n& \"$PSScriptRoot/check-software.ps1\"\n& \"$PSScriptRoot/check-network.ps1\"\nexit 0 # success",
+    "dekodierte_befehle": [],
+    "beobachtete_abfolge": []
+  }
+}

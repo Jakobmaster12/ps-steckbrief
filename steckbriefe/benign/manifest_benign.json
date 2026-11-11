@@ -1,0 +1,422 @@
+[
+  {
+    "id": "benign_0001_da0465fd31",
+    "quelldatei": "benign_000_add-firewall-rules.ps1",
+    "sha256": "da0465fd31716aab52def24b28c59ac0e26b6a4e7deb887d4868375bc7ca4978",
+    "label": "benign",
+    "groesse_bytes": 1677
+  },
+  {
+    "id": "benign_0002_a577e3078c",
+    "quelldatei": "benign_001_alert.ps1",
+    "sha256": "a577e3078c4d66e10c3d7b2742b121c41ca477517156d33b7e00b555e196aca2",
+    "label": "benign",
+    "groesse_bytes": 801
+  },
+  {
+    "id": "benign_0003_5d1637ffda",
+    "quelldatei": "benign_002_brew-coffee.ps1",
+    "sha256": "5d1637ffda6a2b5a3732642d966ac679c4ccfd570234a54b51698306c8b19bc4",
+    "label": "benign",
+    "groesse_bytes": 1552
+  },
+  {
+    "id": "benign_0004_cbc74b89b8",
+    "quelldatei": "benign_003_build-repo.ps1",
+    "sha256": "cbc74b89b8f145d01f15baa2acd9e43aa9095bd24112f8db07290bed1842c4a2",
+    "label": "benign",
+    "groesse_bytes": 6820
+  },
+  {
+    "id": "benign_0005_a5047e99a5",
+    "quelldatei": "benign_004_build-repos.ps1",
+    "sha256": "a5047e99a520336eaa9a14f73994dd2e06e9e9882562936bc16054d67dd8750c",
+    "label": "benign",
+    "groesse_bytes": 1076
+  },
+  {
+    "id": "benign_0006_fdb85b8640",
+    "quelldatei": "benign_005_calculate-BMI.ps1",
+    "sha256": "fdb85b8640c65aa9fd15cf7d087f1afdda9e293cc5744086764a3fbac2b5c66c",
+    "label": "benign",
+    "groesse_bytes": 761
+  },
+  {
+    "id": "benign_0007_987135e9c8",
+    "quelldatei": "benign_006_cd-autostart.ps1",
+    "sha256": "987135e9c81f70c4fca4a26c84b1e1210c35d43947a4caa7ac534b071c1b4fed",
+    "label": "benign",
+    "groesse_bytes": 950
+  },
+  {
+    "id": "benign_0008_f18dfc0791",
+    "quelldatei": "benign_007_cd-crashdumps.ps1",
+    "sha256": "f18dfc0791e628e1f195b717939de8167a5c19f060ba44d430dac1468ea79b64",
+    "label": "benign",
+    "groesse_bytes": 1134
+  },
+  {
+    "id": "benign_0009_4cd37d586d",
+    "quelldatei": "benign_008_cd-desktop.ps1",
+    "sha256": "4cd37d586d77ef5d5399cb2028571cad3d59d6c69243293f64806071d15ed74f",
+    "label": "benign",
+    "groesse_bytes": 1035
+  },
+  {
+    "id": "benign_0010_29b12fbf6d",
+    "quelldatei": "benign_009_cd-docs.ps1",
+    "sha256": "29b12fbf6d24c6d62c3baf01e7f9c1cb95e987f9566797bee1c022c25b454ff7",
+    "label": "benign",
+    "groesse_bytes": 1036
+  },
+  {
+    "id": "benign_0011_0befdb1bb7",
+    "quelldatei": "benign_010_cd-downloads.ps1",
+    "sha256": "0befdb1bb7348d44f513bf8e8a821ec66758abc1e5217cee8e1636847060d79f",
+    "label": "benign",
+    "groesse_bytes": 1090
+  },
+  {
+    "id": "benign_0012_c6f179af3b",
+    "quelldatei": "benign_011_cd-dropbox.ps1",
+    "sha256": "c6f179af3b566530fb77cb1703d03c6cb1a6fcb8b8aa553ae3036a86d77d8734",
+    "label": "benign",
+    "groesse_bytes": 839
+  },
+  {
+    "id": "benign_0013_972841802b",
+    "quelldatei": "benign_012_cd-etc.ps1",
+    "sha256": "972841802b78d5fc0195267e2edd7a007461369bc62bde14df66d6369f7f5f76",
+    "label": "benign",
+    "groesse_bytes": 852
+  },
+  {
+    "id": "benign_0014_a6ce8ac9b8",
+    "quelldatei": "benign_013_cd-fonts.ps1",
+    "sha256": "a6ce8ac9b87c778809568604cb4937da05f3de8bc499b4acd239eabcad964462",
+    "label": "benign",
+    "groesse_bytes": 694
+  },
+  {
+    "id": "benign_0015_3ecfe3e434",
+    "quelldatei": "benign_014_cd-home.ps1",
+    "sha256": "3ecfe3e4343a662bb888f4fd707ccbbc2ae6f65c7dc7e5f2096c28c03a6db919",
+    "label": "benign",
+    "groesse_bytes": 796
+  },
+  {
+    "id": "benign_0016_aab81df24e",
+    "quelldatei": "benign_015_cd-jenkins.ps1",
+    "sha256": "aab81df24eae30efab7ae176fa0fe482c2541e088048c1daeb4039270c48dce2",
+    "label": "benign",
+    "groesse_bytes": 904
+  },
+  {
+    "id": "benign_0017_d4b7203b17",
+    "quelldatei": "benign_016_cd-logs.ps1",
+    "sha256": "d4b7203b17a3daa5b6c112c28c1b7c8562ae6b883c09ce800c069d68dfa05025",
+    "label": "benign",
+    "groesse_bytes": 822
+  },
+  {
+    "id": "benign_0018_2528b7cc99",
+    "quelldatei": "benign_017_cd-music.ps1",
+    "sha256": "2528b7cc9935d442e968259d11772c3a09fea1667e2fd697139da02fdc1089b5",
+    "label": "benign",
+    "groesse_bytes": 1018
+  },
+  {
+    "id": "benign_0019_180a34dd82",
+    "quelldatei": "benign_018_cd-nextcloud.ps1",
+    "sha256": "180a34dd82c5f8f423f29dca864ab2b7abc04a8e68976af29178b9975cf7216a",
+    "label": "benign",
+    "groesse_bytes": 857
+  },
+  {
+    "id": "benign_0020_9158bcb7da",
+    "quelldatei": "benign_019_cd-onedrive.ps1",
+    "sha256": "9158bcb7dac58e6e2f6f7ca3a53d93fa06815e65dddbfcd80a0da15c672ae68f",
+    "label": "benign",
+    "groesse_bytes": 843
+  },
+  {
+    "id": "benign_0021_ff61754333",
+    "quelldatei": "benign_020_cd-pics.ps1",
+    "sha256": "ff61754333c619e69352c90dd5851e8afc466419c2ee68649dc61dae80d8a983",
+    "label": "benign",
+    "groesse_bytes": 1042
+  },
+  {
+    "id": "benign_0022_2ad2d57cc1",
+    "quelldatei": "benign_021_cd-public.ps1",
+    "sha256": "2ad2d57cc1a9bf3f89fdf92eea70d36c3dd69abeeee14ee6f41ce3dafcb04338",
+    "label": "benign",
+    "groesse_bytes": 963
+  },
+  {
+    "id": "benign_0023_b43257dd63",
+    "quelldatei": "benign_022_cd-recent.ps1",
+    "sha256": "b43257dd63c6a41a9cf533e9603fff4333083e265e598015c6b46018418da0e0",
+    "label": "benign",
+    "groesse_bytes": 836
+  },
+  {
+    "id": "benign_0024_ccd568aecd",
+    "quelldatei": "benign_023_cd-recycle-bin.ps1",
+    "sha256": "ccd568aecd9bb553a48ec7d39fe4e12c73c3c8a3acc782ebaca49e727ae5ac45",
+    "label": "benign",
+    "groesse_bytes": 1128
+  },
+  {
+    "id": "benign_0025_45e30411d2",
+    "quelldatei": "benign_024_cd-repo.ps1",
+    "sha256": "45e30411d2ab33d9249823c3f069f29e1b3f94c996793f4a2a4fddf9f8384a5a",
+    "label": "benign",
+    "groesse_bytes": 2371
+  },
+  {
+    "id": "benign_0026_67d40b93ec",
+    "quelldatei": "benign_025_cd-repos.ps1",
+    "sha256": "67d40b93eceac126e122d1639a3b077cd6b8945877435a5ea47442a85bf53e1f",
+    "label": "benign",
+    "groesse_bytes": 2146
+  },
+  {
+    "id": "benign_0027_8220ead337",
+    "quelldatei": "benign_026_cd-root.ps1",
+    "sha256": "8220ead337897eb53911756af411dcf0088b3da57f1e3bee0bb4027be7d6ab1e",
+    "label": "benign",
+    "groesse_bytes": 714
+  },
+  {
+    "id": "benign_0028_7895a2751b",
+    "quelldatei": "benign_027_cd-screenshots.ps1",
+    "sha256": "7895a2751b000068d3b2bd5765e3aadbf74c0c52510869ca9a78a4ad8febbd02",
+    "label": "benign",
+    "groesse_bytes": 1315
+  },
+  {
+    "id": "benign_0029_c862f3c267",
+    "quelldatei": "benign_028_cd-scripts.ps1",
+    "sha256": "c862f3c267c1242e4a0b473e6ded2dfc8e29d0eefcf649adf553065d3b08322a",
+    "label": "benign",
+    "groesse_bytes": 824
+  },
+  {
+    "id": "benign_0030_343ea9aa7a",
+    "quelldatei": "benign_029_cd-ssh.ps1",
+    "sha256": "343ea9aa7a09176b3785c4864bd99d20a15fd04f6d769ee490c32f25cc2fd5ac",
+    "label": "benign",
+    "groesse_bytes": 747
+  },
+  {
+    "id": "benign_0031_2f2f39a7e2",
+    "quelldatei": "benign_030_cd-sync.ps1",
+    "sha256": "2f2f39a7e251e519f1dc0a43910f459451b1347e416363c660ec561d768a118a",
+    "label": "benign",
+    "groesse_bytes": 841
+  },
+  {
+    "id": "benign_0032_2c6901a18e",
+    "quelldatei": "benign_031_cd-temp.ps1",
+    "sha256": "2c6901a18e4df3ac36e3bb94e8f1d8e7e1af191b53150001615292244a8ac1a8",
+    "label": "benign",
+    "groesse_bytes": 1016
+  },
+  {
+    "id": "benign_0033_47bbe004d9",
+    "quelldatei": "benign_032_cd-templates.ps1",
+    "sha256": "47bbe004d9c2da0418ee1374c23c88d56498636ce94f2697d6e1a757e8094faf",
+    "label": "benign",
+    "groesse_bytes": 1033
+  },
+  {
+    "id": "benign_0034_5b4f906151",
+    "quelldatei": "benign_033_cd-trash.ps1",
+    "sha256": "5b4f906151d948dbd9e480ac6c9c9ca9e7ac06daacd639ee1d9e1af8a79ac99d",
+    "label": "benign",
+    "groesse_bytes": 1104
+  },
+  {
+    "id": "benign_0035_92d710102b",
+    "quelldatei": "benign_034_cd-up.ps1",
+    "sha256": "92d710102bc4ffaf15960bbed12ebec071f3c4581dcc08b973be2b4c687f5be8",
+    "label": "benign",
+    "groesse_bytes": 563
+  },
+  {
+    "id": "benign_0036_0075cd45ae",
+    "quelldatei": "benign_035_cd-up2.ps1",
+    "sha256": "0075cd45aeb6737ca7449f61880d975da9f739b95d4f217a7a362e8b756affbf",
+    "label": "benign",
+    "groesse_bytes": 568
+  },
+  {
+    "id": "benign_0037_1e8f020478",
+    "quelldatei": "benign_036_cd-up3.ps1",
+    "sha256": "1e8f020478865fe17fb33b3fe917b86a043dc4059b487bf9a83b30a0d5c98a6a",
+    "label": "benign",
+    "groesse_bytes": 574
+  },
+  {
+    "id": "benign_0038_fbca07dc28",
+    "quelldatei": "benign_037_cd-up4.ps1",
+    "sha256": "fbca07dc285271c6124740b4ea33531b750fd2c4252ae0180e869c2182ddd01a",
+    "label": "benign",
+    "groesse_bytes": 576
+  },
+  {
+    "id": "benign_0039_25913921b7",
+    "quelldatei": "benign_038_cd-users.ps1",
+    "sha256": "25913921b70c9118efe630ab6cded13810831f8156cd2a1802eaa0bbb5d1921e",
+    "label": "benign",
+    "groesse_bytes": 671
+  },
+  {
+    "id": "benign_0040_c690cbdca8",
+    "quelldatei": "benign_039_cd-videos.ps1",
+    "sha256": "c690cbdca8c4d964ca656bcd164d161449067a39615e95c764d020e3a0ea7d22",
+    "label": "benign",
+    "groesse_bytes": 1026
+  },
+  {
+    "id": "benign_0041_4b1c860b1c",
+    "quelldatei": "benign_040_cd-windows.ps1",
+    "sha256": "4b1c860b1cba0e7c4de560b6c860237178c86ff6fa9f2d35100a04c0147e4347",
+    "label": "benign",
+    "groesse_bytes": 849
+  },
+  {
+    "id": "benign_0042_3a92d8327c",
+    "quelldatei": "benign_041_ceo-mode.ps1",
+    "sha256": "3a92d8327c08a17fba66aa037b70f48c166d72f3be0e9835169358c040d49e11",
+    "label": "benign",
+    "groesse_bytes": 1305
+  },
+  {
+    "id": "benign_0043_1706c70de3",
+    "quelldatei": "benign_042_change-wallpaper.ps1",
+    "sha256": "1706c70de34cd63529566e552986abc153396ad310b66aac9e65ca147fa883ba",
+    "label": "benign",
+    "groesse_bytes": 983
+  },
+  {
+    "id": "benign_0044_925e9f7ab7",
+    "quelldatei": "benign_043_check-admin.ps1",
+    "sha256": "925e9f7ab7fff5d9cc5507d7c4575704c51743ae6ef7d15e65d79e9db2571045",
+    "label": "benign",
+    "groesse_bytes": 988
+  },
+  {
+    "id": "benign_0045_428e31ae55",
+    "quelldatei": "benign_044_check-apps.ps1",
+    "sha256": "428e31ae55458a2554edd937c7932d0fb05f3d7b735cbfdfb9849c4b963edf6d",
+    "label": "benign",
+    "groesse_bytes": 1653
+  },
+  {
+    "id": "benign_0046_ea6dd88cca",
+    "quelldatei": "benign_045_check-bios.ps1",
+    "sha256": "ea6dd88cca36adbad432bb0da19fc15563adbcf0a23f1c2dcd2c5fb9447dd04c",
+    "label": "benign",
+    "groesse_bytes": 1416
+  },
+  {
+    "id": "benign_0047_b5c9f2c444",
+    "quelldatei": "benign_046_check-cpu.ps1",
+    "sha256": "b5c9f2c4442ac2b9f0d38352c2fdb1657a67e2ae72e408c86b94102cc6aad945",
+    "label": "benign",
+    "groesse_bytes": 2593
+  },
+  {
+    "id": "benign_0048_d334027069",
+    "quelldatei": "benign_047_check-credentials.ps1",
+    "sha256": "d33402706952df81bf2f51831d698f60aabf1f91f034558b70ea9d2b42a7d605",
+    "label": "benign",
+    "groesse_bytes": 1401
+  },
+  {
+    "id": "benign_0049_b0bba4a151",
+    "quelldatei": "benign_048_check-day.ps1",
+    "sha256": "b0bba4a15114e3a70a8f27eb205303e6e1328003c011ea482972f6111695bef5",
+    "label": "benign",
+    "groesse_bytes": 601
+  },
+  {
+    "id": "benign_0050_774601373c",
+    "quelldatei": "benign_049_check-dns.ps1",
+    "sha256": "774601373cabd1b11aa91d6659542779849e660233a742596cc1181feba585d2",
+    "label": "benign",
+    "groesse_bytes": 1179
+  },
+  {
+    "id": "benign_0051_2ba49c7273",
+    "quelldatei": "benign_050_check-drive-space.ps1",
+    "sha256": "2ba49c7273ed3d6e1051e104cb9b0ba051cce0a9b2ec5b71145cd7fefef17ddb",
+    "label": "benign",
+    "groesse_bytes": 1966
+  },
+  {
+    "id": "benign_0052_53fc8f6e36",
+    "quelldatei": "benign_051_check-drives.ps1",
+    "sha256": "53fc8f6e366985debb71d9b9ededb338d431b22dfe5fd5b5fd63b61d68b0a0ee",
+    "label": "benign",
+    "groesse_bytes": 1923
+  },
+  {
+    "id": "benign_0053_75604f5a96",
+    "quelldatei": "benign_052_check-dusk.ps1",
+    "sha256": "75604f5a967d31fe2d7a51a6b089d74647fc1b3a8a017ac6766b597cd5a23641",
+    "label": "benign",
+    "groesse_bytes": 1503
+  },
+  {
+    "id": "benign_0054_e20c58fcf7",
+    "quelldatei": "benign_053_check-easter-sunday.ps1",
+    "sha256": "e20c58fcf7be5e9588511e44888635c65339a428e16b8fb2b66247a23e08a5d0",
+    "label": "benign",
+    "groesse_bytes": 756
+  },
+  {
+    "id": "benign_0055_8fc50de216",
+    "quelldatei": "benign_054_check-file-system.ps1",
+    "sha256": "8fc50de21668b26e60665df116c16c7314000cc7d143c811910ffb9812b68695",
+    "label": "benign",
+    "groesse_bytes": 842
+  },
+  {
+    "id": "benign_0056_dad88c4920",
+    "quelldatei": "benign_055_check-file.ps1",
+    "sha256": "dad88c492007b04fdd569c84110a6b0c0a338d2cdcd215e2f23b2f0690ec21cf",
+    "label": "benign",
+    "groesse_bytes": 3644
+  },
+  {
+    "id": "benign_0057_1a84dae9d2",
+    "quelldatei": "benign_056_check-firewall.ps1",
+    "sha256": "1a84dae9d21e776938a5508f8017d64e7a88099b45c02e1f42f1afc53fde2721",
+    "label": "benign",
+    "groesse_bytes": 780
+  },
+  {
+    "id": "benign_0058_6c23cf2c20",
+    "quelldatei": "benign_057_check-gpu.ps1",
+    "sha256": "6c23cf2c20b3e5bc6b9ce7baffd8016602b6999d3dc4f67915fcd23b5eb493c2",
+    "label": "benign",
+    "groesse_bytes": 1456
+  },
+  {
+    "id": "benign_0059_32edea3893",
+    "quelldatei": "benign_058_check-hardware.ps1",
+    "sha256": "32edea389301aa67666bbaf24038e20a13b0637c24c1dff4aacde9036be4388c",
+    "label": "benign",
+    "groesse_bytes": 758
+  },
+  {
+    "id": "benign_0060_d586d41502",
+    "quelldatei": "benign_059_check-health.ps1",
+    "sha256": "d586d41502993650d2a5521f864cc870ec5dd2ff59095e748ca5140a7a4e3710",
+    "label": "benign",
+    "groesse_bytes": 543
+  }
+]

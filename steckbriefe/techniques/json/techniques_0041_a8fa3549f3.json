@@ -1,0 +1,52 @@
+{
+  "meta": {
+    "quelldatei": "tech_040_Start-Mission.ps1",
+    "sha256": "a8fa3549f37bef8653c262041086fd1aadadadc12fab19661017b61cda048811",
+    "groesse_bytes": 1675,
+    "zeilen": 49,
+    "ground_truth_label": "techniques",
+    "analyse_gekuerzt": false,
+    "hinweis": "Kein Urteil enthalten. Bewertung erfolgt durch das LLM."
+  },
+  "stufe1_extract": {
+    "strings": [],
+    "string_anzahl_gesamt": 0,
+    "base64_bloecke_dekodiert": [],
+    "base64_bloecke_gesamt": 0
+  },
+  "stufe2_features": {
+    "strings": [],
+    "string_anzahl_gesamt": 0,
+    "base64_bloecke_dekodiert": [],
+    "base64_bloecke_gesamt": 0,
+    "beobachtete_cmdlets": [
+      "Start-Mission",
+      "Start-Sleep"
+    ],
+    "auffaellige_tokens": {},
+    "iocs": {
+      "urls": [],
+      "ipv4": [],
+      "pfade": []
+    }
+  },
+  "stufe3_structure": {
+    "strings": [],
+    "string_anzahl_gesamt": 0,
+    "base64_bloecke_dekodiert": [],
+    "base64_bloecke_gesamt": 0,
+    "beobachtete_cmdlets": [
+      "Start-Mission",
+      "Start-Sleep"
+    ],
+    "auffaellige_tokens": {},
+    "iocs": {
+      "urls": [],
+      "ipv4": [],
+      "pfade": []
+    },
+    "deobfuskiert_auszug": "function Start-Mission {\n    [System.Console]::Beep(784, 150)\n    Start-Sleep -Milliseconds 300\n    [System.Console]::Beep(784, 150)\n    Start-Sleep -Milliseconds 300\n    [System.Console]::Beep(932, 150)\n    Start-Sleep -Milliseconds 150\n    [System.Console]::Beep(1047, 150)\n    Start-Sleep -Milliseconds 150\n    [System.Console]::Beep(784, 150)\n    Start-Sleep -Milliseconds 300\n    [System.Console]::Beep(784, 150)\n    Start-Sleep -Milliseconds 300\n    [System.Console]::Beep(699, 150)\n    Start-Sleep -Milliseconds 150\n    [System.Console]::Beep(740, 150)\n    Start-Sleep -Milliseconds 150\n    [System.Console]::Beep(784, 150)\n    Start-Sleep -Milliseconds 300\n    [System.Console]::Beep(784, 150)\n    Start-Sleep -Milliseconds 300\n    [System.Console]::Beep(932, 150)\n    Start-Sleep -Milliseconds 150\n    [System.Console]::Beep(1047, 150)\n    Start-Sleep -Milliseconds 150\n    [System.Console]::Beep(784, 150)\n    Start-Sleep -Milliseconds 300\n    [System.Console]::Beep(784, 150)\n    Start-Sleep -Milliseconds 300\n    [System.Console]::Beep(699, 150)\n    Start-Sleep -Milliseconds 150\n    [System.Console]::Beep(740, 150)\n    Start-Sleep -Milliseconds 150\n    [System.Console]::Beep(932, 150)\n    [System.Console]::Beep(784, 150)\n    [System.Console]::Beep(587, 1200)\n    Start-Sleep -Milliseconds 75\n    [System.Console]::Beep(932, 150)\n    [System.Console]::Beep(784, 150)\n    [System.Console]::Beep(554, 1200)\n    Start-Sleep -Milliseconds 75\n    [System.Console]::Beep(932, 150)\n    [System.Console]::Beep(784, 150)\n    [System.Console]::Beep(523, 1200)\n    Start-Sleep -Milliseconds 150\n    [System.Console]::Beep(466, 150)\n    [System.Console]::Beep(523, 150)\n}\n",
+    "dekodierte_befehle": [],
+    "beobachtete_abfolge": []
+  }
+}

