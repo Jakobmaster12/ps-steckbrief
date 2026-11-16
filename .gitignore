@@ -1,4 +1,8 @@
 # Rohskripte werden nicht versioniert (Lizenz offen, Schadcode). Beschaffung per src/fetch.py
 scripts/
+# Erzeugte Daten: Steckbriefe, Falllisten und Läufe bleiben lokal
+steckbriefe/
+laeufe/
+faelle*.csv
 __pycache__/
 *.pyc

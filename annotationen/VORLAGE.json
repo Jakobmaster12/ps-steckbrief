@@ -1,0 +1,20 @@
+{
+  "id": "FALL-ID aus faelle.csv (die ersten 12 Zeichen des SHA256)",
+  "annotiert_von": "Jakob Weilhartner",
+  "annotiert_am": "JJJJ-MM-TT",
+  "grundlage": "vollständiges Skript, von Hand gelesen, vor den Modellläufen",
+  "einstufung_soll": "boesartig | gutartig",
+  "gruppe": "kodiert | lesbar_boesartig | gutartig_verdaechtig | gutartig_einfach",
+  "befunde": [
+    {
+      "id": "B1",
+      "aussage": "Was der Code vorsieht, in einem Satz.",
+      "art": "verhalten | technik | ioc",
+      "wichtig": true,
+      "belegstelle": "Zeile oder wörtlicher Ausschnitt aus dem Skript",
+      "nur_nach_dekodieren_sichtbar": false
+    }
+  ],
+  "iocs": {"urls": [], "ips": [], "pfade": [], "registry": []},
+  "bemerkung": ""
+}

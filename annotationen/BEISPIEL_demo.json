@@ -1,0 +1,25 @@
+{
+  "id": "BEISPIEL (kein echter Fall, zeigt nur das Ausfüllen)",
+  "annotiert_von": "Jakob Weilhartner",
+  "annotiert_am": "2026-11-16",
+  "grundlage": "Demo-Skript aus tool/steckbrief-werkbank.html, von Hand gelesen",
+  "einstufung_soll": "boesartig",
+  "gruppe": "kodiert",
+  "befunde": [
+    {"id": "B1", "aussage": "Lädt Inhalt von http://192.0.2.10/payload per WebClient.", "art": "verhalten", "wichtig": true,
+     "belegstelle": "$data = $wc.DownloadString($u), $u aus dem Format-Operator in Zeile 4", "nur_nach_dekodieren_sichtbar": true},
+    {"id": "B2", "aussage": "Entpackt einen gzip-komprimierten Base64-Block und führt das Ergebnis mit IEX aus.", "art": "technik", "wichtig": true,
+     "belegstelle": "Zeilen 7 bis 10, IEX ist mit Backticks zerteilt", "nur_nach_dekodieren_sichtbar": false},
+    {"id": "B3", "aussage": "Der entpackte Befehl lädt stage2.ps1 nach $env:TEMP und startet es in einem versteckten Fenster.", "art": "verhalten", "wichtig": true,
+     "belegstelle": "Inhalt des Base64-Blocks nach gzip", "nur_nach_dekodieren_sichtbar": true},
+    {"id": "B4", "aussage": "Trägt C:\\Users\\Public\\u.ps1 als Autostart unter HKCU ...\\CurrentVersion\\Run ein.", "art": "verhalten", "wichtig": true,
+     "belegstelle": "letzte Zeile, Set-ItemProperty", "nur_nach_dekodieren_sichtbar": false}
+  ],
+  "iocs": {
+    "urls": ["http://192.0.2.10/payload", "http://192.0.2.10/stage2.ps1"],
+    "ips": ["192.0.2.10"],
+    "pfade": ["C:\\Users\\Public\\u.ps1", "$env:TEMP\\stage2.ps1"],
+    "registry": ["HKCU:\\Software\\Microsoft\\Windows\\CurrentVersion\\Run"]
+  },
+  "bemerkung": "Die URL im Kommentar (example.org) ist kein IOC. Nennt ein Modell sie als Verbindung, ist das unbelegt."
+}

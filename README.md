@@ -1,121 +1,142 @@
-# Grundgeruest Masterarbeit - LLM-gestuetzte Analyse von PowerShell-Skripten
+# ps-steckbrief
 
-Stand: 2026-11-03. Ersteller: Jakob Weilhartner.
+Werkzeuge zur Masterarbeit "Wann hilft ein Steckbrief? Statische Vorverarbeitung
+für die LLM-gestützte Analyse von PowerShell-Skripten" (Jakob Weilhartner,
+FH St. Pölten).
 
-## Worum geht es
+## Idee in drei Sätzen
 
-Das Grundgeruest liefert zwei Dinge:
+Schadskripte sind oft kodiert oder gepackt. Ein Sprachmodell kann das nicht
+ausrechnen, es rät. Der **Extraktor** rechnet es aus und schreibt die Fakten in
+einen **Steckbrief**. Die Arbeit misst, ob ein Modell ein Skript damit besser
+beurteilt als mit dem Rohcode allein.
 
-1. **Einen Datensatz** aus PowerShell-Skripten in drei Gruppen (gutartig,
-   boesartig, Technik-Demos), reproduzierbar beschafft mit Herkunftsnachweis.
-2. **Einen Steckbrief-Generator**, der aus jedem Skript einen forensischen
-   Steckbrief in drei definierten Stufen erzeugt. Diese Steckbriefe sind der
-   geplante Eingang fuer das LLM-Experiment.
+Jedes Skript geht in drei Eingaben an dasselbe Modell:
 
-Die Grundidee der Arbeit: Nicht der rohe (ggf. obfuskierte) Code geht ins
-LLM, sondern ein statisch erzeugter Steckbrief. Der **Detailgrad des
-Steckbriefs** ist die zentrale, kontrollierte Variable. Gemessen wird, wie
-gut das LLM auf Basis welcher Stufe eine Einschaetzung trifft.
+| Eingabe | Das Modell sieht |
+|---|---|
+| A | nur den Rohcode |
+| B | nur den Steckbrief |
+| C | Rohcode und Steckbrief |
 
-## Projektstruktur
+## Was der Extraktor macht
+
+Er rechnet, er urteilt nicht, und er führt nichts aus.
+
+- trennt Kommentare, Code und String-Literale
+- löst Verschleierung auf: Backticks, Konkatenation, `[char]`-Codes,
+  Format-Operator `-f`, `.Replace()` und `-replace`, `-join`, umgedrehte Strings
+- packt Schichten aus: Base64, Hex, Byte-Listen, gzip, zlib, Deflate, XOR mit
+  einem im Skript sichtbaren Schlüssel, auch ineinander verschachtelt
+- listet URLs, IPv4, Pfade, Registry-Schlüssel, Cmdlets und auffällige Tokens
+- hält bei jedem Fund fest, **ab wann er sichtbar ist**: im Original, nur in
+  einem Kommentar, erst nach Deobfuskation oder erst in einer Schicht
+- zeigt auffällige Zeilen mit ihren Parametern, misst Entropie und erkennt
+  Kennungen in Blobs (zum Beispiel eine PE-Datei)
+
+Grenzen: keine Variablenverfolgung, keine Verschlüsselung mit unbekanntem
+Schlüssel, keine Ausführung. Was er nicht auflösen kann, meldet er als Blob
+mit Länge und Entropie.
+
+## Aufbau
 
 ```
-src/fetch.py          Datensatz-Beschaffung (git clone + sortieren)
-src/steckbrief.py     Steckbrief-Generator (statisch, drei Stufen)
-scripts/benign/       gutartige Rohskripte (Sample)
-scripts/techniques/   Technik-Demonstrationen (Rohskripte)
-steckbriefe/benign/     Steckbriefe gutartig  (json + md)
-steckbriefe/techniques/ Steckbriefe Technik-Demos (json + md)
-steckbriefe/malicious/  Steckbriefe boesartig (json + md)
-sources.json          Herkunft, Commit-Stand, Lizenzstatus je Quelle
-manifest.csv          alle Samples mit Label und SHA256
+src/steckbrief.py     Extraktor (maßgeblich für den Versuch)
+src/fetch.py          holt die Skripte und dokumentiert die Herkunft
+src/query.py          schickt die Fälle in den Eingaben A, B, C an ein Modell
+src/evaluate.py       wertet einen Lauf aus
+tool/steckbrief-werkbank.html   Oberfläche für den Browser, läuft offline
+prompts/analyse_prompt.txt      die Aufgabe an das Modell
+annotationen/         Vorlage und Beispiel für Referenzannotationen
+docs/bewertungsregeln.md        Regeln für die Handbewertung (Entwurf)
+tests/                Tests und Test-Modell
+sources.json          Herkunft und Commit-Stand der Datenquellen
 ```
 
-Hinweis: Die **rohen boesartigen Skripte** sind in diesem Paket absichtlich
-nicht enthalten, nur ihre Steckbriefe (reine Analyse-Artefakte, ungefaehrlich).
-Den vollstaendigen boesartigen Satz holst du selbst mit `fetch.py` in deiner
-isolierten VM (siehe unten). So bleibt die Beschaffung reproduzierbar und
-nachvollziehbar, und es wird kein Schadcode ueber den Chat verteilt.
+Rohskripte, Steckbriefe, Falllisten und Läufe liegen nicht im Repository. Sie
+entstehen lokal mit den Befehlen unten.
 
-## Die drei Quellen und warum
+## Ablauf
 
-| Gruppe | Quelle | Begruendung | Lizenz |
-|---|---|---|---|
-| gutartig | github.com/fleschutz/PowerShell | grosse Sammlung legitimer Admin-Skripte, Kontrollgruppe fuer Fehlalarme | CC0-1.0 |
-| boesartig | github.com/Fa2y/Malicious-PowerShell-Dataset | echte boesartige Skripte (Triage, Bazaar, Hybrid-Analysis), vom PSStrikes-Paper referenziert | keine LICENSE-Datei, vor Nutzung klaeren |
-| Technik-Demos | github.com/calinux-py/PowerShell | gut lesbare Demonstrationen einzelner Techniken (Base64, Exfiltration, Obfuskation) | keine LICENSE-Datei, vor Nutzung klaeren |
-
-Bewusst **nicht** verwendet: vollstaendige, scharfe Malware-Binaries (z.B. von
-MalwareBazaar als EXE). Fuer die statische Skript-Analyse nicht noetig und
-unnoetiges Risiko. Die akademisch sauberste Alternative fuer die boesartige
-Seite ist `mkmeher/powershell-malware-dataset` (Nature-Paper, VirusTotal-
-validiert, gelabelt). Deren Rohskripte liegen in git-LFS und brauchen eigenen
-GitHub-Zugang, daher hier als Option, nicht als Default.
-
-## Die drei Steckbrief-Stufen (= drei Techniken)
-
-Jede Stufe entspricht genau einer statischen Analyse-Technik. Dadurch ist der
-Detailgrad reproduzierbar und nicht vom Ermessen des Analysten abhaengig.
-Das beantwortet die Frage "wann ist genug Forensik drin": nicht nach
-Bauchgefuehl, sondern definiert durch die Technik.
-
-- **Stufe 1 (extract):** Ausgabe eines String- und Encoding-Extraktors.
-  Enthaelt Strings und dekodierte Base64-Bloecke. Keine Interpretation.
-- **Stufe 2 (features):** Stufe 1 plus statischer Muster- und IOC-Scanner.
-  Enthaelt beobachtete Cmdlets, auffaellige Tokens, URLs, IPs, Pfade.
-- **Stufe 3 (structure):** Stufe 2 plus leichte Deobfuskation und die
-  beobachtete Operationsabfolge.
-
-Wichtig: Kein Steckbrief enthaelt ein Urteil (kein "boesartig", kein
-Schweregrad, keine Empfehlung). Die Bewertung ist Aufgabe des LLM im
-Experiment. Das Ground-Truth-Label steht nur in den Metadaten, fuer die
-spaetere Auswertung, nicht im Analyse-Teil.
-
-## Datensatz selbst beschaffen (vollstaendig)
-
-Nur in einer isolierten Umgebung ausfuehren (VM ohne Netzverbindung zum Host).
+Nur in einer isolierten VM arbeiten. Python 3.10 oder neuer, keine Zusatzpakete.
 
 ```bash
-# alle drei Gruppen holen
+# 1. Skripte holen
 python3 src/fetch.py --out ./scripts
+cat scripts/sources.json
 
-# nur die boesartige Gruppe
-python3 src/fetch.py --out ./scripts --only malicious
+# 2. Fallliste bauen (Label kommt aus dem Ordner)
+python3 src/query.py faelle --ordner scripts/benign=benign scripts/malicious=malicious --out faelle.csv
+head -5 faelle.csv
 
-# danach Steckbriefe erzeugen, je Gruppe
-python3 src/steckbrief.py ./scripts/malicious --out ./steckbriefe/malicious --label malicious
+# 3. Optional: Steckbriefe als Dateien ansehen
+python3 src/steckbrief.py scripts/malicious --out steckbriefe/malicious --label malicious
+ls steckbriefe/malicious/llm | head
+
+# 4. Abfragen (OpenAI-kompatible Schnittstelle)
+export LLM_API_KEY=...          # nur wenn der Server einen Schlüssel verlangt
+python3 src/query.py lauf --faelle faelle.csv --basis-url http://SERVER:8000/v1 \
+    --modell MODELLNAME --lauf laeufe/pilot --wiederholungen 3 --limit 12
+
+# 5. Auswerten
+python3 src/evaluate.py --faelle faelle.csv --lauf laeufe/pilot
+cat laeufe/pilot/auswertung/zusammenfassung.md
 ```
 
-`fetch.py` schreibt `sources.json` mit Commit-Stand je Quelle, damit der
-Datensatz exakt nachgebaut werden kann.
+Ein abgebrochener Lauf wird mit demselben Befehl fortgesetzt. Mehrere Modelle
+schreiben in denselben Lauf-Ordner, die Auswertung trennt sie.
+
+### Ohne Server ausprobieren
+
+```bash
+python3 tests/mock_server.py 8765 &
+python3 src/query.py lauf --faelle faelle.csv --basis-url http://127.0.0.1:8765/v1 \
+    --modell mock-modell --lauf laeufe/probe --limit 5
+python3 src/evaluate.py --faelle faelle.csv --lauf laeufe/probe
+```
+
+Das Test-Modell antwortet nach einer Stichwortregel. Seine Zahlen prüfen nur
+die Technik.
+
+## Was nie an das Modell geht
+
+Label, Dateiname und Hash. `query.py` baut das Material nur aus dem Skripttext
+und dem Steckbrief ohne Metadaten. `tests/test_pipeline.py` prüft das bei jedem
+Lauf.
+
+## Reproduzierbarkeit
+
+- Der Extraktor ist deterministisch. Seine Version steht in jedem Steckbrief
+  und in jeder gespeicherten Antwort (`extraktor_version`).
+- Der Stand für den Versuch ist als Tag markiert (`extraktor-v2.0.0`). Wird der
+  Extraktor danach geändert, steigt die Versionsnummer und alle Läufe sind neu
+  zu machen.
+- Jede Antwort wird mit Material, Prompt-Hash, Modellname und Einstellungen
+  gespeichert. Temperatur ist 0. Wiederholungen messen die Restschwankung.
+
+## Tests
+
+```bash
+python3 tests/test_extraktor.py            # 21 Fälle mit bekannter Lösung
+python3 tests/test_pipeline.py             # ganzer Durchlauf gegen das Test-Modell
+node tests/vergleich_browser.js scripts/   # Browser-Fassung gegen Python, Byte für Byte
+```
 
 ## Sicherheit
 
-- Der Steckbrief-Generator **fuehrt nichts aus**. Er liest Text und wendet
-  Regex und Base64-Dekodierung an.
-- Trotzdem gehoeren die boesartigen Rohskripte in eine isolierte VM.
-- Sehr grosse, stark obfuskierte Dateien werden nur bis 200 KB analysiert
-  (im Steckbrief als `analyse_gekuerzt` vermerkt).
+- Schadskripte nur in einer isolierten VM, ohne geteilte Ordner zum Host.
+- Kein Werkzeug hier führt ein Skript aus.
+- Schadskripte können Text enthalten, der ein Sprachmodell lenken soll. Der
+  Prompt weist das Modell an, Anweisungen im Material nicht zu befolgen. Ob es
+  sich daran hält, ist Teil der Beobachtung.
 
-## Offene Punkte (fuer die Besprechung)
+## Datenquellen und offene Punkte
 
-- **Lizenz** von Fa2y und calinux ist ungeklaert. Vor Veroeffentlichung des
-  Datensatzes klaeren, oder auf `mkmeher` (gelabelt, Paper) ausweichen.
-- **FH-Modelle:** welche drei LLMs laufen auf dem FH-Server, wie ist der Zugriff.
-- **Umfang:** wie viele Samples je Gruppe, wie viele Durchlaeufe je Sample.
-- **Kriterienkatalog** fuer die Bewertung der LLM-Einschaetzung (angelehnt an
-  NIST SP 800-61), noch festzulegen.
-- **Obfuskationsstufen:** optional zusaetzlich zur Steckbrief-Tiefe variieren
-  (mit Invoke-Obfuscation), falls gewuenscht.
+| Gruppe | Quelle | Lizenz |
+|---|---|---|
+| gutartig | github.com/fleschutz/PowerShell | CC0-1.0 |
+| bösartig | github.com/Fa2y/Malicious-PowerShell-Dataset | keine Lizenzdatei, vor Veröffentlichung klären |
+| Technik-Demos | github.com/calinux-py/PowerShell | keine Lizenzdatei, vor Veröffentlichung klären |
 
-## Oberflaeche (tool/)
-
-`tool/steckbrief-werkbank.html` ist eine einzelne HTML-Datei, die offline im Browser
-laeuft (Doppelklick). Sie erzeugt Steckbriefe nach denselben Regeln wie
-`src/steckbrief.py`, mit Verlauf und Export. Fuer den Stapellauf ueber alle
-Samples bleibt `src/steckbrief.py` massgeblich.
-
-## Nicht im Repo
-
-Der Ordner `scripts/` (Rohskripte) ist per `.gitignore` ausgeschlossen. Er entsteht
-mit `python3 src/fetch.py --out ./scripts`.
+Offen: Labels der bösartigen Skripte stichprobenweise prüfen, Zugang zu den
+FH-Modellen, Referenzannotationen für die Detailfälle.
