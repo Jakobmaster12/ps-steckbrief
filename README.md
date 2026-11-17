@@ -1,8 +1,7 @@
 # ps-steckbrief
 
 Werkzeuge zur Masterarbeit "Wann hilft ein Steckbrief? Statische Vorverarbeitung
-für die LLM-gestützte Analyse von PowerShell-Skripten" (Jakob Weilhartner,
-FH St. Pölten).
+für die LLM-gestützte Analyse von PowerShell-Skripten" 
 
 ## Idee in drei Sätzen
 
